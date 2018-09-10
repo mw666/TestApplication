@@ -1,0 +1,132 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="newmatch.zbmf.com.testapplication.fragments.RegisterFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/zc_accountTextLayout"
+            style="@style/inputTextLayoutStyle"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:hint="@string/account_tip"
+            app:hintTextAppearance="@style/inputTextAppearence">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/zc_accountInputEt"
+                style="@style/inputEditStyle"
+                android:inputType="number"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/zc_clearAccount"
+            style="@style/loginIvStyle"
+            android:src="@drawable/delete_icon"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/zc_verifyCodeTextLayout"
+            style="@style/inputTextLayoutStyle"
+            android:layout_marginBottom="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:hint="@string/account_tip"
+            app:hintTextAppearance="@style/inputTextAppearence">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/zc_verifyCodeInputEt"
+                style="@style/inputEditStyle"
+                android:inputType="number"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/zc_verifyCodeBtn"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/dp_35"
+            android:background="@drawable/select_login_btn_bg"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            android:text="@string/get_verify_code"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/zc_passwordTextLayout"
+            style="@style/inputTextLayoutStyle"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:hint="@string/password_tip"
+            app:hintTextAppearance="@style/inputTextAppearence">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/zc_passwordInputEt"
+                style="@style/inputEditStyle"
+                android:inputType="textPassword"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/zc_clearPassword"
+            style="@style/loginIvStyle"
+            android:src="@drawable/delete_icon"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/zc_btn"
+        style="@style/btnStyle"
+        tools:text="@string/login"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/loginProtocolKey"
+            style="@style/protocolTvStyle"
+            android:text="@string/register_tip_protocol"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/registerRule"
+            style="@style/protocolTvStyle"
+            android:text="@string/register_rule_title"
+            android:textColor="@color/middlePurple"/>
+        <TextView
+            android:id="@+id/and"
+            style="@style/protocolTvStyle"
+            android:text="@string/and"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/registerProtocol"
+            style="@style/protocolTvStyle"
+            android:text="@string/register_protocol_title"
+            android:textColor="@color/middlePurple"/>
+    </LinearLayout>
+</LinearLayout>

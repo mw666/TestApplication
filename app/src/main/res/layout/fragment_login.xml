@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/accountTextLayout"
+            style="@style/inputTextLayoutStyle"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:hint="@string/account_tip"
+            app:hintTextAppearance="@style/inputTextAppearence">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/accountInputEt"
+                style="@style/inputEditStyle"
+                android:inputType="number"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/clearAccount"
+            style="@style/loginIvStyle"
+            android:src="@drawable/delete_icon"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordTextLayout"
+            style="@style/inputTextLayoutStyle"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:hint="@string/password_tip"
+            app:hintTextAppearance="@style/inputTextAppearence">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/passwordInputEt"
+                style="@style/inputEditStyle"
+                android:inputType="textPassword"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/clearPassword"
+            style="@style/loginIvStyle"
+            android:src="@drawable/delete_icon"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/loginBtn"
+        style="@style/btnStyle"
+        tools:text="@string/login"/>
+
+    <TextView
+        android:id="@+id/forgetPassword"
+        style="@style/forgetPasswordStyle"
+        android:text="@string/forget_password"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/loginProtocolKey"
+            style="@style/protocolTvStyle"
+            android:text="@string/login_tip_protocol"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/loginProtocolContent"
+            style="@style/protocolTvStyle"
+            android:text="@string/login_protocol_title"
+            android:textColor="@color/middlePurple"/>
+    </LinearLayout>
+
+
+</LinearLayout>

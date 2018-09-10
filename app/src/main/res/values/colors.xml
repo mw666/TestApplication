@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EC7FFC</color>
+    <color name="colorPrimaryDark">#BE2AD4</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="middlePurple">#DA1AF7</color>
+    <color name="middlePurpleAphla">#80DA1AF7</color>
+    <color name="middlePurpleAphla65">#4FDA1AF7</color>
+    <color name="deepPurple">#DD29E5</color>
+    <color name="lavender">#EDA1FB</color>
+    <color name="light_orange">#FFB302</color>
+    <color name="black_color_333333">#272822</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="toast_bg_color">#E0616161</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>
