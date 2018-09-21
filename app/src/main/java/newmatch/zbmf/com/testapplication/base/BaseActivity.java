@@ -44,14 +44,31 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
     //点击事件
     protected abstract void onViewClick(View view);
 
+    protected void setStatuBar(Integer topBarColor, Integer statusBarAlpha) {
+        //设置状态栏颜色
+        StatusBarUtil.setColor(this, topBarColor, 60);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
+
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        if (Build.VERSION.SDK_INT < 16) {
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        }
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setContentView(layoutId());
         String title = initTitle();
         int topBarColor = topBarColor();
         Log.d("==TAG", "--   颜色纸 回传: " + topBarColor);
+        setStatuBar(topBarColor, 36);
         Boolean showBackBtn = showBackBtn();
         initToolBar(title, topBarColor, showBackBtn);
         initView();
@@ -70,7 +87,15 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-
+       /* if (hasFocus && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }*/
     }
 
     //获取保存数据的bundle
@@ -85,22 +110,15 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
         Toolbar toolBar = bindView(R.id.toolbar);
         TextView toolBarTitle = bindView(R.id.toolbar_title);
         if (toolBar != null) {
-            //int deepPurple = MyApplication.getInstance().getResources().getColor(R.color.deepPurple);
-            Log.d("==TAG", "--  颜色值:" + topBarColor);
-            //设置状态栏颜色
-            StatusBarUtil.setColor(this, topBarColor, 36);
             toolBar.setTitle("");
             toolBarTitle.setText(title);
             setSupportActionBar(toolBar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if (homeAsUpEnabled) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 toolBar.setNavigationIcon(R.drawable.back_icon);
-                toolBar.setNavigationOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //ToastUtils.showSingleToast(BaseActivity.this, "点击了");
-                        onBackPressed();
-                    }
+                toolBar.setNavigationOnClickListener(v -> {
+                    //ToastUtils.showSingleToast(BaseActivity.this, "点击了");
+                    onBackPressed();
                 });
             }
         }

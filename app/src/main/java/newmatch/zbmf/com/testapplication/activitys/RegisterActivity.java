@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.fragments.RegisterFragment;
+import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 
 /**
  * 注册&登录页面
@@ -32,6 +34,9 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        //是否全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        MyActivityManager.getMyActivityManager().pushAct(RegisterActivity.this);
         TabLayout tabLayout = bindView(R.id.tabLayout);
         ViewPager viewPager = bindView(R.id.viewPager);
 
@@ -42,24 +47,6 @@ public class RegisterActivity extends BaseActivity {
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager(), mFragments, titles));
 
         tabLayout.setupWithViewPager(viewPager);
-/* tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                PLog.LogD("--   选中Tab");
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                PLog.LogD("--  没有选中Tab");
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                PLog.LogD("--    再次选中 tab");
-            }
-        });
-*/
 
     }
 

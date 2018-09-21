@@ -7,35 +7,42 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
+import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
 
 /**
  * Created by **
  * on 2018/9/10.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment{
 
     private Bundle savedInstanceState;
     private View mView;
 
     protected abstract Integer layoutId();
-
     protected abstract void initView();
     protected abstract void initData();
+    protected abstract BasePresenter initPresenter();
     //点击事件
     protected abstract void onViewClick(View view);
+    //是否全屏，让视图内容浸入状态栏
+    protected abstract Boolean setViewEnterStatuBar();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(layoutId(), container, false);
         this.savedInstanceState=savedInstanceState;
+        Boolean isEnter = setViewEnterStatuBar();
+        //设置状态栏的通用特性
+        initAppBar(isEnter);
+        initPresenter();//该处返回BasePresenter
         initData();
         initView();
         return mView;
-
     }
 
     //获取保存数据的bundle
@@ -70,6 +77,13 @@ public abstract class BaseFragment extends Fragment {
             onViewClick(v);
         }
     };
+
+    private void initAppBar(Boolean isEnter){
+             if (isEnter){
+                 //设置全屏，视图内容浸入状态栏
+                 getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+             }
+    }
 
 
 }

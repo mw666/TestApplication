@@ -23,7 +23,11 @@ public class MyActivityManager {
     }
     public static MyActivityManager getMyActivityManager(){
         if(instance==null){
-            instance=new MyActivityManager();
+            synchronized (MyActivityManager.class){
+             if (instance==null){
+                 instance=new MyActivityManager();
+             }
+            }
         }
         return instance;
     }

@@ -7,67 +7,81 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/accountTextLayout"
-            style="@style/inputTextLayoutStyle"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:layout_marginTop="@dimen/dp_5"
-            android:hint="@string/account_tip"
-            app:hintTextAppearance="@style/inputTextAppearence">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/accountInputEt"
-                style="@style/inputEditStyle"
-                android:inputType="number"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/accountTextLayout"
+                    style="@style/inputTextLayoutStyle"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:hint="@string/account_tip"
+                    app:hintTextAppearance="@style/registerInputTextAppearence">
 
-        <ImageView
-            android:id="@+id/clearAccount"
-            style="@style/loginIvStyle"
-            android:src="@drawable/delete_icon"
-            android:visibility="invisible"/>
-    </RelativeLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/accountInputEt"
+                        style="@style/inputEditStyle"
+                        android:inputType="number"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/passwordTextLayout"
-            style="@style/inputTextLayoutStyle"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_5"
-            android:hint="@string/password_tip"
-            app:hintTextAppearance="@style/inputTextAppearence">
+                <ImageView
+                    android:id="@+id/clearAccount"
+                    style="@style/loginIvStyle"
+                    android:src="@drawable/delete_icon"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/passwordInputEt"
-                style="@style/inputEditStyle"
-                android:inputType="textPassword"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/passwordTextLayout"
+                    style="@style/inputTextLayoutStyle"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:hint="@string/password_tip"
+                    app:hintTextAppearance="@style/registerInputTextAppearence">
 
-        <ImageView
-            android:id="@+id/clearPassword"
-            style="@style/loginIvStyle"
-            android:src="@drawable/delete_icon"
-            android:visibility="invisible"/>
-    </RelativeLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/passwordInputEt"
+                        style="@style/inputEditStyle"
+                        android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/loginBtn"
-        style="@style/btnStyle"
-        tools:text="@string/login"/>
+                </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/forgetPassword"
-        style="@style/forgetPasswordStyle"
-        android:text="@string/forget_password"/>
+                <ImageView
+                    android:id="@+id/clearPassword"
+                    style="@style/loginIvStyle"
+                    android:src="@drawable/delete_icon"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/loginBtn"
+                style="@style/btnStyle"
+                tools:text="@string/login"/>
+
+            <TextView
+                android:id="@+id/forgetPassword"
+                style="@style/forgetPasswordStyle"
+                android:text="@string/forget_password"/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <Space
         android:layout_width="wrap_content"

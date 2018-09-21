@@ -1,6 +1,7 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,17 +15,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.component.PLog;
+import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
+import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -61,12 +64,15 @@ public class FullscreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
+        //是否全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Location location = getLocation();
         getCity(location);
         mHandler.postDelayed(() -> startActivity(
                 new Intent(FullscreenActivity.this,
-                        MainActivity.class)),2000);
+                        RegisterActivity.class)), 2000);
+        FullscreenActivity.this.finish();
     }
 
     Location gpsLocation = null;
@@ -110,11 +116,11 @@ public class FullscreenActivity extends AppCompatActivity {
     private void resum() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(this, PermissionC.LOCATION_PERMISSION[0])
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this
+                    != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this
                     , PermissionC.LOCATION_PERMISSION[1]) != PackageManager.PERMISSION_GRANTED) {
+                PLog.LogD("---   执行位置信息的权限   ---");
                 //没有同意授予权限
                 ActivityCompat.requestPermissions(this, PermissionC.LOCATION_PERMISSION, PermissionC.LOCATION_CODE);
-                return;
             } else {
                 if (netWorkIsOpen()) {
                     myLocationManager.requestLocationUpdates("network", 2000, 5, locationListener);
@@ -149,21 +155,26 @@ public class FullscreenActivity extends AppCompatActivity {
                     //当用户全部同意定位权限，才执行定位代码
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                         //想用户展示给权限的作用
-                        new AlertDialog.Builder(FullscreenActivity.this)
-                                .setMessage(getString(R.string.permission_name_location))
-                                .setPositiveButton(getString(R.string.resume), (dialog, which) -> {
-                                    ActivityCompat.requestPermissions(this,
-                                            PermissionC.LOCATION_PERMISSION
-                                            , PermissionC.LOCATION_CODE);
-                                })
-                                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
-                                    //退出应用
-                                    onBackPressed();
-                                })
-                                .create()
-                                .show();
+                        MyDialogUtil.getInstance().setDialogCallBack(new DialogCallBack() {
+                            @Override
+                            public void positiveClick(DialogInterface dialog) {
+                                //确定，表示用户同意权限-->重新申请权限
+                                //确定，重新申请权限
+                                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                                        PermissionC.LOCATION_PERMISSION
+                                        , PermissionC.LOCATION_CODE);
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void negativeClick(DialogInterface dialog) {
+                                //表示用户拒绝位置权限-->不作处理
+                                dialog.dismiss();
+                            }
+                        }).showPermissionDialog(FullscreenActivity.this, getString(R.string.permission_name_location));
                     }
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED && i == grantResults.length - 1) {
+                        //这样写强制用户同意位置信息权限,体验有点不好
                         resum();
                     }
                 }

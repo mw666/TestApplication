@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="newmatch.zbmf.com.testapplication.activitys.SelectCityActivity">
+
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/my_toolbar"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/currentSelectLocation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/action_bar"-->
+        <!--android:padding="@dimen/dp_10"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textStyle="bold"-->
+        <!--tools:text="您正在看:湖州"/>-->
+
+    <ListView
+        android:id="@+id/city_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"/>
+
+    <newmatch.zbmf.com.testapplication.citys.view.LetterListView
+        android:id="@+id/letter_container"
+        android:layout_width="22dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/action_bar"/>
+
+</RelativeLayout>

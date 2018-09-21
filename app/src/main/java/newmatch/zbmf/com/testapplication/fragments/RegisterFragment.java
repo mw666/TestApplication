@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
+import newmatch.zbmf.com.testapplication.activitys.UserInfoActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.PLog;
@@ -155,7 +157,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                PLog.LogD("--   字符串的长度   :" + s.length());
                 if (s.length() > 0) {
                     clearIv.setVisibility(View.VISIBLE);
                 } else {
@@ -241,6 +242,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     // TODO: 2018/9/10 调用登录接口
 
                     ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.login_success));
+
+                    SkipActivityUtil.skipActivity(getActivity(), MainActivity.class);
                 }
                 break;
             case R.id.clearAccount:
@@ -284,6 +287,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     // TODO: 2018/9/10 调用登录接口
 
                     ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.register_success));
+                    //跳转圈友信息填写页面
+                    SkipActivityUtil.skipActivity(getActivity(), UserInfoActivity.class);
+
                 }
                 break;
             case R.id.registerRule:

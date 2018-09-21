@@ -9,7 +9,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="BaseTheme">
         <!-- Customize your theme here. -->
-
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
@@ -19,6 +18,8 @@
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
@@ -32,8 +33,8 @@
 
     <style name="textInputTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--<item name="android:colorAccent">@color/colorPrimary</item>-->
-        <item name="android:textColorHint">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textColorHint">@color/white_grey</item>
+        <item name="colorControlNormal">@color/white_grey</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorPrimary</item>
         <!--<item name="android:windowTranslucentStatus">true</item>-->
@@ -43,9 +44,15 @@
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">@color/middlePurple</item>
     </style>
-    <style name="inputTextAppearence" parent="TextAppearance.Design.Hint">
+
+    <style name="registerInputTextAppearence" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="userInfoInputTextAppearence" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/white_grey</item>
     </style>
 
     <style name="inputTextLayoutStyle">
@@ -56,6 +63,7 @@
         <item name="android:layout_marginLeft">@dimen/dp_20</item>
         <item name="android:layout_marginRight">@dimen/dp_20</item>
     </style>
+
     <style name="inputEditStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -67,15 +75,17 @@
         <item name="android:textColorHint">@color/middlePurple</item>
         <item name="android:textSize">@dimen/sp_16</item>
     </style>
+
     <style name="loginIvStyle">
-        <item name="android:layout_width">@dimen/dp_14</item>
-        <item name="android:layout_height">@dimen/dp_14</item>
-        <item name="android:padding">@dimen/dp_1</item>
+        <item name="android:layout_width">@dimen/dp_16</item>
+        <item name="android:layout_height">@dimen/dp_16</item>
+        <item name="android:padding">@dimen/dp_3</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:layout_marginRight">@dimen/dp_35</item>
         <item name="android:layout_marginTop">@dimen/dp_2</item>
     </style>
+
     <style name="btnStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_42</item>
@@ -85,6 +95,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sp_16</item>
     </style>
+
     <style name="forgetPasswordStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -94,6 +105,7 @@
         <item name="android:textColor">@color/middlePurple</item>
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
+
     <style name="protocolTvStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -101,8 +113,153 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
+    <!--图片选择器的主题-->
+    <style name="Matisse.MyZhihu" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="toolbar">@style/Toolbar.Zhihu</item>
+        <item name="album.dropdown.title.color">@color/zhihu_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/zhihu_album_dropdown_count_text</item>
+        <item name="album.element.color">@android:color/white</item>
+        <item name="album.thumbnail.placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder
+        </item>
+        <item name="album.emptyView">@drawable/ic_empty_zhihu</item>
+        <item name="album.emptyView.textColor">@color/zhihu_album_empty_view</item>
+        <item name="item.placeholder">@color/zhihu_item_placeholder</item>
+        <item name="item.checkCircle.backgroundColor">
+            @color/zhihu_item_checkCircle_backgroundColor
+        </item>
+        <item name="item.checkCircle.borderColor">@color/zhihu_item_checkCircle_borderColor</item>
+        <item name="page.bg">@color/zhihu_page_bg</item>
+        <item name="bottomToolbar.bg">@color/zhihu_bottom_toolbar_bg</item>
+        <item name="bottomToolbar.preview.textColor">@color/zhihu_bottom_toolbar_preview</item>
+        <item name="bottomToolbar.apply.textColor">@color/zhihu_selector_imgs_bottom_textcolor</item>
+        <item name="preview.bottomToolbar.back.textColor">
+            @color/zhihu_preview_bottom_toolbar_back_text
+        </item>
+        <item name="preview.bottomToolbar.apply.textColor">
+            @color/zhihu_preview_bottom_toolbar_apply
+        </item>
+        <item name="listPopupWindowStyle">@style/Popup.Zhihu</item>
+        <item name="capture.textColor">@color/zhihu_capture</item>
+    </style>
 
-    <dimen name="dp_15">15dp</dimen>
-    <dimen name="dp_13">13dp</dimen>
-    <dimen name="dp_14">14dp</dimen>
+    <style name="userInfoRLStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingLeft">@dimen/dp_21</item>
+        <item name="android:paddingRight">@dimen/dp_21</item>
+    </style>
+
+    <style name="userInfoSelectLocationTvStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:padding">@dimen/dp_10</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/middlePurple</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+    <style name="userInfoLocationIvStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginRight">@dimen/dp_15</item>
+    </style>
+    <style name="userInfoLineStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/dp_1</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
+        <item name="android:background">@color/white_gray</item>
+    </style>
+    <style name="userDetailTvStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/middlePurple</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+    <style name="userLStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/dp_3</item>
+        <item name="android:paddingBottom">@dimen/dp_3</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/dp_12</item>
+        <item name="android:paddingRight">@dimen/dp_12</item>
+    </style>
+    <style name="spaceStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="userNoTvStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:lines">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+    <style name="userGoToStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical|end</item>
+        <item name="android:src">@drawable/right_arrow_purple_icon</item>
+    </style>
+    <style name="userBtnStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="addFriendTvStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">@dimen/dp_15</item>
+        <item name="android:layout_marginTop">@dimen/dp_15</item>
+    </style>
+    <style name="addFriendRemarkEtStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:layout_marginLeft">@dimen/dp_14</item>
+        <item name="android:layout_marginRight">@dimen/dp_14</item>
+        <item name="android:layout_marginTop">@dimen/dp_3</item>
+        <item name="android:background">@drawable/add_friend_et_bg</item>
+        <item name="android:gravity">left|top</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="searchTvTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/dp_15</item>
+        <item name="android:drawableBottom">@drawable/search_tv_bottom_view_purple</item>
+        <item name="android:drawablePadding">@dimen/dp_2</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

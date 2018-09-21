@@ -18,9 +18,14 @@ public final class BuildConfig {
 
     //页面间传值的Key
     public static final String TAB_POSITION="tab_position";
-
+    //用户信息页面跳转城市选择页面的请求码
+    public static final Integer USERINFO_SKIP_CITYS=3001;
 
     public static final String PROVINCE="province";
     public static final String CITY="city";
+    public static final String SEE_CITY="see_city";
+    public static final String CITY_TO_USERINFO="city_userinfo";
+
+
 
 }

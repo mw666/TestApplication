@@ -9,4 +9,16 @@
         <attr name="metaButtonBarButtonStyle" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="CircleImgView">
+        <attr name="circle_img_view_src" format="reference"/>
+    </declare-styleable>
+
+    <attr name="borderColor" format="color"/>
+    <attr name="borderWidth" format="dimension"/>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderColor"/>
+        <attr name="borderWidth"/>
+    </declare-styleable>
+
 </resources>

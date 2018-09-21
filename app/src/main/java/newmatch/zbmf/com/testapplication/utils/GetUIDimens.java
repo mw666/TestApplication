@@ -10,6 +10,7 @@ import android.util.Log;
 
 public class GetUIDimens {
 
+    //获取状态栏的高度
     public static int getStatusH(Context context) {
         int result = 0;
         //根据resource的Id 获取

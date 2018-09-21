@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:icon="@drawable/home_selector"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/dynamic"
+        android:icon="@drawable/dynamic_selector"
+        android:title="@string/dynamic"/>
+    <item
+        android:id="@+id/msg"
+        android:icon="@drawable/msg_selector"
+        android:title="@string/msg"/>
+    <item
+        android:id="@+id/attention"
+        android:icon="@drawable/attention_selector"
+        android:title="@string/attention"/>
+    <item
+        android:id="@+id/mime"
+        android:icon="@drawable/mine_selector"
+        android:title="@string/mine"/>
+</menu>

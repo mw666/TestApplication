@@ -1,0 +1,54 @@
+package newmatch.zbmf.com.testapplication.dialogs;
+
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
+
+import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
+
+/**
+ * Created by **
+ * on 2018/9/11.
+ */
+
+public class MyDialogUtil {
+    private static MyDialogUtil sMyDialogUtil;
+
+    public static MyDialogUtil getInstance() {
+        if (sMyDialogUtil == null) {
+            synchronized (MyDialogUtil.class) {
+                if (sMyDialogUtil == null) {
+                    sMyDialogUtil = new MyDialogUtil();
+                }
+            }
+        }
+        return sMyDialogUtil;
+    }
+
+    private static DialogCallBack mDialogCallBack;
+
+    public MyDialogUtil setDialogCallBack(DialogCallBack dialogCallBack) {
+        mDialogCallBack = dialogCallBack;
+        return this;
+    }
+
+    public void showPermissionDialog(Context context, String permissionTip) {
+        new AlertDialog.Builder(context)
+                .setMessage(permissionTip)
+                .setPositiveButton(context.getString(R.string.resume), (dialog, which) -> {
+                    //确定，调用确定的回调
+                    if (mDialogCallBack != null) {
+                        mDialogCallBack.positiveClick(dialog);
+                    }
+                })
+                .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
+                    if (mDialogCallBack != null) {
+                        mDialogCallBack.negativeClick(dialog);
+                    }
+                    //退出应用
+                    //activity.onBackPressed();
+                })
+                .create()
+                .show();
+    }
+}

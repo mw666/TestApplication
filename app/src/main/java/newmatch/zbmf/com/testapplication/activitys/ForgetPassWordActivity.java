@@ -1,10 +1,12 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
 import android.view.View;
+import android.view.WindowManager;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 
 /**
  * 忘记密码页面
@@ -18,6 +20,10 @@ public class ForgetPassWordActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        //是否全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+       //将Activity添加到容器管理
+        MyActivityManager.getMyActivityManager().pushAct(ForgetPassWordActivity.this);
 
     }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/dp_27"
+              android:layout_marginRight="@dimen/dp_27"
+              android:orientation="vertical"
+              android:shadowColor="@color/black">
+
+    <TextView
+        android:id="@+id/showShapeTv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_32"
+        android:layout_gravity="center"
+        android:background="@drawable/show_home_bg"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        tools:text="入驻首页"/>
+</LinearLayout>

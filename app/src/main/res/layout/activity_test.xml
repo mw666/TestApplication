@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:id="@+id/coordinatorLayout"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:statusBarScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <!--封面图片-->
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mn9"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:fitsSystemWindows="true"/>
+
+            <!--添加一个渐变层的遮罩-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:background="@drawable/gradient_view"
+                android:fitsSystemWindows="true"
+                />
+
+            <!--视频及弹幕控件-->
+        <!--    <FrameLayout
+                android:id="@+id/video_danmu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:fitsSystemWindows="true"
+                android:visibility="gone">
+                <VideoView
+                    android:id="@+id/videoview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                &lt;!&ndash;哔哩哔哩开源的弹幕控件&ndash;&gt;
+                <master.flame.danmaku.ui.widget.DanmakuView
+                    android:id="@+id/danmaku"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+                <!--自定义带图片的立即播放按钮-->
+                <android.support.v7.widget.ButtonBarLayout
+                    android:id="@+id/playButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:text="立即播放"
+                        android:layout_gravity="center_vertical"
+                        />
+                </android.support.v7.widget.ButtonBarLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedSc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="@dimen/dp_100"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/userNameTv"
+                style="@style/userDetailTvStyle"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_2"
+                android:textSize="@dimen/sp_17"
+                android:textStyle="bold"
+                tools:text="小姐姐的名字"/>
+
+            <TextView
+                android:id="@+id/userSignTv"
+                style="@style/userDetailTvStyle"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_4"
+                android:paddingTop="@dimen/dp_2"
+                android:textSize="@dimen/sp_15"
+                tools:text="小姐姐的名字"/>
+
+            <LinearLayout
+                android:id="@+id/userNo"
+                style="@style/userLStyle"
+                android:layout_marginTop="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/userNoTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/user_no_icon"
+                    android:drawableStart="@drawable/user_no_icon"
+                    android:text="79132493"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userNoGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userSex"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userSexTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/sex_icon"
+                    android:drawableStart="@drawable/sex_icon"
+                    android:text="女  23岁"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userSexGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userAddress"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userAddressTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/address_icon"
+                    android:drawableStart="@drawable/address_icon"
+                    android:text="浙江省湖州市"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userAddressIv"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userSend"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userSendTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/send_icon"
+                    android:drawableStart="@drawable/send_icon"
+                    android:text="@string/send_user"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userSendIv"
+                    style="@style/userGoToStyle"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userDynamic"
+                style="@style/userLStyle"
+                android:layout_marginTop="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/userDynamicTV"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/dongtai_icon"
+                    android:drawableStart="@drawable/dongtai_icon"
+                    android:text="@string/dynamic_title"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userDynamicGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/userDetailRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="@dimen/dp_50"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"/>
+
+            <LinearLayout
+                style="@style/userGoToStyle"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_10">
+
+                <Button
+                    android:id="@+id/addUserBtn"
+                    style="@style/userBtnStyle"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:backgroundTint="@color/user_add_bg_color"
+                    android:text="@string/add_user"/>
+
+                <Button
+                    android:id="@+id/sendMsgBtn"
+                    style="@style/userBtnStyle"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/send_msg"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/cry_icon"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end" />
+
+</android.support.design.widget.CoordinatorLayout>

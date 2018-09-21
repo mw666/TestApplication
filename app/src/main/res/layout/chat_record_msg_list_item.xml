@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/chatItemRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_7"
+                android:paddingTop="@dimen/dp_7">
+
+    <include layout="@layout/line_grey"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grey_line"
+        android:layout_marginTop="@dimen/dp_5">
+
+        <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
+            android:id="@+id/chatItemUserIv"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_7"
+            android:layout_marginStart="@dimen/dp_7"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mn9"
+            app:borderColor="@color/white"
+            app:borderWidth="1dp"/>
+
+        <TextView
+            android:id="@+id/chatItemNick"
+            style="@style/addFriendTvStyle"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_toEndOf="@+id/chatItemUserIv"
+            android:layout_toRightOf="@+id/chatItemUserIv"
+            android:textStyle="normal"
+            tools:text="用户的昵称"/>
+
+        <TextView
+            android:id="@+id/chatLastChatMsg"
+            style="@style/addFriendTvStyle"
+            android:layout_below="@+id/chatItemNick"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_toEndOf="@+id/chatItemUserIv"
+            android:layout_toRightOf="@+id/chatItemUserIv"
+            android:textColor="@color/common_bg_press"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="normal"
+            tools:text="最近一次的聊天消息"/>
+
+        <TextView
+            android:id="@+id/chatLastTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12"
+            android:textColor="@color/common_bg_press"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="normal"
+            tools:text="上午 8:50"/>
+    </RelativeLayout>
+</RelativeLayout>

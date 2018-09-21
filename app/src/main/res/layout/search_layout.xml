@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchViewRL"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_35"
+    android:layout_marginLeft="@dimen/dp_45"
+    android:layout_marginRight="@dimen/dp_45"
+    android:layout_marginTop="@dimen/dp_29"
+    android:background="@drawable/search_view_bg"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginStart="@dimen/dp_4"
+        android:src="@drawable/search_icon"/>
+
+    <EditText
+        android:id="@+id/searchUserEt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginStart="@dimen/dp_25"
+        android:background="@null"
+        android:ellipsize="end"
+        android:hint="@string/please_nick_account"
+        android:lines="1"
+        android:maxLength="20"
+        android:padding="@dimen/dp_4"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="normal"/>
+
+    <ImageView
+        android:id="@+id/clearSearchEt"
+        tools:ignore="RtlHardcoded"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_25"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dp_4"
+        android:src="@drawable/delete_purple_icon"
+        android:visibility="gone"/>
+
+</RelativeLayout>

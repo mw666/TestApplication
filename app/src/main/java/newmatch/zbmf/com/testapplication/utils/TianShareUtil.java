@@ -13,7 +13,7 @@ import newmatch.zbmf.com.testapplication.component.PLog;
 
 public class TianShareUtil {
 
-    private static final String DEFAULT_STR="";
+    public static final String DEFAULT_STR="";
     private static SharedpreferencesUtil instance(){
         return SharedpreferencesUtil.getInstance();
     }
@@ -25,10 +25,19 @@ public class TianShareUtil {
     }
 
     public static String getCity(){
-        return instance().getString(BuildConfig.PROVINCE,DEFAULT_STR);
+        return instance().getString(BuildConfig.CITY,DEFAULT_STR);
     }
     public static String getProvince(){
         return instance().getString(BuildConfig.PROVINCE,DEFAULT_STR);
+    }
+
+    //存储正在查看的城市
+    public static void setSeeCity(String seeCity){
+        instance().putString(BuildConfig.SEE_CITY,seeCity);
+    }
+    //获取正在查看的城市
+    public static String getSeeCity(){
+        return instance().getString(BuildConfig.SEE_CITY,DEFAULT_STR);
     }
 
 

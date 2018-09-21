@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="newmatch.zbmf.com.testapplication.activitys.UserDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/userAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_220">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+
+            <RelativeLayout
+                android:id="@+id/appBarRL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <ImageView
+                    android:id="@+id/userAppBarIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_img"/>
+
+                <!--<newmatch.zbmf.com.testapplication.custom_view.CircleImgView-->
+                <newmatch.zbmf.com.testapplication.custom_view.CircleImageView
+                    android:id="@+id/userAvatarIv"
+                    android:layout_width="@dimen/dp_85"
+                    android:layout_height="@dimen/dp_85"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_130"
+                    android:src="@drawable/touxiang_icon"/>
+                <!--app:circle_img_view_src="@drawable/touxiang_icon"-->
+                <!--android:src="@drawable/touxiang_icon"-->
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_22"
+                android:background="@drawable/gradient_view"
+                android:fitsSystemWindows="true"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"
+                android:fitsSystemWindows="true"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingTop="@dimen/dp_20"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                <!--     android:background="@drawable/topbar_bg"-->
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_19"
+                    android:textStyle="bold"
+                    tools:text="title"/>
+
+            </android.support.v7.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_38"
+                android:padding="@dimen/dp_2"
+                android:src="@drawable/left_back_purple_icon"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/guanZhuBtn"
+                android:layout_width="@dimen/dp_75"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_175"
+                android:backgroundTint="@color/zhihu_selector_imgs_bottom_textcolor"
+                android:drawableRight="@drawable/guan_zhu_icon"
+                android:text="@string/guan_zhu"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16"
+                tools:ignore="RtlHardcoded"/>
+
+            <include
+                android:id="@+id/topBarView"
+                layout="@layout/toolbar_content_view"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedSc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:minHeight="@dimen/dp_100"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/userNameTv"
+                    style="@style/userDetailTvStyle"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dp_2"
+                    android:textSize="@dimen/sp_17"
+                    android:textStyle="bold"
+                    tools:text="小姐姐的名字"/>
+
+                <TextView
+                    android:id="@+id/userSignTv"
+                    style="@style/userDetailTvStyle"
+                    android:layout_below="@+id/userNameTv"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/dp_4"
+                    android:paddingTop="@dimen/dp_2"
+                    android:textSize="@dimen/sp_15"
+                    tools:text="小姐姐的名字"/>
+
+                <TextView
+                    android:id="@+id/userHotNo"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/sp_13"
+                    android:layout_marginEnd="@dimen/dp_40"
+                    android:text="@string/hot_value_tip"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <ImageView
+                    android:id="@+id/dianZanIvBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_2"
+                    android:src="@drawable/dian_zan_purple_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/dp_8"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/userNo"
+                style="@style/userLStyle"
+                android:layout_marginTop="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/userNoTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/user_no_icon"
+                    android:drawableStart="@drawable/user_no_icon"
+                    android:text="79132493"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userNoGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userSex"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userSexTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/sex_icon"
+                    android:drawableStart="@drawable/sex_icon"
+                    android:text="女  23岁"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userSexGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userAddress"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userAddressTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/address_icon"
+                    android:drawableStart="@drawable/address_icon"
+                    android:text="浙江省湖州市"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userAddressIv"
+                    style="@style/userGoToStyle"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userSend"
+                style="@style/userLStyle">
+
+                <TextView
+                    android:id="@+id/userSendTv"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/send_icon"
+                    android:drawableStart="@drawable/send_icon"
+                    android:text="@string/send_user"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userSendIv"
+                    style="@style/userGoToStyle"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userDynamic"
+                style="@style/userLStyle"
+                android:layout_marginTop="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/userDynamicTV"
+                    style="@style/userNoTvStyle"
+                    android:drawableLeft="@drawable/dongtai_icon"
+                    android:drawableStart="@drawable/dongtai_icon"
+                    android:text="@string/dynamic_title"/>
+
+                <Space
+                    style="@style/spaceStyle"/>
+
+                <ImageView
+                    android:id="@+id/userDynamicGo"
+                    style="@style/userGoToStyle"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/userDetailRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="@dimen/dp_50"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                app:spanCount="2"/>
+
+            <LinearLayout
+                style="@style/userGoToStyle"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_10">
+
+                <Button
+                    android:id="@+id/addUserBtn"
+                    style="@style/userBtnStyle"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:backgroundTint="@color/user_add_bg_color"
+                    android:text="@string/add_user"/>
+
+                <Button
+                    android:id="@+id/sendMsgBtn"
+                    style="@style/userBtnStyle"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/send_msg"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

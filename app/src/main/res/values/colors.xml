@@ -8,11 +8,26 @@
     <color name="middlePurpleAphla">#80DA1AF7</color>
     <color name="middlePurpleAphla65">#4FDA1AF7</color>
     <color name="deepPurple">#DD29E5</color>
+    <color name="mPurple">#DC7FFC</color>
     <color name="lavender">#EDA1FB</color>
+    <color name="deepPurpleAlpha">#9BED29E5</color>
     <color name="light_orange">#FFB302</color>
+    <color name="user_add_bg_color">#FF69B6</color>
     <color name="black_color_333333">#272822</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_grey">#e6e6e6</color>
     <color name="toast_bg_color">#E0616161</color>
 
+    <color name="green">#40c60a</color>
+    <color name="green_dark">#298409</color>
     <color name="black_overlay">#66000000</color>
+    <color name="black">#9F000000</color>
+    <color name="white_gray">#E6E6E6</color>
+    <color name="common_text">#505050</color>
+    <color name="common_text_alpha">#7D777777</color>
+    <color name="common_line">#eaeaea</color>
+    <color name="grey">#EDEEED</color>
+    <color name="common_bg_press">#a1a1a1</color>
+    <color name="gray">#ababaa</color>
+
 </resources>
