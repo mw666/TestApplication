@@ -33,22 +33,24 @@ public class MyDialogUtil {
     }
 
     public void showPermissionDialog(Context context, String permissionTip) {
-        new AlertDialog.Builder(context)
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setMessage(permissionTip)
                 .setPositiveButton(context.getString(R.string.resume), (dialog, which) -> {
                     //确定，调用确定的回调
                     if (mDialogCallBack != null) {
                         mDialogCallBack.positiveClick(dialog);
                     }
+                    dialog.dismiss();
                 })
                 .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
                     if (mDialogCallBack != null) {
                         mDialogCallBack.negativeClick(dialog);
                     }
+                    dialog.dismiss();
                     //退出应用
                     //activity.onBackPressed();
                 })
-                .create()
-                .show();
+                .create();
+        alertDialog.show();
     }
 }

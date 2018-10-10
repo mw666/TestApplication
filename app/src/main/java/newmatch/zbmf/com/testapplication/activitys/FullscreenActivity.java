@@ -25,7 +25,6 @@ import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
@@ -35,8 +34,10 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
+ *
+ * 启动页
  */
-public class FullscreenActivity extends AppCompatActivity {
+public class FullscreenActivity extends AppCompatActivity{
 
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -118,7 +119,6 @@ public class FullscreenActivity extends AppCompatActivity {
             if (ActivityCompat.checkSelfPermission(this, PermissionC.LOCATION_PERMISSION[0])
                     != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this
                     , PermissionC.LOCATION_PERMISSION[1]) != PackageManager.PERMISSION_GRANTED) {
-                PLog.LogD("---   执行位置信息的权限   ---");
                 //没有同意授予权限
                 ActivityCompat.requestPermissions(this, PermissionC.LOCATION_PERMISSION, PermissionC.LOCATION_CODE);
             } else {
@@ -142,8 +142,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             }
         }
-
-
     }
 
     @Override

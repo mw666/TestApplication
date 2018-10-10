@@ -120,6 +120,13 @@ public class MyActivityManager {
         return res;
     }
 
+    public Integer getActSize(){
+        if (activities!=null){
+            return activities.size();
+        }
+        return 0;
+    }
+
 //    //退出栈顶Activity
 //    public void popActivity(Activity activity){
 //        if(activity!=null){

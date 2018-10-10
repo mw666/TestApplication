@@ -3,7 +3,7 @@ package newmatch.zbmf.com.testapplication.adapters;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import java.util.List;
  * on 2018/9/21.
  */
 
-public class MsgTabAdapter extends FragmentStatePagerAdapter {
-    private String[] mTabtitles;
+public class MsgTabAdapter extends FragmentPagerAdapter {
+    private List<String> mTabtitles;
     private List<Fragment> mFragmentList;
 
-    public MsgTabAdapter(FragmentManager fm, String[] tabtitles, List<Fragment> fragmentList) {
+    public MsgTabAdapter(FragmentManager fm, List<String> tabtitles, List<Fragment> fragmentList) {
         super(fm);
         this.mTabtitles = tabtitles;
         this.mFragmentList = fragmentList;
@@ -35,6 +35,6 @@ public class MsgTabAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTabtitles[position];
+        return mTabtitles.size() == 0 ? null : mTabtitles.get(position);
     }
 }

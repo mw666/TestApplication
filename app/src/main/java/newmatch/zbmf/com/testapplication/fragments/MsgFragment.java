@@ -2,6 +2,7 @@ package newmatch.zbmf.com.testapplication.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,14 +15,14 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
-import newmatch.zbmf.com.testapplication.utils.ConvertStructureUtil;
 
 /**
  * A simple {@link Fragment} subclass.
  * 消息Fragment
  */
 public class MsgFragment extends BaseFragment {
-
+    private List<String> msgTabTitles = new ArrayList<>();
+    private List<Fragment> fragmentList = new ArrayList<>();
 
     public MsgFragment() {
 
@@ -46,17 +47,15 @@ public class MsgFragment extends BaseFragment {
         TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
         ViewPager msgViewPager = bindView(R.id.msgViewPager);
 
-        List<String> msgTabTitles=new ArrayList<>();
-        List<Fragment> fragmentList=new ArrayList<>();
-        addViewPagerContent(msgTabTitles,fragmentList);
-        String[] tabtitles = ConvertStructureUtil.list2Array(msgTabTitles);
-
-        MsgTabAdapter adapter = new MsgTabAdapter(getActivity().getSupportFragmentManager(),
-                tabtitles, fragmentList);
+        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
         msgViewPager.setAdapter(adapter);
-        msgFGTabLayout.setupWithViewPager(msgViewPager);
+        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
+        msgFGTabLayout.setTabsFromPagerAdapter(adapter);
+        msgViewPager.setCurrentItem(0);
+
 
     }
+
 
     @Override
     protected void initData() {
@@ -78,13 +77,24 @@ public class MsgFragment extends BaseFragment {
         return true;
     }
 
-    private void addViewPagerContent(List<String> msgTabTitles,List<Fragment> fragmentList){
-        msgTabTitles.add(0,getString(R.string.msg));//消息
-        msgTabTitles.add(1,getString(R.string.good_friends));//好友
-        //msgTabTitles.add(0,getString(R.string.group));//群组
-        fragmentList.add(0,ChatListFragment.instance());
-        fragmentList.add(1,GoodFriendsOrGroupFragment.instance());
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addFG();
     }
 
+    private void addFG(){
+        msgTabTitles.add(getString(R.string.msg));//消息
+        msgTabTitles.add( getString(R.string.good_friends));//好友
+        //msgTabTitles.add(0,getString(R.string.group));//群组
+        fragmentList.add(ChatListFragment.instance());
+        fragmentList.add( GoodFriendsOrGroupFragment.instance());
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        /*msgTabTitles.clear();
+        fragmentList.clear();*/
+    }
 }

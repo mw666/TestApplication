@@ -1,14 +1,16 @@
 package newmatch.zbmf.com.testapplication.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**
@@ -18,10 +20,15 @@ import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 public class ChatRecommendAdapter extends RecyclerView.Adapter<ChatRecommendAdapter.ChatRecommendHolder> {
 
-    private HomeRVIvClick mHomeRVIvClick;
+    private RecommendUser mRecommendUser;
+    private Context mContext;
 
-    public void setHomeRVIvClick(HomeRVIvClick homeRVIvClick){
-        this.mHomeRVIvClick=homeRVIvClick;
+    public ChatRecommendAdapter(Context context) {
+        mContext = context;
+    }
+
+    public void setMsgChatItemClick(RecommendUser recommendUser){
+        this.mRecommendUser=recommendUser;
     }
 
     @NonNull
@@ -34,17 +41,18 @@ public class ChatRecommendAdapter extends RecyclerView.Adapter<ChatRecommendAdap
     @Override
     public void onBindViewHolder(@NonNull ChatRecommendHolder holder, int position) {
         //模拟展示
-        holder.mChatRecommendItemIv.setBackgroundResource(R.drawable.mn9);
+        GlideUtil.loadCircleImage(mContext, R.drawable.place_holder_img, mContext.getResources().
+                getDrawable(R.drawable.mn9), holder.mChatRecommendItemIv);
 
         clickIv(holder.mChatRecommendItemIv,holder.getAdapterPosition());
     }
 
-    private void clickIv(RoundImageView cIv,int position){
+    private void clickIv(ImageView cIv,int position){
         cIv.setOnClickListener(new OnceClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
-                if (mHomeRVIvClick!=null){
-                    mHomeRVIvClick.rvIvCallBack(position);
+                if (mRecommendUser!=null){
+                    mRecommendUser.recommendUser(position);
                 }
             }
         });
@@ -57,7 +65,7 @@ public class ChatRecommendAdapter extends RecyclerView.Adapter<ChatRecommendAdap
 
     static class ChatRecommendHolder extends RecyclerView.ViewHolder {
 
-        private final RoundImageView mChatRecommendItemIv;
+        private final ImageView mChatRecommendItemIv;
 
         public ChatRecommendHolder(View itemView) {
             super(itemView);

@@ -83,6 +83,10 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
 
     }
 
+    public void showToast(String msg){
+        ToastUtils.showSingleToast(MyApplication.getInstance(),msg);
+    }
+
     //activity渲染完成后会调用的方法
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -150,8 +154,12 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                ToastUtils.showSquareTvToast(this, "再按一次退出程序");
-                exitTime = System.currentTimeMillis();
+                if (MyActivityManager.getMyActivityManager().getActSize() <= 1) {
+                    ToastUtils.showSquareTvToast(this, "再按一次退出程序");
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    finish();
+                }
             } else {
                 MyActivityManager.getMyActivityManager().removeAllAct();
             }

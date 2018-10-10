@@ -19,6 +19,8 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         SharedpreferencesUtil.getInstance().initSharedUtil(this);
+
+
        //集成友盟统计,分享
 
         /*

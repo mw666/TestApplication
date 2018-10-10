@@ -30,8 +30,4 @@ public class MainFragMentAdapter extends FragmentPagerAdapter {
         return mFragmentList.get(position);
     }
 
-   /* @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view==object;
-    }*/
 }

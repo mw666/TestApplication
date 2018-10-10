@@ -10,7 +10,7 @@ import android.widget.TextView;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.custom_view.CircleImageView;
+import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.utils.TextContentUtil;
 
 public class AddFirendActivity extends BaseActivity {
@@ -25,7 +25,7 @@ public class AddFirendActivity extends BaseActivity {
         //全屏，内容顶入状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        CircleImageView userAvatarIv = bindViewWithClick(R.id.userAvatarIv,true);
+        RoundImageView userAvatarIv = bindViewWithClick(R.id.userAvatarIv,true);
         TextView userName = bindView(R.id.userName);
         TextView userSexAge = bindView(R.id.userSexAge);
         Button sendAddFriendMsgBtn = bindView(R.id.sendAddFriendMsgBtn);

@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
@@ -27,6 +27,7 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
+import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
@@ -43,7 +44,8 @@ import newmatch.zbmf.com.testapplication.utils.UnitUtils;
  * <p>
  * 测试网络结构
  */
-public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestView<BannerService, TestWanAndroidPresenter> {
+public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestView<BannerService, TestWanAndroidPresenter>
+,DianZanClickListener{
 
     private TextView mCurrentLocationTv;
 
@@ -60,6 +62,9 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
 
     //数据
     BannerService mResult;
+    private RecyclerView mHomeRV;
+    private View mView;
+    private Toolbar mHomeToolBar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -86,12 +91,12 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
             String currentCity = bundle.getString(PermissionC.CURRENT_CIRT);
             mCurrentLocationTv.setText(currentCity);
         }
-        Toolbar homeToolBar = bindView(R.id.homeToolBar);
-        homeToolBar.setTitle("");
+        mHomeToolBar = bindView(R.id.homeToolBar);
+        mHomeToolBar.setTitle("");
 
-        homeToolBar.setAlpha((float) i);
-        View view = bindViewWithClick(R.id.view, true);
-        view.setAlpha((float) i);
+        mHomeToolBar.setAlpha((float) i);
+        mView = bindViewWithClick(R.id.view, true);
+        mView.setAlpha((float) i);
         mCurrentLocationTv.setVisibility(View.VISIBLE);
 //        TextView topbar_title = bindView(R.id.topbar_title);
 //        topbar_title.setAlpha((float) i);
@@ -103,18 +108,21 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
         mTopBtn.setVisibility(View.VISIBLE);
         mTopBtn.setAlpha((float) (0.7));
 
-        SwipeRefreshLayout swipeRefresh = bindView(R.id.swipeRefresh);
-
         // TODO: 2018/9/13 根据性别来呈现搜索入口或者入驻首页入口
-        RecyclerView homeRV = bindView(R.id.homeRecyclerView);
-        homeRV.setLayoutManager(new GridLayoutManager(getActivity(), 2,
+        mHomeRV = bindView(R.id.homeRecyclerView);
+        mHomeRV.setLayoutManager(new GridLayoutManager(getActivity(), 2,
                 OrientationHelper.VERTICAL, false));
-        mHomeGridAdapter = new HomeGridAdapter(getContext());
+        mHomeGridAdapter = new HomeGridAdapter(getContext(),getActivity());
         mHomeGridAdapter.setHomeRVIvClick(this);
-        homeRV.setAdapter(mHomeGridAdapter);
+        mHomeGridAdapter.setDianZan(this);
+        mHomeRV.setAdapter(mHomeGridAdapter);
 
         //监听recyclerView的滑动
-        homeRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvScroll();
+    }
+
+    private void rvScroll() {
+        mHomeRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int totalDy = 0;
             private int lastY = 0;
             private int distanceL = 0;
@@ -127,7 +135,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
                 super.onScrolled(recyclerView, dx, dy);
                 //滑动的单位是dp
                 if (mToolTarH == 0) {
-                    mToolTarH = UnitUtils.pxToDp(getActivity(), homeToolBar.getMeasuredHeight());
+                    mToolTarH = UnitUtils.pxToDp(getActivity(), mHomeToolBar.getMeasuredHeight());
                     //获取topBtn的长度
                     topBtnWidth = topBtnWidth_start = mTopBtn.getMeasuredWidth();
 //                    PLog.LogD("--   topBtnWidth  :" + topBtnWidth);
@@ -192,8 +200,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
                     }
                 }
                 //0 是全透明
-                homeToolBar.setAlpha((float) i);
-                view.setAlpha((float) i);
+                mHomeToolBar.setAlpha((float) i);
+                mView.setAlpha((float) i);
 //                topbar_title.setAlpha((float) i);
 //                mTopBtn.setAlpha((float) (1 - i));
             }
@@ -286,5 +294,11 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
         this.mResult = result;
         //返回结果
         mHomeGridAdapter.addImgList(result.getData());
+    }
+
+    @Override
+    public void dianZanClick(ImageView view,TextView moodTv) {
+        //设置点赞
+        LikeGMClass.clickLike(getActivity(),view);
     }
 }

@@ -16,11 +16,12 @@ public final class PermissionC {
             Manifest.permission.ACCESS_FINE_LOCATION
             ,Manifest.permission.ACCESS_COARSE_LOCATION
     };
-    //读写文件的权限
+    //读写文件的权限&相机权限
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static final String[] WR_FILES_PERMISSION={
             Manifest.permission.READ_EXTERNAL_STORAGE
             ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.CAMERA
     };
 
     public static final int LOCATION_CODE=2001;
@@ -29,6 +30,9 @@ public final class PermissionC {
     public static final int PIC_IMG_VIDEO_CODE=2003;
     public static final int USER_INFO_CITY_CODE=2004;
     public static final int CURRENT_CITY_CODE=2005;
+    //首页bottomTab是否显示
+    public static final int BOTTOM_TAB_SHOW=2006;
+    public static final int BOTTOM_TAB_GONE=2007;
 
 
     /*
