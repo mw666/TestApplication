@@ -46,4 +46,8 @@
         <item name="capture.textColor">@color/zhihu_capture</item>
     </style>
 
+    <style name="alertDialogStyle01" parent="android:Theme.Material.Light.Dialog.Alert">
+    <item name="android:windowSoftInputMode">adjustPan|stateVisible</item>
+    </style>
+
 </resources>

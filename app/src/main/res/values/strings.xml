@@ -72,4 +72,27 @@
     <string name="group">群组</string>
     <string name="recommend_link_mans">推荐联系人</string>
     <string name="chat_mans_tip">消息列表</string>
+    <string name="same_city">同城推荐</string>
+    <string name="attention_list">关注列表</string>
+    <string name="my_attention">我的关注</string>
+    <string name="open_vip">开通会员</string>
+    <string name="update_pass_word">修改密码</string>
+    <string name="options_back">意见反馈</string>
+    <string name="version_update">版本更新</string>
+    <string name="login_out">退出登录</string>
+    <string name="qy_dynamic">圈友动态</string>
+    <string name="comment_tip">评论...</string>
+    <string name="tian_msg_tip">说点蜜语哟...</string>
+    <string name="moodsValue">人气值</string>
+    <string name="get_img_tip">app获取图片需要该权限，请同意！</string>
+    <string name="get_location_tip">需要获取当前位置，请同意！</string>
+    <string name="revert">回复</string>
+    <string name="reprint">转载</string>
+    <string name="collect">收藏</string>
+    <string name="report">举报</string>
+    <string name="comment_hint">留点什么哈...</string>
+    <string name="fen_zu_name">分组名称</string>
+    <string name="member_count">8/16</string>
+    <string name="settle_show">进驻展示</string>
+    <string name="input_your_nick">请输入您要修改的昵称</string>
 </resources>

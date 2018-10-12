@@ -51,7 +51,7 @@ public class LikeGMClass {
         if (!isDianLike) {//点赞
             //这里处理点赞和取消点赞
             AnimatSpecialEffectUtil.releaseTwoStars(activity, view);
-            isLike = true;
+            isDianLike = true;
             //更换点赞成点亮的图标
             GMTextSetIcon.setTvLeftIcon(context,R.drawable.dian_zan_grey_icon,view);
             //设置动画

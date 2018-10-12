@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
+import newmatch.zbmf.com.testapplication.activitys.SettledActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
@@ -240,8 +240,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
                 /**
                  * 此处暂时展示搜索跳转页面--->当接入接口后，再分情况是跳转搜索还是跳转入驻首页页面
                  */
-                SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
-
+//                SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
+                SkipActivityUtil.skipDataActivity(getActivity(), SettledActivity.class, new Bundle());
                 break;
             case R.id.topIv:
                 //点击事件传递不进来

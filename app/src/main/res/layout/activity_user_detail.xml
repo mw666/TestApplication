@@ -37,8 +37,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/bg_img"/>
 
-                <!--<newmatch.zbmf.com.testapplication.custom_view.CircleImgView-->
-                <newmatch.zbmf.com.testapplication.custom_view.CircleImageView
+                <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
                     android:id="@+id/userAvatarIv"
                     android:layout_width="@dimen/dp_85"
                     android:layout_height="@dimen/dp_85"
@@ -84,12 +83,12 @@
                 android:id="@+id/backBtn"
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_35"
-                android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginStart="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_38"
                 android:padding="@dimen/dp_2"
                 android:src="@drawable/left_back_purple_icon"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/dp_15"/>
 
             <Button
                 android:id="@+id/guanZhuBtn"
@@ -147,6 +146,8 @@
                     android:layout_below="@+id/userNameTv"
                     android:background="@color/white"
                     android:gravity="center"
+                    android:paddingLeft="@dimen/dp_60"
+                    android:paddingRight="@dimen/dp_60"
                     android:paddingBottom="@dimen/dp_4"
                     android:paddingTop="@dimen/dp_2"
                     android:textSize="@dimen/sp_15"
@@ -157,29 +158,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/dp_40"
-                    android:layout_marginRight="@dimen/dp_40"
                     android:background="@color/white"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/hot_value_tip"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sp_13"
                     android:textStyle="bold"
-                    tools:text="人气值:89"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_40"/>
 
                 <ImageView
                     android:id="@+id/dianZanIvBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/dp_2"
                     android:layout_marginEnd="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:padding="@dimen/dp_6"
-                    android:src="@drawable/dian_zan_purple_icon"/>
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:padding="@dimen/dp_7"
+                    android:src="@drawable/dian_zan_purple_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_8"/>
 
+
+                <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
+                    android:id="@+id/userAvatarRv"
+                    android:layout_width="@dimen/dp_42"
+                    android:layout_height="@dimen/dp_42"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:src="@drawable/touxiang_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/dp_12"/>
             </RelativeLayout>
 
 
@@ -291,36 +304,38 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:minHeight="@dimen/dp_50"
+                android:paddingBottom="@dimen/dp_80"
                 android:paddingLeft="@dimen/dp_12"
                 android:paddingRight="@dimen/dp_12"
                 app:spanCount="2"/>
 
-            <LinearLayout
-                style="@style/userGoToStyle"
-                android:layout_width="match_parent"
-                android:background="@color/white"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingLeft="@dimen/dp_12"
-                android:paddingRight="@dimen/dp_12"
-                android:paddingTop="@dimen/dp_10">
-
-                <Button
-                    android:id="@+id/addUserBtn"
-                    style="@style/userBtnStyle"
-                    android:layout_marginRight="@dimen/dp_5"
-                    android:backgroundTint="@color/user_add_bg_color"
-                    android:text="@string/add_user"/>
-
-                <Button
-                    android:id="@+id/sendMsgBtn"
-                    style="@style/userBtnStyle"
-                    android:layout_marginLeft="@dimen/dp_5"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="@string/send_msg"/>
-            </LinearLayout>
-
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        style="@style/userGoToStyle"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_5">
+
+        <Button
+            android:id="@+id/addUserBtn"
+            style="@style/userBtnStyle"
+            android:layout_marginRight="@dimen/dp_5"
+            android:backgroundTint="@color/user_add_bg_color"
+            android:text="@string/add_user"/>
+
+        <Button
+            android:id="@+id/sendMsgBtn"
+            style="@style/userBtnStyle"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/send_msg"/>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

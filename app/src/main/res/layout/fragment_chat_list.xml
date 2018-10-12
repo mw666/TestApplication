@@ -1,40 +1,69 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="newmatch.zbmf.com.testapplication.fragments.ChatListFragment">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:orientation="vertical"
+                                                 tools:context="newmatch.zbmf.com.testapplication.fragments.ChatListFragment">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="@dimen/dp_103">
 
-        <TextView
-            android:id="@+id/recommendLinkMansTitle"
-            style="@style/searchTvTitleStyle"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_5"
-            android:drawableBottom="@drawable/search_tv_bottom_view_purple_73"
-            android:text="@string/recommend_link_mans"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chatRecommendRecyclerView"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/attentionCollaplayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"/>
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="@null">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/recommendL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/recommendLinkMansTitle"
+                    style="@style/searchTvTitleStyle"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
+                    android:text="@string/recommend_link_mans"/>
+
+                <newmatch.zbmf.com.testapplication.views.MZBannerView
+                    android:id="@+id/m_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_70"
+                    android:layout_marginTop="5dp"
+                    app:canLoop="true"
+                    app:indicatorAlign="center"
+                    app:indicatorPaddingBottom="10dp"
+                    app:indicatorPaddingLeft="10dp"
+                    app:isShowIndicator="false"
+                    app:middle_page_cover="true"
+                    app:open_mz_mode="true"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/h72dp_toolbar_view"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_1_5"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
             android:id="@+id/chatMansTitle"
@@ -43,14 +72,17 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_5"
             android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
+            android:paddingBottom="@dimen/dp_1"
             android:text="@string/chat_mans_tip"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chatRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"/>
+            android:layout_marginRight="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_50"/>
 
     </LinearLayout>
-</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

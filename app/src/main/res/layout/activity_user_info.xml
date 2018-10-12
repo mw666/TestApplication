@@ -10,36 +10,7 @@
 
     <include layout="@layout/my_toolbar"/>
 
-    <LinearLayout
-        android:id="@+id/avatarL"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_85"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <newmatch.zbmf.com.testapplication.custom_view.CircleImageView
-            android:id="@+id/avatarIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_12"
-            android:layout_marginStart="@dimen/dp_12"
-            android:layout_marginTop="@dimen/dp_10"
-            android:src="@drawable/touxiang_icon"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:id="@+id/selectPic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="@dimen/dp_15"
-            android:src="@drawable/right_arrow_purple_icon"/>
-    </LinearLayout>
+    <include layout="@layout/user_avatar_view"/>
 
     <RadioGroup
         android:id="@+id/sexRG"
@@ -59,9 +30,9 @@
             android:layout_marginStart="@dimen/dp_25"
             android:gravity="center"
             android:padding="@dimen/dp_3"
-            android:textColor="@color/black"
             android:shadowColor="@color/colorPrimary"
             android:text="@string/man"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_16"/>
 
         <RadioButton
@@ -71,9 +42,9 @@
             android:layout_marginStart="@dimen/dp_55"
             android:gravity="center"
             android:padding="@dimen/dp_3"
-            android:textColor="@color/black"
             android:shadowColor="@color/colorPrimary"
             android:text="@string/woman"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_16"/>
     </RadioGroup>
 
@@ -126,6 +97,7 @@
             style="@style/userInfoLineStyle"
             android:layout_below="@+id/locationTv"/>
     </RelativeLayout>
+
     <RelativeLayout
         style="@style/userInfoRLStyle"
         android:paddingTop="@dimen/dp_16">

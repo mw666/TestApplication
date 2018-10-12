@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 
@@ -70,7 +68,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mViewPager.addOnPageChangeListener(this);
 
         mViewPager.setCurrentItem(0);
-
+       //监听viewpager的滑动
+        viewPagerScrollListener(mViewPager);
         // 如果不是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
         mIwHelper.setTranslucentStatus(!isTranslucentStatus ? GetUIDimens.calcStatusBarHeight(this) : 0);
 
@@ -78,7 +77,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 //        mIwHelper.setOnPictureLongPressListener(this);
 //        mIwHelper.setLoader(new SimpleLoader());
 
-//        GetUIDimens.fitsSystemWindows(isTranslucentStatus, findViewById(R.id.v_fit));
 
     }
 
@@ -127,21 +125,47 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         switch (item.getItemId()) {
             case R.id.home:
                 mViewPager.setCurrentItem(0);
+                mBottomNavigationView.setVisibility(View.VISIBLE);
                 break;
             case R.id.dynamic:
                 mViewPager.setCurrentItem(1);
                 break;
             case R.id.msg:
                 mViewPager.setCurrentItem(2);
+                mBottomNavigationView.setVisibility(View.VISIBLE);
                 break;
             case R.id.attention:
                 mViewPager.setCurrentItem(3);
+                mBottomNavigationView.setVisibility(View.VISIBLE);
                 break;
             case R.id.mime:
                 mViewPager.setCurrentItem(4);
+                mBottomNavigationView.setVisibility(View.VISIBLE);
                 break;
         }
         return true;
+    }
+
+    //监听ViewPager滑动
+    private void viewPagerScrollListener(ViewPager viewPager){
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                    if (mBottomNavigationView.getVisibility()==View.GONE){
+                        mBottomNavigationView.setAlpha(1f);
+                        mBottomNavigationView.setVisibility(View.VISIBLE);
+                    }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -151,19 +175,24 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         }
     }
 
-    //设置mBottomNavigationView的可见性
-    public void setBottomViewVisible(Integer isShow){
-        Animation animation = null;
-        if (isShow== PermissionC.BOTTOM_TAB_SHOW){
-            animation = AnimationUtils.loadAnimation(MainActivity.this,
-                    R.anim.main_bottomtab_visiable_anim);
-        }else if (isShow==PermissionC.BOTTOM_TAB_GONE){
-            animation = AnimationUtils.loadAnimation(MainActivity.this,
-                    R.anim.main_bottomtab_gone_anim);
+    /**
+     * 设置mBottomNavigationView的可见性
+     *
+     * @param isShow 可见性
+     * @param alpha  透明度   1:不透明   0:全透明
+     */
+    public void setBottomViewVisible(Integer isShow, Float alpha) {
+        if (isShow == PermissionC.BOTTOM_TAB_SHOW) {
+            mBottomNavigationView.setAlpha(alpha);
+            if (alpha <= 0.3f) {
+                mBottomNavigationView.setVisibility(View.GONE);
+            }
+        } else if (isShow == PermissionC.BOTTOM_TAB_GONE) {
+            mBottomNavigationView.setAlpha(alpha);
+            if (alpha >= 1f) {
+                mBottomNavigationView.setVisibility(View.VISIBLE);
+            }
         }
-        assert animation != null;
-        animation.setFillAfter(false);
-        mBottomNavigationView.startAnimation(animation);
     }
 
 }

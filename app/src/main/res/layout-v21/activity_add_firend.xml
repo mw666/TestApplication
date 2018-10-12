@@ -19,7 +19,7 @@
         android:background="@color/white"
         android:paddingBottom="@dimen/dp_10">
 
-        <newmatch.zbmf.com.testapplication.custom_view.CircleImageView
+        <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
             android:id="@+id/userAvatarIv"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_80"

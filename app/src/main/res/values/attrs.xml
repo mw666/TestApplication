@@ -9,10 +9,6 @@
         <attr name="metaButtonBarButtonStyle" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="CircleImgView">
-        <attr name="circle_img_view_src" format="reference"/>
-    </declare-styleable>
-
     <attr name="borderColor" format="color"/>
     <attr name="borderWidth" format="dimension"/>
 
@@ -21,4 +17,20 @@
         <attr name="borderWidth"/>
     </declare-styleable>
 
+    <!--魅族banner-->
+    <declare-styleable name="MZBannerView">
+        <attr name="open_mz_mode" format="boolean"/>
+        <attr name="canLoop" format="boolean"/>
+        <attr name="indicatorPaddingLeft" format="dimension"/>
+        <attr name="indicatorPaddingRight" format="dimension"/>
+        <attr name="indicatorPaddingTop" format="dimension"/>
+        <attr name="indicatorPaddingBottom" format="dimension"/>
+        <attr name="indicatorAlign">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="isShowIndicator" format="boolean"/>
+        <attr name="middle_page_cover" format="boolean"/>
+    </declare-styleable>
 </resources>

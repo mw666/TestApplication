@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="newmatch.zbmf.com.testapplication.fragments.MineFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="newmatch.zbmf.com.testapplication.fragments.MineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/h72dp_toolbar_view"/>
+
+    <include android:id="@+id/mine_user_view"
+        layout="@layout/user_avatar_view"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/userMineRV"
+        android:layout_marginTop="@dimen/dp_15"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="match_parent"/>
 
-</FrameLayout>
+</LinearLayout>

@@ -13,6 +13,8 @@ import android.view.View;
 
 public class GetUIDimens {
 
+    private int sMeasuredHeight;
+
     //获取状态栏的高度
     public static int getStatusH(Context context) {
         int result = 0;
@@ -45,16 +47,6 @@ public class GetUIDimens {
         }
         return statusHeight;
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

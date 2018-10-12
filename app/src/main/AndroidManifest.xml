@@ -12,6 +12,7 @@
     <!-- 读写文件的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".base.MyApplication"
@@ -74,11 +75,25 @@
             </meta-data>
         </provider>
 
-        <activity android:name=".activitys.TestActivity">
+        <activity
+            android:name=".activitys.TestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
-        <activity android:name=".activitys.AddFirendActivity">
+        <activity
+            android:name=".activitys.AddFirendActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
-        <activity android:name=".activitys.SearchActivity">
+        <activity
+            android:name=".activitys.SearchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
+        <!-- 专门用来申请权限的activity -->
+        <activity
+            android:name=".activitys.PermissionsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/activityApplyPermissionsTheme">
+        </activity>
+        <activity android:name=".activitys.SettledActivity">
         </activity>
     </application>
 
