@@ -95,4 +95,7 @@
     <string name="member_count">8/16</string>
     <string name="settle_show">进驻展示</string>
     <string name="input_your_nick">请输入您要修改的昵称</string>
+    <string name="copy">复制</string>
+    <string name="flow_call_settle">流量推广招募中</string>
+    <string name="zhaomu_jianjie">招募简介...</string>
 </resources>

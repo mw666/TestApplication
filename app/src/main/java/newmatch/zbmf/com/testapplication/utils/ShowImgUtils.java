@@ -20,6 +20,7 @@ import newmatch.zbmf.com.testapplication.dialogs.SheetDialog;
 /**
  * Created by **
  * on 2018/9/26.
+ * 图片查看的工具类
  */
 
 public class ShowImgUtils {

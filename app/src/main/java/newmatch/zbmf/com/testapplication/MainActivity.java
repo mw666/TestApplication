@@ -1,5 +1,8 @@
 package newmatch.zbmf.com.testapplication;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,12 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
+import com.zhihu.matisse.Matisse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.adapters.MainFragMentAdapter;
 import newmatch.zbmf.com.testapplication.assist.BottomNavigationViewHelper;
+import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.fragments.DynamicFragment;
@@ -38,6 +43,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private ViewPager mViewPager;
     public ImageWatcherHelper mIwHelper;
+    private MineFragment mineFragment;
 
     @Override
     protected Integer layoutId() {
@@ -60,7 +66,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         fragmentList.add(DynamicFragment.dynamicInstance());
         fragmentList.add(MsgFragment.msgInstance());
         fragmentList.add(OuterAttentionFragment.outAttentionInstance());
-        fragmentList.add(MineFragment.mineInstance());
+        mineFragment = MineFragment.mineInstance();
+        fragmentList.add(mineFragment);
         MainFragMentAdapter mainFragMentAdapter = new MainFragMentAdapter(getSupportFragmentManager()
                 , fragmentList);
         mViewPager.setAdapter(mainFragMentAdapter);
@@ -172,6 +179,22 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onBackPressed() {
         if (!mIwHelper.handleBackPressed()) {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //获取结果
+        switch (requestCode) {
+            case PermissionC.PIC_IMG_VIDEO_CODE:
+                //选择图片的结果
+                if (resultCode== Activity.RESULT_OK){
+                    List<Uri> mSelected = Matisse.obtainResult(data);
+                    //更新mineFragment的用户头像
+                    mineFragment.updateMyAvatar(mSelected);
+                }
+                break;
         }
     }
 

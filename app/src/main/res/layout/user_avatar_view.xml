@@ -29,6 +29,7 @@
             style="@style/tvStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textIsSelectable="true"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_18"
@@ -64,10 +65,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_5"
                 android:layout_marginStart="@dimen/dp_5"
-                android:background="?android:attr/selectableItemBackground"
                 android:gravity="left|center_vertical"
                 android:paddingBottom="@dimen/dp_5"
-                android:textIsSelectable="true"
                 android:visibility="visible"
                 tools:text="137184753"/>
         </LinearLayout>

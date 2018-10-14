@@ -102,4 +102,5 @@
     <dimen name="dp_290">290dp</dimen>
     <dimen name="dp_285">285dp</dimen>
     <dimen name="dp_280">280dp</dimen>
+    <dimen name="sp_5">5sp</dimen>
 </resources>

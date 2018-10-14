@@ -10,7 +10,7 @@
 
     <newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText
         android:id="@+id/nickEt"
-        android:layout_width="@dimen/dp_285"
+        android:layout_width="@dimen/dp_280"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/dp_10"

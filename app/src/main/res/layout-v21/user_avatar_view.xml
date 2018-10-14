@@ -16,7 +16,8 @@
         android:layout_marginStart="@dimen/dp_10"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:layout_marginTop="@dimen/dp_10"
-        android:src="@drawable/touxiang_icon"/>
+        android:src="@drawable/touxiang_icon"
+        tools:ignore="RtlHardcoded" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,14 +29,15 @@
             style="@style/tvStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_18"
             android:gravity="center"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:paddingBottom="@dimen/dp_5"
             android:visibility="visible"
-            tools:text="二狗子"/>
+            tools:text="二狗子"
+            tools:ignore="RtlHardcoded" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,22 +55,22 @@
                 android:gravity="center"
                 android:paddingBottom="@dimen/dp_5"
                 android:visibility="visible"
-                tools:text="二狗子"/>
+                tools:text="二狗子"
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/userAccount"
                 style="@style/tvStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_5"
                 android:layout_marginStart="@dimen/dp_5"
                 android:gravity="left|center_vertical"
                 android:paddingBottom="@dimen/dp_5"
                 android:visibility="visible"
-                tools:text="137184753"/>
+                tools:text="137184753"
+                tools:ignore="RtlHardcoded" />
         </LinearLayout>
 
     </LinearLayout>

@@ -1,8 +1,14 @@
 package newmatch.zbmf.com.testapplication.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,13 +18,18 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
 
 import java.util.List;
+import java.util.Objects;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
@@ -28,6 +39,7 @@ import newmatch.zbmf.com.testapplication.adapters.MineViewAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.interfaces.MineViewClick;
@@ -35,6 +47,7 @@ import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
+import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
@@ -44,6 +57,7 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 public class MineFragment extends BaseFragment implements MineViewClick,GMPermissions.PermissionCallBackExcute{
 
     private RoundImageView mAvatarIv;
+    private LinearLayout ll;
 
     /*private String[] titles = {getActivity().getString(R.string.open_vip),
                     getActivity().getString(R.string.update_pass_word),
@@ -69,6 +83,7 @@ public class MineFragment extends BaseFragment implements MineViewClick,GMPermis
         return R.layout.fragment_mine;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView() {
         TextView toolbar_title = bindView(R.id.toolbar_title);
@@ -78,6 +93,7 @@ public class MineFragment extends BaseFragment implements MineViewClick,GMPermis
         TextView userSexAndAge = bindView(R.id.userSexAndAge);
         TextView userAccount = bindView(R.id.userAccount);
         mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
+        ll = bindView(R.id.ll);
 
         userName.setVisibility(View.VISIBLE);
         userSexAndAge.setVisibility(View.VISIBLE);
@@ -107,10 +123,15 @@ public class MineFragment extends BaseFragment implements MineViewClick,GMPermis
         mineViewAdapter.setMineViewClick(this);
         userMineRV.setAdapter(mineViewAdapter);
         //设置textView的复制操作
-        String copyUserName = new GMCopy<TextView>().copyContent(userName, getActivity());
-        String copyUserAccount = new GMCopy<TextView>().copyContent(userAccount, getActivity());
+        GMCopy.instance().copyGetXY(userName,getActivity(),ll);
+        GMCopy.instance().copyGetXY(userAccount,getActivity(),ll);
+
+
+
 
     }
+
+
 
 
 
@@ -146,14 +167,15 @@ public class MineFragment extends BaseFragment implements MineViewClick,GMPermis
                     .setDialogAnimStyle(R.style.dialogAnimator01)
                     .setDialogStyle(R.style.dialog)
                     .setGravity(Gravity.BOTTOM)
-                    .setView(inflate);
+                    .setView(inflate)
+            .showAlertDialog(getActivity(),getActivity());
             sendNick.setOnClickListener(new OnceClickListener() {
                 @Override
                 public void onNoDoubleClick(View v) {
                     String nick = nickEt.getText().toString();
                     ToastUtils.showSingleToast(MyApplication.getInstance(),"获取到的昵称："+nick);
 
-
+                    nickEt.getText().clear();
                 }
             });
             break;
@@ -214,5 +236,13 @@ public class MineFragment extends BaseFragment implements MineViewClick,GMPermis
                 }
                 break;
         }
+    }
+
+    public void updateMyAvatar(List<Uri> mSelected){
+        //设置选择的图片
+        GlideUtil.loadCircleImage(getActivity(),
+                R.drawable.touxiang_icon, mSelected.get(0), mAvatarIv);
+        // TODO: 2018/10/9 上传选择的图片 --->用户图片
+
     }
 }
