@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 
 /**
  * Created by **
@@ -97,6 +98,11 @@ public class DialogUtils {
         mHasMargin = hasMargin;
         return this;
     }
+    private Integer mRes;
+    public DialogUtils setDialogDecoeViewBg(Integer res){
+        mRes=res;
+        return this;
+    }
 
     public Dialog gMDialog(Activity activity, Context context) {
         AlertDialog.Builder builder;
@@ -124,7 +130,11 @@ public class DialogUtils {
         window.getDecorView().setPadding(0, 0, 0, 0);
         //从Android 4.1开始向上兼容，对下不兼容
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            window.getDecorView().setBackground(context.getResources().getDrawable(R.drawable.dialog_top_bg));
+            if (mRes==null){
+                window.getDecorView().setBackground(context.getResources().getDrawable(R.drawable.dialog_top_bg));
+            }else {
+                window.getDecorView().setBackground(context.getResources().getDrawable(mRes));
+            }
         }
         //设置位置
         window.setGravity(mGravity);
@@ -177,5 +187,34 @@ public class DialogUtils {
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
+    }
+
+    private DialogCallBack mDialogCallBack;
+    public DialogUtils setDialogCallBack(DialogCallBack dialogCallBack){
+        mDialogCallBack=dialogCallBack;
+        return this;
+    }
+
+    public void showNormalAlertDialog(Context context,Integer msg){
+        AlertDialog.Builder builder;
+//        if (mDialogStyle != null) {
+//            builder = new AlertDialog.Builder(context, mDialogStyle);
+//        } else {
+            builder = new AlertDialog.Builder(context);
+//        }
+        builder.setMessage(msg)
+                .setPositiveButton(context.getString(R.string.confirm), (dialog, which) -> {
+                    if (mDialogCallBack!=null){
+                        mDialogCallBack.positiveClick(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
+                    if (mDialogCallBack!=null){
+                        mDialogCallBack.negativeClick(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }

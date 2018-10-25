@@ -38,7 +38,7 @@
             android:paddingTop="3dp"
             android:singleLine="false"
             android:textColor="@color/black"
-            android:textColorHint="@color/white_gray"
+            android:textColorHint="@color/black_cd"
             android:textSize="15sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"/>
 

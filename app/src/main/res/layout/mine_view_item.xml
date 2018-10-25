@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_marginTop="@dimen/dp_1_2"
               android:layout_width="match_parent"
               android:layout_height="@dimen/dp_50"
+              android:layout_marginTop="@dimen/dp_1_2"
               android:background="@color/white"
               android:orientation="vertical"
               android:paddingBottom="@dimen/dp_5"
@@ -15,6 +15,7 @@
         android:id="@+id/mine_item_RL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingLeft="@dimen/dp_12"
         android:paddingRight="@dimen/dp_12">
 

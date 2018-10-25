@@ -96,6 +96,14 @@
     <string name="settle_show">进驻展示</string>
     <string name="input_your_nick">请输入您要修改的昵称</string>
     <string name="copy">复制</string>
-    <string name="flow_call_settle">流量推广招募中</string>
-    <string name="zhaomu_jianjie">招募简介...</string>
+    <string name="flow_call_settle">流量推广位招募中</string>
+    <string name="zhaomu_jianjie">入驻首页将会给您带来更多的优质流量，增加曝光率，提升关注度，增加您的钱包和人气哦！</string>
+    <string name="price_1">￥666元/月\n入驻</string>
+    <string name="price_2">￥470元/月\n入驻</string>
+    <string name="price_3">￥350元/月\n入驻</string>
+    <string name="input_old_password">请输入旧密码</string>
+    <string name="input_new_password">请输入新密码</string>
+    <string name="options_tip">提点App改进意见或建议吧！...</string>
+    <string name="login_out_tip">您确定要退出登陆吗?</string>
+
 </resources>

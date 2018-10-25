@@ -8,6 +8,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
+import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * 入驻的页面
@@ -28,7 +29,10 @@ public class SettledActivity extends BaseActivity {
         TextView settleTitle = bindView(R.id.settleTitle);
         settleTitle.setVisibility(View.VISIBLE);
         settleTitle.setText(getString(R.string.settle_show));
-//        bindView(R.id.toolbar).setVisibility(View.GONE);
+        bindViewWithClick(R.id.settleBtn_1, true);
+        bindViewWithClick(R.id.settleBtn_2, true);
+        bindViewWithClick(R.id.settleBtn_3, true);
+
 
     }
 
@@ -54,7 +58,20 @@ public class SettledActivity extends BaseActivity {
 
     @Override
     protected void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.settleBtn_1:
+                ToastUtils.showSingleToast(MyApplication.getInstance(),"--   点击订阅 1");
 
+                break;
+            case R.id.settleBtn_2:
+                ToastUtils.showSingleToast(MyApplication.getInstance(),"--   点击订阅 2");
+
+                break;
+            case R.id.settleBtn_3:
+                ToastUtils.showSingleToast(MyApplication.getInstance(),"--   点击订阅 3");
+
+                break;
+        }
     }
 
 

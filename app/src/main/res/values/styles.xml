@@ -13,12 +13,12 @@
 
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+        <item name="android:windowBackground">@drawable/splash</item>
+        <!--<item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>-->
+        <!--<item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>-->
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
     <!--专门申请权限的activity-->
@@ -62,7 +62,7 @@
 
     <style name="userInfoInputTextAppearence" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">@dimen/sp_13</item>
-        <item name="android:textColor">@color/white_grey</item>
+        <item name="android:textColor">@color/middlePurple</item>
     </style>
 
     <style name="inputTextLayoutStyle">

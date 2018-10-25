@@ -5,13 +5,13 @@
              android:background="@color/white"
              tools:context="newmatch.zbmf.com.testapplication.activitys.FullscreenActivity">
 
-    <ImageView
+<!--    <ImageView
+        android:id="@+id/screenIV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/splash"
         android:gravity="center"
         android:scaleType="centerCrop"
-        android:keepScreenOn="true"/>
-
+        android:keepScreenOn="true"/>-->
 
 </FrameLayout>

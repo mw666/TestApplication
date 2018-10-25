@@ -219,6 +219,7 @@ public class DynamicFragment extends BaseFragment implements DynamicAdapter.Comm
                 .setHasMargin(true)
                 .setDialogStyle(R.style.dialog)
                 .setGravity(Gravity.CENTER)
+                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
 //                .setDialogAnimStyle(R.style.dialogAnimator01)
                 .gMDialog(getActivity(),getActivity());
         reprint.setOnClickListener(new OnceClickListener() {

@@ -1,6 +1,5 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,9 +12,10 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
@@ -37,43 +38,59 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  *
  * 启动页
  */
-public class FullscreenActivity extends AppCompatActivity{
-
-    private View mContentView;
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            // Delayed removal of status and navigation bar
-
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        }
-    };
+public class FullscreenActivity extends BaseActivity{
 
     private Handler mHandler = new Handler();
     private LocationManager myLocationManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fullscreen);
-        //是否全屏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
         Location location = getLocation();
         getCity(location);
+    }
+
+    @Override
+    protected Integer layoutId() {
+        return R.layout.activity_fullscreen;
+    }
+
+    @Override
+    protected void initView() {
+        //是否全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        ImageView screenIV = bindView(R.id.screenIV);
+//        screenIV.setBackgroundResource(R.drawable.splash);
+
         mHandler.postDelayed(() -> startActivity(
                 new Intent(FullscreenActivity.this,
                         RegisterActivity.class)), 2000);
         FullscreenActivity.this.finish();
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected String initTitle() {
+        return "";
+    }
+
+    @Override
+    protected Boolean showBackBtn() {
+        return false;
+    }
+
+    @Override
+    protected int topBarColor() {
+        return MyApplication.getInstance().getResources().getColor(R.color.deepPurple);
+    }
+
+    @Override
+    protected void onViewClick(View view) {
+
     }
 
     Location gpsLocation = null;

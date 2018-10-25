@@ -71,7 +71,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int tabPosition = getArguments().getInt(BuildConfig.TAB_POSITION);
-        PLog.LogD("--   标记:" + tabPosition);
         View view = null;
         if (tabPosition == 0) {
             view = inflater.inflate(R.layout.fragment_login, container, false);

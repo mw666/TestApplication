@@ -1,38 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="newmatch.zbmf.com.testapplication.activitys.SettledActivity">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="newmatch.zbmf.com.testapplication.activitys.SettledActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <include layout="@layout/h72dp_toolbar_view" />
-
-        <TextView
-            android:id="@+id/settleTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_65"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_19"
-            android:textStyle="bold"
-            android:visibility="visible"
-            tools:ignore="RtlSymmetry"
-            tools:text="title" />
-    </RelativeLayout>
+    <include layout="@layout/normal_activity_toolbar"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_72"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_72">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,32 +24,128 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_8"
                 android:drawableBottom="@drawable/settle_title_tv_bg"
                 android:paddingTop="@dimen/dp_2"
                 android:text="@string/flow_call_settle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:paddingStart="@dimen/dp_10"
-                android:paddingLeft="@dimen/dp_10"
                 android:paddingEnd="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_5"
+                android:paddingStart="@dimen/dp_10"
                 android:text="@string/zhaomu_jianjie"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15"
-                android:textStyle="normal" />
+                android:textStyle="normal"/>
 
-            <TextView
-                android:layout_width="@dimen/dp_80"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/settle_bg_view"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_10"
+                    android:text="入驻首页前15位"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_15"/>
+
+                <TextView
+                    android:id="@+id/settleBtn_1"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settle_btn_bg_view"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="@string/price_1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/settle_bg_view"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_10"
+                    android:text="入驻首页前16~50位"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_15"/>
+
+                <TextView
+                    android:id="@+id/settleBtn_2"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settle_btn_bg_view"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="@string/price_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/settle_bg_view"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_10"
+                    android:text="入驻首页50~位"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_15"/>
+
+                <TextView
+                    android:id="@+id/settleBtn_3"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settle_btn_bg_view"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="@string/price_3"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
         </LinearLayout>
 

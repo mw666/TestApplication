@@ -48,15 +48,14 @@ public class PhoneFormatCheckUtils {
     /**
      * 验证密码
      *
-     * @param password
      * @return
      */
-    public static boolean validatePassword(Context context, EditText et, String password) {
+    public static boolean validatePassword(Context context, EditText et) {
         if (TextUtils.isEmpty(et.getText().toString().trim())) {
             ToastUtils.showSquareTvToast(context, "密码不能为空");
             return false;
         } else {
-            if (password.length() < 6 || password.length() > 18) {
+            if (et.getText().toString().trim().length() < 6 || et.getText().toString().trim().length() > 18) {
                 showError(et, "密码长度为6-18位");
                 return false;
             }else {

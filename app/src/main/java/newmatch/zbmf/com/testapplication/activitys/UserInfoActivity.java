@@ -36,7 +36,7 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 /**
  * 圈友信息填写页面
  */
-public class UserInfoActivity extends BaseActivity implements GMPermissions.PermissionCallBackExcute{
+public class UserInfoActivity extends BaseActivity implements GMPermissions.PermissionCallBackExcute {
 
     private TextInputLayout mPhoneLayout;
     //    private TextInputLayout mLocationLayout;
@@ -58,7 +58,6 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
         MyActivityManager.getMyActivityManager().pushAct(UserInfoActivity.this);
         bindViewWithClick(R.id.avatarL, true);
         mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
-        bindViewWithClick(R.id.selectPic, true);
         RadioGroup sexRG = bindView(R.id.sexRG);
         mPhoneLayout = bindView(R.id.phoneLayout);
         ImageView clearPhone = bindViewWithClick(R.id.clearPhone, true);
@@ -105,11 +104,11 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
         //对应的是Build.Version_code  16
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             GMPermissions.skipPermissionActivity(this,
-                    PermissionC.WR_FILES_PERMISSION,PermissionC.PIC_IMG_VIDEO_CODE
-            ,getString(R.string.get_img_tip));
-        }else {
+                    PermissionC.WR_FILES_PERMISSION, PermissionC.PIC_IMG_VIDEO_CODE
+                    , getString(R.string.get_img_tip));
+        } else {
             //选择图片
-            new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
+            new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE, 1);
         }
        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //如果Android版本大于或等于6.0
@@ -189,12 +188,11 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
                 break;*/
             case R.id.avatarL:
             case R.id.avatarIv:
-            case R.id.selectPic:
-//                if (!allGrantedPermission) {
-                    //检查权限
-                    wrFilesPermission();
+                //                if (!allGrantedPermission) {
+                //检查权限
+                wrFilesPermission();
 //                } else {
-                    //执行选择图片视频
+                //执行选择图片视频
 //                    picImgsOrVideo(1);
 //                    new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
 //                }
@@ -298,6 +296,6 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
     @Override
     public void excutePermissionCodes() {
         //选择图片
-        new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
+        new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE, 1);
     }
 }
