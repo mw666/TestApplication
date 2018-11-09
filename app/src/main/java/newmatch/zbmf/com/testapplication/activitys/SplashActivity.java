@@ -12,11 +12,9 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import java.io.IOException;
@@ -24,7 +22,6 @@ import java.util.List;
 import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
@@ -33,69 +30,34 @@ import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * 启动页
+ * 欢迎页
  */
-public class FullscreenActivity extends BaseActivity{
+public class SplashActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler();
-    private LocationManager myLocationManager;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        Location location = getLocation();
-        getCity(location);
-    }
-
-    @Override
-    protected Integer layoutId() {
-        return R.layout.activity_fullscreen;
-    }
-
-    @Override
-    protected void initView() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         //是否全屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        ImageView screenIV = bindView(R.id.screenIV);
-//        screenIV.setBackgroundResource(R.drawable.splash);
+        Location location = getLocation();
+        getCity(location);
 
-        mHandler.postDelayed(() -> startActivity(
-                new Intent(FullscreenActivity.this,
-                        RegisterActivity.class)), 2000);
-        FullscreenActivity.this.finish();
-    }
+        startActivity(
+                new Intent(SplashActivity.this,
+                        RegisterActivity.class));
 
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected String initTitle() {
-        return "";
-    }
-
-    @Override
-    protected Boolean showBackBtn() {
-        return false;
-    }
-
-    @Override
-    protected int topBarColor() {
-        return MyApplication.getInstance().getResources().getColor(R.color.deepPurple);
-    }
-
-    @Override
-    protected void onViewClick(View view) {
-
+//        mHandler.postDelayed(() -> startActivity(
+//                new Intent(SplashActivity.this,
+//                        RegisterActivity.class)), 2000);
+        SplashActivity.this.finish();
     }
 
     Location gpsLocation = null;
     Location netLocation = null;
-
+    private LocationManager myLocationManager;
     private Location getLocation() {
         //获取位置管理服务
         myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -175,7 +137,7 @@ public class FullscreenActivity extends BaseActivity{
                             public void positiveClick(DialogInterface dialog) {
                                 //确定，表示用户同意权限-->重新申请权限
                                 //确定，重新申请权限
-                                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                                ActivityCompat.requestPermissions(SplashActivity.this,
                                         PermissionC.LOCATION_PERMISSION
                                         , PermissionC.LOCATION_CODE);
                                 dialog.dismiss();
@@ -186,7 +148,7 @@ public class FullscreenActivity extends BaseActivity{
                                 //表示用户拒绝位置权限-->不作处理
                                 dialog.dismiss();
                             }
-                        }).showPermissionDialog(FullscreenActivity.this, getString(R.string.permission_name_location));
+                        }).showPermissionDialog(SplashActivity.this, getString(R.string.permission_name_location));
                     }
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED && i == grantResults.length - 1) {
                         //这样写强制用户同意位置信息权限,体验有点不好

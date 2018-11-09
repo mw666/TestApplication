@@ -125,4 +125,12 @@ public class ChatListFragment extends BaseFragment implements RecommendUser,MsgC
             mMZBanner.isPause();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mMZBanner != null) {
+            mMZBanner.isPause();
+        }
+    }
 }

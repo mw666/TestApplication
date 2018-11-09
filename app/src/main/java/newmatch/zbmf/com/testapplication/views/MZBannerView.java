@@ -27,11 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.interfaces.MZHolderCreator;
 import newmatch.zbmf.com.testapplication.interfaces.MZViewHolder;
 import newmatch.zbmf.com.testapplication.listeners.BannerPageClickListener;
 import newmatch.zbmf.com.testapplication.utils.CoverModeTransformer;
 import newmatch.zbmf.com.testapplication.utils.ScaleYTransformer;
+import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * Created by **
@@ -383,6 +385,7 @@ public class MZBannerView<T> extends RelativeLayout {
         mAdapter.setUpViewViewPager(mViewPager);
         if (mBannerPageClickListener!=null){
             mAdapter.setPageClickListener(mBannerPageClickListener);
+            ToastUtils.showSingleToast(MyApplication.getInstance(),"--  哈哈哈   ");
         }
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -609,6 +612,7 @@ public class MZBannerView<T> extends RelativeLayout {
             view.setOnClickListener(v -> {
                 if(mPageClickListener!=null){
                     mPageClickListener.onPageClick(v,realPosition);
+                    ToastUtils.showSingleToast(MyApplication.getInstance(),"MeizuView  点击");
                 }
             });
             return view;

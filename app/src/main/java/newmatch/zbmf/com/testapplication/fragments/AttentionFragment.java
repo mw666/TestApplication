@@ -20,6 +20,7 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
+import newmatch.zbmf.com.testapplication.listeners.BannerPageClickListener;
 import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
 import newmatch.zbmf.com.testapplication.presenter.TestView;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
@@ -30,7 +31,8 @@ import newmatch.zbmf.com.testapplication.views.MZBannerView;
  * A simple {@link Fragment} subclass.
  * 关注Fragment
  */
-public class AttentionFragment extends BaseFragment implements RecommendUser, HomeRVIvClick, TestView<BannerService, TestWanAndroidPresenter> {
+public class AttentionFragment extends BaseFragment implements RecommendUser, HomeRVIvClick,
+        TestView<BannerService, TestWanAndroidPresenter> ,BannerPageClickListener {
 
     private TestWanAndroidPresenter mPresenter;
     private HomeGridAdapter mHomeGridAdapter;
@@ -87,6 +89,7 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
         mHomeGridAdapter.setHomeRVIvClick(this);
         attentionRecyclerView.setAdapter(mHomeGridAdapter);
 
+        mMZBanner.setBannerClickListener(this);
 
     }
 
@@ -160,5 +163,18 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
         if (mMZBanner != null) {
             mMZBanner.isPause();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mMZBanner != null) {
+            mMZBanner.isPause();
+        }
+    }
+
+    @Override
+    public void onPageClick(View view, int position) {
+
     }
 }

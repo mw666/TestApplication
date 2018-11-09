@@ -32,6 +32,7 @@ import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.activitys.UserCenterActivity;
 import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.adapters.MineViewAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
@@ -178,7 +179,8 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
                 break;
             case R.id.goToSpace:
             case R.id.mine_user_view:
-
+                //跳转用户个人空间
+                SkipActivityUtil.skipActivity(getActivity(), UserCenterActivity.class);
                 break;
         }
     }

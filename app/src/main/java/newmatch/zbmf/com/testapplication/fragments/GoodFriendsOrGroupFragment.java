@@ -91,7 +91,8 @@ public class GoodFriendsOrGroupFragment extends BaseFragment {
 
     private void addFG(){
         msgTabTitles.add( getString(R.string.good_friends));//好友
-        //msgTabTitles.add(0,getString(R.string.group));//群组
+        msgTabTitles.add(getString(R.string.group));//群组
+        fragmentList.add(FriendsListFragment.instance());
         fragmentList.add(FriendsListFragment.instance());
     }
 

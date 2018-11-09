@@ -105,5 +105,8 @@
     <string name="input_new_password">请输入新密码</string>
     <string name="options_tip">提点App改进意见或建议吧！...</string>
     <string name="login_out_tip">您确定要退出登陆吗?</string>
+    <string name="user_centetr">个人空间</string>
+    <string name="photo">照片</string>
+    <string name="video">视频</string>
 
 </resources>

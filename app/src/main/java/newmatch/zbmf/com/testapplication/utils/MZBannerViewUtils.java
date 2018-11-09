@@ -32,7 +32,7 @@ public class MZBannerViewUtils {
             BannerViewHolder bannerViewHolder = new BannerViewHolder(imgs);
             //设置Banner的点击事件
             bannerViewHolder.setBannerClickListener((view, position) -> {
-                ToastUtils.showSingleToast(MyApplication.getInstance(), "点击了MZBannerView " + position);
+//                ToastUtils.showSingleToast(MyApplication.getInstance(), "点击了MZBannerView " + position);
             });
             return bannerViewHolder;
         });

@@ -41,6 +41,7 @@
     <color name="black_cd">#FFCDCDCD</color>
     <color name="black_dd">#FFDDDDDD</color>
     <color name="white_50">#66FFFFFF</color>
+    <color name="white_50_alpha">#35FFFFFF</color>
     <color name="apply_textcolor">#ff754b</color>
     <color name="red">#FFE63946</color>
 

@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    <!--读取手机的联系人权限-->
+    <!-- 读取手机的联系人权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
@@ -24,26 +24,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--region 适配全面屏-->
+
+        <!-- region 适配全面屏 -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4" />
-        <!--endregion-->
+            android:value="2.4"/>
+        <!-- endregion -->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
-
-        </activity>
-        <activity
-            android:name=".activitys.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -105,7 +94,17 @@
         </activity>
         <activity android:name=".activitys.VIPActivity">
         </activity>
-        <activity android:name=".activitys.SpaceActivity">
+        <activity
+            android:name=".activitys.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activitys.UserCenterActivity">
         </activity>
     </application>
 
