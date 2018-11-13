@@ -3,12 +3,11 @@ package newmatch.zbmf.com.testapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import com.zhihu.matisse.Matisse;
@@ -17,33 +16,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.adapters.MainFragMentAdapter;
-import newmatch.zbmf.com.testapplication.assist.BottomNavigationViewHelper;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.fragments.DynamicFragment;
 import newmatch.zbmf.com.testapplication.fragments.HomeFragment;
 import newmatch.zbmf.com.testapplication.fragments.MineFragment;
 import newmatch.zbmf.com.testapplication.fragments.MsgFragment;
-import newmatch.zbmf.com.testapplication.fragments.OuterAttentionFragment;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
+import newmatch.zbmf.com.testapplication.utils.UnitUtils;
 
 /**
  * 取名甜甜圈吧
  * 首页
  */
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
-
-    private BottomNavigationView mBottomNavigationView;
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener ,View.OnClickListener{
 
     private ViewPager mViewPager;
     public ImageWatcherHelper mIwHelper;
     private MineFragment mineFragment;
+    private TextView mHomeBottomItem;
+    private TextView mDynamicBottomItem;
+    private ImageView mPushContent;
+    private TextView mMsgBottomItem;
+    private TextView mMineBottomItem;
 
     @Override
     protected Integer layoutId() {
@@ -56,26 +55,29 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         MyActivityManager.getMyActivityManager().pushAct(MainActivity.this);
         //图片放大所需
         mIwHelper = ShowImgUtils.init(this);
-        mBottomNavigationView = bindView(R.id.bottomNavigationView);
-        //取消自带平移的动画效果
-        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+//        LinearLayout bottomTabView = bindView(R.id.bottomTabView);
+        mHomeBottomItem = findViewById(R.id.homeBottomItem);
+        mDynamicBottomItem = findViewById(R.id.dynamicBottomItem);
+        mPushContent = findViewById(R.id.pushContent);
+        mMsgBottomItem = findViewById(R.id.msgBottomItem);
+        mMineBottomItem = findViewById(R.id.mineBottomItem);
+        addListener();
         mViewPager = bindView(R.id.viewPager);
 
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(HomeFragment.homgInstance(TianShareUtil.getCity()));
         fragmentList.add(DynamicFragment.dynamicInstance());
         fragmentList.add(MsgFragment.msgInstance());
-        fragmentList.add(OuterAttentionFragment.outAttentionInstance());
         mineFragment = MineFragment.mineInstance();
         fragmentList.add(mineFragment);
         MainFragMentAdapter mainFragMentAdapter = new MainFragMentAdapter(getSupportFragmentManager()
                 , fragmentList);
         mViewPager.setAdapter(mainFragMentAdapter);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(this);
         mViewPager.addOnPageChangeListener(this);
 
         mViewPager.setCurrentItem(0);
-       //监听viewpager的滑动
+        initSelectHome();
+        //监听viewpager的滑动
         viewPagerScrollListener(mViewPager);
         // 如果不是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
         mIwHelper.setTranslucentStatus(!isTranslucentStatus ? GetUIDimens.calcStatusBarHeight(this) : 0);
@@ -85,6 +87,14 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 //        mIwHelper.setLoader(new SimpleLoader());
 
 
+    }
+
+    private void addListener(){
+        mHomeBottomItem.setOnClickListener(this);
+        mDynamicBottomItem.setOnClickListener(this);
+        mPushContent.setOnClickListener(this);
+        mMsgBottomItem.setOnClickListener(this);
+        mMineBottomItem.setOnClickListener(this);
     }
 
     @Override
@@ -111,7 +121,91 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     }
 
-
+    //设置icon
+    private void setTvIcon(int flag) {
+        switch (flag) {
+            case 0:
+                initSelectHome();
+                break;
+            case 1:
+                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.home_icon), null, null);
+                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.dynamic_light_icon), null, null);
+                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.msg_icon), null, null);
+                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.mine_icon), null, null);
+                //设置字体的大小
+                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case 2:
+                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.home_icon), null, null);
+                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.dynamic_icon), null, null);
+                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.msg_light_icon), null, null);
+                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.mine_icon), null, null);
+                //设置字体的大小
+                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mMsgBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case 3:
+                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.home_icon), null, null);
+                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.dynamic_icon), null, null);
+                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.msg_icon), null, null);
+                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                        getDrawable(R.drawable.mine_light_icon), null, null);
+                //设置字体的大小
+                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+                mMineBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+                break;
+        }
+    }
+    //初始化选择home
+    private void initSelectHome(){
+        mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                getDrawable(R.drawable.home_light_icon), null, null);
+        mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                getDrawable(R.drawable.dynamic_icon), null, null);
+        mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                getDrawable(R.drawable.msg_icon), null, null);
+        mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+                getDrawable(R.drawable.mine_icon), null, null);
+        //设置字体的大小
+        mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+        mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+        mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+        mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+        mHomeBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+        mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+        mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+        mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+    }
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -119,7 +213,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int position) {
-        mBottomNavigationView.getMenu().getItem(position).setChecked(true);
+//        mBottomNavigationView.getMenu().getItem(position).setChecked(true);
     }
 
     @Override
@@ -127,34 +221,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home:
-                mViewPager.setCurrentItem(0);
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-            case R.id.dynamic:
-                mViewPager.setCurrentItem(1);
-                break;
-            case R.id.msg:
-                mViewPager.setCurrentItem(2);
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-            case R.id.attention:
-                mViewPager.setCurrentItem(3);
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-            case R.id.mime:
-                mViewPager.setCurrentItem(4);
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-        }
-        return true;
-    }
-
     //监听ViewPager滑动
-    private void viewPagerScrollListener(ViewPager viewPager){
+    private void viewPagerScrollListener(ViewPager viewPager) {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -162,10 +230,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
             @Override
             public void onPageSelected(int position) {
-                    if (mBottomNavigationView.getVisibility()==View.GONE){
-                        mBottomNavigationView.setAlpha(1f);
-                        mBottomNavigationView.setVisibility(View.VISIBLE);
-                    }
+
             }
 
             @Override
@@ -189,7 +254,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         switch (requestCode) {
             case PermissionC.PIC_IMG_VIDEO_CODE:
                 //选择图片的结果
-                if (resultCode== Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     List<Uri> mSelected = Matisse.obtainResult(data);
                     //更新mineFragment的用户头像
                     mineFragment.updateMyAvatar(mSelected);
@@ -206,16 +271,40 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     public void setBottomViewVisible(Integer isShow, Float alpha) {
         if (isShow == PermissionC.BOTTOM_TAB_SHOW) {
-            mBottomNavigationView.setAlpha(alpha);
-            if (alpha <= 0.3f) {
-                mBottomNavigationView.setVisibility(View.GONE);
-            }
+//            mBottomNavigationView.setAlpha(alpha);
+//            if (alpha <= 0.3f) {
+//                mBottomNavigationView.setVisibility(View.GONE);
+//            }
         } else if (isShow == PermissionC.BOTTOM_TAB_GONE) {
-            mBottomNavigationView.setAlpha(alpha);
-            if (alpha >= 1f) {
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-            }
+//            mBottomNavigationView.setAlpha(alpha);
+//            if (alpha >= 1f) {
+//                mBottomNavigationView.setVisibility(View.VISIBLE);
+//            }
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.homeBottomItem:
+                mViewPager.setCurrentItem(0);
+                setTvIcon(0);
+                break;
+            case R.id.dynamicBottomItem:
+                mViewPager.setCurrentItem(1);
+                setTvIcon(1);
+                break;
+            case R.id.pushContent:
+
+                break;
+            case R.id.msgBottomItem:
+                mViewPager.setCurrentItem(2);
+                setTvIcon(2);
+                break;
+            case R.id.mineBottomItem:
+                mViewPager.setCurrentItem(3);
+                setTvIcon(3);
+                break;
+        }
+    }
 }

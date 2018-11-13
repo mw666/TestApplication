@@ -6,8 +6,8 @@
     android:id="@+id/fl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
 
     <android.support.v4.view.ViewPager
@@ -16,12 +16,63 @@
         android:layout_height="match_parent"
         />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        app:menu="@menu/bottom_menu"/>
+    <!--<android.support.design.widget.BottomNavigationView-->
+    <!--android:id="@+id/bottomNavigationView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_50"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@android:color/white"-->
+    <!--app:menu="@menu/bottom_menu"/>-->
+    <include layout="@layout/main_navigation_bottom"/>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_50"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingTop="@dimen/dp_2"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:weightSum="5">-->
 
+        <!--<TextView-->
+            <!--android:id="@+id/homeBottomItem"-->
+            <!--style="@style/mainNavigationTabItemTv"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:drawableTop="@drawable/home_selector"-->
+            <!--android:text="@string/home"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/dynamicBottomItem"-->
+            <!--style="@style/mainNavigationTabItemTv"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:drawableTop="@drawable/dynamic_selector"-->
+            <!--android:text="@string/dynamic"/>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/pushContent"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="?android:attr/selectableItemBackgroundBorderless"-->
+            <!--android:padding="@dimen/dp_8"-->
+            <!--android:src="@drawable/icon_public"-->
+            <!--tools:ignore="ContentDescription"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/msgBottomItem"-->
+            <!--style="@style/mainNavigationTabItemTv"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:drawableTop="@drawable/msg_selector"-->
+            <!--android:text="@string/msg"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/mineBottomItem"-->
+            <!--style="@style/mainNavigationTabItemTv"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:drawableTop="@drawable/mine_selector"-->
+            <!--android:text="@string/mine"/>-->
+    <!--</LinearLayout>-->
 </FrameLayout>

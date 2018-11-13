@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="mine_tab_titles">
+        <item>@string/production</item>
+        <item>@string/dynamic</item>
+        <item>@string/like</item>
+        <item>@string/setting</item>
+    </array>
+</resources>

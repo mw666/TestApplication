@@ -29,6 +29,7 @@
     <string name="register_protocol_title">隐私协议</string>
     <string name="login_success">登陆成功!</string>
     <string name="account_no_empty">用户名不能为空</string>
+    <string name="phone_no_empty">手机号码不能为空</string>
     <string name="password_no_empty">密码不能为空</string>
     <string name="register_success">注册成功！</string>
     <string name="find_password">找回密码</string>
@@ -108,5 +109,11 @@
     <string name="user_centetr">个人空间</string>
     <string name="photo">照片</string>
     <string name="video">视频</string>
+    <string name="production">作品</string>
+    <string name="like">喜欢</string>
+    <string name="setting">设置</string>
+    <string name="update_password_tip">密码必须是字母和数字组合且长度大于6位</string>
+    <string name="new_password_equles_old">新密码不能与旧密码相同!</string>
+    <string name="code_tip">请输入验证码</string>
 
 </resources>

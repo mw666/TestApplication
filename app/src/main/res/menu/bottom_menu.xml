@@ -10,13 +10,17 @@
         android:icon="@drawable/dynamic_selector"
         android:title="@string/dynamic"/>
     <item
+        android:title=""
+        android:id="@+id/push"
+        android:icon="@drawable/icon_public"/>
+    <item
         android:id="@+id/msg"
         android:icon="@drawable/msg_selector"
         android:title="@string/msg"/>
-    <item
-        android:id="@+id/attention"
-        android:icon="@drawable/attention_selector"
-        android:title="@string/attention"/>
+    <!--<item-->
+    <!--android:id="@+id/attention"-->
+    <!--android:icon="@drawable/attention_selector"-->
+    <!--android:title="@string/attention"/>-->
     <item
         android:id="@+id/mime"
         android:icon="@drawable/mine_selector"

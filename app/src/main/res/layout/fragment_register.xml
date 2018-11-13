@@ -51,7 +51,7 @@
                     style="@style/inputTextLayoutStyle"
                     android:layout_marginBottom="@dimen/dp_1"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:hint="@string/account_tip"
+                    android:hint="@string/code_tip"
                     app:hintTextAppearance="@style/registerInputTextAppearence">
 
                     <android.support.design.widget.TextInputEditText

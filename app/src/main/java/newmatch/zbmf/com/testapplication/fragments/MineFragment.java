@@ -3,29 +3,25 @@ package newmatch.zbmf.com.testapplication.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
@@ -33,31 +29,34 @@ import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserCenterActivity;
-import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
-import newmatch.zbmf.com.testapplication.adapters.MineViewAdapter;
+import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
-import newmatch.zbmf.com.testapplication.interfaces.MineViewClick;
-import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
+import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MyProductionFragment;
+import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MySettingFragment;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
-import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
 
 /**
  * A simple {@link Fragment} subclass.
  * 我的Fragment
  */
-public class MineFragment extends BaseFragment implements MineViewClick, GMPermissions.PermissionCallBackExcute {
+public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMPermissions.PermissionCallBackExcute {
 
     private RoundImageView mAvatarIv;
-    private LinearLayout ll;
+    private FrameLayout ll;
+    private Toolbar mToolbar;
+//    private List<String> msgTabTitles = new ArrayList<>();
+    private List<Fragment> fragmentList;
+    private List<String> mMsgTabTitles;
 
     /*private String[] titles = {getActivity().getString(R.string.open_vip),
                     getActivity().getString(R.string.update_pass_word),
@@ -87,6 +86,9 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView() {
+        //随着scrollView的滑动逐渐显示
+        mToolbar = bindView(R.id.toolbar);
+        mToolbar.setVisibility(View.INVISIBLE);
         TextView toolbar_title = bindView(R.id.toolbar_title);
         toolbar_title.setVisibility(View.VISIBLE);
         toolbar_title.setText(getString(R.string.mine));
@@ -97,6 +99,21 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
         bindViewWithClick(R.id.goToSpace,true).setVisibility(View.VISIBLE);
         bindViewWithClick(R.id.mine_user_view,true);
         ll = bindView(R.id.ll);
+        /**************************************************/
+        PersonalScrollView personalSc = bindView(R.id.personalSc);
+        ImageView iv_personinfo_bg = bindView(R.id.iv_personinfo_bg);
+        View stateBarView = bindView(R.id.stateBarView);
+        TabLayout userCenterTab = bindView(R.id.userCenterTab);
+        ViewPager userCenterViewPager = bindView(R.id.userCenterViewPager);
+
+        personalSc.setTabLayout(userCenterTab,mToolbar,ll);
+        //准备数据--->tabLayout和viewPager
+        addFG();
+        userCenterTab.setTabTextColors(R.color.black,R.color.colorPrimary);
+        userCenterTab.setupWithViewPager(userCenterViewPager);
+        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), mMsgTabTitles, fragmentList);
+        userCenterViewPager.setAdapter(adapter);
+        userCenterViewPager.setCurrentItem(0);
 
         userName.setVisibility(View.VISIBLE);
         userSexAndAge.setVisibility(View.VISIBLE);
@@ -111,25 +128,25 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
         mGmPermissions = GMPermissions.instance().setParameter(getActivity(), getActivity(), PermissionC.WR_FILE_CODE);
         mGmPermissions.setPermissionCallBackExcute(this);
 
-
-        String[] titles = {getActivity().getString(R.string.open_vip),
-                getActivity().getString(R.string.update_pass_word),
-                getActivity().getString(R.string.options_back),
-                getActivity().getString(R.string.version_update),
-                getActivity().getString(R.string.login_out)
-        };
-
-        RecyclerView userMineRV = bindView(R.id.userMineRV);
-        userMineRV.setLayoutManager(new LinearLayoutManager(getActivity(),
-                OrientationHelper.VERTICAL, false));
-        MineViewAdapter mineViewAdapter = new MineViewAdapter(titles, getActivity());
-        mineViewAdapter.setMineViewClick(this);
-        userMineRV.setAdapter(mineViewAdapter);
         //设置textView的复制操作
         GMCopy.instance().copyGetXY(userName, getActivity(), ll);
         GMCopy.instance().copyGetXY(userAccount, getActivity(), ll);
 
 
+    }
+
+    private void addFG(){
+        String[] tabTitles = getActivity().getResources().getStringArray(R.array.mine_tab_titles);
+        mMsgTabTitles = Arrays.asList(tabTitles);
+        if (fragmentList==null){
+            fragmentList = new ArrayList<>();
+        }else if (fragmentList.size()>0){
+            fragmentList.clear();
+        }
+        fragmentList.add(MyProductionFragment.instance());
+        fragmentList.add(MyProductionFragment.instance());
+        fragmentList.add(MyProductionFragment.instance());
+        fragmentList.add(MySettingFragment.instance());
     }
 
 
@@ -190,106 +207,6 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
         return true;
     }
 
-
-    @Override
-    public void clickVip() {
-        //跳转VIP页面
-        SkipActivityUtil.skipActivity(getActivity(), VIPActivity.class);
-    }
-
-    @Override
-    public void clickUpdatePassWord() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.update_password_et_view, null);
-        TextInputLayout oldPasswordTextLayout = view.findViewById(R.id.oldPasswordTextLayout);
-        TextInputLayout newPasswordTextLayout = view.findViewById(R.id.newPasswordTextLayout);
-        ImageView clearOldPassword = view.findViewById(R.id.clearOldPassword);
-        ImageView clearNewPassword = view.findViewById(R.id.clearNewPassword);
-        Button confirmBtn = view.findViewById(R.id.confirmBtn);
-        //修改密码
-        DialogUtils.instance()
-                .setGravity(Gravity.CENTER)
-                .setHasMargin(true)
-                .setIsCancel(true)
-                .setDialogStyle(R.style.dialog)
-                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
-                .setView(view)
-                .gMDialog(getActivity(), getActivity());
-        setBtnBg(confirmBtn, R.drawable.invalide_btn_view, false);
-        etTextChangeListener(oldPasswordTextLayout, newPasswordTextLayout, confirmBtn, clearOldPassword);
-        etTextChangeListener(newPasswordTextLayout, oldPasswordTextLayout, confirmBtn, clearNewPassword);
-
-        confirmBtn.setOnClickListener(new OnceClickListener() {
-            @Override
-            public void onNoDoubleClick(View v) {
-                if (PhoneFormatCheckUtils.validatePassword(getActivity(), oldPasswordTextLayout.getEditText())
-                        && PhoneFormatCheckUtils.validatePassword(getActivity(),
-                        newPasswordTextLayout.getEditText())) {
-                    //密码格式验证通过
-                    if (textEquelsText(oldPasswordTextLayout.getEditText().getText().toString().trim()
-                            , newPasswordTextLayout.getEditText().getText().toString().trim())) {
-                        ToastUtils.showSingleToast(MyApplication.getInstance(), "新密码不能与旧密码相同!");
-                    } else {
-                        //调用修改密码的接口
-
-                    }
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void clickOptionsUp() {
-        //意见反馈
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.option_back_view, null);
-        ContainsEmojiEditText inputOptions = view.findViewById(R.id.inputOptions);
-        ImageView sendOptions = view.findViewById(R.id.sendOptions);
-        DialogUtils.instance()
-                .setGravity(Gravity.CENTER)
-                .setView(view)
-                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
-                .setDialogStyle(R.style.dialog)
-                .setIsCancel(true)
-                .gMDialog(getActivity(),getActivity());
-        sendOptions.setOnClickListener(new OnceClickListener() {
-            @Override
-            public void onNoDoubleClick(View v) {
-                String options = inputOptions.getText().toString().trim();
-                //提供的宝贵建议
-                ToastUtils.showSingleToast(MyApplication.getInstance(),options+"");
-                //调用接口返回
-
-            }
-        });
-
-    }
-
-    @Override
-    public void clickVertionUpdate() {
-        //版本更新
-
-    }
-
-    @Override
-    public void clickLoginOut() {
-        //退出登录
-        DialogUtils.instance()
-                /*.setDialogStyle(R.style.dialog)*/
-                .setDialogCallBack(new DialogCallBack() {
-                    @Override
-                    public void positiveClick(DialogInterface dialog) {
-                        //调用退出登录的接口
-
-                    }
-
-                    @Override
-                    public void negativeClick(DialogInterface dialog) {
-
-                    }
-                })
-        .showNormalAlertDialog(getActivity(),R.string.login_out_tip);
-    }
-
     @Override
     public void excutePermissionCodes() {
         //选择图片
@@ -323,50 +240,4 @@ public class MineFragment extends BaseFragment implements MineViewClick, GMPermi
 
     }
 
-    private void etTextChangeListener(TextInputLayout et1, TextInputLayout et2, Button btn, ImageView clear) {
-        EditText editText = et1.getEditText();
-        assert editText != null;
-        editText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().length() > 0) {
-                    clear.setVisibility(View.VISIBLE);
-                    clear.setOnClickListener(new OnceClickListener() {
-                        @Override
-                        public void onNoDoubleClick(View v) {
-                            editText.getText().clear();
-                            clear.setVisibility(View.GONE);
-                        }
-                    });
-                } else {
-                    clear.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (et1.getEditText().getText().toString().trim().length() > 0 &&
-                        et2.getEditText().getText().toString().trim().length() > 0) {
-                    setBtnBg(btn, R.drawable.select_login_btn_bg, true);
-                } else {
-                    setBtnBg(btn, R.drawable.invalide_btn_view, false);
-                }
-            }
-        });
-    }
-
-    private Boolean textEquelsText(String text1, String text2) {
-        return text1.equals(text2);
-    }
-
-    private void setBtnBg(Button btn, Integer res, Boolean isClick) {
-        btn.setClickable(isClick);
-        btn.setBackgroundResource(res);
-    }
 }

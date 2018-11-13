@@ -21,8 +21,8 @@ import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
  * 消息Fragment
  */
 public class MsgFragment extends BaseFragment {
-    private List<String> msgTabTitles = new ArrayList<>();
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private List<String> msgTabTitles;
+    private List<Fragment> fragmentList;
 
     public MsgFragment() {
 
@@ -84,6 +84,16 @@ public class MsgFragment extends BaseFragment {
     }
 
     private void addFG(){
+        if (fragmentList==null){
+            fragmentList = new ArrayList<>();
+        }else if (fragmentList.size()>0){
+            fragmentList.clear();
+        }
+        if (msgTabTitles==null){
+            msgTabTitles = new ArrayList<>();
+        }else if (msgTabTitles.size()>0){
+            msgTabTitles.clear();
+        }
         msgTabTitles.add(getString(R.string.msg));//消息
         msgTabTitles.add( getString(R.string.good_friends));//好友
         //msgTabTitles.add(0,getString(R.string.group));//群组

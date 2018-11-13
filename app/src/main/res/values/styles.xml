@@ -311,6 +311,16 @@
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!--首页底部navigationTab的Item的属性-->
+    <style name="mainNavigationTabItemTv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
 
     <style name="Theme_Light_Dialog1" parent="android:style/Theme.Dialog">
         <item name="android:windowBackground">@null</item>

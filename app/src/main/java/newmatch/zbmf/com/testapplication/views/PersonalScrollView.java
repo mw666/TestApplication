@@ -4,18 +4,25 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.design.widget.TabLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
+
+import newmatch.zbmf.com.testapplication.component.PLog;
 
 /**
  * Created by **
  * on 2018/11/7.
- *
+ * <p>
  * 带有阻尼的ScrollView
+ * <p>
+ * view在Android视图中的坐标关系:https://www.cnblogs.com/tangs/articles/5864092.html
  */
 
 public class PersonalScrollView extends ScrollView {
@@ -45,10 +52,59 @@ public class PersonalScrollView extends ScrollView {
     private float distanceX = 0;
     private float distanceY = 0;
     private boolean upDownSlide = false; //判断上下滑动的flag
+
+    /**************************************/
+    private TabLayout mineTabLayout;
+    private Toolbar mToolbar;
+    private FrameLayout mFl;
+    int[] locationToolBar = new int[2];
+    int[] locationFl = new int[2];
+
     //------尾部收缩属性end--------
     public PersonalScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
+    public void setTabLayout(TabLayout tabLayout, Toolbar toolbar, FrameLayout fl) {
+        mineTabLayout = tabLayout;
+        mToolbar = toolbar;
+        mFl = fl;
+    }
+
+    //滑动拦截
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (mineTabLayout != null) {
+            mineTabLayout.getLocationOnScreen(locationToolBar);
+            float y = mineTabLayout.getY();
+            PLog.LogD("----  TabLayout 相对于屏幕的 Y 坐标:" + y);
+        }
+        if (mFl!=null){
+            mFl.getLocationOnScreen(locationFl);
+            float y = mFl.getY();
+            PLog.LogD("----  mFl 相对于屏幕的 Y 坐标:" + y);
+        }
+        boolean intercepted = false;
+
+        int action = ev.getAction() & MotionEvent.ACTION_MASK;
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                intercepted = false;
+                //初始化mActivePointerId
+                super.onInterceptTouchEvent(ev);
+                break;
+            case MotionEvent.ACTION_MOVE:
+
+//                intercepted = true;
+
+                break;
+            case MotionEvent.ACTION_UP:
+                intercepted = false;
+                break;
+        }
+        return intercepted;
+    }
+
     //初始化
     private void init() {
         setOverScrollMode(OVER_SCROLL_NEVER);
@@ -61,6 +117,7 @@ public class PersonalScrollView extends ScrollView {
             }
         }
     }
+
     /***
      * 生成视图工作完成.该函数在生成视图的最后调用，在所有子视图添加完之后. 即使子类覆盖了 onFinishInflate
      * 方法，也应该调用父类的方法，使该方法得以执行.
@@ -71,6 +128,7 @@ public class PersonalScrollView extends ScrollView {
         init();
         super.onFinishInflate();
     }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         //这里只是计算尾部坐标
@@ -90,6 +148,7 @@ public class PersonalScrollView extends ScrollView {
         if (upDownSlide && inner != null) commOnTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
+
     /***
      * 触摸事件
      *
@@ -156,6 +215,7 @@ public class PersonalScrollView extends ScrollView {
                 break;
         }
     }
+
     /***
      * 回缩动画,尾部往下缩动画
      */
@@ -169,10 +229,12 @@ public class PersonalScrollView extends ScrollView {
         inner.layout(normal.left, normal.top, normal.right, normal.bottom);
         normal.setEmpty();
     }
+
     // 是否需要开启动画
     public boolean isNeedAnimation() {
         return !normal.isEmpty();
     }
+
     // 回弹动画，header往上缩动画 (使用了属性动画)
     public void replyImage() {
         final float distance = dropZoomView.getMeasuredWidth() - dropZoomViewWidth;
@@ -184,6 +246,7 @@ public class PersonalScrollView extends ScrollView {
         });
         anim.start();
     }
+
     //头部缩放
     public void setZoom(float s) {
         if (dropZoomViewHeight <= 0 || dropZoomViewWidth <= 0) {
@@ -194,6 +257,7 @@ public class PersonalScrollView extends ScrollView {
         lp.height = (int) (dropZoomViewHeight * ((dropZoomViewWidth + s) / dropZoomViewWidth));
         dropZoomView.setLayoutParams(lp);
     }
+
     /***
      * 是否需要移动布局 inner.getMeasuredHeight():获取的是控件的总高度
      *
@@ -210,6 +274,7 @@ public class PersonalScrollView extends ScrollView {
         }
         return false;
     }
+
     //清理尾部属性值
     private void clear0() {
         lastX = 0;
