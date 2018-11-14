@@ -43,10 +43,12 @@ public class MyProductionFragment extends BaseFragment implements ProductionAdap
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3,
                 OrientationHelper.VERTICAL, false);
         mineProductionRV.setLayoutManager(layoutManager);
+//        mineProductionRV.setHasFixedSize(true);
+//        mineProductionRV.setNestedScrollingEnabled(false);
         ProductionAdapter productionAdapter = new ProductionAdapter(getActivity());
         productionAdapter.setProductionIvClick(this);
         mineProductionRV.setAdapter(productionAdapter);
-
+        mineProductionRV.requestLayout();
 
     }
 

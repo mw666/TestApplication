@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
@@ -33,6 +34,7 @@ import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MyProductionFragment;
@@ -52,7 +54,7 @@ import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
 public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMPermissions.PermissionCallBackExcute {
 
     private RoundImageView mAvatarIv;
-    private FrameLayout ll;
+//    private CoordinatorLayout ll;
     private Toolbar mToolbar;
 //    private List<String> msgTabTitles = new ArrayList<>();
     private List<Fragment> fragmentList;
@@ -88,7 +90,8 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
     protected void initView() {
         //随着scrollView的滑动逐渐显示
         mToolbar = bindView(R.id.toolbar);
-        mToolbar.setVisibility(View.INVISIBLE);
+        mToolbar.setVisibility(View.VISIBLE);
+        mToolbar.setAlpha(0);
         TextView toolbar_title = bindView(R.id.toolbar_title);
         toolbar_title.setVisibility(View.VISIBLE);
         toolbar_title.setText(getString(R.string.mine));
@@ -97,16 +100,22 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         TextView userAccount = bindView(R.id.userAccount);
         mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
         bindViewWithClick(R.id.goToSpace,true).setVisibility(View.VISIBLE);
-        bindViewWithClick(R.id.mine_user_view,true);
-        ll = bindView(R.id.ll);
+        RelativeLayout mine_user_view = bindViewWithClick(R.id.mine_user_view, true);
+//        ll = bindView(R.id.ll);
         /**************************************************/
         PersonalScrollView personalSc = bindView(R.id.personalSc);
         ImageView iv_personinfo_bg = bindView(R.id.iv_personinfo_bg);
         View stateBarView = bindView(R.id.stateBarView);
+        RelativeLayout headRv = bindView(R.id.headRv);
         TabLayout userCenterTab = bindView(R.id.userCenterTab);
         ViewPager userCenterViewPager = bindView(R.id.userCenterViewPager);
 
-        personalSc.setTabLayout(userCenterTab,mToolbar,ll);
+        personalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
+        personalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
+                (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                    PLog.LogD("==  scrollY : "+scrollY+"   ===  oldScrollY : "+oldScrollY);
+                    
+        });
         //准备数据--->tabLayout和viewPager
         addFG();
         userCenterTab.setTabTextColors(R.color.black,R.color.colorPrimary);
@@ -129,8 +138,8 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         mGmPermissions.setPermissionCallBackExcute(this);
 
         //设置textView的复制操作
-        GMCopy.instance().copyGetXY(userName, getActivity(), ll);
-        GMCopy.instance().copyGetXY(userAccount, getActivity(), ll);
+        GMCopy.instance().copyGetXY(userName, getActivity(), personalSc);
+        GMCopy.instance().copyGetXY(userAccount, getActivity(), personalSc);
 
 
     }

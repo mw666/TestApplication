@@ -5,14 +5,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
-import android.widget.ScrollView;
+import android.widget.RelativeLayout;
 
 import newmatch.zbmf.com.testapplication.component.PLog;
 
@@ -25,7 +25,7 @@ import newmatch.zbmf.com.testapplication.component.PLog;
  * view在Android视图中的坐标关系:https://www.cnblogs.com/tangs/articles/5864092.html
  */
 
-public class PersonalScrollView extends ScrollView {
+public class PersonalScrollView extends NestedScrollView {
 
     private static final String TAG = "BounceScrollView";
     //----头部收缩属性--------
@@ -56,36 +56,95 @@ public class PersonalScrollView extends ScrollView {
     /**************************************/
     private TabLayout mineTabLayout;
     private Toolbar mToolbar;
-    private FrameLayout mFl;
-    int[] locationToolBar = new int[2];
-    int[] locationFl = new int[2];
+    private RelativeLayout mFl;
+    private RelativeLayout mHeadRv;
+    private int[] locationToolBar = new int[2];
+    private int[] locationFl = new int[2];
+    private int mToolBarH;
+    //toolBar开始逐渐显示的Y坐标的位置
+    private int startShowToolBarY = 0;
+    private float mToolbarY;
+    private float mTabLayoutY;
+    private float scale;
+    private int alpha;
 
     //------尾部收缩属性end--------
     public PersonalScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public void setTabLayout(TabLayout tabLayout, Toolbar toolbar, FrameLayout fl) {
+    public void setTabLayout(TabLayout tabLayout, Toolbar toolbar, RelativeLayout fl, RelativeLayout headRv) {
         mineTabLayout = tabLayout;
         mToolbar = toolbar;
         mFl = fl;
+        mHeadRv = headRv;
+        if (toolbar!=null){
+            mToolBarH=toolbar.getMeasuredHeight();
+        }
     }
 
-    //滑动拦截
+    @Override
+    public boolean onInterceptHoverEvent(MotionEvent event) {
+
+        return super.onInterceptHoverEvent(event);
+    }
+
+    boolean intercepted=false;
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+        int scrollY = getScrollY();
+        PLog.LogD("===    移动的Y距离              :  "+scrollY);
+        if (mineTabLayout!=null){
+            mineTabLayout.getLocationOnScreen(locationFl);
+            mTabLayoutY = locationFl[1];
+            PLog.LogD("===    mFl  的坐标              :  "+y);
+        }
+        if (mTabLayoutY>mToolBarH){
+            intercepted=true;
+        }else {
+            intercepted=false;
+        }
+        return intercepted;
+    }
+
+    /*    //滑动拦截
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        //获取toolBar左上角的Y坐标（即：Y方向距离屏幕顶部的距离）,获取滑动的距离来控制tollBar的透明度
+        // ，以及滑动事件的拦截，谁来获取焦点
+        if (mToolBarH == 0) {
+            mToolBarH = mToolbar.getMeasuredHeight();
+        }
+//        PLog.LogD("===  获取到的ToolBar的高度 ：" + mToolBarH);
+        if (mToolbarY == 0 && mToolbar != null) {
+            mToolbar.getLocationOnScreen(locationToolBar);
+            mToolbarY = locationToolBar[1];
+        }
+//        PLog.LogD("----  toolBar 相对于屏幕的 Y 坐标:" + mToolbarY);
+        if (startShowToolBarY == 0) {
+            //toolBar显示与否的临界值
+            startShowToolBarY = (int) (mToolbarY - mToolBarH);
+        }
+        PLog.LogD("----  toolBar显示与否的临界值 Y 坐标:" + startShowToolBarY);
+        //获取滑动的距离
+        int scrollY = getScrollY();
+        PLog.LogD("====    滚动的距离  :" + scrollY);
         if (mineTabLayout != null) {
             mineTabLayout.getLocationOnScreen(locationToolBar);
-            float y = mineTabLayout.getY();
-            PLog.LogD("----  TabLayout 相对于屏幕的 Y 坐标:" + y);
+            mTabLayoutY = locationToolBar[1];
+//            PLog.LogD("----  TabLayout 相对于屏幕的 Y 坐标:" + y);
         }
-        if (mFl!=null){
+        if (mFl != null) {
             mFl.getLocationOnScreen(locationFl);
-            float y = mFl.getY();
-            PLog.LogD("----  mFl 相对于屏幕的 Y 坐标:" + y);
+            float y = locationFl[1];
+//            PLog.LogD("----  mFl 相对于屏幕的 Y 坐标:" + y);
+        }
+        if (mToolbar != null) {
+            mToolbar.getLocationOnScreen(locationToolBar);
+            mToolbarY = locationToolBar[1];
         }
         boolean intercepted = false;
-
         int action = ev.getAction() & MotionEvent.ACTION_MASK;
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -94,16 +153,39 @@ public class PersonalScrollView extends ScrollView {
                 super.onInterceptTouchEvent(ev);
                 break;
             case MotionEvent.ACTION_MOVE:
-
-//                intercepted = true;
-
+                if (scrollY < startShowToolBarY||mToolbarY<0) {
+                    mToolbar.setVisibility(View.INVISIBLE);//隐藏
+                    scale=0;
+                    intercepted = true;
+                } else if (scrollY >= startShowToolBarY && scrollY <= mToolbarY) {
+                    mToolbar.setVisibility(View.VISIBLE);//显示
+                    //根据滑动的距离改变透明度--->alpha: 0 全透明  1 不透明
+                    scale = (float) (scrollY - startShowToolBarY) / mToolBarH;//向上滑逐渐接近于1，向下滑逐渐接近于0
+                    if (scale < 1) {
+                        intercepted = true;
+                    } else if (scale >= 1) {
+                        scale = 1;
+                        intercepted = false;
+                    }
+                    mToolbar.setAlpha(scale);
+                } else if (scrollY > mToolbarY) {
+                    scale = 1;
+                    mToolbar.setVisibility(View.VISIBLE);//显示
+                    mToolbar.setAlpha(scale);
+                    intercepted = false;
+                }
+//                if (*//*mToolbarY == 0 ||*//*mTabLayoutY == mToolBarH) {
+//                    scale = 1;
+//                    mToolbar.setAlpha(scale);
+//                    intercepted=false;
+//                }
                 break;
             case MotionEvent.ACTION_UP:
                 intercepted = false;
                 break;
         }
         return intercepted;
-    }
+    }*/
 
     //初始化
     private void init() {

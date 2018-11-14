@@ -107,4 +107,5 @@
     <dimen name="dp_265">265dp</dimen>
     <dimen name="dp_0_3">0.3dp</dimen>
     <dimen name="dp_17">17dp</dimen>
+    <dimen name="dp_170">170dp</dimen>
 </resources>
