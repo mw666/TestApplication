@@ -34,14 +34,13 @@ import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MyProductionFragment;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MySettingFragment;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -110,12 +109,6 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         TabLayout userCenterTab = bindView(R.id.userCenterTab);
         ViewPager userCenterViewPager = bindView(R.id.userCenterViewPager);
 
-        personalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
-        personalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
-                (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                    PLog.LogD("==  scrollY : "+scrollY+"   ===  oldScrollY : "+oldScrollY);
-                    
-        });
         //准备数据--->tabLayout和viewPager
         addFG();
         userCenterTab.setTabTextColors(R.color.black,R.color.colorPrimary);
@@ -123,6 +116,13 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), mMsgTabTitles, fragmentList);
         userCenterViewPager.setAdapter(adapter);
         userCenterViewPager.setCurrentItem(0);
+
+        personalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
+        personalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
+                (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+//                    PLog.LogD("==  scrollY : "+scrollY+"   ===  oldScrollY : "+oldScrollY);
+
+                });
 
         userName.setVisibility(View.VISIBLE);
         userSexAndAge.setVisibility(View.VISIBLE);

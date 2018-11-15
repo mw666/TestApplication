@@ -26,7 +26,7 @@ import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.interfaces.MineViewClick;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;

@@ -27,7 +27,7 @@ import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 

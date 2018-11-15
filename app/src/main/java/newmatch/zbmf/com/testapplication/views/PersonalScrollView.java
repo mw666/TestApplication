@@ -78,32 +78,74 @@ public class PersonalScrollView extends NestedScrollView {
         mToolbar = toolbar;
         mFl = fl;
         mHeadRv = headRv;
-        if (toolbar!=null){
-            mToolBarH=toolbar.getMeasuredHeight();
+        if (toolbar != null) {
+            mToolBarH = toolbar.getMeasuredHeight();
         }
     }
 
-    @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
+    private boolean isUp = true;
 
-        return super.onInterceptHoverEvent(event);
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        // TODO: 2018/11/15 判断scrollView滑动的方向
+        if (t > oldt) {
+            // 上滑
+            isUp = true;
+        } else {
+            //下滑
+            isUp = false;
+        }
+        PLog.LogD("===  onScrollChanged  执行 " + "      l:" + l + "      t:" + t + "      oldL:" + oldl + "       pldT:" + oldt);
     }
 
-    boolean intercepted=false;
+    boolean intercepted = false;
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-
+        PLog.LogD("===  onInterceptTouchEvent  执行 ");
         int scrollY = getScrollY();
-        PLog.LogD("===    移动的Y距离              :  "+scrollY);
-        if (mineTabLayout!=null){
+        PLog.LogD("===    移动的Y距离              :  " + scrollY);
+        if (mineTabLayout != null) {
             mineTabLayout.getLocationOnScreen(locationFl);
             mTabLayoutY = locationFl[1];
-            PLog.LogD("===    mFl  的坐标              :  "+y);
+            PLog.LogD("===    mFl  的坐标              :  " + y);
         }
-        if (mTabLayoutY>mToolBarH){
-            intercepted=true;
-        }else {
-            intercepted=false;
+        if (mTabLayoutY > mToolBarH) {
+            intercepted = true;
+        } else {
+            intercepted = false;
+        }
+        int i = ev.getAction() & MotionEvent.ACTION_MASK;
+        float rawY = ev.getRawY();
+        float y = ev.getY();
+//        PLog.LogD("===     rawY:"+rawY+"--     y :"+y);
+        switch (i) {
+            case MotionEvent.ACTION_DOWN:
+                intercepted = false;
+                //初始化mActivePointerId
+                super.onInterceptTouchEvent(ev);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                 if (isUp){
+                     if (mTabLayoutY > mToolBarH){
+                         intercepted=true;//拦截
+                     }else {
+                         intercepted=false;//传递给子控件
+                     }
+                 }else {
+                     if (mTabLayoutY <= mToolBarH){
+                         //并且recyclerView的内容不处于顶端---》滑动权在子控件，否则拦截
+                         //判断RecyclerView是否滑动到了底部或顶部  https://blog.csdn.net/msn465780/article/details/77101966
+
+
+                     }
+                 }
+
+                break;
+            case MotionEvent.ACTION_UP:
+                intercepted = false;
+                break;
         }
         return intercepted;
     }

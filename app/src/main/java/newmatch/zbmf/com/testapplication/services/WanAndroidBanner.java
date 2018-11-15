@@ -21,17 +21,17 @@ public interface WanAndroidBanner {
     @GET("banner/json")
     Observable<BannerService> getBannerRx();
 
-    /**
-     * 玩Android注册的数据：
-     * {"data":{"collectIds":[],"email":"","icon":"","id":9829,"password":"123456",
-     * "token":"","type":0,"username":"15558191831"},"errorCode":0,"errorMsg":""}
-     * 在泛型中填入pojo实体类
-     * <p>
-     * 注册、登录时，用的表单提交数据的注解 Field
-     *
-     * @return
-     */
-    //注册
+//    /**
+//     * 玩Android注册的数据：
+//     * {"data":{"collectIds":[],"email":"","icon":"","id":9829,"password":"123456",
+//     * "token":"","type":0,"username":"15558191831"},"errorCode":0,"errorMsg":""}
+//     * 在泛型中填入pojo实体类
+//     * <p>
+//     * 注册、登录时，用的表单提交数据的注解 Field
+//     *
+//     * @return
+//     */
+//    //注册
 //    @FormUrlEncoded
 //    @POST(NetConfigApi.Register/*"user/register"*/)
 //    Observable<WAndroidLogin> register(@Field("username") String username,

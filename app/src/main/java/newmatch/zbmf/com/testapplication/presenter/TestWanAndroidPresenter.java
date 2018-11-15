@@ -6,6 +6,8 @@ import io.reactivex.schedulers.Schedulers;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.net.RetrofitSingleton;
 import newmatch.zbmf.com.testapplication.net.utils.RxUtil;
+import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.TestPresenter;
 import newmatch.zbmf.com.testapplication.services.WanAndroidBanner;
 
 /**

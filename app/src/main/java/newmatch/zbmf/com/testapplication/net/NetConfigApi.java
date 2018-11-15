@@ -6,11 +6,14 @@ package newmatch.zbmf.com.testapplication.net;
  */
 
 public class NetConfigApi {
+
     //玩Android接口
-    public static final String BASE_URL = "http://www.wanandroid.com/";
+    public static final String BASE_URL =
+//            "http://106.12.103.105:8081/web/";//测试地址
+            "http://www.wanandroid.com/";
 
     //注册接口
-    public static final String Register = "user/register";
+    public static final String REGISTER = "register/check";
     //登录接口
     public static final String Login_in = "user/login";
 

@@ -10,7 +10,7 @@ import newmatch.zbmf.com.testapplication.GMClass.GMRvSetLayoutManager;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.FriendsListAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.

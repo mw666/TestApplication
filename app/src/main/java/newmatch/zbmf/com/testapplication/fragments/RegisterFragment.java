@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +21,15 @@ import cn.smssdk.SMSSDK;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
+import newmatch.zbmf.com.testapplication.activitys.UserInfoActivity;
+import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.PLog;
+import newmatch.zbmf.com.testapplication.entity.RegisterBean;
+import newmatch.zbmf.com.testapplication.presenter.RegisterOrLoginPresenter;
+import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.TimeCount;
@@ -36,8 +39,7 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * A simple {@link Fragment} subclass.
  * 注册或登录
  */
-public class RegisterFragment extends Fragment implements View.OnClickListener {
-
+public class RegisterFragment extends BaseFragment implements View.OnClickListener, TestView<RegisterBean, RegisterOrLoginPresenter> {
 
     private TextInputLayout mAccountTextLayout;
     private TextInputLayout mPasswordTextLayout;
@@ -57,6 +59,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private TimeCount mTimecount;
     private String mPhone;
     private TextInputEditText mZc_verifyCodeInputEt;
+    private int mTabPosition;
+    private View mView;//布局的View
+    private RegisterOrLoginPresenter mPresenter;
 
     public RegisterFragment() {
         PLog.LogD("RegisterFragment 的构造方法");
@@ -71,33 +76,32 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    protected Integer layoutId() {
+        mTabPosition = getArguments().getInt(BuildConfig.TAB_POSITION);
+        if (mTabPosition == 0) {
+            return R.layout.fragment_login;
+        } else if (mTabPosition == 1) {
+            return R.layout.fragment_register;
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        int tabPosition = getArguments().getInt(BuildConfig.TAB_POSITION);
-
-        // 在尝试读取通信录时以弹窗提示用户（可选功能）
-//        SMSSDK.setAskPermisionOnReadContact(true);
+    protected void initView() {
         // 注册一个事件回调，用于处理SMSSDK接口请求的结果
         SMSSDK.registerEventHandler(eventHandler);
-
-        View view = null;
-        if (tabPosition == 0) {
-            view = inflater.inflate(R.layout.fragment_login, container, false);
-            mAccountTextLayout = bindView(view, R.id.accountTextLayout);
-            TextInputEditText accountInputEt = bindView(view, R.id.accountInputEt);
-            mClearAccount = bindView(view, R.id.clearAccount);
-            mPasswordTextLayout = bindView(view, R.id.passwordTextLayout);
-            TextInputEditText passwordInputEt = bindView(view, R.id.passwordInputEt);
-            mClearPassword = bindView(view, R.id.clearPassword);
-            mLoginBtn = view.findViewById(R.id.loginBtn);
-            mForgetPassword = view.findViewById(R.id.forgetPassword);
-            mLoginProtocolContent = view.findViewById(R.id.loginProtocolContent);
+        mView = getView();
+        if (mTabPosition == 0) {
+            mAccountTextLayout = bindView(mView, R.id.accountTextLayout);
+            TextInputEditText accountInputEt = bindView(mView, R.id.accountInputEt);
+            mClearAccount = bindView(mView, R.id.clearAccount);
+            mPasswordTextLayout = bindView(mView, R.id.passwordTextLayout);
+            TextInputEditText passwordInputEt = bindView(mView, R.id.passwordInputEt);
+            mClearPassword = bindView(mView, R.id.clearPassword);
+            mLoginBtn = mView.findViewById(R.id.loginBtn);
+            mForgetPassword = mView.findViewById(R.id.forgetPassword);
+            mLoginProtocolContent = mView.findViewById(R.id.loginProtocolContent);
 
             mLoginBtn.setText(getString(R.string.login));
 //            initNoFocus(mAccountTextLayout);
@@ -105,30 +109,48 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             clearListener(mAccountTextLayout, mClearAccount);
             clearListener(mPasswordTextLayout, mClearPassword);
             setLoginViewClick();
-
-            return view;
-        } else if (tabPosition == 1) {
-            view = inflater.inflate(R.layout.fragment_register, container, false);
-            mZc_accountTextLayout = bindView(view, R.id.zc_accountTextLayout);
-            TextInputEditText zc_accountInputEt = bindView(view, R.id.zc_accountInputEt);
-            mZc_clearAccount = bindView(view, R.id.zc_clearAccount);
-            TextInputLayout zc_verifyCodeTextLayout = bindView(view, R.id.zc_verifyCodeTextLayout);
-            mZc_verifyCodeInputEt = bindView(view, R.id.zc_verifyCodeInputEt);
-            mZc_verifyCodeBtn = bindView(view, R.id.zc_verifyCodeBtn);
-            mZc_passwordTextLayout = bindView(view, R.id.zc_passwordTextLayout);
-            TextInputEditText zc_passwordInputEt = bindView(view, R.id.zc_passwordInputEt);
-            mZc_clearPassword = bindView(view, R.id.zc_clearPassword);
-            mZc_btn = bindView(view, R.id.zc_btn);
-            mRegisterRule = bindView(view, R.id.registerRule);
-            mRegisterProtocol = bindView(view, R.id.registerProtocol);
+        } else if (mTabPosition == 1) {
+            mZc_accountTextLayout = bindView(mView, R.id.zc_accountTextLayout);
+            TextInputEditText zc_accountInputEt = bindView(mView, R.id.zc_accountInputEt);
+            mZc_clearAccount = bindView(mView, R.id.zc_clearAccount);
+            TextInputLayout zc_verifyCodeTextLayout = bindView(mView, R.id.zc_verifyCodeTextLayout);
+            mZc_verifyCodeInputEt = bindView(mView, R.id.zc_verifyCodeInputEt);
+            mZc_verifyCodeBtn = bindView(mView, R.id.zc_verifyCodeBtn);
+            mZc_passwordTextLayout = bindView(mView, R.id.zc_passwordTextLayout);
+            TextInputEditText zc_passwordInputEt = bindView(mView, R.id.zc_passwordInputEt);
+            mZc_clearPassword = bindView(mView, R.id.zc_clearPassword);
+            mZc_btn = bindView(mView, R.id.zc_btn);
+            mRegisterRule = bindView(mView, R.id.registerRule);
+            mRegisterProtocol = bindView(mView, R.id.registerProtocol);
 
             mZc_btn.setText(getString(R.string.register));
             clearListener(mZc_accountTextLayout, mZc_clearAccount);
             clearListener(mZc_passwordTextLayout, mZc_clearPassword);
             setRegisterViewClick();
-            return view;
         }
-        return view;
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected BasePresenter initPresenter() {
+        if (mPresenter == null) {
+            mPresenter = new RegisterOrLoginPresenter(this);
+        }
+        return mPresenter;
+    }
+
+    @Override
+    protected void onViewClick(View view) {
+
+    }
+
+    @Override
+    protected Boolean setViewEnterStatuBar() {
+        return false;
     }
 
     private void setLoginViewClick() {
@@ -283,8 +305,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (!TextUtils.isEmpty(mZc_passwordTextLayout.getEditText().getText().toString()))
                     mZc_passwordTextLayout.getEditText().getText().clear();
                 break;
-            case R.id.zc_verifyCodeBtn:
-                //获取验证码接口   phone下同zcAccount，都是用户账号
+            case R.id.zc_verifyCodeBtn://获取验证码接口   phone下同zcAccount，都是用户账号
                 mPhone = mZc_accountTextLayout.getEditText().getText().toString();
                 boolean validateAccount = PhoneFormatCheckUtils.validateAccount(getActivity(),
                         mPhone, getString(R.string.phone_no_empty));
@@ -293,10 +314,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (!validateAccount) {
                     return;
                 }
+                //请求获取验证码
                 SMSSDK.getVerificationCode("86", mPhone);
                 break;
             case R.id.zc_btn:
-                // TODO: 2018/9/10 注册
                 String zcAccount = mZc_accountTextLayout.getEditText().getText().toString();
                 String zcPassword = mZc_passwordTextLayout.getEditText().getText().toString();
 
@@ -307,18 +328,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 //验证用户名和密码
                 if (validateAccount(zcAccount, mZc_accountTextLayout) && validatePassword(zcPassword,
                         mZc_passwordTextLayout)) {
-                    if (!TextUtils.isEmpty(code)){
+                    if (!TextUtils.isEmpty(code)) {
                         //提交到开发者服务器--->mob的服务器,进行短信验证
-                        SMSSDK.submitVerificationCode("86", mPhone, code);
-                        //跳转圈友信息填写页面
-                        SkipActivityUtil.skipActivity(getActivity(), MainActivity.class);
+                        mPresenter.register(BuildConfig.MOB_APPKEY, zcAccount, "86", code);
+//                        SMSSDK.submitVerificationCode("86", mPhone, code);//这个是直接发送到mob服务器进行的验证
                     }
-                    // TODO: 2018/9/10 调用登录接口
-
-//                    ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.register_success));
-//                    //跳转圈友信息填写页面
-//                    SkipActivityUtil.skipActivity(getActivity(), UserInfoActivity.class);
-
                 }
                 break;
             case R.id.registerRule:
@@ -345,25 +359,21 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 Object data1 = msg1.obj;
                 if (event1 == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        // TODO 处理成功得到验证码的结果
-                        // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
-                        // 提交验证码，其中的code表示验证码，如“1357”
-
                         //发送验证码的请求完成--->发送验证码的按钮开始计时，变灰，不可点击
                         setCodeBtn();
                     } else {
-                        // TODO 处理错误的结果
+                        //处理错误的结果
                         ((Throwable) data1).printStackTrace();
                     }
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        // TODO 处理验证码验证通过的结果
+                        //处理验证码验证通过的结果
                     } else {
-                        // TODO 处理错误的结果
+                        //处理错误的结果
                         ((Throwable) data1).printStackTrace();
                     }
                 }
-                // TODO 其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
+                //其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
                 return false;
             }).sendMessage(msg);
         }
@@ -382,5 +392,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(eventHandler);
+    }
+
+    @Override
+    public void setPresenter(RegisterOrLoginPresenter presenter) {
+        //设置presenter
+        this.mPresenter = presenter;
+    }
+
+    @Override
+    public void resultCallBack(RegisterBean result) {
+        ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.register_success));
+        //跳转圈友信息填写页面
+        SkipActivityUtil.skipActivity(getActivity(), UserInfoActivity.class);
     }
 }

@@ -18,7 +18,7 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.interfaces.MsgChatItemClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.MZBannerViewUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;

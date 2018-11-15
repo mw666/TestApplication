@@ -24,6 +24,7 @@ public class TimeCount extends CountDownTimer {
         if (tv_yzm != null) {
             tv_yzm.setText("重新验证");
             tv_yzm.setEnabled(true);
+            tv_yzm.setBackgroundResource(R.drawable.select_login_btn_bg);
         }
     }
 
@@ -32,7 +33,8 @@ public class TimeCount extends CountDownTimer {
     public void onTick(long millisUntilFinished) {//计时过程显示
         if (tv_yzm != null) {
             tv_yzm.setEnabled(false);
-            tv_yzm.setText(millisUntilFinished / 1000 + "S");
+            long l = millisUntilFinished / 1000;
+            tv_yzm.setText(l + "S");
             tv_yzm.setBackgroundResource(R.drawable.gray_code_btn_bg);
         }
     }

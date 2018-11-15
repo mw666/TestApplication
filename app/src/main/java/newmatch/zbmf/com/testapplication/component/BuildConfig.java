@@ -8,6 +8,9 @@ package newmatch.zbmf.com.testapplication.component;
 
 public final class BuildConfig {
     public static final boolean DEBUG = Boolean.parseBoolean("true");
+    //mob的 appkey
+    public static final String MOB_APPKEY="28b730acbedd5";
+
     public static final String APPLICATION_ID = "com.xiecc.seeWeather";
     public static final String BUILD_TYPE = "debug";
     public static final String FLAVOR = "";

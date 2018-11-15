@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.presenter.BasePresenter;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * Created by **
@@ -42,6 +42,11 @@ public abstract class BaseFragment extends Fragment{
         initPresenter();//该处返回BasePresenter
         initData();
         initView();
+        return mView;
+    }
+
+    //外传mView
+    public View getView(){
         return mView;
     }
 
