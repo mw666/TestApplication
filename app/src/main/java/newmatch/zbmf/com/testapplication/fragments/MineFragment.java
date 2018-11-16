@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,8 +38,10 @@ import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
+import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MyProductionFragment;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MySettingFragment;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
@@ -53,22 +59,13 @@ import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
 public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMPermissions.PermissionCallBackExcute {
 
     private RoundImageView mAvatarIv;
-//    private CoordinatorLayout ll;
     private Toolbar mToolbar;
-//    private List<String> msgTabTitles = new ArrayList<>();
     private List<Fragment> fragmentList;
     private List<String> mMsgTabTitles;
+    private PersonalScrollView mPersonalSc;
 
-    /*private String[] titles = {getActivity().getString(R.string.open_vip),
-                    getActivity().getString(R.string.update_pass_word),
-                    getActivity().getString(R.string.options_back),
-                    getActivity().getString(R.string.version_update),
-                    getActivity().getString(R.string.login_out)
-            };
-        */
-    public MineFragment() {
-        // Required empty public constructor
-    }
+
+    public MineFragment() {}
 
     private GMPermissions mGmPermissions;
 
@@ -102,7 +99,7 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         RelativeLayout mine_user_view = bindViewWithClick(R.id.mine_user_view, true);
 //        ll = bindView(R.id.ll);
         /**************************************************/
-        PersonalScrollView personalSc = bindView(R.id.personalSc);
+        mPersonalSc = bindView(R.id.personalSc);
         ImageView iv_personinfo_bg = bindView(R.id.iv_personinfo_bg);
         View stateBarView = bindView(R.id.stateBarView);
         RelativeLayout headRv = bindView(R.id.headRv);
@@ -117,8 +114,9 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         userCenterViewPager.setAdapter(adapter);
         userCenterViewPager.setCurrentItem(0);
 
-        personalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
-        personalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
+        EventBus.getDefault().register(this);//注册事件
+        mPersonalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
+        mPersonalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
                 (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
 //                    PLog.LogD("==  scrollY : "+scrollY+"   ===  oldScrollY : "+oldScrollY);
 
@@ -138,10 +136,16 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
         mGmPermissions.setPermissionCallBackExcute(this);
 
         //设置textView的复制操作
-        GMCopy.instance().copyGetXY(userName, getActivity(), personalSc);
-        GMCopy.instance().copyGetXY(userAccount, getActivity(), personalSc);
+        GMCopy.instance().copyGetXY(userName, getActivity(), mPersonalSc);
+        GMCopy.instance().copyGetXY(userAccount, getActivity(), mPersonalSc);
 
 
+    }
+
+    //接收事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void redeiveRVEvent(RVScrollEvent rvScrollEvent) {
+        mPersonalSc.setRVState(rvScrollEvent.getRVState());
     }
 
     private void addFG(){
@@ -249,4 +253,9 @@ public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMP
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//注销事件
+    }
 }

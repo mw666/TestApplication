@@ -8,10 +8,13 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import org.greenrobot.eventbus.EventBus;
+
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.ProductionAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
@@ -19,8 +22,10 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * A simple {@link Fragment} subclass.
  * 我的作品fragment
  */
-public class MyProductionFragment extends BaseFragment implements ProductionAdapter.ProductionIvClick{
+public class MyProductionFragment extends BaseFragment implements ProductionAdapter.ProductionIvClick {
 
+
+    private RVScrollEvent mRvScrollEvent;
 
     public MyProductionFragment() {
     }
@@ -50,6 +55,54 @@ public class MyProductionFragment extends BaseFragment implements ProductionAdap
         mineProductionRV.setAdapter(productionAdapter);
         mineProductionRV.requestLayout();
 
+        mRvScrollEvent = new RVScrollEvent();
+        //监听recyclerView的滑动
+        mineProductionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            private boolean mScrollVertically;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+//                PLog.LogD("=====   状态 newState:" + newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    //向上滑动
+                    //recyclerView.canScrollVertically(1);返回false表示不能往上滑动，即代表到底部了；
+                    mScrollVertically = mineProductionRV.canScrollVertically(1);
+                    if (!mScrollVertically) {
+                        //已经上滑到底部了
+                        mRvScrollEvent.setRVState(RVScrollEvent.UP_REACH_BOTTOM);
+                        EventBus.getDefault().post(mRvScrollEvent);
+                    } else {
+                        //向上滑，还未到达底部
+                        mRvScrollEvent.setRVState(RVScrollEvent.UP_NO_REACH_BOTTOM);
+                        EventBus.getDefault().post(mRvScrollEvent);
+                    }
+                } else if (dy < 0) {
+                    //向下滑
+                    //recyclerView.canScrollVertically(-1);返回false表示不能往下滑动，即代表到顶部了；
+                    mScrollVertically = mineProductionRV.canScrollVertically(-1);
+                    if (!mScrollVertically) {
+                        //向下滑已经到达顶部
+                        mRvScrollEvent.setRVState(RVScrollEvent.DOWN_REACH_TOP);
+                        EventBus.getDefault().post(mRvScrollEvent);
+                    } else {
+                       //向下滑未到达顶部
+                        mRvScrollEvent.setRVState(RVScrollEvent.DOWN_NO_REACH_TOP);
+                        EventBus.getDefault().post(mRvScrollEvent);
+                    }
+                }
+
+//                PLog.LogD("=====      RV滑动  :  dy : " + dy + "       mScrollVertically  : " + mScrollVertically);
+            }
+        });
+
     }
 
     @Override
@@ -76,6 +129,6 @@ public class MyProductionFragment extends BaseFragment implements ProductionAdap
     @Override
     public void productionIvClick() {
         // TODO: 2018/11/13 跳转到短视频播放页面
-        ToastUtils.showSingleToast(MyApplication.getInstance(),"跳转到短视频播放页面");
+        ToastUtils.showSingleToast(MyApplication.getInstance(), "跳转到短视频播放页面");
     }
 }

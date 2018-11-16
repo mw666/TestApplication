@@ -15,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 
 import newmatch.zbmf.com.testapplication.component.PLog;
+import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
 
 /**
  * Created by **
@@ -71,6 +72,7 @@ public class PersonalScrollView extends NestedScrollView {
     //------尾部收缩属性end--------
     public PersonalScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
     }
 
     public void setTabLayout(TabLayout tabLayout, Toolbar toolbar, RelativeLayout fl, RelativeLayout headRv) {
@@ -78,9 +80,12 @@ public class PersonalScrollView extends NestedScrollView {
         mToolbar = toolbar;
         mFl = fl;
         mHeadRv = headRv;
-        if (toolbar != null) {
-            mToolBarH = toolbar.getMeasuredHeight();
-        }
+    }
+
+    private Integer RVState;
+
+    public void setRVState(Integer rvState) {
+        this.RVState = rvState;
     }
 
     private boolean isUp = true;
@@ -88,7 +93,6 @@ public class PersonalScrollView extends NestedScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        // TODO: 2018/11/15 判断scrollView滑动的方向
         if (t > oldt) {
             // 上滑
             isUp = true;
@@ -96,29 +100,26 @@ public class PersonalScrollView extends NestedScrollView {
             //下滑
             isUp = false;
         }
-        PLog.LogD("===  onScrollChanged  执行 " + "      l:" + l + "      t:" + t + "      oldL:" + oldl + "       pldT:" + oldt);
     }
 
     boolean intercepted = false;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        PLog.LogD("===  onInterceptTouchEvent  执行 ");
+//        PLog.LogD("===  onInterceptTouchEvent  执行 ");
         int scrollY = getScrollY();
         PLog.LogD("===    移动的Y距离              :  " + scrollY);
+        if (mToolbar != null && mToolBarH == 0) {
+            mToolBarH = mToolbar.getMeasuredHeight();
+        }
         if (mineTabLayout != null) {
             mineTabLayout.getLocationOnScreen(locationFl);
             mTabLayoutY = locationFl[1];
-            PLog.LogD("===    mFl  的坐标              :  " + y);
         }
-        if (mTabLayoutY > mToolBarH) {
-            intercepted = true;
-        } else {
-            intercepted = false;
-        }
+//        PLog.LogD("===    mFl  的坐标  :  " + mTabLayoutY + "     toolBar的高度 :" + mToolBarH);
         int i = ev.getAction() & MotionEvent.ACTION_MASK;
-        float rawY = ev.getRawY();
-        float y = ev.getY();
+//        float rawY = ev.getRawY();
+//        float y = ev.getY();
 //        PLog.LogD("===     rawY:"+rawY+"--     y :"+y);
         switch (i) {
             case MotionEvent.ACTION_DOWN:
@@ -127,21 +128,34 @@ public class PersonalScrollView extends NestedScrollView {
                 super.onInterceptTouchEvent(ev);
                 break;
             case MotionEvent.ACTION_MOVE:
-                 if (isUp){
-                     if (mTabLayoutY > mToolBarH){
-                         intercepted=true;//拦截
-                     }else {
-                         intercepted=false;//传递给子控件
-                     }
-                 }else {
-                     if (mTabLayoutY <= mToolBarH){
-                         //并且recyclerView的内容不处于顶端---》滑动权在子控件，否则拦截
-                         //判断RecyclerView是否滑动到了底部或顶部  https://blog.csdn.net/msn465780/article/details/77101966
+                if (isUp) {
+                    if (mTabLayoutY > mToolBarH) {
+                        intercepted = true;//拦截
+                    } else {
+                        mToolbar.setVisibility(View.VISIBLE);
+                        intercepted = false;//传递给子控件
+                    }
+                    if (mToolbarY>=mToolBarH&&mToolBarH<=(mToolBarH+50)){
+                        //在这个范围区间，显示mToolBar
+                        PLog.LogD("===    mFl  的坐标  :  " + mTabLayoutY);
 
-
-                     }
-                 }
-
+                    }
+                } else {
+                    if (mTabLayoutY <= mToolBarH) {
+                        //并且recyclerView的内容不处于顶端---》滑动权在子控件，否则拦截
+                        //判断RecyclerView是否滑动到了底部或顶部  https://blog.csdn.net/msn465780/article/details/77101966
+                        mToolbar.setVisibility(View.VISIBLE);
+                        if (RVState== RVScrollEvent.DOWN_REACH_TOP){
+                            //RV内容下滑到顶了
+                            intercepted=true;
+                        }else if (RVState == RVScrollEvent.DOWN_NO_REACH_TOP){
+                            //RV内容还没下滑到顶部，可以继续滑动
+                            intercepted=false;
+                        }
+                    }else {
+                        intercepted=true;
+                    }
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 intercepted = false;
