@@ -24,9 +24,13 @@ public final class BuildConfig {
     //用户信息页面跳转城市选择页面的请求码
     public static final Integer USERINFO_SKIP_CITYS=3001;
 
-    public static final String PROVINCE="province";
-    public static final String CITY="city";
-    public static final String SEE_CITY="see_city";
+    public static final String PROVINCE="province";//省
+    public static final String CITY="locality";//城市
+    public static final String GET_CITY="get_locality";
+    public static final String SUB_LOCALITY="subLocality";//区/镇
+    public static final String GET_SUB_LOCALITY="get_subLocality";
+    public static final String FEATURE_NAME="featureName";//详细的街道地址
+    public static final String GET_FEATURE_NAME="get_featureName";
     public static final String CITY_TO_USERINFO="city_userinfo";
 
 

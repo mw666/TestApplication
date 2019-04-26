@@ -22,6 +22,8 @@ public class TianShareUtil {
         ToastUtils.showSingleToast(MyApplication.getInstance(),"存储了城市："+address.getLocality());
         instance().putString(BuildConfig.PROVINCE,address.getAdminArea());//存储省
         instance().putString(BuildConfig.CITY,address.getLocality());//存储市
+        instance().putString(BuildConfig.SUB_LOCALITY,address.getSubLocality());//存储区/镇
+        instance().putString(BuildConfig.FEATURE_NAME,address.getFeatureName());//存储街道详细地址
     }
 
     public static String getCity(){
@@ -33,11 +35,11 @@ public class TianShareUtil {
 
     //存储正在查看的城市
     public static void setSeeCity(String seeCity){
-        instance().putString(BuildConfig.SEE_CITY,seeCity);
+        instance().putString(BuildConfig.GET_CITY,seeCity);
     }
     //获取正在查看的城市
     public static String getSeeCity(){
-        return instance().getString(BuildConfig.SEE_CITY,DEFAULT_STR);
+        return instance().getString(BuildConfig.GET_CITY,DEFAULT_STR);
     }
 
 

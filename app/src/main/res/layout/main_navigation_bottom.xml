@@ -21,7 +21,7 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingTop="@dimen/dp_2"
-        android:weightSum="5">
+        android:weightSum="4">
 
         <!--<com.ruffian.library.RTextView-->
             <!--android:id="@+id/homeBottomItem"-->
@@ -123,16 +123,6 @@
             android:drawableTop="@drawable/dynamic_selector"
             android:focusable="true"
             android:text="@string/dynamic"/>
-
-        <ImageView
-            android:id="@+id/pushContent"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/icon_public"
-            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/msgBottomItem"

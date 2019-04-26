@@ -7,7 +7,9 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -44,7 +46,7 @@ public class DialogUtils {
         return this;
     }
 
-    private Integer mGravity;
+    private Integer mGravity = Gravity.CENTER;
 
     //设置dialog的位置
     public DialogUtils setGravity(Integer gravity) {
@@ -60,17 +62,9 @@ public class DialogUtils {
         return this;
     }
 
-    //设置dialog大小的参数
-    private Float mDialogW = 1f;
-
-    private DialogUtils setDialogW(Float dialogW) {
-        mDialogW = dialogW;
-        return this;
-    }
-
     private Float mDialogH;
 
-    private DialogUtils setDialogH(Float dialogH) {
+    public DialogUtils setDialogH(Float dialogH) {
         mDialogH = dialogH;
         return this;
     }
@@ -93,14 +87,23 @@ public class DialogUtils {
 
     //设置是否有边距
     private Boolean mHasMargin = false;
+    //对话框站窗口宽度的比例
+    private float rateW = 4 / 5;
+
+    public DialogUtils setRateW(float newRateW) {
+        rateW = newRateW;
+        return this;
+    }
 
     public DialogUtils setHasMargin(Boolean hasMargin) {
         mHasMargin = hasMargin;
         return this;
     }
+
     private Integer mRes;
-    public DialogUtils setDialogDecoeViewBg(Integer res){
-        mRes=res;
+
+    public DialogUtils setDialogDecoeViewBg(Integer res) {
+        mRes = res;
         return this;
     }
 
@@ -113,38 +116,38 @@ public class DialogUtils {
             builder = new AlertDialog.Builder(context);
         }
         alertDialog = builder.create();
+        //给dialog设置布局
+        alertDialog.setView(mView);
         Window window = alertDialog.getWindow();
         assert window != null;
         WindowManager.LayoutParams lp = window.getAttributes();
+        WindowManager windowManager = activity.getWindowManager();
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        defaultDisplay.getMetrics(metrics);
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (mHasMargin) {
-            lp.width = (int) (WindowManager.LayoutParams.MATCH_PARENT / mDialogW);
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.width = (int) (metrics.widthPixels * rateW);
         } else {
-            WindowManager windowManager = activity.getWindowManager();
-            Display defaultDisplay = windowManager.getDefaultDisplay();
-            Point point = new Point();
-            defaultDisplay.getSize(point);
-            lp.width = point.x;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         }
         window.getDecorView().setPadding(0, 0, 0, 0);
         //从Android 4.1开始向上兼容，对下不兼容
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (mRes==null){
+            if (mRes == null) {
                 window.getDecorView().setBackground(context.getResources().getDrawable(R.drawable.dialog_top_bg));
-            }else {
+            } else {
                 window.getDecorView().setBackground(context.getResources().getDrawable(mRes));
             }
         }
         //设置位置
         window.setGravity(mGravity);
+        lp.gravity = mGravity;
         //设置window动画
         if (mDialogAnimStyle != null) {
             window.setWindowAnimations(mDialogAnimStyle);
         }
         window.setAttributes(lp);
-        //给dialog设置布局
-        alertDialog.setView(mView);
         //设置点击外围取消
         alertDialog.setCanceledOnTouchOutside(mIsCancel);
         alertDialog.setCancelable(mIsCancel);
@@ -190,27 +193,28 @@ public class DialogUtils {
     }
 
     private DialogCallBack mDialogCallBack;
-    public DialogUtils setDialogCallBack(DialogCallBack dialogCallBack){
-        mDialogCallBack=dialogCallBack;
+
+    public DialogUtils setDialogCallBack(DialogCallBack dialogCallBack) {
+        mDialogCallBack = dialogCallBack;
         return this;
     }
 
-    public void showNormalAlertDialog(Context context,Integer msg){
+    public void showNormalAlertDialog(Context context, Integer msg) {
         AlertDialog.Builder builder;
 //        if (mDialogStyle != null) {
 //            builder = new AlertDialog.Builder(context, mDialogStyle);
 //        } else {
-            builder = new AlertDialog.Builder(context);
+        builder = new AlertDialog.Builder(context);
 //        }
         builder.setMessage(msg)
                 .setPositiveButton(context.getString(R.string.confirm), (dialog, which) -> {
-                    if (mDialogCallBack!=null){
+                    if (mDialogCallBack != null) {
                         mDialogCallBack.positiveClick(dialog);
                         dialog.dismiss();
                     }
                 })
                 .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
-                    if (mDialogCallBack!=null){
+                    if (mDialogCallBack != null) {
                         mDialogCallBack.negativeClick(dialog);
                         dialog.dismiss();
                     }

@@ -1,20 +1,19 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 
 import java.io.IOException;
@@ -23,190 +22,120 @@ import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
-import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.StatusBarUtil;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
-import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+
+import newmatch.zbmf.com.testapplication.services.LocationMonitor;
 
 /**
  * 欢迎页
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements
+        LocationMonitor.LocationCallBack {
 
-    private Handler mHandler = new Handler();
+    private boolean hasNeedPermissi = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         //是否全屏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        Location location = getLocation();
-        getCity(location);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        //设置状态栏半透明
+//        StatusBarUtil.setTranslucent(SplashActivity.this,
+//                ContextCompat.getColor(SplashActivity.this,R.color.plum_2));
 
-        startActivity(
-                new Intent(SplashActivity.this,
-                        RegisterActivity.class));
+        StatusBarUtil.setStatuBar(SplashActivity.this, Color.TRANSPARENT);
+//        if (Build.VERSION.SDK_INT>21){
+//            View decorView = getWindow().getDecorView();
+//            int options=View.SYSTEM_UI_FLAG_FULLSCREEN
+//                    |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                    |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                    |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(options);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//        }
 
-//        mHandler.postDelayed(() -> startActivity(
-//                new Intent(SplashActivity.this,
-//                        RegisterActivity.class)), 2000);
-        SplashActivity.this.finish();
-    }
-
-    Location gpsLocation = null;
-    Location netLocation = null;
-    private LocationManager myLocationManager;
-    private Location getLocation() {
-        //获取位置管理服务
-        myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        //查找服务信息
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE); //定位精度: 最高
-        criteria.setAltitudeRequired(false); //海拔信息：不需要
-        criteria.setBearingRequired(false); //方位信息: 不需要
-        criteria.setCostAllowed(true);  //是否允许付费
-        criteria.setPowerRequirement(Criteria.POWER_LOW); //耗电量: 低功耗
-        if (!netWorkIsOpen() && !gpsIsOpen()) {
-            ToastUtils.showSingleToast(this, "请开启移动网络或GPS");
-            return null;
-        }
-        //检查权限---->Android版本大于6.0的时候，检查动态权限的申请
-        resum();
-        if (gpsLocation == null && netLocation == null) {
-            return null;
-        }
-        if (gpsLocation != null && netLocation != null) {
-            if (gpsLocation.getTime() < netLocation.getTime()) {
-                gpsLocation = null;
-                return netLocation;
-            } else {
-                netLocation = null;
-                return gpsLocation;
-            }
-        }
-        if (gpsLocation == null) {
-            return netLocation;
-        } else {
-            return gpsLocation;
-        }
-    }
-
-    private void resum() {
+        LocationMonitor.getInstance(SplashActivity.this).setLocationCallBack(this);
+        //检查权限
+        String[] initPermissions = PermissionC.INIT_PERMISSIONS;
+        //只要有一个权限没有同意就全部传到申请权限的页面进行权限申请
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, PermissionC.LOCATION_PERMISSION[0])
-                    != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this
-                    , PermissionC.LOCATION_PERMISSION[1]) != PackageManager.PERMISSION_GRANTED) {
-                //没有同意授予权限
-                ActivityCompat.requestPermissions(this, PermissionC.LOCATION_PERMISSION, PermissionC.LOCATION_CODE);
-            } else {
-                if (netWorkIsOpen()) {
-                    myLocationManager.requestLocationUpdates("network", 2000, 5, locationListener);
-                    netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            for (String initPermission : initPermissions) {
+                int selfPermission = ContextCompat.checkSelfPermission(SplashActivity.this,
+                        initPermission);
+                if (selfPermission == PackageManager.PERMISSION_DENIED) {
+                    hasNeedPermissi = true;
+                    Intent intent = new Intent();
+                    intent.setAction("android.testApplication.permissions.permissionActivity");
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    intent.putExtra(PermissionC.init_permis, initPermissions);
+                    startActivityForResult(intent, 0xf12);
+                    break;
                 }
-                if (gpsIsOpen()) {
-                    myLocationManager.requestLocationUpdates("gps", 2000, 5, locationListener);
-                    gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                }
+            }
+            if (!hasNeedPermissi) {
+                LocationMonitor.getInstance(SplashActivity.this).getLocation();
+                skipNextAct();
             }
         } else {
-            //用户同意了定位的所有权限--->执行获取定位的操作
-            if (netWorkIsOpen()) {
-                myLocationManager.requestLocationUpdates("network", 2000, 5, locationListener);
-                netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }
-            if (gpsIsOpen()) {
-                myLocationManager.requestLocationUpdates("gps", 2000, 5, locationListener);
-                gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            }
+            //直接执行
+            LocationMonitor.getInstance(SplashActivity.this).getLocation();
+            skipNextAct();
         }
+        //该页面会展示广告,延时2.5秒跳转
+
+
+    }
+
+    private void skipNextAct() {
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashActivity.this,
+                    RegisterActivity.class));
+                SplashActivity.this.finish();
+        }, 2500);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PermissionC.LOCATION_CODE:
-                for (int i = 0; i < grantResults.length; i++) {
-                    //当用户全部同意定位权限，才执行定位代码
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        //想用户展示给权限的作用
-                        MyDialogUtil.getInstance().setDialogCallBack(new DialogCallBack() {
-                            @Override
-                            public void positiveClick(DialogInterface dialog) {
-                                //确定，表示用户同意权限-->重新申请权限
-                                //确定，重新申请权限
-                                ActivityCompat.requestPermissions(SplashActivity.this,
-                                        PermissionC.LOCATION_PERMISSION
-                                        , PermissionC.LOCATION_CODE);
-                                dialog.dismiss();
-                            }
-
-                            @Override
-                            public void negativeClick(DialogInterface dialog) {
-                                //表示用户拒绝位置权限-->不作处理
-                                dialog.dismiss();
-                            }
-                        }).showPermissionDialog(SplashActivity.this, getString(R.string.permission_name_location));
-                    }
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED && i == grantResults.length - 1) {
-                        //这样写强制用户同意位置信息权限,体验有点不好
-                        resum();
-                    }
-                }
-                break;
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+//        Log.d("===TAG", "   SplashActivity    销毁 ");
     }
 
-    private boolean gpsIsOpen() {
-        boolean isOpen = true;
-        if (!myLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {//没有开启GPS
-            isOpen = false;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0xf12 && resultCode == 0xf13) {
+            //用户已经同意需要的权限
+            LocationMonitor.getInstance(SplashActivity.this).getLocation();
+            skipNextAct();
         }
-        return isOpen;
     }
-
-    private boolean netWorkIsOpen() {
-        boolean netIsOpen = true;
-        if (!myLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {//没有开启网络定位
-            netIsOpen = false;
-        }
-        return netIsOpen;
-    }
-
-    private Location mLocation;
-    //监听GPS位置改变后得到新的经纬度
-    private LocationListener locationListener = new LocationListener() {
-        public void onLocationChanged(final Location location) {
-            mLocation = location;
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-    };
 
     private Address getCity(Location location) {
         Geocoder geocoder = new Geocoder(MyApplication.getInstance(), Locale.getDefault());
-        List<Address> addresses = null;
+        List<Address> addresses;
         try {
             addresses = geocoder.getFromLocation(location.getLatitude(),
                     location.getLongitude(), 1);
-            Address address = addresses.get(0);
-            TianShareUtil.saveAddress(address);
-            return address;
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                TianShareUtil.saveAddress(address);
+                return address;
+            }
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void locationChanged(Location location) {
+        if (location != null)
+            getCity(location);
     }
 }

@@ -7,10 +7,26 @@ import android.support.annotation.RequiresApi;
 /**
  * Created by **
  * on 2018/9/7.
+ * 权限相关的常量数据
  */
 
 
 public final class PermissionC {
+
+    public static final int init_permis_code=0x1;
+
+    public static final String init_permis="init_permission";
+
+    //位置，读写文件权限,相机权限
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static final String [] INIT_PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+            ,Manifest.permission.ACCESS_COARSE_LOCATION
+            ,Manifest.permission.READ_EXTERNAL_STORAGE
+            ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.CAMERA
+    };
+
     //位置权限
     public static final String [] LOCATION_PERMISSION={
             Manifest.permission.ACCESS_FINE_LOCATION

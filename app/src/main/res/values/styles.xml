@@ -11,12 +11,45 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--背景全透明-->
+    <style name="EmptyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+    <!--dialog的属性-->
+    <style name="dialogTheme" parent="Theme.Light.NoTitle.Dialog">
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+
+        <!--<item name="listPreferredItemPaddingLeft">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingRight">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingStart">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingEnd">50dip</item>-->
+    </style>
+
+    <style name="Theme.Light.NoTitle.Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+
+        <!--<item name="listPreferredItemPaddingLeft">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingRight">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingStart">50dip</item>-->
+        <!--<item name="listPreferredItemPaddingEnd">50dip</item>-->
+    </style>
+
+    <style name="Theme.Light.NoTitle.NoShadow.Dialog" parent="Theme.Light.NoTitle.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <style name="FullscreenTheme" parent="@style/BaseTheme">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <!--<item name="android:windowActionBarOverlay">true</item>-->
-        <item name="android:windowBackground">@drawable/t3</item>
-        <!--<item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>-->
-        <!--<item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>-->
+        <item name="android:windowBackground">@drawable/t1</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowNoTitle">true</item>
@@ -155,16 +188,6 @@
         <item name="capture.textColor">@color/zhihu_capture</item>
     </style>
 
-    <style name="Theme.Light.NoTitle.Dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowFrame">@null</item>
-    </style>
-
-    <style name="Theme.Light.NoTitle.NoShadow.Dialog" parent="Theme.Light.NoTitle.Dialog">
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
 
     <style name="Animation.Bottom.Rising" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
@@ -277,7 +300,7 @@
         <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="addFriendTvStyle">
         <item name="android:layout_width">wrap_content</item>

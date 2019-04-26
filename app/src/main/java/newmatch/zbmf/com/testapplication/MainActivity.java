@@ -3,8 +3,10 @@ package newmatch.zbmf.com.testapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,16 +35,22 @@ import newmatch.zbmf.com.testapplication.utils.UnitUtils;
  * 取名甜甜圈吧
  * 首页
  */
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener ,View.OnClickListener{
+public class MainActivity extends BaseActivity implements
+        ViewPager.OnPageChangeListener ,View.OnClickListener{
 
     private ViewPager mViewPager;
     public ImageWatcherHelper mIwHelper;
     private MineFragment mineFragment;
-    private TextView mHomeBottomItem;
-    private TextView mDynamicBottomItem;
-    private ImageView mPushContent;
-    private TextView mMsgBottomItem;
-    private TextView mMineBottomItem;
+    private BottomNavigationItemView mHomeBottomItem;
+    private BottomNavigationItemView mDynamicBottomItem;
+    private BottomNavigationItemView mMsgBottomItem;
+    private BottomNavigationItemView mMineBottomItem;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        Log.d("===TAG","   MainActivity  销毁  ");
+    }
 
     @Override
     protected Integer layoutId() {
@@ -56,11 +64,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         //图片放大所需
         mIwHelper = ShowImgUtils.init(this);
 //        LinearLayout bottomTabView = bindView(R.id.bottomTabView);
-        mHomeBottomItem = findViewById(R.id.homeBottomItem);
-        mDynamicBottomItem = findViewById(R.id.dynamicBottomItem);
-        mPushContent = findViewById(R.id.pushContent);
-        mMsgBottomItem = findViewById(R.id.msgBottomItem);
-        mMineBottomItem = findViewById(R.id.mineBottomItem);
+        mHomeBottomItem = findViewById(R.id.home);
+        mDynamicBottomItem = findViewById(R.id.dynamic);
+        mMsgBottomItem = findViewById(R.id.msg);
+        mMineBottomItem = findViewById(R.id.mime);
         addListener();
         mViewPager = bindView(R.id.viewPager);
 
@@ -92,7 +99,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private void addListener(){
         mHomeBottomItem.setOnClickListener(this);
         mDynamicBottomItem.setOnClickListener(this);
-        mPushContent.setOnClickListener(this);
         mMsgBottomItem.setOnClickListener(this);
         mMineBottomItem.setOnClickListener(this);
     }
@@ -128,83 +134,83 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                 initSelectHome();
                 break;
             case 1:
-                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.home_icon), null, null);
-                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.dynamic_light_icon), null, null);
-                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.msg_icon), null, null);
-                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.mine_icon), null, null);
-                //设置字体的大小
-                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
-                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
-                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.home_icon), null, null);
+//                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.dynamic_light_icon), null, null);
+//                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.msg_icon), null, null);
+//                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.mine_icon), null, null);
+//                //设置字体的大小
+//                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+//                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+//                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
                 break;
             case 2:
-                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.home_icon), null, null);
-                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.dynamic_icon), null, null);
-                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.msg_light_icon), null, null);
-                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.mine_icon), null, null);
-                //设置字体的大小
-                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
-                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mMsgBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
-                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.home_icon), null, null);
+//                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.dynamic_icon), null, null);
+//                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.msg_light_icon), null, null);
+//                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.mine_icon), null, null);
+//                //设置字体的大小
+//                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+//                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mMsgBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+//                mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
                 break;
             case 3:
-                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.home_icon), null, null);
-                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.dynamic_icon), null, null);
-                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.msg_icon), null, null);
-                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                        getDrawable(R.drawable.mine_light_icon), null, null);
-                //设置字体的大小
-                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
-                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
-                mMineBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+//                mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.home_icon), null, null);
+//                mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.dynamic_icon), null, null);
+//                mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.msg_icon), null, null);
+//                mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                        getDrawable(R.drawable.mine_light_icon), null, null);
+//                //设置字体的大小
+//                mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//                mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+//                mHomeBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+//                mMineBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
                 break;
         }
     }
     //初始化选择home
     private void initSelectHome(){
-        mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                getDrawable(R.drawable.home_light_icon), null, null);
-        mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                getDrawable(R.drawable.dynamic_icon), null, null);
-        mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                getDrawable(R.drawable.msg_icon), null, null);
-        mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
-                getDrawable(R.drawable.mine_icon), null, null);
-        //设置字体的大小
-        mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
-        mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-        mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-        mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
-        mHomeBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
-        mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
-        mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
-        mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
+//        mHomeBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                getDrawable(R.drawable.home_light_icon), null, null);
+//        mDynamicBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                getDrawable(R.drawable.dynamic_icon), null, null);
+//        mMsgBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                getDrawable(R.drawable.msg_icon), null, null);
+//        mMineBottomItem.setCompoundDrawablesWithIntrinsicBounds(null, getResources().
+//                getDrawable(R.drawable.mine_icon), null, null);
+//        //设置字体的大小
+//        mHomeBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 5));
+//        mDynamicBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//        mMsgBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//        mMineBottomItem.setTextSize(UnitUtils.spToPx(MainActivity.this, 4));
+//        mHomeBottomItem.setTextColor(getResources().getColor(R.color.middlePurple));
+//        mDynamicBottomItem.setTextColor(getResources().getColor(R.color.black));
+//        mMsgBottomItem.setTextColor(getResources().getColor(R.color.black));
+//        mMineBottomItem.setTextColor(getResources().getColor(R.color.black));
     }
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -293,9 +299,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             case R.id.dynamicBottomItem:
                 mViewPager.setCurrentItem(1);
                 setTvIcon(1);
-                break;
-            case R.id.pushContent:
-
                 break;
             case R.id.msgBottomItem:
                 mViewPager.setCurrentItem(2);

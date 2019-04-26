@@ -12,11 +12,12 @@ android {
         config {
             keyAlias 'key0'
             keyPassword 'sweet112324'
-            storeFile file('G:/Android_projects/TestApplication/sweet_group.jks')
+            storeFile file('D:/Android_Study_Projects/Github/TestApplication/sweet_group.jks')
             storePassword 'sweet112324'
         }
     }
     compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "newmatch.zbmf.com.testapplication"
         minSdkVersion 15
@@ -35,7 +36,7 @@ android {
             signingConfig signingConfigs.config
             minifyEnabled false
             pseudoLocalesEnabled true
-            proguardFile 'G:/Android_projects/TestApplication/app/proguard-rules.pro'
+            proguardFile 'D:/Android_Study_Projects/Github/TestApplication/app/proguard-rules.pro'
         }
     }
     //支持Java1.8的新特性

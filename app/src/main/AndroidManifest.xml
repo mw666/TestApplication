@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="newmatch.zbmf.com.testapplication">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="newmatch.zbmf.com.testapplication">
 
     <!-- 获取网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 接收网络 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 读写文件的权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <!-- 读取手机的联系人权限 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".base.MyApplication"
@@ -23,49 +24,57 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <!-- region 适配全面屏 -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.4"/>
+        <!--<meta-data-->
+            <!--android:name="android.max_aspect"-->
+            <!--android:value="2.4" />-->
         <!-- endregion -->
         <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:name=".activitys.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".permissions.PermissionActivity"
+            android:theme="@style/EmptyTheme">
+            <intent-filter>
+                <action android:name="android.testApplication.permissions.permissionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activitys.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/textInputTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.ForgetPassWordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/textInputTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.UserInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/textInputTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.SelectCityActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activitys.UserDetailActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -74,40 +83,33 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public">
-            </meta-data>
+                android:resource="@xml/file_paths_public" />
         </provider>
 
         <activity
             android:name=".activitys.TestActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activitys.AddFirendActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activitys.SearchActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <!-- 专门用来申请权限的activity -->
         <activity
             android:name=".activitys.PermissionsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/activityApplyPermissionsTheme">
-        </activity>
-        <activity android:name=".activitys.SettledActivity">
-        </activity>
-        <activity android:name=".activitys.VIPActivity">
-        </activity>
-        <activity
-            android:name=".activitys.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/activityApplyPermissionsTheme" />
+        <activity android:name=".activitys.SettledActivity" />
+        <activity android:name=".activitys.VIPActivity" />
 
-        </activity>
-        <activity android:name=".activitys.UserCenterActivity">
-        </activity>
+        <activity android:name=".activitys.UserCenterActivity" />
+
+
+        <service
+            android:name=".services.LocationService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

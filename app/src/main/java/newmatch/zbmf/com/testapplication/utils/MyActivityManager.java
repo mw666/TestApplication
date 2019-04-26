@@ -3,6 +3,7 @@ package newmatch.zbmf.com.testapplication.utils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,55 +20,69 @@ public class MyActivityManager {
     private static Stack<Activity> activityStack;
     private static List<Activity> activities;
     private static MyActivityManager instance;
-    private MyActivityManager(){
+
+    private MyActivityManager() {
     }
-    public static MyActivityManager getMyActivityManager(){
-        if(instance==null){
-            synchronized (MyActivityManager.class){
-             if (instance==null){
-                 instance=new MyActivityManager();
-             }
+
+    public static MyActivityManager getMyActivityManager() {
+        if (instance == null) {
+            synchronized (MyActivityManager.class) {
+                if (instance == null) {
+                    instance = new MyActivityManager();
+                }
             }
         }
         return instance;
     }
+
     //存储activity
-    public void pushAct(Activity activity){
-        if (activities==null){
-            activities=new ArrayList<>();
+    public void pushAct(Activity activity) {
+        if (activities == null) {
+            activities = new ArrayList<>();
         }
-        if (activities.size()>0){
+        if (activities.size() > 0) {
             for (int i = 0; i < activities.size(); i++) {
                 boolean equals = activities.get(i).getClass().equals(activity.getClass());
-                if (!equals){
+                if (!equals) {
                     activities.add(activity);
                 }
             }
-        }else {
+        } else {
             activities.add(activity);
         }
     }
+
     //删除所有的activity
-    public void removeAllAct(){
-        if (activities!=null&&activities.size()>0){
+    public void removeAllAct() {
+        if (activities != null && activities.size() > 0) {
             for (int i = 0; i < activities.size(); i++) {
-                if (!activities.get(i).isFinishing()){
+                if (!activities.get(i).isFinishing()) {
                     activities.get(i).finish();
                 }
             }
             activities.clear();
         }
     }
+
+    private List<Activity> activities1 = null;
     //关闭摸一个activity
-    public void flushAct(Class cla){
-        List<Activity> activities1=new ArrayList<>();
+    public void removeAct(Class cla) {
+        Log.d("===TAG","   移除activity ");
+        if (activities1 == null) {
+            activities1 = new ArrayList<>();
+        }else {
+            if (activities1.size()>0){
+                activities1.clear();
+            }
+        }
         activities1.addAll(activities);
-        if (cla!=null&&activities!=null&&activities.size()>0){
+        if (cla != null && activities != null && activities.size() > 0) {
             for (int i = 0; i < activities1.size(); i++) {
                 boolean equals = activities.get(i).getClass().equals(cla);
-                if (equals){
+                if (equals) {
                     activities.get(i).finish();
                     activities.remove(i);
+                    break;
                 }
             }
         }
@@ -75,21 +90,22 @@ public class MyActivityManager {
 
     /**
      * 获取目标activity
+     *
      * @param cla
      * @param <T>
      * @return
      */
-    public <T extends BaseActivity> T getAct(Class<T> cla){
+    public <T extends BaseActivity> T getAct(Class<T> cla) {
         Activity activity = null;
-        if (cla!=null&&activities!=null&&activities.size()>0){
+        if (cla != null && activities != null && activities.size() > 0) {
             for (int i = 0; i < activities.size(); i++) {
                 boolean equals = activities.get(i).getClass().equals(cla);
-                if (equals){
+                if (equals) {
                     activity = activities.get(i);
                 }
             }
         }
-        return (T)(activity);
+        return (T) (activity);
     }
 
     /**
@@ -101,10 +117,10 @@ public class MyActivityManager {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public <T extends Activity> boolean isActivityExist(Class<T> clz) {
         boolean res;
-        Activity activity=null;
+        Activity activity = null;
         for (int i = 0; i < activities.size(); i++) {
             boolean equals = activities.get(i).getClass().equals(clz);
-            if (equals){
+            if (equals) {
                 activity = activities.get(i);
             }
         }
@@ -120,8 +136,8 @@ public class MyActivityManager {
         return res;
     }
 
-    public Integer getActSize(){
-        if (activities!=null){
+    public Integer getActSize() {
+        if (activities != null) {
             return activities.size();
         }
         return 0;

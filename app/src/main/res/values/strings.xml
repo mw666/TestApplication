@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">TestApplication</string>
+    <string name="app_name">夜嗨</string>
     <string name="home_title">首页</string>
-    <string name="application_title">甜甜圈</string>
+    <string name="application_title">夜嗨</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -9,9 +9,9 @@
     <string name="resume">允许</string>
     <string name="cancel">取消</string>
     <string name="message_permission_rationale">App运行需要以下权限</string>
-    <string name="title_dialog">甜甜圈需要权限</string>
+    <string name="title_dialog">夜嗨需要权限</string>
     <string name="message_permission_always_failed">请允许这个权限</string>
-    <string name="location_permission_tip">甜甜圈正常运行需要获取定位权限</string>
+    <string name="location_permission_tip">夜嗨正常运行需要获取定位权限</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
 
@@ -115,5 +115,9 @@
     <string name="update_password_tip">密码必须是字母和数字组合且长度大于6位</string>
     <string name="new_password_equles_old">新密码不能与旧密码相同!</string>
     <string name="code_tip">请输入验证码</string>
+    <string name="push_out_app">退出夜嗨</string>
+    <string name="app_need_permis_dialog_title">App运行必需权限</string>
+    <string name="app_need_permissions">该应用正常运行需要获取位置、读写文件、相机等权限</string>
+    <string name="agree_app">同意</string>
 
 </resources>
