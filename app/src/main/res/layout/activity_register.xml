@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context="newmatch.zbmf.com.testapplication.activitys.RegisterActivity">
 
-    <!--<include layout="@layout/my_toolbar"/>-->
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -47,6 +45,5 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </FrameLayout>
-
 
 </LinearLayout>

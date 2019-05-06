@@ -102,7 +102,6 @@ public class SplashActivity extends AppCompatActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        Log.d("===TAG", "   SplashActivity    销毁 ");
     }
 
     @Override

@@ -17,9 +17,7 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-            <include layout="@layout/h72dp_toolbar_view"/>
-
-
+            <include layout="@layout/normal_activity_toolbar"/>
 
             <include layout="@layout/top_bar_content_view"/>
 

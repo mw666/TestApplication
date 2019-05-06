@@ -87,9 +87,6 @@
         </provider>
 
         <activity
-            android:name=".activitys.TestActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
             android:name=".activitys.AddFirendActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity

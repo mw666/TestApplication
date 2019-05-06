@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/h72dp_toolbar_view"/>
+        <!--<include layout="@layout/h72dp_toolbar_view"/>-->
 
         <!--添加一个渐变层的遮罩-->
         <View

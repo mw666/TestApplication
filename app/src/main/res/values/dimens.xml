@@ -108,4 +108,7 @@
     <dimen name="dp_0_3">0.3dp</dimen>
     <dimen name="dp_17">17dp</dimen>
     <dimen name="dp_170">170dp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="dp_28">28dp</dimen>
+    <dimen name="dp_57">57dp</dimen>
 </resources>

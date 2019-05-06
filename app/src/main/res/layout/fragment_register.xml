@@ -63,7 +63,7 @@
 
                 <Button
                     android:id="@+id/zc_verifyCodeBtn"
-                    android:layout_width="@dimen/dp_50"
+                    android:layout_width="@dimen/dp_58"
                     android:layout_height="@dimen/dp_35"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
@@ -73,7 +73,7 @@
                     android:paddingRight="@dimen/dp_2"
                     android:text="@string/get_verify_code"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_13"/>
+                    android:textSize="@dimen/sp_10"/>
             </RelativeLayout>
 
             <RelativeLayout

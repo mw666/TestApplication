@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,7 +26,11 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * on 2018/9/6.
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity /*implements ITestContent.View*/ {
+public abstract class BaseActivity extends RxAppCompatActivity{
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private Bundle savedInstanceState;
 
@@ -67,10 +72,9 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
         setContentView(layoutId());
         String title = initTitle();
         int topBarColor = topBarColor();
-        Log.d("==TAG", "--   颜色纸 回传: " + topBarColor);
         setStatuBar(topBarColor, 36);
         Boolean showBackBtn = showBackBtn();
-        initToolBar(title, topBarColor, showBackBtn);
+        initToolBar(title, showBackBtn);
         initView();
 //        statusBar();
 
@@ -83,8 +87,8 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
 
     }
 
-    public void showToast(String msg){
-        ToastUtils.showSingleToast(MyApplication.getInstance(),msg);
+    public void showToast(String msg) {
+        ToastUtils.showSingleToast(MyApplication.getInstance(), msg);
     }
 
     //activity渲染完成后会调用的方法
@@ -110,7 +114,7 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
     /**
      * 初始化 Toolbar
      */
-    protected void initToolBar(String title, Integer topBarColor, Boolean homeAsUpEnabled) {
+    protected void initToolBar(String title, Boolean homeAsUpEnabled) {
         Toolbar toolBar = bindView(R.id.toolbar);
         TextView toolBarTitle = bindView(R.id.toolbar_title);
         if (toolBar != null) {
@@ -120,10 +124,7 @@ public abstract class BaseActivity extends RxAppCompatActivity /*implements ITes
             if (homeAsUpEnabled) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 toolBar.setNavigationIcon(R.drawable.back_icon);
-                toolBar.setNavigationOnClickListener(v -> {
-                    //ToastUtils.showSingleToast(BaseActivity.this, "点击了");
-                    onBackPressed();
-                });
+                toolBar.setNavigationOnClickListener(v -> onBackPressed());
             }
         }
     }

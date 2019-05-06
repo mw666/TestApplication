@@ -26,9 +26,6 @@ public class SettledActivity extends BaseActivity {
         //设置内容顶进状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        TextView settleTitle = bindView(R.id.settleTitle);
-        settleTitle.setVisibility(View.VISIBLE);
-        settleTitle.setText(getString(R.string.settle_show));
         bindViewWithClick(R.id.settleBtn_1, true);
         bindViewWithClick(R.id.settleBtn_2, true);
         bindViewWithClick(R.id.settleBtn_3, true);

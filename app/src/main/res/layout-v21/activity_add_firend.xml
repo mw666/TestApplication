@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,8 +8,7 @@
     android:orientation="vertical"
     tools:context="newmatch.zbmf.com.testapplication.activitys.AddFirendActivity">
 
-    <include
-        layout="@layout/h72dp_toolbar_view"/>
+    <include layout="@layout/normal_activity_toolbar"/>
 
     <RelativeLayout
         android:id="@+id/addUserTopRL"
@@ -143,4 +142,4 @@
         android:src="@drawable/right_arrow_purple_icon"
         tools:ignore="RtlHardcoded"/>
 
-</RelativeLayout>
+</LinearLayout>

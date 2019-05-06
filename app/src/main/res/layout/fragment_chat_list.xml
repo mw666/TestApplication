@@ -51,7 +51,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/h72dp_toolbar_view"/>
+            <!--<include layout="@layout/h72dp_toolbar_view"/>-->
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

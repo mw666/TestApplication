@@ -24,9 +24,7 @@ public class VIPActivity extends BaseActivity {
         MyActivityManager.getMyActivityManager().pushAct(VIPActivity.this);
         //设置内容顶进状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        TextView settleTitle = bindView(R.id.settleTitle);
-        settleTitle.setText(getString(R.string.open_vip));
-        settleTitle.setVisibility(View.VISIBLE);
+
 
 
     }

@@ -160,8 +160,6 @@ public class DynamicFragment extends BaseFragment implements DynamicAdapter.Comm
                     } else {
                         alpha = (Math.abs(hh)) / 100;
                     }
-                    assert activity != null;
-                    activity.setBottomViewVisible(PermissionC.BOTTOM_TAB_GONE, alpha);
                 }
                 if (dy > 0) {
                     //向上滑动
@@ -171,8 +169,6 @@ public class DynamicFragment extends BaseFragment implements DynamicAdapter.Comm
                     } else {
                         alpha = (1 - Math.abs((float) bearYCount) / 100);
                     }
-                    assert activity != null;
-                    activity.setBottomViewVisible(PermissionC.BOTTOM_TAB_SHOW, alpha);
                 }
                 if (rvState == 0) {
                     //静止  ---》correctYCount=0;

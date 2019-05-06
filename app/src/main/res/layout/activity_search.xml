@@ -8,8 +8,7 @@
     android:orientation="vertical"
     tools:context="newmatch.zbmf.com.testapplication.activitys.SearchActivity">
 
-    <include
-        layout="@layout/h72dp_toolbar_view"/>
+    <!--<include layout="@layout/h72dp_toolbar_view"/>-->
 
     <include layout="@layout/search_layout"/>
 

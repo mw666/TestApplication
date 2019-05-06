@@ -15,7 +15,8 @@
     <color name="deepPurpleAlpha">#9BED29E5</color>
 
     <color name="black_color_333333">#272822</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_alpha">#9BFFFFFF</color>
     <color name="white_grey">#e6e6e6</color>
     <color name="toast_bg_color">#E0616161</color>
     <color name="refresh_bg_color">#444444</color>

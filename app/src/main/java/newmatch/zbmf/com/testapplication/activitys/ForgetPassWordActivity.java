@@ -22,8 +22,7 @@ public class ForgetPassWordActivity extends BaseActivity {
     protected void initView() {
         //是否全屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-       //将Activity添加到容器管理
-        MyActivityManager.getMyActivityManager().pushAct(ForgetPassWordActivity.this);
+
 
     }
 

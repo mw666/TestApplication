@@ -51,7 +51,6 @@ public class ChatListFragment extends BaseFragment implements RecommendUser,MsgC
 
     @Override
     protected void initView() {
-        bindView(R.id.toolbar).setVisibility(View.GONE);
         //联系人推荐列表
         /*RecyclerView chatRecommendRecyclerView = bindView(R.id.chatRecommendRecyclerView);
         chatRecommendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),

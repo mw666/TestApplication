@@ -44,14 +44,14 @@ public class MsgFragment extends BaseFragment {
     protected void initView() {
 //        TextView toolbar_title = bindView(R.id.toolbar_title);
 //        toolbar_title.setText(getString(R.string.linkmans));
-        TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
-        ViewPager msgViewPager = bindView(R.id.msgViewPager);
-
-        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
-        msgViewPager.setAdapter(adapter);
-        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
-        msgFGTabLayout.setTabsFromPagerAdapter(adapter);
-        msgViewPager.setCurrentItem(0);
+//        TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
+//        ViewPager msgViewPager = bindView(R.id.msgViewPager);
+//
+//        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
+//        msgViewPager.setAdapter(adapter);
+//        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
+//        msgFGTabLayout.setTabsFromPagerAdapter(adapter);
+//        msgViewPager.setCurrentItem(0);
 
 
     }

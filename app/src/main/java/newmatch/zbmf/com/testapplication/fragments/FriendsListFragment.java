@@ -19,7 +19,8 @@ import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
  *  群组功能暂时不开通
  *
  */
-public class FriendsListFragment extends BaseFragment implements FriendsListAdapter.ClickFdArrow{
+public class FriendsListFragment extends BaseFragment implements
+        FriendsListAdapter.ClickFdArrow{
 
 
     public FriendsListFragment() {

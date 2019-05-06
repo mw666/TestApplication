@@ -6,6 +6,8 @@
               android:orientation="vertical"
               tools:context="newmatch.zbmf.com.testapplication.fragments.MsgFragment">
 
-   <include layout="@layout/tab_layout_with_viewpager"/>
+   <include layout="@layout/normal_activity_toolbar"/>
+
+   <!--<include layout="@layout/tab_layout_with_viewpager"/>-->
 
 </LinearLayout>

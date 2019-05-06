@@ -8,9 +8,11 @@ import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +23,7 @@ import cn.smssdk.SMSSDK;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
+import newmatch.zbmf.com.testapplication.activitys.RegisterActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserInfoActivity;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
@@ -62,6 +65,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private int mTabPosition;
     private View mView;//布局的View
     private RegisterOrLoginPresenter mPresenter;
+    private RegisterActivity registerActivity;
 
     public RegisterFragment() {
         PLog.LogD("RegisterFragment 的构造方法");
@@ -91,6 +95,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     protected void initView() {
         // 注册一个事件回调，用于处理SMSSDK接口请求的结果
         SMSSDK.registerEventHandler(eventHandler);
+        registerActivity = (RegisterActivity)getActivity();
         mView = getView();
         if (mTabPosition == 0) {
             mAccountTextLayout = bindView(mView, R.id.accountTextLayout);
@@ -279,7 +284,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
                     ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.login_success));
 
-                    SkipActivityUtil.skipActivity(getActivity(), MainActivity.class);
+                    SkipActivityUtil.skipActivity(registerActivity, MainActivity.class);
+                    registerActivity.finish();
                 }
                 break;
             case R.id.clearAccount:
@@ -290,9 +296,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 if (!TextUtils.isEmpty(mPasswordTextLayout.getEditText().getText().toString()))
                     mPasswordTextLayout.getEditText().getText().clear();
                 break;
-            case R.id.forgetPassword:
-                SkipActivityUtil.skipActivity(getActivity(), ForgetPassWordActivity.class);
-                break;
+
             case R.id.loginProtocolContent:
                 // TODO: 2018/9/10 跳转登录协议展示
 
@@ -337,11 +341,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.registerRule:
                 // TODO: 2018/9/10 使用条款
-                SkipActivityUtil.skipActivity(getActivity(), ForgetPassWordActivity.class);
+                SkipActivityUtil.skipActivity(registerActivity, ForgetPassWordActivity.class);
                 break;
             case R.id.registerProtocol:
                 //隐私协议
-                SkipActivityUtil.skipActivity(getActivity(), ForgetPassWordActivity.class);
+                SkipActivityUtil.skipActivity(registerActivity, ForgetPassWordActivity.class);
+                break;
+            case R.id.forgetPassword:
+                SkipActivityUtil.skipActivity(registerActivity, ForgetPassWordActivity.class);
                 break;
         }
     }
@@ -402,8 +409,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void resultCallBack(RegisterBean result) {
-        ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.register_success));
         //跳转圈友信息填写页面
-        SkipActivityUtil.skipActivity(getActivity(), UserInfoActivity.class);
+        SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
     }
 }

@@ -56,7 +56,8 @@ import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
  * A simple {@link Fragment} subclass.
  * 我的Fragment
  */
-public class MineFragment extends BaseFragment implements /*MineViewClick,*/ GMPermissions.PermissionCallBackExcute {
+public class MineFragment extends BaseFragment implements
+        GMPermissions.PermissionCallBackExcute {
 
     private RoundImageView mAvatarIv;
     private Toolbar mToolbar;

@@ -67,7 +67,6 @@ public class MyActivityManager {
     private List<Activity> activities1 = null;
     //关闭摸一个activity
     public void removeAct(Class cla) {
-        Log.d("===TAG","   移除activity ");
         if (activities1 == null) {
             activities1 = new ArrayList<>();
         }else {

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
 import newmatch.zbmf.com.testapplication.activitys.SettledActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
@@ -44,8 +46,8 @@ import newmatch.zbmf.com.testapplication.utils.UnitUtils;
  * <p>
  * 测试网络结构
  */
-public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestView<BannerService, TestWanAndroidPresenter>
-,DianZanClickListener{
+public class HomeFragment extends BaseFragment implements HomeRVIvClick,
+        TestView<BannerService, TestWanAndroidPresenter>,DianZanClickListener{
 
     private TextView mCurrentLocationTv;
 
@@ -56,15 +58,11 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
     private double i = 0.2;
     private double dynamicX = 4.5;
     private int minTopBtnX = 550;
-    private Button mTopBtn;
-    //可改变图片背景
-    private ImageView mTopIv;
 
     //数据
     BannerService mResult;
     private RecyclerView mHomeRV;
-    private View mView;
-    private Toolbar mHomeToolBar;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -85,28 +83,22 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
 
     @Override
     protected void initView() {
-        mCurrentLocationTv = bindViewWithClick(R.id.leftToolbarTv, true);
+        //定位的控件
+        mCurrentLocationTv = bindViewWithClick(R.id.locationIcon, true);
         Bundle bundle = getArguments();
         if (bundle != null) {
             String currentCity = bundle.getString(PermissionC.CURRENT_CIRT);
             mCurrentLocationTv.setText(currentCity);
         }
-        mHomeToolBar = bindView(R.id.homeToolBar);
-        mHomeToolBar.setTitle("");
-
-        mHomeToolBar.setAlpha((float) i);
-        mView = bindViewWithClick(R.id.view, true);
-        mView.setAlpha((float) i);
         mCurrentLocationTv.setVisibility(View.VISIBLE);
-//        TextView topbar_title = bindView(R.id.topbar_title);
-//        topbar_title.setAlpha((float) i);
-//        topbar_title.setVisibility(View.INVISIBLE);
-//        topbar_title.setText(getString(R.string.application_title));
-        mTopIv = bindViewWithClick(R.id.topIv, true);
+        //头像
+        AppCompatImageView headIv = bindViewWithClick(R.id.headIv, true);
+        AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
+        TextView searchBtn = bindViewWithClick(R.id.searchBtn,true);
+        TextView subArea = bindViewWithClick(R.id.subArea,true);
+        //搜索图标  男性用户隐藏  女性用户显示
 
-        mTopBtn = bindViewWithClick(R.id.topBtn, true);
-        mTopBtn.setVisibility(View.VISIBLE);
-        mTopBtn.setAlpha((float) (0.7));
+
 
         // TODO: 2018/9/13 根据性别来呈现搜索入口或者入驻首页入口
         mHomeRV = bindView(R.id.homeRecyclerView);
@@ -117,103 +109,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
         mHomeGridAdapter.setDianZan(this);
         mHomeRV.setAdapter(mHomeGridAdapter);
 
-        //监听recyclerView的滑动
-        rvScroll();
     }
 
-    private void rvScroll() {
-        mHomeRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            private int totalDy = 0;
-            private int lastY = 0;
-            private int distanceL = 0;
-            private int topBtnWidth = 0;
-            private int topBtnWidth_start = 0;
-            private int dynamic = 0;
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                //滑动的单位是dp
-                if (mToolTarH == 0) {
-                    mToolTarH = UnitUtils.pxToDp(getActivity(), mHomeToolBar.getMeasuredHeight());
-                    //获取topBtn的长度
-                    topBtnWidth = topBtnWidth_start = mTopBtn.getMeasuredWidth();
-//                    PLog.LogD("--   topBtnWidth  :" + topBtnWidth);
-                    distanceL = mToolTarH + UnitUtils.pxToDp(getActivity(), GetUIDimens.getStatusH(getActivity()));
-                }
-                totalDy -= dy;
-                int deltaY = UnitUtils.pxToDp(getActivity(), totalDy);
-                int deltaL = deltaY - lastY;
-                lastY = deltaY;
-                int absY = Math.abs(deltaY);
-//                PLog.LogD("--   滑动的距离 :" + absY + "   distanceL :" + distanceL);
-                if (deltaL > 0) {
-//                    PLog.LogD("-- 向下滑动 ");
-                    /*if (absY >= 25) {
-                        topbar_title.setVisibility(View.INVISIBLE);
-                        mTopBtn.setVisibility(View.VISIBLE);
-                    }*/
-                    if (absY >= distanceL) {
-                        i = (float) dynamic / 100;
-                        if (topBtnWidth_start < topBtnWidth) {
-                            topBtnWidth_start += dynamicX;
-                            if (topBtnWidth_start >= topBtnWidth) {
-                                topBtnWidth_start = topBtnWidth;
-                            }
-                            btnTranslate(topBtnWidth_start);
-                        }
-                    } else {
-                        i = (float) absY / 100;
-                        if (topBtnWidth_start < topBtnWidth) {
-                            topBtnWidth_start += dynamicX;
-                            if (topBtnWidth_start >= topBtnWidth) {
-                                topBtnWidth_start = topBtnWidth;
-                            }
-                            btnTranslate(topBtnWidth_start);
-                        }
-                        if (i <= 0.2f) {
-                            i = 0.2f;
-                        }
-                    }
-                } else if (deltaL < 0) {
-//                    PLog.LogD("-- 向上滑动 ");
-                    /*if (absY < 25) {
-                        topbar_title.setVisibility(View.VISIBLE);
-                        mTopBtn.setVisibility(View.INVISIBLE);
-                    }*/
-                    if (absY < distanceL) {
-                        i = (float) absY / 100 + 0.2f;
-                        topBtnWidth_start -= dynamicX;
-                        if (topBtnWidth_start <= minTopBtnX) {
-                            //最小长度
-                            topBtnWidth_start = minTopBtnX;
-                        }
-                        btnTranslate(topBtnWidth_start);
-                        if (i > 1f) {
-                            i = 1;
-                        }
-                        dynamic = absY;
-                    } else if (absY >= distanceL) {
-                        i = 1;
-                        dynamic = distanceL;
-
-                    }
-                }
-                //0 是全透明
-                mHomeToolBar.setAlpha((float) i);
-                mView.setAlpha((float) i);
-//                topbar_title.setAlpha((float) i);
-//                mTopBtn.setAlpha((float) (1 - i));
-            }
-        });
-    }
-
-    private void btnTranslate(int x/*, int y*/) {
-        PLog.LogD("--   传入的长度  :" + x);
-        ViewGroup.LayoutParams lp = mTopBtn.getLayoutParams();
-        lp.width = x;//注意:单位是像素
-        mTopBtn.setLayoutParams(lp);
-    }
 
     @Override
     protected void initData() {
@@ -230,25 +127,23 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, TestVie
     @Override
     protected void onViewClick(View view) {
         switch (view.getId()) {
-            case R.id.leftToolbarTv:
+            case R.id.locationIcon:
                 //跳转选择地址页面
                 startActivityForResult(new Intent(getActivity(), SelectCityActivity.class), PermissionC.CURRENT_CITY_CODE);
                 break;
-            case R.id.topBtn:
-                //跳转搜索页面或者开通入驻首页展示页面
-                ToastUtils.showSingleToast(MyApplication.getInstance(), "点击了topBtn");
-                /**
-                 * 此处暂时展示搜索跳转页面--->当接入接口后，再分情况是跳转搜索还是跳转入驻首页页面
-                 */
-//                SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
-                SkipActivityUtil.skipDataActivity(getActivity(), SettledActivity.class, new Bundle());
+            case R.id.searchBtn:
+                //男性用户点击跳转搜索页面，女性用户点击跳转入驻页面
+                SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
+
+//                SkipActivityUtil.skipDataActivity(getActivity(), SettledActivity.class, new Bundle());
                 break;
-            case R.id.topIv:
-                //点击事件传递不进来
-                ToastUtils.showSingleToast(MyApplication.getInstance(), "点击了背景图片");
+            case R.id.searchIv:
+                //搜索图标只对女性用户显示，点击跳转搜索页面
+                SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
                 break;
-            case R.id.view:
-                ToastUtils.showSingleToast(MyApplication.getInstance(), "点击了view");
+            case R.id.subArea:
+                //区域定位
+                ToastUtils.showSingleToast(getContext(),"区域定位");
                 break;
         }
     }
