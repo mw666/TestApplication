@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,8 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-//        TextView toolbar_title = bindView(R.id.toolbar_title);
-//        toolbar_title.setText(getString(R.string.linkmans));
+        TextView toolbar_title = bindView(R.id.toolbar_title);
+        toolbar_title.setText(getString(R.string.linkmans));
 //        TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
 //        ViewPager msgViewPager = bindView(R.id.msgViewPager);
 //

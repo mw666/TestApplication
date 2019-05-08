@@ -1,6 +1,7 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -23,7 +24,12 @@ public class SearchActivity extends BaseActivity{
         //全屏，内容延伸至状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        bindView(R.id.toolbar_title).setVisibility(View.INVISIBLE);//隐藏顶部标题
+        //设置返回箭头的隐藏
+        Toolbar toolBar = bindView(R.id.toolbar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+
+//        bindView(R.id.toolbar_title).setVisibility(View.INVISIBLE);//隐藏顶部标题
         EditText searchUserEt = bindView(R.id.searchUserEt);
         ImageView searchResultIv = bindView(R.id.searchResultIv);
         RecyclerView searchRecommendRv = bindView(R.id.searchRecommendRv);

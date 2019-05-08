@@ -134,7 +134,8 @@
         <item name="android:layout_height">@dimen/dp_42</item>
         <item name="android:layout_marginLeft">@dimen/dp_25</item>
         <item name="android:layout_marginRight">@dimen/dp_25</item>
-        <item name="android:background">@drawable/select_login_btn_bg</item>
+        <!--<item name="android:background">@drawable/select_login_btn_bg</item>-->
+        <item name="android:background">@drawable/login_btn0_bg</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sp_16</item>
     </style>

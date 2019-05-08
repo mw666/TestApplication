@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,13 +9,17 @@
 
     <!--<include layout="@layout/h72dp_toolbar_view"/>-->
 
-    <include layout="@layout/search_layout"/>
+
+    <include layout="@layout/normal_activity_toolbar" />
+
+    <include layout="@layout/search_layout" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/searchNestedView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/dp_70">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,15 +30,15 @@
                 style="@style/searchTvTitleStyle"
                 android:layout_marginTop="@dimen/dp_5"
                 android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
-                android:text="@string/search_result_title"/>
+                android:text="@string/search_result_title" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/searchResultIvCard"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
                 android:layout_below="@+id/searchResultTitle"
-                android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_7"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -51,7 +54,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/searchResultTitle"
                     android:background="@color/white"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop" />
 
             </android.support.v7.widget.CardView>
 
@@ -61,7 +64,7 @@
                 android:layout_below="@+id/searchResultIvCard"
                 android:layout_marginTop="@dimen/dp_13"
                 android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
-                android:text="@string/search_recommend_title"/>
+                android:text="@string/search_recommend_title" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/searchRecommendRv"
@@ -69,11 +72,11 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/searchRecommendTitle"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_7"/>
+                android:layout_marginTop="@dimen/dp_7"
+                android:layout_marginRight="@dimen/dp_15" />
 
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+</FrameLayout>

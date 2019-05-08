@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
+import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
@@ -62,6 +64,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     //数据
     BannerService mResult;
     private RecyclerView mHomeRV;
+    private MainActivity mainActivity;
 
 
     public HomeFragment() {
@@ -98,6 +101,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         TextView subArea = bindViewWithClick(R.id.subArea,true);
         //搜索图标  男性用户隐藏  女性用户显示
 
+
+        mainActivity = (MainActivity)getActivity();
 
 
         // TODO: 2018/9/13 根据性别来呈现搜索入口或者入驻首页入口
@@ -144,6 +149,12 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
             case R.id.subArea:
                 //区域定位
                 ToastUtils.showSingleToast(getContext(),"区域定位");
+                break;
+            case R.id.headIv:
+                //打开侧滑菜单
+                if (mainActivity!=null){
+                    mainActivity.showMainMenu();
+                }
                 break;
         }
     }

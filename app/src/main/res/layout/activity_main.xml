@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_grey"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    <include layout="@layout/layout_main" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <newmatch.zbmf.com.testapplication.views.GenericDrawerLayout
+        android:id="@+id/genericdrawerlayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_gravity="bottom"
-        android:background="@drawable/topbar_bg"
-        app:itemIconTint="@color/selector_main_bottom_icon_color"
-        app:itemTextColor="@color/selector_main_bottom_icon_color"
-        app:menu="@menu/bottom_menu" />
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+</FrameLayout>

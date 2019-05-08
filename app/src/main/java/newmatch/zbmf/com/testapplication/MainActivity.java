@@ -1,22 +1,17 @@
 package newmatch.zbmf.com.testapplication;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.WindowManager;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
-import com.zhihu.matisse.Matisse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +21,13 @@ import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.fragments.DynamicFragment;
 import newmatch.zbmf.com.testapplication.fragments.HomeFragment;
-import newmatch.zbmf.com.testapplication.fragments.MineFragment;
 import newmatch.zbmf.com.testapplication.fragments.MsgFragment;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
-import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
-import newmatch.zbmf.com.testapplication.utils.UnitUtils;
+import newmatch.zbmf.com.testapplication.utils.Util;
+import newmatch.zbmf.com.testapplication.views.GenericDrawerLayout;
 
 /**
  * 取名甜甜圈吧
@@ -46,6 +40,7 @@ public class MainActivity extends BaseActivity implements
     private ViewPager mViewPager;
     public ImageWatcherHelper mIwHelper;
     private BottomNavigationView bottomNavigationView;
+    private GenericDrawerLayout genericdrawerlayout;
 
     @Override
     protected void onDestroy() {
@@ -64,6 +59,12 @@ public class MainActivity extends BaseActivity implements
         mIwHelper = ShowImgUtils.init(this);
         bottomNavigationView = bindView(R.id.bottomNavigationView);
         mViewPager = bindView(R.id.viewPager);
+        genericdrawerlayout = bindView(R.id.genericdrawerlayout);
+
+        View menu = LayoutInflater.from(MainActivity.this).inflate(R.layout.main_menu_view, null);
+        setMainMenu(genericdrawerlayout, menu);
+        getMenuView(menu);
+
 
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(HomeFragment.homgInstance(TianShareUtil.getCity()));
@@ -82,6 +83,7 @@ public class MainActivity extends BaseActivity implements
 
 
     }
+
 
     private void addListener() {
         mViewPager.addOnPageChangeListener(this);
@@ -166,5 +168,71 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    //获取抽屉View的控件
+    private void getMenuView(View menu) {
+
+    }
+
+    //设置侧滑抽屉
+    private void setMainMenu(GenericDrawerLayout genericdrawerlayout, View menu) {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        genericdrawerlayout.setContentLayout(menu);
+
+        // 可以设置打开时响应Touch的区域范围
+        if (mViewPager.getCurrentItem() == 0)
+            genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 120));
+//        genericdrawerlayout.setTouchSizeOfClosed(Util.dip2px(this, 500));
+
+        // 设置随着位置的变更，背景透明度也改变
+        genericdrawerlayout.setOpaqueWhenTranslating(true);
+
+        // 设置抽屉是否可以打开
+//        genericdrawerlayout.setOpennable(false);
+
+        // 设置抽屉的空白区域大小
+        float v = /*getResources().getDisplayMetrics().density * 100 +*/ 0.5f; // 100DIP
+        genericdrawerlayout.setDrawerEmptySize((int) v);
+        // 设置黑色背景的最大透明度
+        genericdrawerlayout.setMaxOpaque(0.4f);
+        // 设置事件回调
+        genericdrawerlayout.setDrawerCallback(new GenericDrawerLayout.DrawerCallbackAdapter() {
+            @Override
+            public void onStartOpen() {
+                Log.i("===哈哈哈", "onStartOpen");
+            }
+
+            @Override
+            public void onEndOpen() {
+                Log.i("===哈哈哈", "onEndOpen");
+            }
+
+            @Override
+            public void onStartClose() {
+                Log.i("===哈哈哈", "onStartClose");
+            }
+
+            @Override
+            public void onEndClose() {
+                Log.i("===哈哈哈", "onEndClose");
+            }
+
+            @Override
+            public void onPreOpen() {
+                Log.i("===哈哈哈", "onPreOpen");
+            }
+
+            @Override
+            public void onTranslating(int gravity, float translation, float fraction) {
+                Log.i("===哈哈哈", "onTranslating gravity = " + gravity + "\n" +
+                        " translation = " + translation + "\n fraction = " + fraction);
+            }
+        });
+    }
+
+    //显示侧滑菜单
+    public void showMainMenu() {
+        genericdrawerlayout.open();
     }
 }

@@ -1,20 +1,24 @@
 package newmatch.zbmf.com.testapplication.fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,7 +99,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     protected void initView() {
         // 注册一个事件回调，用于处理SMSSDK接口请求的结果
         SMSSDK.registerEventHandler(eventHandler);
-        registerActivity = (RegisterActivity)getActivity();
+        registerActivity = (RegisterActivity) getActivity();
         mView = getView();
         if (mTabPosition == 0) {
             mAccountTextLayout = bindView(mView, R.id.accountTextLayout);
@@ -114,6 +118,29 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             clearListener(mAccountTextLayout, mClearAccount);
             clearListener(mPasswordTextLayout, mClearPassword);
             setLoginViewClick();
+
+            passwordInputEt.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (!TextUtils.isEmpty(accountInputEt.getText().toString().trim())) {
+                        if (passwordInputEt.getText().toString().trim().length() > 6) {
+                            mLoginBtn.setBackground(ContextCompat.getDrawable(getActivity(),
+                                    R.drawable.login_btn1_bg_pressed));
+                        }
+                    }
+                }
+            });
         } else if (mTabPosition == 1) {
             mZc_accountTextLayout = bindView(mView, R.id.zc_accountTextLayout);
             TextInputEditText zc_accountInputEt = bindView(mView, R.id.zc_accountInputEt);
@@ -132,6 +159,29 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             clearListener(mZc_accountTextLayout, mZc_clearAccount);
             clearListener(mZc_passwordTextLayout, mZc_clearPassword);
             setRegisterViewClick();
+
+            zc_passwordInputEt.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (!TextUtils.isEmpty(zc_passwordInputEt.getText().toString().trim())) {
+                        if (zc_passwordInputEt.getText().toString().trim().length() > 6) {
+                            mZc_btn.setBackground(ContextCompat.getDrawable(getActivity(),
+                                    R.drawable.login_btn1_bg_pressed));
+                        }
+                    }
+                }
+            });
         }
     }
 

@@ -33,7 +33,9 @@ public abstract class BaseFragment extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(layoutId(), container, false);
         this.savedInstanceState=savedInstanceState;
         Boolean isEnter = setViewEnterStatuBar();

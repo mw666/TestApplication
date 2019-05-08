@@ -28,19 +28,15 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!-- region 适配全面屏 -->
-        <!--<meta-data-->
-            <!--android:name="android.max_aspect"-->
-            <!--android:value="2.4" />-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
         <!-- endregion -->
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".permissions.PermissionActivity"
@@ -53,7 +49,13 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activitys.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
