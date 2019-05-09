@@ -1,15 +1,19 @@
 package newmatch.zbmf.com.testapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.adapters.MainFragMentAdapter;
+import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.fragments.DynamicFragment;
@@ -28,6 +33,7 @@ import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
 import newmatch.zbmf.com.testapplication.utils.Util;
 import newmatch.zbmf.com.testapplication.views.GenericDrawerLayout;
+import newmatch.zbmf.com.testapplication.views.RotationPageTransformer;
 
 /**
  * 取名甜甜圈吧
@@ -170,8 +176,43 @@ public class MainActivity extends BaseActivity implements
 
     }
 
+    private int [] imgs={R.mipmap.card3,R.mipmap.card2,R.mipmap.card4,R.mipmap.card5};
+    private List<Integer> imgList;
     //获取抽屉View的控件
+    @SuppressLint("ClickableViewAccessibility")
     private void getMenuView(View menu) {
+        ViewPager menuViewPager = menu.findViewById(R.id.menuViewPager);
+        imgList=new ArrayList<>();
+        for (int i = 0; i < imgs.length; i++) {
+            imgList.add(imgs[i]);
+        }
+        MenuAdapter menuAdapter = new MenuAdapter(imgList);
+        menuViewPager.setAdapter(menuAdapter);
+        menuViewPager.setOffscreenPageLimit(imgList.size());//设置预加载的数量
+        menuViewPager.setPageMargin(12);
+        //添加3D画廊效果
+        menuViewPager.setPageTransformer(true,new RotationPageTransformer());
+        //viewPager左右两边滑动无效的处理
+        findViewById(R.id.vp_outer).setOnTouchListener((view, motionEvent)
+                -> menuViewPager.dispatchTouchEvent(motionEvent));
+
+        //获取控件
+        AppCompatImageView menuHeadIv = menu.findViewById(R.id.menuHeadIv);
+        TextView userNick = menu.findViewById(R.id.userNick);
+        TextView careTv = menu.findViewById(R.id.careTv);
+        TextView fansTv = menu.findViewById(R.id.fansTv);
+        TextView likeTv = menu.findViewById(R.id.likeTv);
+        TextView rankTv = menu.findViewById(R.id.rankTv);
+
+        TextView userRmb = menu.findViewById(R.id.userRmb);
+        TextView vipTv = menu.findViewById(R.id.vipTv);
+        TextView inviteTv = menu.findViewById(R.id.inviteTv);
+        TextView myArea = menu.findViewById(R.id.myArea);
+        TextView taskRewards = menu.findViewById(R.id.taskRewards);
+        TextView optionBackTv = menu.findViewById(R.id.optionBackTv);
+        TextView versionUpdateTv = menu.findViewById(R.id.versionUpdateTv);
+        TextView loginOutTv = menu.findViewById(R.id.loginOutTv);
+
 
     }
 
@@ -179,18 +220,14 @@ public class MainActivity extends BaseActivity implements
     private void setMainMenu(GenericDrawerLayout genericdrawerlayout, View menu) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         genericdrawerlayout.setContentLayout(menu);
-
         // 可以设置打开时响应Touch的区域范围
         if (mViewPager.getCurrentItem() == 0)
             genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 120));
 //        genericdrawerlayout.setTouchSizeOfClosed(Util.dip2px(this, 500));
-
         // 设置随着位置的变更，背景透明度也改变
         genericdrawerlayout.setOpaqueWhenTranslating(true);
-
         // 设置抽屉是否可以打开
 //        genericdrawerlayout.setOpennable(false);
-
         // 设置抽屉的空白区域大小
         float v = /*getResources().getDisplayMetrics().density * 100 +*/ 0.5f; // 100DIP
         genericdrawerlayout.setDrawerEmptySize((int) v);

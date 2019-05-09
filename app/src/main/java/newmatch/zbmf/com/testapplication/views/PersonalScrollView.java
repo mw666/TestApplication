@@ -55,8 +55,8 @@ public class PersonalScrollView extends NestedScrollView {
     private boolean upDownSlide = false; //判断上下滑动的flag
 
     /**************************************/
-    private TabLayout mineTabLayout;
-    private Toolbar mToolbar;
+//    private TabLayout mineTabLayout;
+//    private Toolbar mToolbar;
     private RelativeLayout mFl;
     private RelativeLayout mHeadRv;
     private int[] locationToolBar = new int[2];
@@ -76,8 +76,8 @@ public class PersonalScrollView extends NestedScrollView {
     }
 
     public void setTabLayout(TabLayout tabLayout, Toolbar toolbar, RelativeLayout fl, RelativeLayout headRv) {
-        mineTabLayout = tabLayout;
-        mToolbar = toolbar;
+//        mineTabLayout = tabLayout;
+//        mToolbar = toolbar;
         mFl = fl;
         mHeadRv = headRv;
     }
@@ -109,13 +109,13 @@ public class PersonalScrollView extends NestedScrollView {
 //        PLog.LogD("===  onInterceptTouchEvent  执行 ");
         int scrollY = getScrollY();
         PLog.LogD("===    移动的Y距离              :  " + scrollY);
-        if (mToolbar != null && mToolBarH == 0) {
-            mToolBarH = mToolbar.getMeasuredHeight();
-        }
-        if (mineTabLayout != null) {
-            mineTabLayout.getLocationOnScreen(locationFl);
-            mTabLayoutY = locationFl[1];
-        }
+//        if (mToolbar != null && mToolBarH == 0) {
+//            mToolBarH = mToolbar.getMeasuredHeight();
+//        }
+//        if (mineTabLayout != null) {
+//            mineTabLayout.getLocationOnScreen(locationFl);
+//            mTabLayoutY = locationFl[1];
+//        }
 //        PLog.LogD("===    mFl  的坐标  :  " + mTabLayoutY + "     toolBar的高度 :" + mToolBarH);
         int i = ev.getAction() & MotionEvent.ACTION_MASK;
 //        float rawY = ev.getRawY();
@@ -132,7 +132,7 @@ public class PersonalScrollView extends NestedScrollView {
                     if (mTabLayoutY > mToolBarH) {
                         intercepted = true;//拦截
                     } else {
-                        mToolbar.setVisibility(View.VISIBLE);
+//                        mToolbar.setVisibility(View.VISIBLE);
                         intercepted = false;//传递给子控件
                     }
                     if (mToolbarY>=mToolBarH&&mToolBarH<=(mToolBarH+50)){
@@ -144,7 +144,7 @@ public class PersonalScrollView extends NestedScrollView {
                     if (mTabLayoutY <= mToolBarH) {
                         //并且recyclerView的内容不处于顶端---》滑动权在子控件，否则拦截
                         //判断RecyclerView是否滑动到了底部或顶部  https://blog.csdn.net/msn465780/article/details/77101966
-                        mToolbar.setVisibility(View.VISIBLE);
+//                        mToolbar.setVisibility(View.VISIBLE);
                         if (RVState== RVScrollEvent.DOWN_REACH_TOP){
                             //RV内容下滑到顶了
                             intercepted=true;

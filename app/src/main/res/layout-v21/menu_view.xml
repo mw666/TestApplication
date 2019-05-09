@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dp_220"
+    android:layout_height="@dimen/dp_100">
+
+    <newmatch.zbmf.com.testapplication.custom_view.CustomImageView
+        android:id="@+id/menuIv"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="@dimen/dp_100"
+        android:background="@color/deepPurple"
+        android:scaleType="centerCrop" />
+
+    <!--<View-->
+        <!--android:layout_width="@dimen/dp_220"-->
+        <!--android:layout_height="@dimen/dp_100"-->
+        <!--android:background="@drawable/card_bg"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_10"
+            android:elevation="@dimen/dp_3"
+            android:lines="1"
+            android:scaleType="centerCrop"
+            android:text="夜嗨奖金:"
+            android:textColor="@color/white_gray"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:elevation="@dimen/dp_3"
+            android:lines="1"
+            android:paddingStart="@dimen/dp_15"
+            android:paddingLeft="@dimen/dp_16"
+            android:scaleType="centerCrop"
+            android:text="236元"
+            android:textColor="@color/white_gray"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="italic|bold" />
+
+        <!--android:background="@drawable/sum_tv_bg"-->
+
+        <TextView
+            android:id="@+id/sumDeclare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sum"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawablePadding="@dimen/dp_30"
+            android:elevation="@dimen/dp_3"
+            android:gravity="center"
+            android:lines="1"
+            android:scaleType="centerCrop"
+            android:text="邀请奖励金说明"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="italic|bold" />
+    </RelativeLayout>
+
+
+</FrameLayout>
+
