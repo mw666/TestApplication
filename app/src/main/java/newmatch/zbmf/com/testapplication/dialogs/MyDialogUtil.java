@@ -3,8 +3,12 @@ package newmatch.zbmf.com.testapplication.dialogs;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,10 +17,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
+import newmatch.zbmf.com.testapplication.callback.EtCallBack;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 
 /**
@@ -106,6 +112,61 @@ public class MyDialogUtil {
         agreeBtn.setOnClickListener(view1 -> {
             if (callBack != null) {
                 callBack.positionActCallBack(alertDialog);
+            }
+        });
+        alertDialog.show();
+    }
+
+    public static void showEtDialog(Activity activity, Context context, String tips, View view,
+                                    int res, boolean touchCancel, EtCallBack callBack) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.dialogTheme);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setView(view);
+        Window window = alertDialog.getWindow();
+        if (window != null) {
+            window.getDecorView().setPadding(0, 0, 0, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+            }
+            WindowManager manager = activity.getWindowManager();
+            Display display = manager.getDefaultDisplay();
+            android.view.WindowManager.LayoutParams lp = alertDialog.getWindow()
+                    .getAttributes();
+            lp.gravity = Gravity.CENTER;
+            lp.width = display.getWidth() * 4 / 5;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            alertDialog.getWindow().setAttributes(lp);
+            alertDialog.setCancelable(touchCancel);
+            alertDialog.setCanceledOnTouchOutside(touchCancel);
+            window.setWindowAnimations(R.style.alertDialogStyle01);
+        }
+        TextView tip = view.findViewById(R.id.tip);
+        EditText newNickEt = view.findViewById(R.id.newNickEt);
+        TextView btn = view.findViewById(R.id.btn);
+        tip.setText(tips);
+        newNickEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (newNickEt.getText().length() > 0) {
+                    btn.setBackground(ContextCompat.getDrawable(context,
+                            R.drawable.login_btn1_bg_pressed));
+                }
+            }
+        });
+        btn.setOnClickListener(view1 -> {
+            if (newNickEt.getText().length() > 0 && callBack != null) {
+                callBack.etContent(newNickEt.getText().toString(),alertDialog);
             }
         });
         alertDialog.show();

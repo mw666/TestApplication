@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -122,10 +123,14 @@ public abstract class BaseActivity extends RxAppCompatActivity{
             toolBarTitle.setText(title);
             setSupportActionBar(toolBar);
             if (homeAsUpEnabled) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                toolBar.setNavigationIcon(R.drawable.back_icon);
-                toolBar.setNavigationOnClickListener(v -> onBackPressed());
+                ImageView back = bindView(R.id.back);
+                back.setVisibility(View.VISIBLE);
+                back.setOnClickListener(view -> onBackPressed());
+//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//                toolBar.setNavigationIcon(R.drawable.back_icon);
+//                toolBar.setNavigationOnClickListener(v -> onBackPressed());
             }
+
         }
     }
 

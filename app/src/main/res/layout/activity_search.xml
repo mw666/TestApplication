@@ -9,7 +9,6 @@
 
     <!--<include layout="@layout/h72dp_toolbar_view"/>-->
 
-
     <include layout="@layout/normal_activity_toolbar" />
 
     <include layout="@layout/search_layout" />

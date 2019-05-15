@@ -20,9 +20,11 @@ import newmatch.zbmf.com.testapplication.custom_view.CustomImageView;
 public class MenuAdapter extends PagerAdapter {
 
     private List<Integer> mList;
+    private int viewRes;
 
-    public MenuAdapter(List<Integer> mList) {
+    public MenuAdapter(List<Integer> mList,int viewRes) {
         this.mList = mList;
+        this.viewRes=viewRes;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class MenuAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.menu_view, container, false);
+                .inflate(viewRes, container, false);
         CustomImageView menuIv = view.findViewById(R.id.menuIv);
 //        TextView title = view.findViewById(R.id.title);
 //        TextView sum = view.findViewById(R.id.sum);

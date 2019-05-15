@@ -9,30 +9,27 @@ import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 
-public class PermissionsActivity extends AppCompatActivity{
+/**
+ * Created By pq
+ * on 2019/5/13
+ */
+public class PermissionsActivity extends AppCompatActivity {
 
     private GMPermissions mGmPermissions;
-    private int mRequestCode=-1;
-    private String mDialogTip;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_permissions);
+        setContentView(R.layout.activity_permission);
 
         String[] permissions = getIntent().getStringArrayExtra("Permissions");
-        mRequestCode = getIntent().getIntExtra("requestCode", -1);
-        mDialogTip = getIntent().getStringExtra("dialogTip");
 
         //申请权所需要的对象
-//        mGmPermissions = new GMPermissions(this, this, PermissionC.WR_FILE_CODE);
-        mGmPermissions=GMPermissions.instance().setParameter(this, this, PermissionC.WR_FILE_CODE);
-
+        mGmPermissions= GMPermissions.instance().setParameter(this, this,
+                PermissionC.WR_FILE_CODE);
         //申请权限
         if (permissions!=null){
             mGmPermissions.checkMyPermissions(permissions,PermissionsActivity.this);
         }
-
 
     }
 
@@ -52,7 +49,6 @@ public class PermissionsActivity extends AppCompatActivity{
                     GlideUtil.loadCircleImage(UserDetailActivity.this,
                             R.drawable.touxiang_icon, mSelected.get(0), mUserAvatarRv);*//*
                     // TODO: 2018/10/9 上传选择的图片 --->用户图片
-
                 }
                 break;
         }
@@ -60,7 +56,8 @@ public class PermissionsActivity extends AppCompatActivity{
 
     //权限申请的回调
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PermissionC.WR_FILE_CODE:
@@ -68,7 +65,7 @@ public class PermissionsActivity extends AppCompatActivity{
                     //如果某一个权限用户没有同意--->申请权限
                     if (grantResults[i]!= PackageManager.PERMISSION_GRANTED){
                         //向用户展示该权限的dialog--->权限用途
-                        mGmPermissions.showPermissionDialog(mDialogTip);
+                        mGmPermissions.showPermissionDialog(getString(R.string.get_img_tip));
                     }
                     if (i==grantResults.length-1&&grantResults[i]==PackageManager.PERMISSION_GRANTED){
                         //表示用户已经同意所有的权限--->执行需要权限后的操作
@@ -80,6 +77,5 @@ public class PermissionsActivity extends AppCompatActivity{
                 break;
         }
     }
-
 
 }
