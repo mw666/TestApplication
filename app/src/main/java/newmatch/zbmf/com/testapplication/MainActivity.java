@@ -27,10 +27,12 @@ import android.widget.TextView;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.ui.MatisseActivity;
 
 import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
@@ -51,6 +53,7 @@ import newmatch.zbmf.com.testapplication.fragments.HomeFragment;
 import newmatch.zbmf.com.testapplication.fragments.MsgFragment;
 import newmatch.zbmf.com.testapplication.permissions.PermissionActivity;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
@@ -76,6 +79,7 @@ public class MainActivity extends BaseActivity implements
     private GenericDrawerLayout genericdrawerlayout;
     private AppCompatImageView menuHeadIv;
     private TextView userNick;
+    private HomeFragment homeFragment;
 
     @Override
     protected void onDestroy() {
@@ -102,7 +106,8 @@ public class MainActivity extends BaseActivity implements
 
 
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(HomeFragment.homgInstance(TianShareUtil.getCity()));
+        homeFragment = HomeFragment.homgInstance(TianShareUtil.getCity());
+        fragmentList.add(homeFragment);
         fragmentList.add(DynamicFragment.dynamicInstance());
         fragmentList.add(MsgFragment.msgInstance());
         MainFragMentAdapter mainFragMentAdapter = new MainFragMentAdapter(getSupportFragmentManager()
@@ -200,7 +205,7 @@ public class MainActivity extends BaseActivity implements
         for (int i = 0; i < imgs.length; i++) {
             imgList.add(imgs[i]);
         }
-        MenuAdapter menuAdapter = new MenuAdapter(imgList,R.layout.menu_view);
+        MenuAdapter menuAdapter = new MenuAdapter(imgList, null, R.layout.menu_view);
         menuViewPager.setAdapter(menuAdapter);
         menuViewPager.setOffscreenPageLimit(imgList.size());//设置预加载的数量
         menuViewPager.setPageMargin(12);
@@ -277,7 +282,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.userRmb:
                 //用户钱包页面，资金余额，绑定的提现账号
-                SkipActivityUtil.skipActivity(this, WalletActivity.class);
+                ActivityAnimUtils.instance().activityIn(MainActivity.this,
+                        WalletActivity.class);
                 break;
             case R.id.vipTv:
                 //开通VIP页面
@@ -320,12 +326,12 @@ public class MainActivity extends BaseActivity implements
         genericdrawerlayout.setContentLayout(menu);
         // 可以设置打开时响应Touch的区域范围
         if (mViewPager.getCurrentItem() == 0)
-            genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 110));
-//        genericdrawerlayout.setTouchSizeOfClosed(Util.dip2px(this, 500));
+            genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 120));
+        //        genericdrawerlayout.setTouchSizeOfClosed(Util.dip2px(this, 500));
         // 设置随着位置的变更，背景透明度也改变
         genericdrawerlayout.setOpaqueWhenTranslating(true);
         // 设置抽屉是否可以打开
-//        genericdrawerlayout.setOpennable(false);
+        //        genericdrawerlayout.setOpennable(false);
         // 设置抽屉的空白区域大小
         float v = /*getResources().getDisplayMetrics().density * 100 +*/ 0.5f; // 100DIP
         genericdrawerlayout.setDrawerEmptySize((int) v);
@@ -428,6 +434,7 @@ public class MainActivity extends BaseActivity implements
                     List<Uri> mSelected = Matisse.obtainResult(data);
                     GlideUtil.loadCircleImage(MainActivity.this,
                             R.drawable.ic_head_portrait_icon, mSelected.get(0), menuHeadIv);
+                    homeFragment.updateHeadImg(mSelected.get(0));
                 }
                 break;
         }

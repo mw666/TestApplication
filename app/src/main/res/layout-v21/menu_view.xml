@@ -58,7 +58,7 @@
             android:layout_below="@+id/sum"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_10"
-            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableRight="@drawable/ic_arrow_right_white"
             android:drawablePadding="@dimen/dp_30"
             android:elevation="@dimen/dp_3"
             android:gravity="center"

@@ -36,6 +36,6 @@
         android:background="@drawable/login_btn0_bg"
         android:text="确定"
         android:textSize="15sp"
-        android:textColor="@color/white_alpha"
+        android:textColor="@color/white"
         android:gravity="center"/>
 </LinearLayout>

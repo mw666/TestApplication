@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.WalletActivity">
+    tools:context=".activitys.WalletActivity"
+    tools:ignore="MissingDefaultResource">
 
     <!--<include layout="@layout/normal_activity_toolbar" />-->
     <!--android:layout_marginTop="@dimen/dp_68"-->
@@ -16,13 +17,13 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_32"
         android:background="@drawable/wave_border_less_ripple"
-        android:padding="@dimen/dp_3"
+        android:padding="@dimen/dp_5"
         android:src="@drawable/back_icon"
         android:visibility="visible" />
 
@@ -67,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menuHeadIv"
-        android:layout_marginTop="@dimen/dp_172"
+        android:layout_marginTop="@dimen/dp_175"
         android:clipChildren="false"
         android:orientation="vertical">
 
@@ -81,4 +82,52 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vp_outer"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="@dimen/dp_35"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/wallet_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/getRMB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_rmb"
+            android:drawableLeft="@drawable/ic_rmb"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
+            android:text="奖励金提现"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_3"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@color/black_3" />
+
+        <TextView
+            android:id="@+id/getJifenToRMB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_zuan_shi"
+            android:drawableLeft="@drawable/ic_zuan_shi"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
+            android:text="夜钻提现"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
 </RelativeLayout>

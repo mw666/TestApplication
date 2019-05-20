@@ -3,7 +3,10 @@ package newmatch.zbmf.com.testapplication.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -27,6 +30,7 @@ import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
 import newmatch.zbmf.com.testapplication.activitys.SettledActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
+import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.PLog;
@@ -65,6 +69,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     BannerService mResult;
     private RecyclerView mHomeRV;
     private MainActivity mainActivity;
+    private AppCompatImageView headIv;
 
 
     public HomeFragment() {
@@ -95,7 +100,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         }
         mCurrentLocationTv.setVisibility(View.VISIBLE);
         //头像
-        AppCompatImageView headIv = bindViewWithClick(R.id.headIv, true);
+        headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
         TextView searchBtn = bindViewWithClick(R.id.searchBtn,true);
         TextView subArea = bindViewWithClick(R.id.subArea,true);
@@ -116,6 +121,12 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
 
     }
 
+    //更新用户头像
+    public void updateHeadImg(Uri uri){
+        GlideUtil.loadCircleImage(getActivity(),
+                R.drawable.ic_head_portrait_icon, uri,headIv);
+    }
+
 
     @Override
     protected void initData() {
@@ -129,6 +140,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         return mPresenter;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onViewClick(View view) {
         switch (view.getId()) {

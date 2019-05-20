@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_7">
+
+    <TextView
+        android:id="@+id/payDiaLogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="提现到微信"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/getRmbItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payDiaLogTitle"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="提现金额"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
+
+        <EditText
+            android:id="@+id/rmbEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/line"
+            android:gravity="start|center_vertical"
+            android:hint="提现金额"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_6"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/allRmb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_45"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="全部"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/tiXianBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_32"
+        android:layout_below="@+id/getRmbItem"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_45"
+        android:background="@drawable/add_friend_et_bg"
+        android:text="提现" />
+
+</RelativeLayout>

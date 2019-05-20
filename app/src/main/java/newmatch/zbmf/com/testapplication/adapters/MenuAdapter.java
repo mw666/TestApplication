@@ -20,11 +20,13 @@ import newmatch.zbmf.com.testapplication.custom_view.CustomImageView;
 public class MenuAdapter extends PagerAdapter {
 
     private List<Integer> mList;
+    private List<Integer> payImgs;
     private int viewRes;
 
-    public MenuAdapter(List<Integer> mList,int viewRes) {
+    public MenuAdapter(List<Integer> mList, List<Integer> mPayList, int viewRes) {
         this.mList = mList;
-        this.viewRes=viewRes;
+        this.payImgs = mPayList;
+        this.viewRes = viewRes;
     }
 
     @Override
@@ -43,12 +45,16 @@ public class MenuAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(viewRes, container, false);
         CustomImageView menuIv = view.findViewById(R.id.menuIv);
-//        TextView title = view.findViewById(R.id.title);
-//        TextView sum = view.findViewById(R.id.sum);
-//        TextView sumDeclare = view.findViewById(R.id.sumDeclare);
+        CustomImageView pay_type = view.findViewById(R.id.pay_type);
+        //        TextView title = view.findViewById(R.id.title);
+        //        TextView sum = view.findViewById(R.id.sum);
+        //        TextView sumDeclare = view.findViewById(R.id.sumDeclare);
 
 
         menuIv.setBackgroundResource(mList.get(position));
+        if (payImgs != null && payImgs.size() > 0) {
+            pay_type.setBackgroundResource(payImgs.get(position));
+        }
         container.addView(view);
         return view;
     }
