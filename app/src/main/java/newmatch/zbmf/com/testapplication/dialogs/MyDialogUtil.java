@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.MessageFormat;
+
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
 import newmatch.zbmf.com.testapplication.callback.EtCallBack;
@@ -236,6 +238,46 @@ public class MyDialogUtil {
             String rmb = rmbEt.getText().toString().trim();
             if (callBack != null)
                 callBack.etContent(rmb, alertDialog);
+        });
+        alertDialog.show();
+    }
+
+    public static void showVipDialog(Activity activity, Context context, View view, boolean touchCancel
+            , int res, String title, String vipContentTitle,String vipPrice, EtCallBack callBack) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.dialogTheme);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setView(view);
+        Window window = alertDialog.getWindow();
+        if (window != null) {
+            window.getDecorView().setPadding(0, 0, 0, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+            }
+            WindowManager manager = activity.getWindowManager();
+            Display display = manager.getDefaultDisplay();
+            android.view.WindowManager.LayoutParams lp = alertDialog.getWindow()
+                    .getAttributes();
+            lp.gravity = Gravity.CENTER;
+            lp.width = display.getWidth() * 4 / 5;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            alertDialog.getWindow().setAttributes(lp);
+            alertDialog.setCancelable(touchCancel);
+            alertDialog.setCanceledOnTouchOutside(touchCancel);
+            window.setWindowAnimations(R.style.alertDialogStyle01);
+        }
+        TextView vipDiaLogTitle = view.findViewById(R.id.vipDiaLogTitle);
+        TextView vipRmbTitle = view.findViewById(R.id.vipRmbTitle);
+        TextView vipRmb = view.findViewById(R.id.vipRmb);
+        Button vipPositionBtn = view.findViewById(R.id.vipPositionBtn);
+        if (!TextUtils.isEmpty(title))
+            vipDiaLogTitle.setText(title);
+        if (!TextUtils.isEmpty(vipContentTitle))
+            vipRmbTitle.setText(vipContentTitle);
+        if (!TextUtils.isEmpty(vipPrice))
+            vipRmb.setText(MessageFormat.format("{0}元", vipPrice));
+        vipPositionBtn.setOnClickListener(v -> {
+            if (callBack != null)
+                callBack.etContent(vipPrice, alertDialog);
         });
         alertDialog.show();
     }

@@ -38,6 +38,8 @@ import java.util.Objects;
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
+import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
+import newmatch.zbmf.com.testapplication.activitys.OptionsActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.activitys.WalletActivity;
@@ -297,7 +299,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.myArea:
                 //跳转个人空间页面
-
+                ActivityAnimUtils.instance().activityIn(MainActivity.this,
+                        MySpaceActivity.class);
                 break;
             case R.id.taskRewards:
                 //待完成任务的页面
@@ -305,7 +308,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.optionBackTv:
                 //意见反馈页面
-
+                ActivityAnimUtils.instance().activityIn(MainActivity.this,
+                        OptionsActivity.class);
                 break;
             case R.id.versionUpdateTv:
                 //版本更新页面

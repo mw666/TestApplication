@@ -35,7 +35,7 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".permissions.PermissionActivity"
             android:screenOrientation="portrait"
@@ -119,7 +119,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activitys.WalletActivity"></activity>
+        <activity android:name=".activitys.WalletActivity" />
+        <activity android:name=".activitys.OptionsActivity" />
+        <activity android:name=".activitys.MySpaceActivity"></activity>
     </application>
 
 </manifest>
