@@ -221,6 +221,10 @@ public class MyDialogUtil {
                     tiXianBtn.setTextColor(Color.WHITE);
                     tiXianBtn.setBackground(ContextCompat.getDrawable(context,
                             R.drawable.login_btn1_bg_pressed));
+                } else {
+                    tiXianBtn.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    tiXianBtn.setBackground(ContextCompat.getDrawable(context,
+                            R.drawable.add_friend_et_bg));
                 }
             }
         });

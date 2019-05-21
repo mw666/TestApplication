@@ -39,6 +39,7 @@ import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
+import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.activitys.WalletActivity;
 import newmatch.zbmf.com.testapplication.adapters.MainFragMentAdapter;
 import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
@@ -287,7 +288,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.vipTv:
                 //开通VIP页面
-
+                ActivityAnimUtils.instance().activityIn(MainActivity.this,
+                        VIPActivity.class);
                 break;
             case R.id.inviteTv:
                 //邀请会员页面

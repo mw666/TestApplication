@@ -10,6 +10,7 @@
     <!--<include layout="@layout/normal_activity_toolbar" />-->
     <!--android:layout_marginTop="@dimen/dp_68"-->
     <ImageView
+        android:id="@+id/bgIv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_170"
         android:scaleType="centerCrop"
@@ -68,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menuHeadIv"
-        android:layout_marginTop="@dimen/dp_175"
+        android:layout_marginTop="@dimen/dp_170"
         android:clipChildren="false"
         android:orientation="vertical">
 

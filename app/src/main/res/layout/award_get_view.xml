@@ -74,6 +74,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_5"
         android:layout_marginRight="@dimen/dp_45"
+        android:textColor="@color/black"
         android:background="@drawable/add_friend_et_bg"
         android:text="提现" />
 
