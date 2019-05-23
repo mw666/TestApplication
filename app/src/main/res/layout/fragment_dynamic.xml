@@ -34,13 +34,16 @@
         app:srlEnableLoadMore="true"
         app:srlEnablePreviewInEditMode="true"
         app:srlEnableRefresh="true"
+        app:srlHeaderHeight="50dp"
+        app:srlFooterHeight="50dp"
         app:srlPrimaryColor="@color/toast_bg_color">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:srlTextSizeTitle="@dimen/sp_13"
             app:srlAccentColor="@color/white"
-            app:srlPrimaryColor="@color/toast_bg_color"/>
+            app:srlPrimaryColor="@color/common_bg_press"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/dynamicRV"

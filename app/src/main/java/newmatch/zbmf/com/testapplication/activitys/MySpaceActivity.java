@@ -47,24 +47,24 @@ public class MySpaceActivity extends BaseActivity {
 
     }
 
-    private int x = 0;
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x = (int) event.getX();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                int nowX = (int) event.getX();
-                int i = nowX - x;
-                if (i > 100) {
-                    x = 0;
-                    ActivityAnimUtils.instance().activityOut(MySpaceActivity.this);
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
+//    private int x = 0;
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                x = (int) event.getX();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                int nowX = (int) event.getX();
+//                int i = nowX - x;
+//                if (i > 120) {
+//                    x = 0;
+//                    ActivityAnimUtils.instance().activityOut(MySpaceActivity.this);
+//                }
+//                break;
+//        }
+//        return super.onTouchEvent(event);
+//    }
 
 }

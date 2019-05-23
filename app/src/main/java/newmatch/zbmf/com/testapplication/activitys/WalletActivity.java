@@ -147,7 +147,7 @@ public class WalletActivity extends BaseActivity {
             case MotionEvent.ACTION_MOVE:
                 int nowX = (int) event.getX();
                 int i = nowX - x;
-                if (i > 100) {
+                if (i > 120) {
                     x = 0;
                     ActivityAnimUtils.instance().activityOut(WalletActivity.this);
                 }
