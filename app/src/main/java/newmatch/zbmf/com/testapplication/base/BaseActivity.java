@@ -123,12 +123,12 @@ public abstract class BaseActivity extends RxAppCompatActivity{
             toolBarTitle.setText(title);
             setSupportActionBar(toolBar);
             if (homeAsUpEnabled) {
-                ImageView back = bindView(R.id.back);
+                ImageView back = bindView(R.id.backBtn);
                 back.setVisibility(View.VISIBLE);
                 back.setOnClickListener(view -> onBackPressed());
-//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//                toolBar.setNavigationIcon(R.drawable.back_icon);
-//                toolBar.setNavigationOnClickListener(v -> onBackPressed());
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                toolBar.setNavigationIcon(R.drawable.back_icon);
+                toolBar.setNavigationOnClickListener(v -> onBackPressed());
             }
 
         }

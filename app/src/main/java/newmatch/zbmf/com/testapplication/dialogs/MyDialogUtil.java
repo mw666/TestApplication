@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.MessageFormat;
@@ -243,7 +244,7 @@ public class MyDialogUtil {
     }
 
     public static void showVipDialog(Activity activity, Context context, View view, boolean touchCancel
-            , int res, String title, String vipContentTitle,String vipPrice, EtCallBack callBack) {
+            , int res, String title, String vipContentTitle, String vipPrice, EtCallBack callBack) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.dialogTheme);
         AlertDialog alertDialog = builder.create();
         alertDialog.setView(view);
@@ -279,6 +280,34 @@ public class MyDialogUtil {
             if (callBack != null)
                 callBack.etContent(vipPrice, alertDialog);
         });
+        alertDialog.show();
+    }
+
+    public static void showBottomDynamicDialog(Activity activity, Context context, View view,
+                                               boolean touchCancel, int res, String title,
+                                               DialogActCallBack actionCallBac) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.dialogTheme1);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setView(view);
+        Window window = alertDialog.getWindow();
+        if (window != null) {
+            window.getDecorView().setPadding(0, 0, 0, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+            }
+            WindowManager manager = activity.getWindowManager();
+            Display display = manager.getDefaultDisplay();
+            android.view.WindowManager.LayoutParams lp = alertDialog.getWindow()
+                    .getAttributes();
+            lp.gravity = Gravity.BOTTOM;
+            lp.width = display.getWidth();
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            alertDialog.getWindow().setAttributes(lp);
+            alertDialog.setCancelable(touchCancel);
+            alertDialog.setCanceledOnTouchOutside(touchCancel);
+            window.setWindowAnimations(R.style.alertDialogStyle01);
+        }
+
         alertDialog.show();
     }
 }

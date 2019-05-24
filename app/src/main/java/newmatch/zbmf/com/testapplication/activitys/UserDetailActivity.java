@@ -61,7 +61,6 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
 
     @Override
     protected void initView() {
-        MyActivityManager.getMyActivityManager().pushAct(UserDetailActivity.this);
         mIwHelper = ShowImgUtils.init(this);
         //设置内容顶进状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

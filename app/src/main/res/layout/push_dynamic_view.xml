@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/dynamicContentEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="start|top"
+        android:hint="说点新鲜事儿..."
+        android:lineHeight="@dimen/dp_20"
+        android:lines="10"
+        android:minLines="3"
+        android:padding="@dimen/dp_8"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="@dimen/sp_15" />
+
+    <include layout="@layout/line_grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_38"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/upPhotoBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_photo_album"
+                android:drawableLeft="@drawable/ic_photo_album"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="图片相册"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/videoDynamicBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_video"
+                android:drawableLeft="@drawable/ic_video"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="视频动态"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/photoDynamicBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_photo"
+                android:drawableLeft="@drawable/ic_photo"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="图文动态"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

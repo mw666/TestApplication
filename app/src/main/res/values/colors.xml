@@ -161,7 +161,11 @@
     <color name="green_26">#A2CD5A</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="black_overlay1">#99000000</color>
+    <color name="black_overlay2">#44000000</color>
     <color name="black">#9F000000</color>
+    <color name="black_0">#AA000000</color>
+    <color name="black_13">#0D0000</color>
     <color name="black_1">#1C1C1C</color>
     <color name="black_2">#363636</color>
     <color name="black_3">#4F4F4F</color>
@@ -171,5 +175,7 @@
     <color name="black_7">#B5B5B5</color>
     <color name="black_8">#CFCFCF</color>
     <color name="black_9">#E8E8E8</color>
+    <color name="black_11">#000000</color>
+    <color name="black_12">#090909</color>
 
 </resources>

@@ -193,7 +193,7 @@ public class MineFragment extends BaseFragment implements
                 ContainsEmojiEditText nickEt = inflate.findViewById(R.id.nickEt);
                 ImageView sendNick = inflate.findViewById(R.id.sendNick);
                 DialogUtils.instance()
-                        .setDialogAnimStyle(R.style.dialogAnimator01)
+                        .setDialogAnimStyle(R.style.ActionSheetDialogAnimation)
                         .setDialogStyle(R.style.dialog)
                         .setGravity(Gravity.BOTTOM)
                         .setView(inflate)
