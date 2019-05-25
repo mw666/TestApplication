@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -35,6 +36,10 @@ public class OptionsActivity extends BaseActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         optionsEt = bindView(R.id.optionsEt);
         commitBtn = bindViewWithClick(R.id.commitBtn, true);
+
+        Toolbar toolBar = bindView(R.id.toolbar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         setBtnBgState();
 

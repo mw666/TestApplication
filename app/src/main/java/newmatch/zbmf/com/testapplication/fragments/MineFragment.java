@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -185,7 +186,8 @@ public class MineFragment extends BaseFragment implements
                             getString(R.string.get_img_tip));
                 } else {
                     //选择图片
-                    new GMSelectImg().picImgsOrVideo(getActivity(), PermissionC.PIC_IMG_VIDEO_CODE, 1);
+                    new GMSelectImg().picImgsOrVideo(getActivity(),MimeType.ofImage(),
+                            PermissionC.PIC_IMG_VIDEO_CODE, 1);
                 }
                 break;
             case R.id.userName:
@@ -224,7 +226,8 @@ public class MineFragment extends BaseFragment implements
     @Override
     public void excutePermissionCodes() {
         //选择图片
-        new GMSelectImg().picImgsOrVideo(getActivity(), PermissionC.PIC_IMG_VIDEO_CODE, 1);
+        new GMSelectImg().picImgsOrVideo(getActivity(),MimeType.ofImage(),
+                PermissionC.PIC_IMG_VIDEO_CODE, 1);
     }
 
     @Override

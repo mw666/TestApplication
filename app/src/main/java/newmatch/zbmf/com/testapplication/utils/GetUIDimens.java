@@ -1,6 +1,7 @@
 package newmatch.zbmf.com.testapplication.utils;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
@@ -48,7 +49,18 @@ public class GetUIDimens {
         return statusHeight;
     }
 
+    //获取屏幕的尺寸
+    public static int getWindowH(Context context){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int heightPixels = metrics.heightPixels;
+        return heightPixels;
+    }
 
+    public static int getWindowW(Context context){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int widthPixels = metrics.widthPixels;
+        return widthPixels;
+    }
 
 
     public static int dpToPx(Context context, float dp) {

@@ -40,7 +40,7 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
     @Override
     public void onBind(Context context, final int position, Integer data/*, Integer text*/) {
         // 数据绑定
-        GlideUtil.loadCircleImage(context, R.drawable.place_holder_img, data, mImageView);
+        GlideUtil.loadCircleImage(context, R.drawable.loading1, data, mImageView);
 //        mMTv.setText(text);
         mImageView.setOnClickListener(v -> {
             int i = position % imgs;

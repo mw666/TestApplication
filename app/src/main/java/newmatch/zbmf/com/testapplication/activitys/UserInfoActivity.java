@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import java.util.List;
 
@@ -108,7 +109,8 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
                     , getString(R.string.get_img_tip));
         } else {
             //选择图片
-            new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE, 1);
+            new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
+                    PermissionC.PIC_IMG_VIDEO_CODE, 1);
         }
        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //如果Android版本大于或等于6.0
@@ -296,6 +298,7 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
     @Override
     public void excutePermissionCodes() {
         //选择图片
-        new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE, 1);
+        new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
+                PermissionC.PIC_IMG_VIDEO_CODE, 1);
     }
 }

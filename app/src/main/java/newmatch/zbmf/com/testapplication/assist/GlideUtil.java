@@ -8,9 +8,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.utils.UnitUtils;
 
 /**
  * Created by **
@@ -27,18 +29,22 @@ public class GlideUtil {
      * @param imageview
      */
     @SuppressLint("CheckResult")
-    public static void loadImage(Context mContext, Integer placeHolder, String path, ImageView imageview) {
+    public static void loadImage(Context mContext, Integer placeHolder,
+                                 String path, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
         options.centerCrop();
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext).load(path).apply(options).into(imageview);
     }
 
     @SuppressLint("CheckResult")
-    public static void loadImage(Context mContext, Integer placeHolder, Integer path, ImageView imageview) {
+    public static void loadImage(Context mContext, Integer placeHolder,
+                                 Integer path, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
         options.centerCrop();
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext).load(path).apply(options).into(imageview);
@@ -85,10 +91,12 @@ public class GlideUtil {
      * @param imageview
      */
     @SuppressLint("CheckResult")
-    public static void loadCircleImage(Context mContext, Integer placeHolder, Uri path, ImageView imageview) {
+    public static void loadCircleImage(Context mContext, Integer placeHolder,
+                                       Uri path, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
         options.transform(new GlideCircleTransform(mContext, 2,
                 mContext.getResources().getColor(R.color.white)));
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
@@ -96,10 +104,12 @@ public class GlideUtil {
     }
 
     @SuppressLint("CheckResult")
-    public static void loadCircleImage(Context mContext, Integer placeHolder, Drawable drawable, ImageView imageview) {
+    public static void loadCircleImage(Context mContext, Integer placeHolder,
+                                       Drawable drawable, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
         options.transform(new GlideCircleTransform(mContext, 2,
                 mContext.getResources().getColor(R.color.white)));
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
@@ -108,20 +118,49 @@ public class GlideUtil {
 
     /**
      * 设置圆形ImageView
-     * @param mContext  上下文
-     * @param placeHolder   占位图
-     * @param path   资源
+     *
+     * @param mContext    上下文
+     * @param placeHolder 占位图
+     * @param path        资源
      * @param imageview   图片空间
      */
     @SuppressLint("CheckResult")
-    public static void loadCircleImage(Context mContext, Integer placeHolder, Integer path, ImageView imageview) {
+    public static void loadCircleImage(Context mContext, Integer placeHolder,
+                                       Integer path, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
         options.transform(new GlideCircleTransform(mContext, 2,
                 mContext.getResources().getColor(R.color.white)));
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext).load(path).apply(options).into(imageview);
+    }
+
+    @SuppressLint("CheckResult")
+    public static void loadCornerdImg(Context mContext, Integer path, Integer placeHolder,
+                                      ImageView imageView, boolean leftTop, boolean leftBottom,
+                                      boolean rightTop, boolean rightBottom) {
+        GlideCircle2Transformer glideCircle2Transformer = new GlideCircle2Transformer(mContext,
+                -1, 20);
+        glideCircle2Transformer.setExceptCorner(leftTop, rightTop, leftBottom, rightBottom);
+        RequestOptions.centerCropTransform();
+        RequestOptions requestOptions = RequestOptions.bitmapTransform(glideCircle2Transformer);
+        requestOptions.centerCrop();
+        requestOptions.placeholder(placeHolder);
+        Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);
+    }
+
+    @SuppressLint("CheckResult")
+    public static void loadCornerdImg(Context mContext, Uri path, Integer placeHolder,
+                                      ImageView imageView, boolean leftTop, boolean leftBottom,
+                                      boolean rightTop, boolean rightBottom) {
+        CornerTransform transform = new CornerTransform(mContext, UnitUtils.dpToPx(mContext, 5));
+        transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
+        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder).transform(transform);
+//        requestOptions.error(R.drawable.place_holder_img);
+//        requestOptions.centerCrop();
+        Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);
     }
 
 }

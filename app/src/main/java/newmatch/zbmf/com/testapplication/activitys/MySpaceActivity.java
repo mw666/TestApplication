@@ -3,33 +3,50 @@ package newmatch.zbmf.com.testapplication.activitys;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
+import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.DynamicAdapter;
+import newmatch.zbmf.com.testapplication.adapters.MyCircleAdapter;
 import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
+import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
@@ -37,6 +54,7 @@ import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
 import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
+import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.AnimatSpecialEffectUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -51,6 +69,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
     private Toolbar mToolbar;
     private ImageView mBackBtn;
     private AppCompatImageView mySpaceFloatBtn, addDynationBtn;
+    private LinearLayout dynamicSpaceBtn, photoSpaceBtn;
     //子按钮列表
 
     private List<AppCompatImageView> buttonItems = new ArrayList<AppCompatImageView>();
@@ -74,6 +93,8 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         mBackBtn = bindViewWithClick(R.id.backBtn, true);
         addDynationBtn = bindViewWithClick(R.id.addDynationBtn, true);
         mySpaceFloatBtn = bindViewWithClick(R.id.mySpaceFloatBtn, true);
+        photoSpaceBtn = bindViewWithClick(R.id.photoSpaceBtn, true);
+        dynamicSpaceBtn = bindViewWithClick(R.id.dynamicSpaceBtn, true);
         mySpaceRefreshLayout = bindView(R.id.mySpaceRefreshLayout);
         //支持嵌套滑动
         mySpaceRefreshLayout.setEnableNestedScroll(true);
@@ -264,21 +285,18 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
 //                    flag = 1;
 //                    buttonAnimation(buttonItems, 300);
 //                }
-                View dialogView = LayoutInflater.from(this).inflate(R.layout.push_dynamic_view, null);
-                MyDialogUtil.showBottomDynamicDialog(this, this, dialogView
-                        , true, R.drawable.dialog_bg, "", this);
-                LinearLayout upPhotoBtn = dialogView.findViewById(R.id.upPhotoBtn);
-                LinearLayout videoDynamicBtn = dialogView.findViewById(R.id.videoDynamicBtn);
-                LinearLayout photoDynamicBtn = dialogView.findViewById(R.id.photoDynamicBtn);
-                videoDynamicBtn.setOnClickListener(btnView -> {
-                    ToastUtils.showSingleToast(MySpaceActivity.this,"添加视频动态");
-                });
-                photoDynamicBtn.setOnClickListener(btnView -> {
-                    ToastUtils.showSingleToast(MySpaceActivity.this,"添加图片动态");
-                });
+                setSendDynamicView();
                 break;
             case R.id.backBtn:
                 ActivityAnimUtils.instance().activityOut(MySpaceActivity.this);
+                break;
+            case R.id.dynamicSpaceBtn:
+                //跳转动态广场
+
+                break;
+            case R.id.photoSpaceBtn:
+                //跳转照片短视频空间
+
                 break;
         }
     }
@@ -396,5 +414,85 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         //弹出发表视频动态的对话框
         alertDialog.dismiss();
 
+    }
+
+    private MyCircleAdapter myCircleAdapter;
+
+    private void setSendDynamicView() {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.push_dynamic_view, null);
+        MyDialogUtil.showBottomDynamicDialog(this, this, dialogView
+                , true, R.drawable.dialog_bg, "", this);
+        EditText dynamicContentEt = dialogView.findViewById(R.id.dynamicContentEt);
+        TextView sendTv = dialogView.findViewById(R.id.sendTv);
+        RecyclerView recyclerView = dialogView.findViewById(R.id.recyclerView);
+        LinearLayout dynamicSendBtn = dialogView.findViewById(R.id.dynamicSendBtn);
+        LinearLayout videoDynamicBtn = dialogView.findViewById(R.id.videoDynamicBtn);
+        LinearLayout photoDynamicBtn = dialogView.findViewById(R.id.photoDynamicBtn);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,
+                3, OrientationHelper.VERTICAL, false));
+        myCircleAdapter = new MyCircleAdapter(MySpaceActivity.this);
+        recyclerView.setAdapter(myCircleAdapter);
+        videoDynamicBtn.setOnClickListener(btnView -> {
+            new GMSelectImg().picImgsOrVideo(this, MimeType.ofVideo(),
+                    PermissionC.PIC_IMG_VIDEO_CODE, 15);
+        });
+        photoDynamicBtn.setOnClickListener(btnView -> {
+            new GMSelectImg().picImgsOrVideo(this, MimeType.ofImage(),
+                    PermissionC.PIC_IMG_VIDEO_CODE, 9);
+        });
+        dynamicSendBtn.setOnClickListener(btnView -> {
+            //发布的文字
+            String contentCharacter = dynamicContentEt.getText().toString().trim();
+            ToastUtils.showSingleToast(MySpaceActivity.this, contentCharacter);
+
+        });
+        dynamicContentEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String trim = dynamicContentEt.getText().toString().trim();
+                if (trim.length() > 0) {
+                    sendTv.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(
+                            MySpaceActivity.this, R.drawable.ic_send_pulle)
+                            , null, null, null);
+                    sendTv.setTextColor(ContextCompat.getColor(
+                            MySpaceActivity.this, R.color.plum_3));
+                } else {
+                    sendTv.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(
+                            MySpaceActivity.this, R.drawable.ic_send_gray)
+                            , null, null, null);
+                    sendTv.setTextColor(ContextCompat.getColor(
+                            MySpaceActivity.this, R.color.black));
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PermissionC.PIC_IMG_VIDEO_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    List<Uri> mSelected = Matisse.obtainResult(data);
+                    Log.d("===TAG", "   size:" + mSelected.size());
+
+//                    GlideUtil.loadCornerdImg(MySpaceActivity.this, mSelected.get(0),
+//                            R.drawable.loading1,
+//                            iv, true, true, false, false);
+                    myCircleAdapter.addData(mSelected);
+
+                }
+                break;
+        }
     }
 }

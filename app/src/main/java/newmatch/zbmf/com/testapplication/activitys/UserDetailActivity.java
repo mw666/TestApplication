@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +137,8 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
                             getString(R.string.get_img_tip));
                 }else {
                     //选择图片
-                    new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
+                    new GMSelectImg().picImgsOrVideo(this, MimeType.ofImage(),
+                            PermissionC.PIC_IMG_VIDEO_CODE,1);
                 }
                 break;
             case R.id.addUserBtn:
@@ -257,6 +259,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
     @Override
     public void excutePermissionCodes() {
         //选择图片
-        new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
+        new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
+                PermissionC.PIC_IMG_VIDEO_CODE,1);
     }
 }

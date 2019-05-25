@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.ui.MatisseActivity;
 
 import java.security.Permissions;
@@ -399,7 +400,7 @@ public class MainActivity extends BaseActivity implements
                         0x12);
             } else {
                 //选择图片
-                new GMSelectImg().picImgsOrVideo(this,
+                new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
                         PermissionC.PIC_IMG_VIDEO_CODE, 1);
             }
         }
@@ -423,7 +424,7 @@ public class MainActivity extends BaseActivity implements
             } else {
                 //权限已经通过
                 //选择图片
-                new GMSelectImg().picImgsOrVideo(this,
+                new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
                         PermissionC.PIC_IMG_VIDEO_CODE, 1);
             }
         }

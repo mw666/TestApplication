@@ -200,11 +200,65 @@
             app:srlAccentColor="@color/toast_bg_color"
             app:srlTextSizeTitle="@dimen/sp_12" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mySpaceRV"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusable="false" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/topTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/photoSpaceBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_38"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_btn_bg"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/ic_photo_album"
+                        android:drawableLeft="@drawable/ic_photo_album"
+                        android:drawablePadding="@dimen/dp_3"
+                        android:text="图片相册"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dynamicSpaceBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_38"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_btn_bg"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/ic_dynamic_space"
+                        android:drawableLeft="@drawable/ic_dynamic_space"
+                        android:drawablePadding="@dimen/dp_3"
+                        android:text="动态广场"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mySpaceRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/topTab"
+                android:focusable="false" />
+        </RelativeLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:id="@+id/mySpaceFooter"
@@ -220,40 +274,40 @@
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <!--<android.support.v7.widget.AppCompatImageView-->
-        <!--android:id="@+id/mySpacePhotoBtn"-->
-        <!--android:layout_width="@dimen/dp_35"-->
-        <!--android:layout_height="@dimen/dp_35"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_marginRight="@dimen/dp_40"-->
-        <!--android:layout_marginBottom="@dimen/dp_40"-->
-        <!--android:elevation="@dimen/dp_5"-->
-        <!--android:visibility="visible"-->
-        <!--app:backgroundTint="@color/black"-->
-        <!--app:borderWidth="0dp"-->
-        <!--app:fabSize="normal"-->
-        <!--app:layout_anchorGravity="center|bottom"-->
-        <!--app:pressedTranslationZ="@dimen/dp_12"-->
-        <!--app:rippleColor="@color/black_3"-->
-        <!--app:srcCompat="@drawable/ic_photo"-->
-        <!--tools:ignore="RtlHardcoded" />-->
+    <!--android:id="@+id/mySpacePhotoBtn"-->
+    <!--android:layout_width="@dimen/dp_35"-->
+    <!--android:layout_height="@dimen/dp_35"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_marginRight="@dimen/dp_40"-->
+    <!--android:layout_marginBottom="@dimen/dp_40"-->
+    <!--android:elevation="@dimen/dp_5"-->
+    <!--android:visibility="visible"-->
+    <!--app:backgroundTint="@color/black"-->
+    <!--app:borderWidth="0dp"-->
+    <!--app:fabSize="normal"-->
+    <!--app:layout_anchorGravity="center|bottom"-->
+    <!--app:pressedTranslationZ="@dimen/dp_12"-->
+    <!--app:rippleColor="@color/black_3"-->
+    <!--app:srcCompat="@drawable/ic_photo"-->
+    <!--tools:ignore="RtlHardcoded" />-->
 
     <!--<android.support.v7.widget.AppCompatImageView-->
-        <!--android:id="@+id/mySpaceVideoBtn"-->
-        <!--android:layout_width="@dimen/dp_35"-->
-        <!--android:layout_height="@dimen/dp_35"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_marginRight="@dimen/dp_40"-->
-        <!--android:layout_marginBottom="@dimen/dp_40"-->
-        <!--android:elevation="@dimen/dp_5"-->
-        <!--android:visibility="visible"-->
-        <!--app:backgroundTint="@color/black"-->
-        <!--app:borderWidth="0dp"-->
-        <!--app:fabSize="normal"-->
-        <!--app:layout_anchorGravity="center|bottom"-->
-        <!--app:pressedTranslationZ="@dimen/dp_12"-->
-        <!--app:rippleColor="@color/black_3"-->
-        <!--app:srcCompat="@drawable/ic_add"-->
-        <!--tools:ignore="RtlHardcoded" />-->
+    <!--android:id="@+id/mySpaceVideoBtn"-->
+    <!--android:layout_width="@dimen/dp_35"-->
+    <!--android:layout_height="@dimen/dp_35"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_marginRight="@dimen/dp_40"-->
+    <!--android:layout_marginBottom="@dimen/dp_40"-->
+    <!--android:elevation="@dimen/dp_5"-->
+    <!--android:visibility="visible"-->
+    <!--app:backgroundTint="@color/black"-->
+    <!--app:borderWidth="0dp"-->
+    <!--app:fabSize="normal"-->
+    <!--app:layout_anchorGravity="center|bottom"-->
+    <!--app:pressedTranslationZ="@dimen/dp_12"-->
+    <!--app:rippleColor="@color/black_3"-->
+    <!--app:srcCompat="@drawable/ic_add"-->
+    <!--tools:ignore="RtlHardcoded" />-->
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/mySpaceFloatBtn"

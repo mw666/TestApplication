@@ -27,7 +27,7 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * on 2018/9/6.
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity{
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -124,8 +124,10 @@ public abstract class BaseActivity extends RxAppCompatActivity{
             setSupportActionBar(toolBar);
             if (homeAsUpEnabled) {
                 ImageView back = bindView(R.id.backBtn);
-                back.setVisibility(View.VISIBLE);
-                back.setOnClickListener(view -> onBackPressed());
+                if (back != null) {
+                    back.setVisibility(View.VISIBLE);
+                    back.setOnClickListener(view -> onBackPressed());
+                }
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 toolBar.setNavigationIcon(R.drawable.back_icon);
                 toolBar.setNavigationOnClickListener(v -> onBackPressed());
