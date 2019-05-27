@@ -93,7 +93,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
         DynamicItemImgAdapter imgAdapter = new DynamicItemImgAdapter(mContext/*,图片数据*/);
         imgAdapter.setShowClickIv((pos, imageView, dataList) -> {
             //展示图片
-            ShowImgUtils.showImgs(imageView, dataList);
+            ShowImgUtils.showImgs(pos,imageView, dataList);
         });
         holder.mDyUserRV.setAdapter(imgAdapter);
         //设置评论

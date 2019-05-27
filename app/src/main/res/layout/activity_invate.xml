@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activitys.InvateActivity">
+
+    <include layout="@layout/normal_activity_toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_70">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@drawable/left_tv_line"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="邀请说明"
+                android:textColor="@color/black_13"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+            <!--android:drawableBottom="@drawable/vip_red_type_bottom_line"-->
+
+            <TextView
+                android:id="@+id/invateContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginRight="@dimen/dp_7"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/invate_bg"
+                android:elevation="@dimen/dp_8"
+                android:gravity="start|center_vertical"
+                android:lineHeight="@dimen/dp_20"
+                android:overScrollMode="ifContentScrolls"
+                android:padding="@dimen/dp_3"
+                android:scrollbars="vertical"
+                android:text="@string/content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <!--<include layout="@layout/line_grey"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@drawable/left_tv_line"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="邀请方法"
+                android:textColor="@color/black_13"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/invateMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginRight="@dimen/dp_7"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/invate_bg"
+                android:elevation="@dimen/dp_8"
+                android:gravity="start|center_vertical"
+                android:lineHeight="@dimen/dp_20"
+                android:overScrollMode="ifContentScrolls"
+                android:padding="@dimen/dp_3"
+                android:scrollbars="vertical"
+                android:text="@string/invite_method"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@drawable/left_tv_line"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="下载二维码"
+                android:textColor="@color/black_13"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/downLoadCode"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_3"
+                app:srcCompat="@drawable/ic_2_code" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_3"
+                android:text="(点击保存App下载二维码)"
+                android:textColor="@color/black_0"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@drawable/left_tv_line"
+                android:drawablePadding="@dimen/dp_3"
+                android:text="个人邀请码"
+                android:textColor="@color/black_13"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/myInviteCodeParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginLeft="@dimen/dp_25"
+                    android:padding="@dimen/dp_5"
+                    android:text="邀请码:"
+                    android:textColor="@color/black_13"
+                    android:textSize="@dimen/sp_15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/inviteCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_6"
+                    android:text="ADJF2356SFJ45MD"
+                    android:textColor="@color/red_2"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="(长按可复制邀请码)"
+                android:textColor="@color/black_0"
+                android:textSize="@dimen/sp_14" />
+
+            <Button
+                android:id="@+id/shareInviteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/dp_50"
+                android:background="@drawable/selector_btn1_bg"
+                android:text="一键分享邀请新用户"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</RelativeLayout>

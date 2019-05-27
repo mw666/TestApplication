@@ -34,9 +34,9 @@ public class ShowImgUtils {
         return sIwHelper;
     }
 
-    public static void showImgs(ImageView clickedImage, List<Uri> dataList) {
+    public static void showImgs(int pos,ImageView clickedImage, List<Uri> dataList) {
         SparseArray<ImageView> mapping = new SparseArray<>(); // 这个请自行理解，
-        mapping.put(0, clickedImage);
+        mapping.put(pos, clickedImage);
         sIwHelper.show(clickedImage, mapping, dataList);
     }
 

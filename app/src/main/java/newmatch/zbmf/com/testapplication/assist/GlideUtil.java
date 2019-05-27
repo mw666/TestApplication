@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -157,7 +159,9 @@ public class GlideUtil {
                                       boolean rightTop, boolean rightBottom) {
         CornerTransform transform = new CornerTransform(mContext, UnitUtils.dpToPx(mContext, 5));
         transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
-        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder).transform(transform);
+        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder).transform(new CenterCrop(),transform);
+
+//        RequestOptions requestOptions = new RequestOptions().transform(new GlideRoundTransform(5));
 //        requestOptions.error(R.drawable.place_holder_img);
 //        requestOptions.centerCrop();
         Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);

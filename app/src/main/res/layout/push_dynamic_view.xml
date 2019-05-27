@@ -1,109 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/dynamicContentEt"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:gravity="start|top"
-        android:hint="说点新鲜事儿..."
-        android:lineHeight="@dimen/dp_20"
-        android:lines="10"
-        android:minLines="3"
-        android:padding="@dimen/dp_8"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:textSize="@dimen/sp_15" />
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10" />
+        <EditText
+            android:id="@+id/dynamicContentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="说点新鲜事儿..."
+            android:lineHeight="@dimen/dp_20"
+            android:lines="10"
+            android:minLines="3"
+            android:padding="@dimen/dp_8"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/sp_15" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/iv"-->
-        <!--android:layout_width="@dimen/dp_120"-->
-        <!--android:layout_height="@dimen/dp_120"-->
-        <!--android:visibility="gone"-->
-        <!--android:layout_marginLeft="@dimen/dp_15"-->
-        <!--android:scaleType="centerCrop" />-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dynamicContentEt"
+            android:padding="@dimen/dp_10" />
 
-    <include layout="@layout/line_grey" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_38"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/videoDynamicBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_btn_bg"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableStart="@drawable/ic_video"
-                android:drawableLeft="@drawable/ic_video"
-                android:drawablePadding="@dimen/dp_3"
-                android:text="视频动态"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_15" />
-        </LinearLayout>
+        <View
+            android:id="@+id/grey_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/recyclerView"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_6"
+            android:background="@color/grey" />
 
         <LinearLayout
-            android:id="@+id/photoDynamicBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_btn_bg"
-            android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_38"
+            android:layout_below="@+id/grey_line"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_photo"
-                android:drawableLeft="@drawable/ic_photo"
-                android:drawablePadding="@dimen/dp_3"
-                android:text="图文动态"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_15" />
+            <LinearLayout
+                android:id="@+id/videoDynamicBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_video"
+                    android:drawableLeft="@drawable/ic_video"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:text="视频动态"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/photoDynamicBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_photo"
+                    android:drawableLeft="@drawable/ic_photo"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:text="图文动态"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dynamicSendBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/sendTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_send_gray"
+                    android:drawableLeft="@drawable/ic_send_gray"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:text="发送"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/dynamicSendBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_btn_bg"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/sendTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_send_gray"
-                android:drawableLeft="@drawable/ic_send_gray"
-                android:drawablePadding="@dimen/dp_3"
-                android:text="发送"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_15" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class MyCircleAdapter extends RecyclerView.Adapter<MyCircleAdapter.Circle
 
     private List<Uri> imgUriList;
     private Context mContext;
+
+    //最多只显示9张图
 
     public MyCircleAdapter(Context context) {
         this.mContext = context;
@@ -56,7 +59,8 @@ public class MyCircleAdapter extends RecyclerView.Adapter<MyCircleAdapter.Circle
     public void onBindViewHolder(@NonNull CircleHolder circleHolder, int i) {
         int windowW = GetUIDimens.getWindowW(mContext);
         ViewGroup.LayoutParams lp = circleHolder.iv.getLayoutParams();
-        lp.width = (windowW - 20) / 3;
+        lp.width = (windowW - 120) / 3;
+        lp.height = (windowW - 120) / 3;
         circleHolder.iv.setLayoutParams(lp);
         int type = i % 3;
         if (type == 1) {
@@ -72,11 +76,18 @@ public class MyCircleAdapter extends RecyclerView.Adapter<MyCircleAdapter.Circle
                     circleHolder.iv, true, true,
                     false, false);
         }
+
+//        circleHolder.iv.setOnTouchListener();
+
     }
 
     @Override
     public int getItemCount() {
-        return imgUriList.size();
+        if (imgUriList.size() >= 9) {
+            return 9;
+        } else {
+            return imgUriList.size();
+        }
     }
 
     static class CircleHolder extends RecyclerView.ViewHolder {

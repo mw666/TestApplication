@@ -39,6 +39,7 @@ import java.util.Objects;
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
+import newmatch.zbmf.com.testapplication.activitys.InvateActivity;
 import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
 import newmatch.zbmf.com.testapplication.activitys.OptionsActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
@@ -296,7 +297,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.inviteTv:
                 //邀请会员页面
-
+                ActivityAnimUtils.instance().activityIn(MainActivity.this,
+                        InvateActivity.class);
                 break;
             case R.id.myArea:
                 //跳转个人空间页面

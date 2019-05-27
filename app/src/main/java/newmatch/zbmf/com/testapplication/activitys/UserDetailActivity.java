@@ -193,7 +193,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
 
     @Override
     public void showClickIv(Integer pos, ImageView imageView, List<Uri> dataList) {
-        ShowImgUtils.showImgs(imageView, dataList);
+        ShowImgUtils.showImgs(pos,imageView, dataList);
     }
 
     //设置userAvatar是否可见

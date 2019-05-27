@@ -86,12 +86,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         //全屏，内容延伸至状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        TextView toolbar_title = bindView(R.id.toolbar_title);
-        toolbar_title.setText("我的主场");
+//        TextView toolbar_title = bindView(R.id.toolbar_title);
+//        toolbar_title.setText("我的主场");
         mySpaceAppBar = bindView(R.id.mySpaceAppBar);
         mToolbar = bindView(R.id.toolbar);
         mBackBtn = bindViewWithClick(R.id.backBtn, true);
         addDynationBtn = bindViewWithClick(R.id.addDynationBtn, true);
+        bindViewWithClick(R.id.mySpaceAdd, true);
         mySpaceFloatBtn = bindViewWithClick(R.id.mySpaceFloatBtn, true);
         photoSpaceBtn = bindViewWithClick(R.id.photoSpaceBtn, true);
         dynamicSpaceBtn = bindViewWithClick(R.id.dynamicSpaceBtn, true);
@@ -259,7 +260,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
 
     @Override
     protected String initTitle() {
-        return null;
+        return "我的主场";
     }
 
     @Override
@@ -277,6 +278,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         switch (view.getId()) {
             case R.id.addDynationBtn:
             case R.id.mySpaceFloatBtn:
+            case R.id.mySpaceAdd:
                 //弹出发表视频或图文的动态对话框
 //                if (flag == 1) {
 //                    flag = -1;
