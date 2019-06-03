@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -14,11 +19,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="128" />
-                            <entry key="outputName" value="ic_2_code" />
+                            <entry key="height" value="19" />
+                            <entry key="outputName" value="ic_home_white_1" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\iMac\Downloads\二维码.svg" />
-                            <entry key="width" value="128" />
+                            <entry key="sourceFile" value="C:\Users\Administrator\Pictures\home_white_1.svg" />
+                            <entry key="width" value="19" />
                           </map>
                         </option>
                       </PersistentState>

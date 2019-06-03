@@ -136,7 +136,7 @@ public class GenericDrawerLayout extends FrameLayout {
     /**
      * 用来表示抽屉是否被打开过
      */
-    private boolean mIsDrawerOpenned = false;
+    private boolean mIsDrawerOpenned = true;
 
     /**
      * 抽屉在关闭的时候露出的宽度

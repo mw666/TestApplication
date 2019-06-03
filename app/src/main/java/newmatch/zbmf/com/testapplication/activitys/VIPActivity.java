@@ -7,12 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.sephiroth.android.library.easing.Linear;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;

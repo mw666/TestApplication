@@ -3,7 +3,7 @@
     android:id="@+id/fl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_grey"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -11,6 +11,7 @@
 
     <newmatch.zbmf.com.testapplication.views.GenericDrawerLayout
         android:id="@+id/genericdrawerlayout"
+        android:layout_gravity="left"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -50,9 +50,9 @@ android {
         appKey "28b730acbedd5"
         appSecret "09aac733d3fdaf7d50e33e91a7ad796c"
 
-        SMSSDK {
-            gui false //关闭mob的开源UI界面
-        }
+//        SMSSDK {
+//            gui true //关闭mob的开源UI界面
+//        }
     }
     productFlavors {
     }

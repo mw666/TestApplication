@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -66,6 +67,7 @@ import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
 import newmatch.zbmf.com.testapplication.utils.Util;
 import newmatch.zbmf.com.testapplication.views.GenericDrawerLayout;
+import newmatch.zbmf.com.testapplication.views.NoScrollViewPager;
 import newmatch.zbmf.com.testapplication.views.RotationPageTransformer;
 
 /**
@@ -78,13 +80,14 @@ public class MainActivity extends BaseActivity implements
         ViewPager.OnPageChangeListener
         , BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private ViewPager mViewPager;
+    private NoScrollViewPager mViewPager;
     public ImageWatcherHelper mIwHelper;
     private BottomNavigationView bottomNavigationView;
     private GenericDrawerLayout genericdrawerlayout;
     private AppCompatImageView menuHeadIv;
     private TextView userNick;
     private HomeFragment homeFragment;
+
 
     @Override
     protected void onDestroy() {
@@ -103,11 +106,13 @@ public class MainActivity extends BaseActivity implements
         mIwHelper = ShowImgUtils.init(this);
         bottomNavigationView = bindView(R.id.bottomNavigationView);
         mViewPager = bindView(R.id.viewPager);
+
         genericdrawerlayout = bindView(R.id.genericdrawerlayout);
 
         View menu = LayoutInflater.from(MainActivity.this).inflate(R.layout.main_menu_view, null);
         setMainMenu(genericdrawerlayout, menu);
         getMenuView(menu);
+
 
 
         List<Fragment> fragmentList = new ArrayList<>();
@@ -335,7 +340,7 @@ public class MainActivity extends BaseActivity implements
         genericdrawerlayout.setContentLayout(menu);
         // 可以设置打开时响应Touch的区域范围
         if (mViewPager.getCurrentItem() == 0)
-            genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 120));
+            genericdrawerlayout.setTouchSizeOfOpened(Util.dip2px(this, 150));
         //        genericdrawerlayout.setTouchSizeOfClosed(Util.dip2px(this, 500));
         // 设置随着位置的变更，背景透明度也改变
         genericdrawerlayout.setOpaqueWhenTranslating(true);

@@ -22,8 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
+
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
@@ -98,7 +97,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView() {
         // 注册一个事件回调，用于处理SMSSDK接口请求的结果
-        SMSSDK.registerEventHandler(eventHandler);
+//        SMSSDK.registerEventHandler(eventHandler);
         registerActivity = (RegisterActivity) getActivity();
         mView = getView();
         if (mTabPosition == 0) {
@@ -369,7 +368,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     return;
                 }
                 //请求获取验证码
-                SMSSDK.getVerificationCode("86", mPhone);
+//                SMSSDK.getVerificationCode("86", mPhone);
                 break;
             case R.id.zc_btn:
                 String zcAccount = mZc_accountTextLayout.getEditText().getText().toString();
@@ -403,38 +402,38 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private EventHandler eventHandler = new EventHandler() {
-        public void afterEvent(int event, int result, Object data) {
-            // afterEvent会在子线程被调用，因此如果后续有UI相关操作，需要将数据发送到UI线程
-            Message msg = new Message();
-            msg.arg1 = event;
-            msg.arg2 = result;
-            msg.obj = data;
-            new Handler(Looper.getMainLooper(), msg1 -> {
-                int event1 = msg1.arg1;
-                int result1 = msg1.arg2;
-                Object data1 = msg1.obj;
-                if (event1 == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        //发送验证码的请求完成--->发送验证码的按钮开始计时，变灰，不可点击
-                        setCodeBtn();
-                    } else {
-                        //处理错误的结果
-                        ((Throwable) data1).printStackTrace();
-                    }
-                } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        //处理验证码验证通过的结果
-                    } else {
-                        //处理错误的结果
-                        ((Throwable) data1).printStackTrace();
-                    }
-                }
-                //其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
-                return false;
-            }).sendMessage(msg);
-        }
-    };
+//    private EventHandler eventHandler = new EventHandler() {
+//        public void afterEvent(int event, int result, Object data) {
+//            // afterEvent会在子线程被调用，因此如果后续有UI相关操作，需要将数据发送到UI线程
+//            Message msg = new Message();
+//            msg.arg1 = event;
+//            msg.arg2 = result;
+//            msg.obj = data;
+//            new Handler(Looper.getMainLooper(), msg1 -> {
+//                int event1 = msg1.arg1;
+//                int result1 = msg1.arg2;
+//                Object data1 = msg1.obj;
+//                if (event1 == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+//                    if (result1 == SMSSDK.RESULT_COMPLETE) {
+//                        //发送验证码的请求完成--->发送验证码的按钮开始计时，变灰，不可点击
+//                        setCodeBtn();
+//                    } else {
+//                        //处理错误的结果
+//                        ((Throwable) data1).printStackTrace();
+//                    }
+//                } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                    if (result1 == SMSSDK.RESULT_COMPLETE) {
+//                        //处理验证码验证通过的结果
+//                    } else {
+//                        //处理错误的结果
+//                        ((Throwable) data1).printStackTrace();
+//                    }
+//                }
+//                //其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
+//                return false;
+//            }).sendMessage(msg);
+//        }
+//    };
 
     //改变发送验证码按钮的状态
     private void setCodeBtn() {
@@ -448,7 +447,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SMSSDK.unregisterEventHandler(eventHandler);
+//        SMSSDK.unregisterEventHandler(eventHandler);
     }
 
     @Override

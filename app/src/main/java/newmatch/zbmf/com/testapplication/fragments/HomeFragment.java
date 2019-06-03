@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -70,6 +71,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     private RecyclerView mHomeRV;
     private MainActivity mainActivity;
     private AppCompatImageView headIv;
+    private TabLayout mainTab;
 
 
     public HomeFragment() {
@@ -105,6 +107,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         TextView searchBtn = bindViewWithClick(R.id.searchBtn,true);
         TextView subArea = bindViewWithClick(R.id.subArea,true);
         //搜索图标  男性用户隐藏  女性用户显示
+        mainTab = bindView(R.id.mainTab);
+//        main_tab.setInlineLabel(true);
+        mainTab.addTab(new TabLayout.Tab().setText("所有"));
+        mainTab.addTab(new TabLayout.Tab().setText(" 新人"));
 
 
         mainActivity = (MainActivity)getActivity();
