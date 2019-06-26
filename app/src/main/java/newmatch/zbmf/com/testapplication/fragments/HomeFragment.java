@@ -107,10 +107,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         TextView searchBtn = bindViewWithClick(R.id.searchBtn,true);
         TextView subArea = bindViewWithClick(R.id.subArea,true);
         //搜索图标  男性用户隐藏  女性用户显示
-        mainTab = bindView(R.id.mainTab);
-//        main_tab.setInlineLabel(true);
-        mainTab.addTab(new TabLayout.Tab().setText("所有"));
-        mainTab.addTab(new TabLayout.Tab().setText(" 新人"));
+//        mainTab = bindView(R.id.mainTab);
+////        main_tab.setInlineLabel(true);
+//        mainTab.addTab(new TabLayout.Tab().setText("所有"));
+//        mainTab.addTab(new TabLayout.Tab().setText(" 新人"));
 
 
         mainActivity = (MainActivity)getActivity();
@@ -170,9 +170,9 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
                 break;
             case R.id.headIv:
                 //打开侧滑菜单
-                if (mainActivity!=null){
-                    mainActivity.showMainMenu();
-                }
+//                if (mainActivity!=null){
+//                    mainActivity.showMainMenu();
+//                }
                 break;
         }
     }

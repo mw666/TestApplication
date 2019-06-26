@@ -5,7 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.mob.MobSDK;
+
 
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.SharedpreferencesUtil;
@@ -28,7 +28,7 @@ public class MyApplication extends Application {
         instance = this;
         SharedpreferencesUtil.getInstance().initSharedUtil(this);
         //初始化Mob短信的配置
-        MobSDK.init(this);
+        //MobSDK.init(this);
 
         //集成友盟统计,分享
 

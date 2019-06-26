@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 // 添加插件
-apply plugin: 'com.mob.sdk'
+//apply plugin: 'com.mob.sdk'
 
 android {
 //    signingConfigs {
@@ -20,7 +20,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "newmatch.zbmf.com.testapplication"
-        minSdkVersion 15
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -46,14 +46,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     // 在MobSDK的扩展中注册SMSSDK的相关信息
-    MobSDK {
-        appKey "28b730acbedd5"
-        appSecret "09aac733d3fdaf7d50e33e91a7ad796c"
+    // MobSDK {
+    //   appKey "28b730acbedd5"
+    // appSecret "09aac733d3fdaf7d50e33e91a7ad796c"
 
 //        SMSSDK {
 //            gui true //关闭mob的开源UI界面
 //        }
-    }
+    // }
     productFlavors {
     }
 }
