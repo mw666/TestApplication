@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="newmatch.zbmf.com.testapplication.fragments.HomeFragment">
+    tools:context="newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment">
     <!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
     <!--xmlns:tools="http://schemas.android.com/tools"-->
@@ -15,7 +15,7 @@
     <!--android:layout_height="match_parent"-->
     <!--android:fitsSystemWindows="true"-->
     <!--android:orientation="vertical"-->
-    <!--tools:context="newmatch.zbmf.com.testapplication.fragments.HomeFragment">-->
+    <!--tools:context="newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment">-->
 
     <!--<android.support.design.widget.AppBarLayout-->
     <!--android:layout_width="match_parent"-->
@@ -107,29 +107,29 @@
             android:id="@+id/headIv"
             android:layout_width="@dimen/dp_35"
             android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="@dimen/dp_57"
             android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:background="@drawable/wave_border_less_ripple"
-            android:layout_marginStart="@dimen/dp_8"
-            app:srcCompat="@drawable/ic_head_portrait_icon"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/dp_8" />
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_57"
+            android:background="@drawable/wave_border_less_ripple"
+            app:srcCompat="@drawable/ic_head_portrait_icon" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/searchIv"
             android:layout_width="@dimen/dp_32"
             android:layout_height="@dimen/dp_32"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/wave_border_less_ripple"
             android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_toEndOf="@+id/headIv"
+            android:layout_toRightOf="@+id/headIv"
+            android:background="@drawable/wave_border_less_ripple"
             android:padding="@dimen/dp_3"
             app:srcCompat="@drawable/ic_search_icon"
-            tools:ignore="RtlHardcoded"
-            android:layout_toRightOf="@+id/headIv" />
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/searchBtn"
@@ -148,84 +148,89 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/subArea"
-            android:background="@drawable/wave_border_less_ripple"
-            android:textColor="@color/white"
             android:layout_marginTop="@dimen/dp_10"
-            android:textSize="10sp"
-            tools:text="西安"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toStartOf="@+id/subArea"
+            android:layout_toLeftOf="@+id/subArea"
+            android:background="@drawable/wave_border_less_ripple"
+            android:drawableTop="@drawable/ic_location_icon"
+            android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_location_icon"
-            android:layout_toLeftOf="@+id/subArea"
-            android:layout_marginRight="8dp" />
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            tools:text="西安" />
 
         <TextView
             android:id="@+id/subArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/wave_border_less_ripple"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="@dimen/dp_10"
-            android:paddingTop="15dp"
-            android:textColor="@color/white"
-            android:drawableBottom="@drawable/ic_down_arrow_icon"
-            android:textSize="10sp"
-            android:text="福田区"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp" />
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/wave_border_less_ripple"
+            android:drawableBottom="@drawable/ic_down_arrow_icon"
+            android:paddingTop="15dp"
+            android:text="福田区"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
 
     </RelativeLayout>
 
 
-
-    <!--<android.support.design.widget.TabLayout-->
-        <!--android:id="@+id/main_tab"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/dp_40"-->
-        <!--app:background="@drawable/no_corner_white_bg"-->
-        <!--app:tabGravity="fill"-->
-        <!--app:tabIndicatorColor="#111111"-->
-        <!--app:tabIndicatorHeight="@dimen/dp_2"-->
-        <!--app:tabMode="scrollable"-->
-        <!--app:tabRippleColor="@color/white_50"-->
-        <!--app:tabSelectedTextColor="#111111"-->
-        <!--android:layout_marginTop="@dimen/dp_70"-->
-        <!--app:tabTextColor="@color/common_bg_press"-->
-        <!--app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"/>-->
-
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/viewPager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="@dimen/dp_110"-->
-        <!--android:layout_weight="1" />-->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/homeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_70"
-        android:scrollbars="none"
-         />
-
     <android.support.design.widget.TabLayout
         android:id="@+id/mainTab"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/no_corner_white_bg"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/lavender"
-        app:tabIndicatorHeight="@dimen/dp_3"
-        app:tabMinWidth="@dimen/dp_90"
+        android:layout_height="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_70"
+        app:background="@drawable/no_corner_white_bg"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#111111"
+        app:tabIndicatorHeight="@dimen/dp_1"
         app:tabMode="fixed"
+        app:tabRippleColor="@color/white_50"
+        app:tabSelectedTextColor="#111111"
         app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        app:tabTextColor="@color/black"/>
+        app:tabTextColor="@color/common_bg_press" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_3"
+        android:layout_marginTop="@dimen/dp_100"
+        android:background="@color/gray" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_111"
+        android:layout_weight="1" />
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/homeRecyclerView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="@dimen/dp_70"-->
+    <!--android:scrollbars="none"-->
+    <!--/>-->
+
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/mainTab"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="35dp"-->
+    <!--android:background="@drawable/no_corner_white_bg"-->
+    <!--app:tabGravity="center"-->
+    <!--app:tabIndicatorColor="@color/lavender"-->
+    <!--app:tabIndicatorHeight="@dimen/dp_3"-->
+    <!--app:tabMinWidth="@dimen/dp_90"-->
+    <!--android:layout_marginTop="@dimen/dp_70"-->
+    <!--app:tabMode="fixed"-->
+    <!--app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
+    <!--app:tabTextColor="@color/black"/>-->
 
     <!--</android.support.design.widget.CoordinatorLayout>-->
 </FrameLayout>

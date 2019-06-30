@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_170"
         android:scaleType="centerCrop"
-        android:src="@mipmap/night_city_bg" />
+        android:src="@drawable/night_city_bg" />
 
     <ImageView
         android:id="@+id/back"

@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/card2" />
+                    android:src="@drawable/card2" />
 
                 <TextView
                     android:id="@+id/mySpaceTitle"

@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.fragments;
+package newmatch.zbmf.com.testapplication.fragments.dynamic_fragments;
 
 
 import android.os.Bundle;
@@ -26,7 +26,6 @@ import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
 import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;

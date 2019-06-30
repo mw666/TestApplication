@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.CenterInside;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import newmatch.zbmf.com.testapplication.R;
@@ -32,13 +30,30 @@ public class GlideUtil {
      */
     @SuppressLint("CheckResult")
     public static void loadImage(Context mContext, Integer placeHolder,
-                                 String path, ImageView imageview) {
+                                    String path, ImageView imageview) {
         RequestOptions options = new RequestOptions();
         options.placeholder(placeHolder);
         options.error(R.drawable.place_holder_img);
         options.centerCrop();
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext).load(path).apply(options).into(imageview);
+    }
+
+    /**
+     * 加Drawable的图片显示
+     * @param mContext
+     * @param placeHolder
+     * @param drawable
+     * @param imageview
+     */
+    public static void loadImage(Context mContext, Integer placeHolder,
+                                 Drawable drawable, ImageView imageview) {
+        RequestOptions options = new RequestOptions();
+        options.placeholder(placeHolder);
+        options.error(R.drawable.place_holder_img);
+        options.centerCrop();
+        options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        Glide.with(mContext).load(drawable).apply(options).into(imageview);
     }
 
     @SuppressLint("CheckResult")

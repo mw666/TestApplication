@@ -2,7 +2,6 @@ package newmatch.zbmf.com.testapplication.activitys;
 
 import android.annotation.SuppressLint;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,7 +13,6 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
-import newmatch.zbmf.com.testapplication.callback.EtCallBack;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -30,8 +28,8 @@ public class WalletActivity extends BaseActivity {
         return R.layout.activity_wallet;
     }
 
-    private int[] imgs = {R.mipmap.green_ge_bg, R.mipmap.pink_flower_bg};
-    private int[] pay_imgs = {R.mipmap.weichat_pay, R.mipmap.ali_pay};
+    private int[] imgs = {R.drawable.green_ge_bg, R.drawable.pink_flower_bg};
+    private int[] pay_imgs = {R.drawable.weichat_pay, R.drawable.ali_pay};
     private List<Integer> imgList;
     private List<Integer> Pay_imgList;
 

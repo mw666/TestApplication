@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

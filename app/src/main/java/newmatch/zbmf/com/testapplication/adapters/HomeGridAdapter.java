@@ -3,8 +3,10 @@ package newmatch.zbmf.com.testapplication.adapters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
     private Context mContext;
     private Activity mActivity;
     private List<BannerService.Data> mData;
+    private List<Drawable> mData1;
     private HomeRVIvClick mHomeRVIvClick;
     private DianZanClickListener mDianZanClickListener;
 
@@ -47,6 +50,8 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
         this.mContext = context;
         this.mActivity = activity;
         mData = new ArrayList<>();
+        //模拟效果测试
+        mData1 = new ArrayList<>();
     }
 
     public void addImgList(List<BannerService.Data> imgs) {
@@ -56,10 +61,18 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
         }
     }
 
+    public void addImgList1(List<Drawable> imgs) {
+        if (imgs != null && imgs.size() > 0) {
+            mData1.addAll(imgs);
+            notifyDataSetChanged();
+        }
+    }
+
     //清空所有的数据
     public void clearImg() {
         mData.clear();
-//        notifyDataSetChanged();
+        mData1.clear();
+        //        notifyDataSetChanged();
     }
 
     @NonNull
@@ -71,9 +84,10 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
 
     @Override
     public void onBindViewHolder(@NonNull HomeGDHolder holder, @SuppressLint("RecyclerView") int position) {
-        int i = position % mData.size();
-        GlideUtil.loadImage(mContext, R.drawable.place_holder_img, mData.get(i).getImagePath(), holder.mRv_iv);
-//        holder.mRv_iv.setImageResource(R.drawable.mn9);
+        int i = position % mData1.size();
+        Log.d("===KKK", "  mData1.size():" + mData1.size());
+        GlideUtil.loadImage(mContext, R.drawable.place_holder_img, mData1.get(i), holder.mRv_iv);
+        //        holder.mRv_iv.setImageResource(R.drawable.mn9);
         holder.mRv_iv.setOnClickListener(new OnceClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
@@ -86,7 +100,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
             @Override
             public void onNoDoubleClick(View v) {
                 if (mDianZanClickListener != null) {
-                    mDianZanClickListener.dianZanClick(holder.mDianZanIv,holder.mMoodsValue);
+                    mDianZanClickListener.dianZanClick(holder.mDianZanIv, holder.mMoodsValue);
                 }
             }
         });
@@ -94,7 +108,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGD
 
     @Override
     public int getItemCount() {
-        return mData.size() * 2;
+        return mData1.size() * 2;
     }
 
     static class HomeGDHolder extends BaseViewHolder {

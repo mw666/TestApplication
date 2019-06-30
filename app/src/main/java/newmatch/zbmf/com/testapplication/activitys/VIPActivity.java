@@ -26,8 +26,8 @@ import newmatch.zbmf.com.testapplication.views.RotationPageTransformer;
  */
 public class VIPActivity extends BaseActivity {
 
-    private int[] imgs = {R.mipmap.green_ge_bg, R.mipmap.pink_flower_bg};
-    private int[] pay_imgs = {R.mipmap.weichat_pay, R.mipmap.ali_pay};
+    private int[] imgs = {R.drawable.green_ge_bg, R.drawable.pink_flower_bg};
+    private int[] pay_imgs = {R.drawable.weichat_pay, R.drawable.ali_pay};
     private List<Integer> imgList;
     private List<Integer> Pay_imgList;
     //标记menuViewPager的选中
