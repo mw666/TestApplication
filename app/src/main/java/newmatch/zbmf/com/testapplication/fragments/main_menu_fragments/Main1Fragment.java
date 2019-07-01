@@ -22,7 +22,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MainFragMentAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.fragments.dynamic_fragments.DynamicFragment;
-import newmatch.zbmf.com.testapplication.fragments.MsgFragment;
+import newmatch.zbmf.com.testapplication.fragments.msg_fragments.MsgFragment;
 import newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;

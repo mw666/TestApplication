@@ -4,10 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="newmatch.zbmf.com.testapplication.fragments.MsgFragment">
+              tools:context="newmatch.zbmf.com.testapplication.fragments.msg_fragments.MsgFragment">
 
    <include layout="@layout/normal_activity_toolbar"/>
 
-   <!--<include layout="@layout/tab_layout_with_viewpager"/>-->
+   <include layout="@layout/tab_layout_with_viewpager"/>
 
 </LinearLayout>

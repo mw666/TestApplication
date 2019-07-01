@@ -15,11 +15,13 @@ import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 
 /**
  * Create By Administrator
@@ -56,7 +58,7 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
 
         //模拟数据
         for (int i = 0; i < 30; i++) {
-            imgs.add(ContextCompat.getDrawable(getActivity(),R.drawable.mn9));
+            imgs.add(ContextCompat.getDrawable(getActivity(), R.drawable.mn9));
         }
         mHomeGridAdapter.addImgList1(imgs);
     }
@@ -91,9 +93,9 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
     public void rvIvCallBack(int position) {
         //首页图片点击的回调
         Bundle bundle = new Bundle();
-//        ArrayList<BannerService.Data> data = mResult.getData();
-//        bundle.putParcelableArrayList(PermissionC.USER_PIC, data);
-//        SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
+        //        ArrayList<BannerService.Data> data = mResult.getData();
+        //        bundle.putParcelableArrayList(PermissionC.USER_PIC, data);
+        SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
     }
 
 

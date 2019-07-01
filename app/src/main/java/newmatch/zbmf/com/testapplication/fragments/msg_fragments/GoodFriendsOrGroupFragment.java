@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.fragments;
+package newmatch.zbmf.com.testapplication.fragments.msg_fragments;
 
 
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
+import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;

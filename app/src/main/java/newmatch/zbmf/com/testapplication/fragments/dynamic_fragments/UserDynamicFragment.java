@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.fragments;
+package newmatch.zbmf.com.testapplication.fragments.dynamic_fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;

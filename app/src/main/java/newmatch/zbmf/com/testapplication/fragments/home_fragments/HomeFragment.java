@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
@@ -25,7 +26,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
-import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.ViewPagerAdapter;
+import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
@@ -108,17 +109,17 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         //准备fragment集合list的数据
         List<Fragment> fragmentList = initFragments();
         String[] titles = new String[]{"精华", "新人"};
-        //        MyFragmentStatePagerAdapter mainFragMentAdapter = new MyFragmentStatePagerAdapter(getActivity()
-        //                .getSupportFragmentManager(), fragmentList, Arrays.asList(titles));
+        MyFragmentStatePagerAdapter mainFragMentAdapter =
+                new MyFragmentStatePagerAdapter(getChildFragmentManager(),
+                        fragmentList, Arrays.asList(titles));
 
         List<Fragment> mFragment = new ArrayList<>();
         if (mFragment.size() == 0) {
             mFragment.add(new Main2Fragment());
             mFragment.add(new Main1Fragment());
         }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager()
-                , mFragment);
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(mainFragMentAdapter);
+        mainTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);
 
 

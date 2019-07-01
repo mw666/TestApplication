@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.fragments;
+package newmatch.zbmf.com.testapplication.fragments.msg_fragments;
 
 
 import android.os.Bundle;

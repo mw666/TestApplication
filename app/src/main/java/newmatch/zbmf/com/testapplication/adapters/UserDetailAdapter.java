@@ -48,7 +48,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Us
     //清空所有的数据
     public void clearImg() {
         mData.clear();
-//        notifyDataSetChanged();
+        //        notifyDataSetChanged();
     }
 
     @NonNull
@@ -70,7 +70,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Us
                     for (int i = 0; i < mData.size(); i++) {
                         uris.add(Uri.parse(mData.get(i).getImagePath()));
                     }
-                    mShowClickIv.showClickIv(holder.getAdapterPosition(),holder.mUser_rv_iv,uris);
+                    mShowClickIv.showClickIv(holder.getAdapterPosition(), holder.mUser_rv_iv, uris);
                 }
             }
         });
@@ -78,7 +78,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Us
 
     @Override
     public int getItemCount() {
-        return 6;
+        return mData == null ? 0 : mData.size();
     }
 
     public static class UserDetailHolder extends RecyclerView.ViewHolder {

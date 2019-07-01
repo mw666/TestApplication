@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white_grey"
     android:orientation="vertical"
-    tools:context="newmatch.zbmf.com.testapplication.fragments.ChatListFragment">
+    tools:context="newmatch.zbmf.com.testapplication.fragments.msg_fragments.ChatListFragment">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/mySpaceAppBar"

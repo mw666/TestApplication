@@ -19,11 +19,13 @@ import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,6 +101,6 @@ public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
         Bundle bundle = new Bundle();
         //        ArrayList<BannerService.Data> data = mResult.getData();
         //        bundle.putParcelableArrayList(PermissionC.USER_PIC, data);
-        //        SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
+        SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
     }
 }

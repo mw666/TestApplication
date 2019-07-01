@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
+import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.fragments.UserDynamicFragment;
+import newmatch.zbmf.com.testapplication.fragments.dynamic_fragments.UserDynamicFragment;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 
 /**

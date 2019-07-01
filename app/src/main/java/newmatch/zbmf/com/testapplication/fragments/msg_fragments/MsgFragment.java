@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.fragments;
+package newmatch.zbmf.com.testapplication.fragments.msg_fragments;
 
 
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.MsgTabAdapter;
+import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
@@ -45,14 +45,14 @@ public class MsgFragment extends BaseFragment {
     protected void initView() {
         TextView toolbar_title = bindView(R.id.toolbar_title);
         toolbar_title.setText(getString(R.string.linkmans));
-//        TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
-//        ViewPager msgViewPager = bindView(R.id.msgViewPager);
-//
-//        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
-//        msgViewPager.setAdapter(adapter);
-//        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
-//        msgFGTabLayout.setTabsFromPagerAdapter(adapter);
-//        msgViewPager.setCurrentItem(0);
+        TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
+        ViewPager msgViewPager = bindView(R.id.msgViewPager);
+
+        MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
+        msgViewPager.setAdapter(adapter);
+        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
+        msgFGTabLayout.setTabsFromPagerAdapter(adapter);
+        msgViewPager.setCurrentItem(0);
 
 
     }

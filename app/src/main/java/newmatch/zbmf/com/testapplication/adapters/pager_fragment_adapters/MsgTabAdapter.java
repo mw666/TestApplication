@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +16,8 @@ public class MsgTabAdapter extends FragmentPagerAdapter {
     private List<String> mTabtitles;
     private List<Fragment> mFragmentList;
 
-    public MsgTabAdapter(FragmentManager fm, List<String> tabtitles, List<Fragment> fragmentList) {
+    public MsgTabAdapter(FragmentManager fm, List<String> tabtitles,
+                         List<Fragment> fragmentList) {
         super(fm);
         this.mTabtitles = tabtitles;
         this.mFragmentList = fragmentList;
