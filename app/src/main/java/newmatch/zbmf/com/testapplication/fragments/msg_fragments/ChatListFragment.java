@@ -16,6 +16,7 @@ import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.ChatRecordListAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.interfaces.MsgChatItemClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
@@ -64,7 +65,8 @@ public class ChatListFragment extends BaseFragment implements RecommendUser,MsgC
         for (int i : banner) {
             imgs.add(i);
         }
-        MZBannerViewUtils.bannerPageClick(false,mMZBanner,imgs);
+        MZBannerViewUtils.bannerPageClick(false,mMZBanner
+                ,imgs,BannerViewHolderType.CircleViewHolder);
         //聊天列表
         RecyclerView chatRecyclerView = bindView(R.id.chatRecyclerView);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),

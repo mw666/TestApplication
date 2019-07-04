@@ -31,6 +31,7 @@ import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.interfaces.MZHolderCreator;
 import newmatch.zbmf.com.testapplication.interfaces.MZViewHolder;
 import newmatch.zbmf.com.testapplication.listeners.BannerPageClickListener;
+import newmatch.zbmf.com.testapplication.listeners.TestBannerViewHolder;
 import newmatch.zbmf.com.testapplication.utils.CoverModeTransformer;
 import newmatch.zbmf.com.testapplication.utils.ScaleYTransformer;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -357,7 +358,7 @@ public class MZBannerView<T> extends RelativeLayout {
      * @param datas Banner 展示的数据集合
      * @param mzHolderCreator  ViewHolder生成器 {@link MZHolderCreator} And {@link MZViewHolder}
      */
-    public void setPages(List<T> datas, /*List<T> texts,*/ MZHolderCreator mzHolderCreator){
+    public void setPages(List datas, /*List<T> texts,*/ com.zhouwei.mzbanner.holder.MZHolderCreator<TestBannerViewHolder> mzHolderCreator){
         if(datas == null || mzHolderCreator == null){
             return;
         }

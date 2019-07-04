@@ -147,46 +147,35 @@
             android:id="@+id/locationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_toStartOf="@+id/subArea"
-            android:layout_toLeftOf="@+id/subArea"
-            android:background="@drawable/wave_border_less_ripple"
-            android:drawableTop="@drawable/ic_location_icon"
-            android:gravity="center"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            tools:text="西安" />
-
-        <TextView
-            android:id="@+id/subArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/wave_border_less_ripple"
-            android:drawableBottom="@drawable/ic_down_arrow_icon"
-            android:paddingTop="15dp"
+            android:drawableTop="@drawable/ic_location_icon"
             android:text="福田区"
             android:textColor="@color/white"
-            android:textSize="10sp" />
+            android:textSize="@dimen/sp_10" />
 
     </RelativeLayout>
 
+    <com.zhouwei.mzbanner.MZBannerView
+        android:id="@+id/homeBanner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:layout_marginTop="@dimen/dp_70"
+        app:canLoop="true"
+        app:indicatorAlign="center"
+        app:indicatorPaddingLeft="10dp"
+        app:open_mz_mode="true" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/mainTab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginTop="@dimen/dp_170"
         app:background="@drawable/no_corner_white_bg"
         app:tabGravity="fill"
         app:tabIndicatorColor="#111111"
@@ -200,14 +189,15 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_3"
-        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_200"
         android:background="@color/gray" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_101"
+        android:layout_marginTop="@dimen/dp_200"
         android:layout_weight="1" />
 
     <!--<android.support.v7.widget.RecyclerView-->

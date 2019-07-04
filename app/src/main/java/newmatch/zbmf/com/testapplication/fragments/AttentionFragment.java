@@ -17,6 +17,7 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
+import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
@@ -76,7 +77,8 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
         for (int i : banner) {
             imgs.add(i);
         }
-        MZBannerViewUtils.bannerPageClick(false,mMZBanner,imgs);
+        MZBannerViewUtils.bannerPageClick(false,mMZBanner
+                ,imgs,BannerViewHolderType.CircleViewHolder);
         /*recommendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 OrientationHelper.HORIZONTAL, false));
         ChatRecommendAdapter chatRecommendAdapter = new ChatRecommendAdapter(getActivity());

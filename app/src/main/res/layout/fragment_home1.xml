@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.home_fragments.Home1Fragment">
+    android:orientation="vertical">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
@@ -38,9 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srlAccentColor="@color/toast_bg_color"
-            app:srlPrimaryColor="@color/white"
             app:srlFooterHeight="@dimen/dp_40"
-            app:srlTextSizeTitle="@dimen/sp_12"/>
+            app:srlPrimaryColor="@color/white"
+            app:srlTextSizeTitle="@dimen/sp_12" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,12 +36,13 @@ import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Frag
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
 import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.listeners.TestBannerViewHolder;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
-import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.MZBannerView;
 
 
 /**
@@ -62,8 +65,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     private RecyclerView mHomeRV;
     private MainActivity mainActivity;
     private AppCompatImageView headIv;
-    private TabLayout mainTab;
-    private ViewPager viewPager;
     //fragment的集合数据
     private List<Fragment> fragments;
 
@@ -101,10 +102,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
         TextView searchBtn = bindViewWithClick(R.id.searchBtn, true);
-        TextView subArea = bindViewWithClick(R.id.subArea, true);
+        MZBannerView homeBanner = bindView(R.id.homeBanner);
         //搜索图标  男性用户隐藏  女性用户显示
-        mainTab = bindView(R.id.mainTab);
-        viewPager = bindView(R.id.viewPager);
+        TabLayout mainTab = bindView(R.id.mainTab);
+        ViewPager viewPager = bindView(R.id.viewPager);
         mainTab.setupWithViewPager(viewPager, true);
         //准备fragment集合list的数据
         List<Fragment> fragmentList = initFragments();
@@ -112,6 +113,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         MyFragmentStatePagerAdapter mainFragMentAdapter =
                 new MyFragmentStatePagerAdapter(getChildFragmentManager(),
                         fragmentList, Arrays.asList(titles));
+
 
         List<Fragment> mFragment = new ArrayList<>();
         if (mFragment.size() == 0) {
@@ -121,8 +123,28 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         viewPager.setAdapter(mainFragMentAdapter);
         mainTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);
+        initBannerView(homeBanner);
 
 
+    }
+
+    private int[] banner = {R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9,
+            R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9};
+
+    private void initBannerView(MZBannerView homeBanner) {
+        List<Integer> imgs = new ArrayList<>();
+        for (int i : banner) {
+            imgs.add(i);
+        }
+//        MZBannerViewUtils.bannerPageClick(false, homeBanner
+//                , imgs, BannerViewHolderType.ConnerViewHolder);
+        // 设置数据
+        homeBanner.setPages(imgs, new MZHolderCreator<TestBannerViewHolder>() {
+            @Override
+            public TestBannerViewHolder createViewHolder() {
+                return new TestBannerViewHolder();
+            }
+        });
     }
 
     @Override
@@ -142,7 +164,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     protected void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.locationIcon:
-                //跳转选择地址页面
+                //跳转选择地址页面  区域定位
                 startActivityForResult(new Intent(getActivity(), SelectCityActivity.class),
                         PermissionC.CURRENT_CITY_CODE);
                 break;
@@ -155,10 +177,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
             case R.id.searchIv:
                 //搜索图标只对女性用户显示，点击跳转搜索页面
                 SkipActivityUtil.skipDataActivity(getActivity(), SearchActivity.class, new Bundle());
-                break;
-            case R.id.subArea:
-                //区域定位
-                ToastUtils.showSingleToast(getContext(), "区域定位");
                 break;
             case R.id.headIv:
                 //打开侧滑菜单

@@ -17,12 +17,12 @@
     </style>
     <!--图片选择器的主题-->
     <style name="Matisse.MyZhihu" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/black_13</item>
+        <item name="colorPrimaryDark">@color/black_13</item>
         <item name="toolbar">@style/Toolbar.Zhihu</item>
         <item name="album.dropdown.title.color">@color/zhihu_album_dropdown_title_text</item>
         <item name="album.dropdown.count.color">@color/zhihu_album_dropdown_count_text</item>
-        <item name="album.element.color">@android:color/white</item>
+        <item name="album.element.color">@color/light_orange</item>
         <item name="album.thumbnail.placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder
         </item>
         <item name="album.emptyView">@drawable/ic_empty_zhihu</item>

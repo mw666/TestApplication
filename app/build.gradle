@@ -117,4 +117,5 @@ dependencies {
     implementation 'com.ruffian.library:RTextView:1.0.11'
     //Android 时间总线
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
 }

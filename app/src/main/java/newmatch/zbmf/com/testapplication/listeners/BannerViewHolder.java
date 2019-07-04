@@ -7,7 +7,9 @@ import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.interfaces.MZViewHolder;
+
 
 /**
  * Created by **
@@ -19,9 +21,11 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
     //    private TextView mMTv;
     private int imgs;
     private BannerPageClickListener mBannerPageClickListener;
+    private BannerViewHolderType bannerViewHolderType;
 
-    public BannerViewHolder(int imgs) {
+    public BannerViewHolder(int imgs, BannerViewHolderType bannerViewHolderType) {
         this.imgs = imgs;
+        this.bannerViewHolderType=bannerViewHolderType;
     }
 
     public void setBannerClickListener(BannerPageClickListener bannerClickListener) {
@@ -32,7 +36,7 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
     public View createView(Context context) {
         // 返回页面布局文件
         View view = LayoutInflater.from(context).inflate(R.layout.chat_recommend_item_view, null);
-        mImageView = (ImageView) view.findViewById(R.id.chatRecommendItemIv);
+        mImageView = view.findViewById(R.id.chatRecommendItemIv);
 //        mMTv = (TextView) view.findViewById(R.id.banner_tv);
         return view;
     }
@@ -40,8 +44,14 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
     @Override
     public void onBind(Context context, final int position, Integer data/*, Integer text*/) {
         // 数据绑定
-        GlideUtil.loadCircleImage(context, R.drawable.loading1, data, mImageView);
-//        mMTv.setText(text);
+        if (bannerViewHolderType==BannerViewHolderType.CircleViewHolder){
+            GlideUtil.loadCircleImage(context, R.drawable.loading1, data, mImageView);
+        }else if (bannerViewHolderType==BannerViewHolderType.ConnerViewHolder){
+            GlideUtil.loadCornerdImg(context, data,R.drawable.loading1,
+                    mImageView,true,true,true,true);
+        }else if (bannerViewHolderType==BannerViewHolderType.RectViewHolder){
+            GlideUtil.loadImage(context,R.drawable.loading1,data,mImageView);
+        }
         mImageView.setOnClickListener(v -> {
             int i = position % imgs;
             if (mBannerPageClickListener != null) {

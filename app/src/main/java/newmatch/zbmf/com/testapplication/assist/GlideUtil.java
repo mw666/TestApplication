@@ -158,13 +158,18 @@ public class GlideUtil {
     public static void loadCornerdImg(Context mContext, Integer path, Integer placeHolder,
                                       ImageView imageView, boolean leftTop, boolean leftBottom,
                                       boolean rightTop, boolean rightBottom) {
-        GlideCircle2Transformer glideCircle2Transformer = new GlideCircle2Transformer(mContext,
-                -1, 20);
-        glideCircle2Transformer.setExceptCorner(leftTop, rightTop, leftBottom, rightBottom);
-        RequestOptions.centerCropTransform();
-        RequestOptions requestOptions = RequestOptions.bitmapTransform(glideCircle2Transformer);
-        requestOptions.centerCrop();
-        requestOptions.placeholder(placeHolder);
+//        GlideCircle2Transformer glideCircle2Transformer = new GlideCircle2Transformer(mContext,
+//                -1, 20);
+//        glideCircle2Transformer.setExceptCorner(leftTop, rightTop, leftBottom, rightBottom);
+//        RequestOptions.centerCropTransform();
+//        RequestOptions requestOptions = RequestOptions.bitmapTransform(glideCircle2Transformer);
+//        requestOptions.centerCrop();
+//        requestOptions.placeholder(placeHolder);
+//        Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);
+        CornerTransform transform = new CornerTransform(mContext, UnitUtils.dpToPx(mContext, 5));
+        transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
+        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder)
+                .transform(new CenterCrop(),transform);
         Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);
     }
 
@@ -174,11 +179,8 @@ public class GlideUtil {
                                       boolean rightTop, boolean rightBottom) {
         CornerTransform transform = new CornerTransform(mContext, UnitUtils.dpToPx(mContext, 5));
         transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
-        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder).transform(new CenterCrop(),transform);
-
-//        RequestOptions requestOptions = new RequestOptions().transform(new GlideRoundTransform(5));
-//        requestOptions.error(R.drawable.place_holder_img);
-//        requestOptions.centerCrop();
+        RequestOptions requestOptions = new RequestOptions().placeholder(placeHolder)
+                .transform(new CenterCrop(),transform);
         Glide.with(mContext).asBitmap().load(path).apply(requestOptions).into(imageView);
     }
 

@@ -33,7 +33,6 @@ import newmatch.zbmf.com.testapplication.views.NoScrollViewPager;
 /**
  * A simple {@link Fragment} subclass.
  */
-@RequiresApi(api = Build.VERSION_CODES.M)
 public class Main1Fragment extends BaseFragment implements
         ViewPager.OnPageChangeListener
         , BottomNavigationView.OnNavigationItemSelectedListener {
