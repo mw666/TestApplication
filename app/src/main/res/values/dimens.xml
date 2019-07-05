@@ -130,4 +130,5 @@
     <dimen name="dp_69">69dp</dimen>
     <dimen name="dp_111">111dp</dimen>
     <dimen name="dp_190">190dp</dimen>
+    <dimen name="dp_151">151dp</dimen>
 </resources>

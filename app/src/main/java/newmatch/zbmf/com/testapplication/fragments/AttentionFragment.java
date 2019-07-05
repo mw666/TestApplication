@@ -17,16 +17,13 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
 import newmatch.zbmf.com.testapplication.listeners.BannerPageClickListener;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
-import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
-import newmatch.zbmf.com.testapplication.utils.MZBannerViewUtils;
-import newmatch.zbmf.com.testapplication.views.MZBannerView;
+import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
+import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +37,7 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
     //数据
     BannerService mResult;
     private int measuredHeight;
-    private MZBannerView mMZBanner;
+
     private int[] banner={R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,
             R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9};
 
@@ -72,13 +69,12 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
         recommendLinkMansTitle.setText(getString(R.string.same_city));
         chatMansTitle.setText(getString(R.string.attention_list));
         //同城推荐
-        mMZBanner = bindView(R.id.m_banner);
+
         List<Integer> imgs=new ArrayList<>();
         for (int i : banner) {
             imgs.add(i);
         }
-        MZBannerViewUtils.bannerPageClick(false,mMZBanner
-                ,imgs,BannerViewHolderType.CircleViewHolder);
+
         /*recommendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 OrientationHelper.HORIZONTAL, false));
         ChatRecommendAdapter chatRecommendAdapter = new ChatRecommendAdapter(getActivity());
@@ -91,7 +87,7 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
         mHomeGridAdapter.setHomeRVIvClick(this);
         attentionRecyclerView.setAdapter(mHomeGridAdapter);
 
-        mMZBanner.setBannerClickListener(this);
+
 
     }
 
@@ -154,25 +150,19 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
     @Override
     public void onResume() {
         super.onResume();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 
     @Override

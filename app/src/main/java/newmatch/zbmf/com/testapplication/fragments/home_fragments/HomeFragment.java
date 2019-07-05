@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 
 import java.util.ArrayList;
@@ -42,7 +43,6 @@ import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
-import newmatch.zbmf.com.testapplication.views.MZBannerView;
 
 
 /**
@@ -102,7 +102,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
         TextView searchBtn = bindViewWithClick(R.id.searchBtn, true);
-        MZBannerView homeBanner = bindView(R.id.homeBanner);
+//        MZBannerView homeBanner = bindView(R.id.homeBanner);
+        MZBannerView banner = bindView(R.id.banner);
         //搜索图标  男性用户隐藏  女性用户显示
         TabLayout mainTab = bindView(R.id.mainTab);
         ViewPager viewPager = bindView(R.id.viewPager);
@@ -123,7 +124,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         viewPager.setAdapter(mainFragMentAdapter);
         mainTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);
-        initBannerView(homeBanner);
+        initBannerView(banner);
 
 
     }
@@ -136,8 +137,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         for (int i : banner) {
             imgs.add(i);
         }
-//        MZBannerViewUtils.bannerPageClick(false, homeBanner
-//                , imgs, BannerViewHolderType.ConnerViewHolder);
+
         // 设置数据
         homeBanner.setPages(imgs, new MZHolderCreator<TestBannerViewHolder>() {
             @Override

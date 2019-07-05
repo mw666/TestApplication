@@ -8,22 +8,18 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.zhouwei.mzbanner.MZBannerView;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.ChatRecordListAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.interfaces.MsgChatItemClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
-import newmatch.zbmf.com.testapplication.utils.MZBannerViewUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
-import newmatch.zbmf.com.testapplication.views.MZBannerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,13 +56,7 @@ public class ChatListFragment extends BaseFragment implements RecommendUser,MsgC
         chatRecommendAdapter.setMsgChatItemClick(this);
         chatRecommendRecyclerView.setAdapter(chatRecommendAdapter);*/
         /*使用MZBanner*/
-        mMZBanner = bindView(R.id.m_banner);
-        List<Integer> imgs=new ArrayList<>();
-        for (int i : banner) {
-            imgs.add(i);
-        }
-        MZBannerViewUtils.bannerPageClick(false,mMZBanner
-                ,imgs,BannerViewHolderType.CircleViewHolder);
+
         //聊天列表
         RecyclerView chatRecyclerView = bindView(R.id.chatRecyclerView);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
@@ -114,24 +104,18 @@ public class ChatListFragment extends BaseFragment implements RecommendUser,MsgC
     @Override
     public void onResume() {
         super.onResume();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mMZBanner != null) {
-            mMZBanner.isPause();
-        }
+
     }
 }

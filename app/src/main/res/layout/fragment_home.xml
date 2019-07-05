@@ -1,79 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment">
-    <!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/coordinator"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--android:orientation="vertical"-->
-    <!--tools:context="newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment">-->
+    android:layout_height="wrap_content">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_88"-->
-    <!--android:fitsSystemWindows="true">-->
-
-    <!--<android.support.design.widget.CollapsingToolbarLayout-->
-    <!--android:id="@+id/collapsingToolbarLayout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/topIv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:keepScreenOn="true"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:src="@drawable/mn9"-->
-    <!--app:layout_collapseMode="parallax"-->
-    <!--app:layout_collapseParallaxMultiplier="0.7"/>-->
-
-    <!--<View-->
-    <!--android:id="@+id/view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@drawable/topbar_bg"-->
-    <!--app:layout_collapseMode="parallax"/>-->
-    <!--&lt;!&ndash;添加一个渐变层的遮罩&ndash;&gt;-->
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="22dp"-->
-    <!--android:background="@drawable/gradient_view"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--/>-->
-
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/homeToolBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_52"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_marginTop="@dimen/dp_22"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--android:gravity="center"-->
-    <!--android:minHeight="@dimen/dp_52"-->
-    <!--app:layout_collapseMode="pin"-->
-    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-    <!--app:title=""-->
-    <!--app:titleTextColor="@color/white">-->
-    <!--&lt;!&ndash;android:background="@drawable/topbar_bg"&ndash;&gt;-->
-
-    <!--</android.support.v7.widget.Toolbar>-->
-
-    <!--<include layout="@layout/top_bar_content_view"/>-->
-    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -161,66 +91,111 @@
 
     </RelativeLayout>
 
-    <com.zhouwei.mzbanner.MZBannerView
-        android:id="@+id/homeBanner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_120"
-        android:layout_marginTop="@dimen/dp_70"
-        app:canLoop="true"
-        app:indicatorAlign="center"
-        app:indicatorPaddingLeft="10dp"
-        app:open_mz_mode="true" />
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/mainTab"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_170"
-        app:background="@drawable/no_corner_white_bg"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="#111111"
-        app:tabIndicatorHeight="@dimen/dp_1"
-        app:tabMode="fixed"
-        app:tabRippleColor="@color/white_50"
-        app:tabSelectedTextColor="#111111"
-        app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        app:tabTextColor="@color/common_bg_press" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_3"
-        android:layout_marginTop="@dimen/dp_200"
-        android:background="@color/gray" />
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_200"
-        android:layout_weight="1" />
+        android:layout_marginTop="@dimen/dp_70"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/homeRecyclerView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginTop="@dimen/dp_70"-->
-    <!--android:scrollbars="none"-->
-    <!--/>-->
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_120"
+            android:fitsSystemWindows="true">
 
-    <!--<android.support.design.widget.TabLayout-->
-    <!--android:id="@+id/mainTab"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="35dp"-->
-    <!--android:background="@drawable/no_corner_white_bg"-->
-    <!--app:tabGravity="center"-->
-    <!--app:tabIndicatorColor="@color/lavender"-->
-    <!--app:tabIndicatorHeight="@dimen/dp_3"-->
-    <!--app:tabMinWidth="@dimen/dp_90"-->
-    <!--android:layout_marginTop="@dimen/dp_70"-->
-    <!--app:tabMode="fixed"-->
-    <!--app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-    <!--app:tabTextColor="@color/black"/>-->
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <!--</android.support.design.widget.CoordinatorLayout>-->
+                <!--<ImageView-->
+                <!--android:id="@+id/topIv"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:keepScreenOn="true"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/mn9"-->
+                <!--app:layout_collapseMode="parallax"-->
+                <!--app:layout_collapseParallaxMultiplier="0.7"/>-->
+
+                <!--<View-->
+                <!--android:id="@+id/view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/topbar_bg"-->
+                <!--app:layout_collapseMode="parallax"/>-->
+                <!--添加一个渐变层的遮罩-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="22dp"-->
+                <!--android:background="@drawable/gradient_view"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--/>-->
+
+                <android.support.v7.widget.Toolbar
+                android:id="@+id/homeToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_52"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_22"
+                android:fitsSystemWindows="true"
+                android:gravity="center"
+                android:minHeight="@dimen/dp_50"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title=""
+                app:titleTextColor="@color/white">
+                <!--android:background="@drawable/topbar_bg"-->
+
+                </android.support.v7.widget.Toolbar>
+
+                <!--<include layout="@layout/top_bar_content_view"/>-->
+
+                <com.zhouwei.mzbanner.MZBannerView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    app:canLoop="true"
+                    app:indicatorAlign="center"
+                    app:middle_page_cover="true"
+                    app:indicatorPaddingLeft="10dp"
+                    app:open_mz_mode="true" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/mainTab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_120"
+            app:background="@drawable/no_corner_white_bg"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#111111"
+            app:tabIndicatorHeight="@dimen/dp_1"
+            app:tabMode="fixed"
+            app:tabRippleColor="@color/white_50"
+            app:tabSelectedTextColor="#111111"
+            app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            app:tabTextColor="@color/common_bg_press" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_3"
+            android:layout_marginTop="@dimen/dp_150"
+            android:background="@color/gray" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_151"
+            android:layout_weight="1" />
+
+    </android.support.design.widget.CoordinatorLayout>
 </FrameLayout>
