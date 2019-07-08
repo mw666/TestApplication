@@ -65,7 +65,7 @@ public class Main2Fragment extends BaseFragment {
         MenuAdapter menuAdapter = new MenuAdapter(imgList, null, R.layout.menu_view);
         menuViewPager.setAdapter(menuAdapter);
         menuViewPager.setOffscreenPageLimit(imgList.size());//设置预加载的数量
-        menuViewPager.setPageMargin(12);
+        menuViewPager.setPageMargin(5);
         //ViewPager默认选择中间的那个
         if (imgList.size() > 2)
             menuViewPager.setCurrentItem(1);

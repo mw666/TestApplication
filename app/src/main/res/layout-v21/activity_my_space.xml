@@ -179,26 +179,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/mySpaceRefreshLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:srlAccentColor="@color/toast_bg_color"
-        app:srlEnableLoadMore="true"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlEnableRefresh="true"
-        app:srlFooterHeight="45dp"
-        app:srlHeaderHeight="45dp"
-        app:srlPrimaryColor="@color/toast_bg_color">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:id="@+id/mySpaceHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white_grey"
-            app:srlAccentColor="@color/toast_bg_color"
-            app:srlTextSizeTitle="@dimen/sp_12" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -260,54 +245,39 @@
                 android:focusable="false" />
         </RelativeLayout>
 
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:id="@+id/mySpaceFooter"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/mySpaceRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white_grey"
+            android:layout_height="match_parent"
             app:srlAccentColor="@color/toast_bg_color"
-            app:srlPrimaryColor="@color/toast_bg_color"
-            app:srlTextSizeTitle="@dimen/sp_12">
+            app:srlEnableLoadMore="true"
+            app:srlEnablePreviewInEditMode="true"
+            app:srlEnableRefresh="true"
+            app:srlFooterHeight="45dp"
+            app:srlHeaderHeight="45dp"
+            app:srlPrimaryColor="@color/toast_bg_color">
 
-        </com.scwang.smartrefresh.layout.footer.ClassicsFooter>
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:id="@+id/mySpaceHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_grey"
+                app:srlAccentColor="@color/toast_bg_color"
+                app:srlTextSizeTitle="@dimen/sp_12" />
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+                android:id="@+id/mySpaceFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_grey"
+                app:srlAccentColor="@color/toast_bg_color"
+                app:srlPrimaryColor="@color/toast_bg_color"
+                app:srlTextSizeTitle="@dimen/sp_12">
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/mySpacePhotoBtn"-->
-    <!--android:layout_width="@dimen/dp_35"-->
-    <!--android:layout_height="@dimen/dp_35"-->
-    <!--android:layout_gravity="bottom|right"-->
-    <!--android:layout_marginRight="@dimen/dp_40"-->
-    <!--android:layout_marginBottom="@dimen/dp_40"-->
-    <!--android:elevation="@dimen/dp_5"-->
-    <!--android:visibility="visible"-->
-    <!--app:backgroundTint="@color/black"-->
-    <!--app:borderWidth="0dp"-->
-    <!--app:fabSize="normal"-->
-    <!--app:layout_anchorGravity="center|bottom"-->
-    <!--app:pressedTranslationZ="@dimen/dp_12"-->
-    <!--app:rippleColor="@color/black_3"-->
-    <!--app:srcCompat="@drawable/ic_photo"-->
-    <!--tools:ignore="RtlHardcoded" />-->
+            </com.scwang.smartrefresh.layout.footer.ClassicsFooter>
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/mySpaceVideoBtn"-->
-    <!--android:layout_width="@dimen/dp_35"-->
-    <!--android:layout_height="@dimen/dp_35"-->
-    <!--android:layout_gravity="bottom|right"-->
-    <!--android:layout_marginRight="@dimen/dp_40"-->
-    <!--android:layout_marginBottom="@dimen/dp_40"-->
-    <!--android:elevation="@dimen/dp_5"-->
-    <!--android:visibility="visible"-->
-    <!--app:backgroundTint="@color/black"-->
-    <!--app:borderWidth="0dp"-->
-    <!--app:fabSize="normal"-->
-    <!--app:layout_anchorGravity="center|bottom"-->
-    <!--app:pressedTranslationZ="@dimen/dp_12"-->
-    <!--app:rippleColor="@color/black_3"-->
-    <!--app:srcCompat="@drawable/ic_add"-->
-    <!--tools:ignore="RtlHardcoded" />-->
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/mySpaceFloatBtn"

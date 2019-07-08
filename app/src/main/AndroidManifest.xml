@@ -34,9 +34,7 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
-
-        </activity>
+            android:theme="@style/FullscreenTheme"></activity>
         <activity
             android:name=".permissions.PermissionActivity"
             android:screenOrientation="portrait"
@@ -51,11 +49,7 @@
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -123,7 +117,14 @@
         <activity android:name=".activitys.WalletActivity" />
         <activity android:name=".activitys.OptionsActivity" />
         <activity android:name=".activitys.MySpaceActivity" />
-        <activity android:name=".activitys.InvateActivity"></activity>
+        <activity android:name=".activitys.InvateActivity" />
+        <activity android:name=".activitys.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

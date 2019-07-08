@@ -1,13 +1,12 @@
-package newmatch.zbmf.com.testapplication.utils;
+package newmatch.zbmf.com.testapplication.views.customViewPager;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 /**
- * Created by **
- * on 2018/3/20.
+ * Create By Administrator
+ * on 2019/7/7
  */
-
 public class CoverModeTransformer implements ViewPager.PageTransformer {
 
     private float reduceX = 0.0f;
@@ -16,9 +15,9 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
     private int mCoverWidth;
     private float mScaleMax = 1.0f;
     private float mScaleMin = 0.9f;
-    private float mScaleMinX = 0.55f;
     private ViewPager mViewPager;
-    public CoverModeTransformer(ViewPager pager){
+
+    public CoverModeTransformer(ViewPager pager) {
         mViewPager = pager;
     }
 
@@ -52,8 +51,7 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
             } else {
                 view.setTranslationX(translationX);
             }
-            float v = scale + mScaleMin;
-            view.setScaleX(v);
+            view.setScaleX(scale + mScaleMin);
             view.setScaleY(scale + mScaleMin);
         } else {
             view.setScaleX(mScaleMin);
@@ -63,4 +61,3 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
 
     }
 }
-

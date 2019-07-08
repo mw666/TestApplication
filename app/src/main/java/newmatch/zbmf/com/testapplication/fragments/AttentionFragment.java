@@ -20,7 +20,7 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
-import newmatch.zbmf.com.testapplication.listeners.BannerPageClickListener;
+import newmatch.zbmf.com.testapplication.views.customViewPager.BannerPageClickListener;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;

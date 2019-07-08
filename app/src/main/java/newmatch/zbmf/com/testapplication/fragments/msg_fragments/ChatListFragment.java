@@ -7,9 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.zhouwei.mzbanner.MZBannerView;
-
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.ChatRecordListAdapter;
@@ -20,6 +17,7 @@ import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView;
 
 /**
  * A simple {@link Fragment} subclass.

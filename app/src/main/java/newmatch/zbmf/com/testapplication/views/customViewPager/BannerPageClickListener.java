@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.listeners;
+package newmatch.zbmf.com.testapplication.views.customViewPager;
 
 /**
  * Created by **

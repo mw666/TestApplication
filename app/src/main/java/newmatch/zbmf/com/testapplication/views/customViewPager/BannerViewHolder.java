@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.listeners;
+package newmatch.zbmf.com.testapplication.views.customViewPager;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
-import newmatch.zbmf.com.testapplication.interfaces.MZViewHolder;
 
 
 /**
@@ -42,7 +41,7 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
     }
 
     @Override
-    public void onBind(Context context, final int position, Integer data/*, Integer text*/) {
+    public void onBind(Context context, int position, Integer data) {
         // 数据绑定
         if (bannerViewHolderType==BannerViewHolderType.CircleViewHolder){
             GlideUtil.loadCircleImage(context, R.drawable.loading1, data, mImageView);
@@ -59,4 +58,5 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
             }
         });
     }
+
 }

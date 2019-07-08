@@ -36,18 +36,7 @@
                     android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
                     android:text="@string/recommend_link_mans"/>
 
-                <newmatch.zbmf.com.testapplication.views.MZBannerView
-                    android:id="@+id/m_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_70"
-                    android:layout_marginTop="5dp"
-                    app:canLoop="true"
-                    app:indicatorAlign="center"
-                    app:indicatorPaddingBottom="10dp"
-                    app:indicatorPaddingLeft="10dp"
-                    app:isShowIndicator="false"
-                    app:middle_page_cover="true"
-                    app:open_mz_mode="true"/>
+
 
             </LinearLayout>
 

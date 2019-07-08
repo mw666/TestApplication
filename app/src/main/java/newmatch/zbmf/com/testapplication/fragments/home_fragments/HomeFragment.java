@@ -16,8 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zhouwei.mzbanner.MZBannerView;
-import com.zhouwei.mzbanner.holder.MZHolderCreator;
+import com.facebook.stetho.common.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,17 +31,21 @@ import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
+import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
 import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
-import newmatch.zbmf.com.testapplication.listeners.TestBannerViewHolder;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
+import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.customViewPager.BannerViewHolder;
+import newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView;
+import newmatch.zbmf.com.testapplication.views.customViewPager.MZHolderCreator;
 
 
 /**
@@ -67,6 +70,8 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     private AppCompatImageView headIv;
     //fragment的集合数据
     private List<Fragment> fragments;
+    private MZBannerView homeBanner;
+    //    private ViewPager homeBanner;
 
 
     public HomeFragment() {
@@ -98,12 +103,13 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
             mCurrentLocationTv.setText(currentCity);
         }
         mCurrentLocationTv.setVisibility(View.VISIBLE);
+        mCurrentLocationTv.setText("位置");
         //头像
         headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
         TextView searchBtn = bindViewWithClick(R.id.searchBtn, true);
-//        MZBannerView homeBanner = bindView(R.id.homeBanner);
-        MZBannerView banner = bindView(R.id.banner);
+        homeBanner = bindView(R.id.homeBanner);
+
         //搜索图标  男性用户隐藏  女性用户显示
         TabLayout mainTab = bindView(R.id.mainTab);
         ViewPager viewPager = bindView(R.id.viewPager);
@@ -114,8 +120,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         MyFragmentStatePagerAdapter mainFragMentAdapter =
                 new MyFragmentStatePagerAdapter(getChildFragmentManager(),
                         fragmentList, Arrays.asList(titles));
-
-
         List<Fragment> mFragment = new ArrayList<>();
         if (mFragment.size() == 0) {
             mFragment.add(new Main2Fragment());
@@ -124,27 +128,52 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         viewPager.setAdapter(mainFragMentAdapter);
         mainTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);
-        initBannerView(banner);
+
+        //模拟轮播的数据
+        initBannerView(homeBanner);
 
 
     }
 
-    private int[] banner = {R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9,
-            R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9, R.drawable.mn9};
 
     private void initBannerView(MZBannerView homeBanner) {
-        List<Integer> imgs = new ArrayList<>();
-        for (int i : banner) {
-            imgs.add(i);
-        }
+        int[] imgs = {R.drawable.card3, R.drawable.mn9, R.drawable.card2, R.drawable.card4};
 
-        // 设置数据
-        homeBanner.setPages(imgs, new MZHolderCreator<TestBannerViewHolder>() {
+        List<Integer> imgList;
+        imgList = new ArrayList<>();
+        for (int i = 0; i < imgs.length; i++) {
+            imgList.add(imgs[i]);
+        }
+        homeBanner.addPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public TestBannerViewHolder createViewHolder() {
-                return new TestBannerViewHolder();
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                LogUtil.e("----->addPageChangeLisnter:" + position +
+                        "positionOffset:" + positionOffset + "positionOffsetPixels:"
+                        + positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                LogUtil.e("addPageChangeLisnter:" + position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
+        homeBanner.setIndicatorVisible(true);
+        // 代码中更改indicator 的位置
+        homeBanner.setIndicatorAlign(MZBannerView.IndicatorAlign.LEFT);
+        homeBanner.setIndicatorPadding(15, 0, 0, 15);
+        homeBanner.setPages(imgList, (MZHolderCreator<BannerViewHolder>)
+                () -> new BannerViewHolder(imgList.size(), BannerViewHolderType.ConnerViewHolder));
+        //Banner的点击事件
+        homeBanner.setBannerPageClickListener((view, position) -> {
+            ToastUtils.showSquareTvToast(getContext(), "点击了Banner页面：" + position);
+        });
+
+
     }
 
     @Override
@@ -254,5 +283,17 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         fragments.add(new Home1Fragment());
         fragments.add(new Home2Fragment());
         return fragments;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        homeBanner.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        homeBanner.pause();
     }
 }

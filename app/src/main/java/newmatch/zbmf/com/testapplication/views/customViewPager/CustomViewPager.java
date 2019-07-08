@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.views;
+package newmatch.zbmf.com.testapplication.views.customViewPager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
