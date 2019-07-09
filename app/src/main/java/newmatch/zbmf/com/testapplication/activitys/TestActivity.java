@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.TestAdapter;
+import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
-public class TestActivity extends AppCompatActivity implements TestAdapter.ClickCardView {
+public class TestActivity extends AppCompatActivity implements StaggerAdapter.ClickCardView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class TestActivity extends AppCompatActivity implements TestAdapter.Click
                 StaggeredGridLayoutManager.VERTICAL);
         rv.setLayoutManager(manager);
 
-        TestAdapter testAdapter = new TestAdapter(this);
+        StaggerAdapter testAdapter = new StaggerAdapter(this);
         rv.setAdapter(testAdapter);
         testAdapter.setClickCardView(this);
 

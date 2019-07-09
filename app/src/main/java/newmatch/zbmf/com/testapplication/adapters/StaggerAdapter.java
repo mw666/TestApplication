@@ -20,7 +20,7 @@ import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
  * Create By Administrator
  * on 2019/7/7
  */
-public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
+public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> {
 
     private final int w;
     private Context context;
@@ -40,7 +40,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
 
     private List<Integer> imgs;
 
-    public TestAdapter(Context context) {
+    public StaggerAdapter(Context context) {
         this.context = context;
         w = GetUIDimens.getWindowW(context);
         imgs = new ArrayList<>();
@@ -61,10 +61,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
 
     //    @Override
     public int getItemViewType(int position) {
-        int ad = position % 15;
-        if (position != 0 && ad == 0) {
-            return ITEM_TYPE.ALONE_BIG.ordinal();
-        } else {
+//        int ad = position % 15;
+//        if (position != 0 && ad == 0) {
+//            return ITEM_TYPE.ALONE_BIG.ordinal();
+//        } else {
             int res = position % 3;
             int n = position & 1;
             if ((res == 0 && n == 0)) {
@@ -78,12 +78,12 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
             } else {
                 return ITEM_TYPE.ALONE_BIG.ordinal();
             }
-        }
+//        }
     }
 
     @NonNull
     @Override
-    public TestAdapter.Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public StaggerAdapter.Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (i == ITEM_TYPE.BIG_LEFT.ordinal()) {
             View view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.holder_item_view, viewGroup, false);
@@ -151,20 +151,19 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestAdapter.Holder holder, int i) {
-        int ad = i % 15;
+    public void onBindViewHolder(@NonNull StaggerAdapter.Holder holder, int i) {
+        //这里计算好，理论上是可以显示一个横向的item，暂时注销
+//        int ad = i % 15;
         ImageView iv = holder.iv;
-//        DisplayMetrics dm = iv.getContext().getResources().getDisplayMetrics();
-//        int widthPixels = dm.widthPixels;
         CardView cardIv = holder.cardIv;
         ViewGroup.LayoutParams layoutParams = cardIv.getLayoutParams();
         ViewGroup.LayoutParams lp = iv.getLayoutParams();
-        if (i != 0 && ad == 0) {
-            lp.width = w;
-            lp.height = w;
-            layoutParams.width = w;
-            layoutParams.height = w/3;
-        } else {
+//        if (i != 0 && ad == 0) {
+//            lp.width = w;
+//            lp.height = w;
+//            layoutParams.width = w;
+//            layoutParams.height = w/3;
+//        } else {
             int res = i % 3;
             int n = i & 1;
 
@@ -189,8 +188,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.Holder> {
                 layoutParams.width = w / 3;
                 layoutParams.height = w / 3;
             }
-
-        }
+//        }
         iv.setLayoutParams(lp);
         cardIv.setLayoutParams(layoutParams);
         GlideUtil.loadImage(context, R.drawable.place_holder_img, imgs.get(i), iv);

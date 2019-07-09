@@ -2,10 +2,8 @@ package newmatch.zbmf.com.testapplication.fragments.home_fragments;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,18 +15,20 @@ import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
+import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
+import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * Create By Administrator
  * on 2019/7/1
  */
 public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
-        DianZanClickListener {
+        DianZanClickListener, StaggerAdapter.ClickCardView {
 
 
     private RecyclerView homeRecyclerView;
@@ -49,18 +49,68 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
     @Override
     protected void initView() {
         homeRecyclerView = bindView(R.id.homeRecyclerView);
-        homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
-                OrientationHelper.VERTICAL, false));
-        mHomeGridAdapter = new HomeGridAdapter(getContext(), getActivity());
-        mHomeGridAdapter.setHomeRVIvClick(this);
-        mHomeGridAdapter.setDianZan(this);
-        homeRecyclerView.setAdapter(mHomeGridAdapter);
+        homeRecyclerView.setHasFixedSize(true);
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL);
+        homeRecyclerView.setLayoutManager(manager);
+//        homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
+//                OrientationHelper.VERTICAL, false));
+//        mHomeGridAdapter = new HomeGridAdapter(getContext(), getActivity());
+//        mHomeGridAdapter.setHomeRVIvClick(this);
+//        mHomeGridAdapter.setDianZan(this);
+//        homeRecyclerView.setAdapter(mHomeGridAdapter);
 
         //模拟数据
-        for (int i = 0; i < 30; i++) {
-            imgs.add(ContextCompat.getDrawable(getActivity(), R.drawable.mn9));
+//        for (int i = 0; i < 30; i++) {
+//            imgs.add(ContextCompat.getDrawable(getActivity(), R.drawable.mn9));
+//        }
+//        mHomeGridAdapter.addImgList1(imgs);
+        StaggerAdapter testAdapter = new StaggerAdapter(getActivity());
+        homeRecyclerView.setAdapter(testAdapter);
+        testAdapter.setClickCardView(this);
+
+        List<Integer> imgs = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            imgs.add(R.drawable.mn1);
+            imgs.add(R.drawable.mn2);
+            imgs.add(R.drawable.mn3);
+            imgs.add(R.drawable.mn4);
+            imgs.add(R.drawable.mn5);
+            imgs.add(R.drawable.mn6);
+            imgs.add(R.drawable.mn7);
+            imgs.add(R.drawable.mn8);
+            imgs.add(R.drawable.mn9);
+            imgs.add(R.drawable.mn10);
+            imgs.add(R.drawable.mn11);
+            imgs.add(R.drawable.mn12);
+            imgs.add(R.drawable.mn13);
+            imgs.add(R.drawable.mn14);
+            imgs.add(R.drawable.mn15);
+            imgs.add(R.drawable.mn16);
+            imgs.add(R.drawable.mn17);
+            imgs.add(R.drawable.mn18);
+            imgs.add(R.drawable.mn19);
+            imgs.add(R.drawable.mn20);
+            imgs.add(R.drawable.mn21);
+            imgs.add(R.drawable.mn22);
+            imgs.add(R.drawable.mn23);
+            imgs.add(R.drawable.mn24);
+            imgs.add(R.drawable.mn25);
+            imgs.add(R.drawable.mn26);
+            imgs.add(R.drawable.mn27);
+            imgs.add(R.drawable.mn28);
+            imgs.add(R.drawable.mn29);
+            imgs.add(R.drawable.mn30);
+            imgs.add(R.drawable.mn31);
+            imgs.add(R.drawable.mn32);
+            imgs.add(R.drawable.mn33);
+            imgs.add(R.drawable.mn34);
+            imgs.add(R.drawable.mn35);
+            imgs.add(R.drawable.mn36);
+            imgs.add(R.drawable.mn37);
         }
-        mHomeGridAdapter.addImgList1(imgs);
+        testAdapter.addData(imgs);
+
     }
 
     @Override
@@ -99,4 +149,8 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
     }
 
 
+    @Override
+    public void clickCardView(int position) {
+        ToastUtils.showSquareTvToast(getActivity(), "  position:" + position);
+    }
 }
