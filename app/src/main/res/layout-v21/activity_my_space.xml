@@ -121,10 +121,10 @@
                 android:fitsSystemWindows="true"
                 android:minHeight="?attr/actionBarSize"
                 android:paddingTop="@dimen/dp_20"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-                <!--     android:background="@drawable/topbar_bg"-->
+
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"

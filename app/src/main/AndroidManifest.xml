@@ -34,26 +34,18 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity
-            android:name=".permissions.PermissionActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/EmptyTheme">
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
-                <action android:name="android.testApplication.permissions.permissionActivity" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -111,7 +103,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.PermissionsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/EmptyTheme">
+            <intent-filter>
+                <action android:name="android.testApplication.permissions.permissionActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".services.LocationService"

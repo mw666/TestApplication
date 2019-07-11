@@ -86,7 +86,6 @@
     <string name="tian_msg_tip">说点蜜语哟...</string>
     <string name="moodsValue">人气值</string>
     <string name="get_img_tip">app获取图片需要该权限，请同意！</string>
-    <string name="get_location_tip">需要获取当前位置，请同意！</string>
     <string name="revert">回复</string>
     <string name="reprint">转载</string>
     <string name="collect">收藏</string>

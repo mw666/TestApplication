@@ -25,13 +25,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.zhihu.matisse.Matisse;
@@ -41,12 +38,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
-import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.DynamicAdapter;
 import newmatch.zbmf.com.testapplication.adapters.MyCircleAdapter;
 import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
@@ -86,8 +81,6 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         //全屏，内容延伸至状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-//        TextView toolbar_title = bindView(R.id.toolbar_title);
-//        toolbar_title.setText("我的主场");
         mySpaceAppBar = bindView(R.id.mySpaceAppBar);
         mToolbar = bindView(R.id.toolbar);
         mBackBtn = bindViewWithClick(R.id.backBtn, true);
@@ -403,7 +396,6 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         });
     }
 
-
     @Override
     public void cancelActCallBack(AlertDialog alertDialog) {
         //弹出发表图文动态的对话框
@@ -435,6 +427,8 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         myCircleAdapter = new MyCircleAdapter(MySpaceActivity.this);
         recyclerView.setAdapter(myCircleAdapter);
         videoDynamicBtn.setOnClickListener(btnView -> {
+            //检查权限
+
             new GMSelectImg().picImgsOrVideo(this, MimeType.ofVideo(),
                     PermissionC.PIC_IMG_VIDEO_CODE, 15);
         });

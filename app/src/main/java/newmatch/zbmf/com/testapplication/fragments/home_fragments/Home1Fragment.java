@@ -25,13 +25,12 @@ import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
-import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
-        DianZanClickListener ,StaggerAdapter.ClickCardView {
+        DianZanClickListener {
 
     private SmartRefreshLayout refreshLayout;
     private RecyclerView homeRecyclerView;
@@ -60,7 +59,7 @@ public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
         //模拟数据
         StaggerAdapter testAdapter = new StaggerAdapter(getActivity());
         homeRecyclerView.setAdapter(testAdapter);
-        testAdapter.setClickCardView(this);
+        testAdapter.setHomeRVIvClick(this);
 
         List<Integer> imgs = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
@@ -141,9 +140,4 @@ public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
         SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
     }
 
-    @Override
-    public void clickCardView(int position) {
-        ToastUtils.showSquareTvToast(getActivity(), "  position:" + position);
-
-    }
 }

@@ -1,5 +1,6 @@
 package newmatch.zbmf.com.testapplication.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,14 +13,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.MessageFormat;
@@ -283,6 +281,7 @@ public class MyDialogUtil {
         alertDialog.show();
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     public static void showBottomDynamicDialog(Activity activity, Context context, View view,
                                                boolean touchCancel, int res, String title,
                                                DialogActCallBack actionCallBac) {
@@ -307,7 +306,6 @@ public class MyDialogUtil {
             alertDialog.setCanceledOnTouchOutside(touchCancel);
             window.setWindowAnimations(R.style.alertDialogStyle01);
         }
-
         alertDialog.show();
     }
 }

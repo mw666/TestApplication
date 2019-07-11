@@ -10,9 +10,10 @@ import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
+import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
-public class TestActivity extends AppCompatActivity implements StaggerAdapter.ClickCardView {
+public class TestActivity extends AppCompatActivity implements HomeRVIvClick {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class TestActivity extends AppCompatActivity implements StaggerAdapter.Cl
 
         StaggerAdapter testAdapter = new StaggerAdapter(this);
         rv.setAdapter(testAdapter);
-        testAdapter.setClickCardView(this);
+        testAdapter.setHomeRVIvClick(this);
 
         List<Integer> imgs = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
@@ -76,7 +77,7 @@ public class TestActivity extends AppCompatActivity implements StaggerAdapter.Cl
     }
 
     @Override
-    public void clickCardView(int position) {
+    public void rvIvCallBack(int position) {
         ToastUtils.showSquareTvToast(this, "  position:" + position);
     }
 }

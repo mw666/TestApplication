@@ -3,7 +3,6 @@ package newmatch.zbmf.com.testapplication.activitys;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,7 +22,6 @@ import com.zhihu.matisse.MimeType;
 import java.util.ArrayList;
 import java.util.List;
 
-import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
@@ -32,16 +30,17 @@ import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.ShowClickIv;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
-import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
+import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.UnitUtils;
 
-public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPermissions.PermissionCallBackExcute {
+public class UserDetailActivity extends BaseActivity implements ShowClickIv {
 
     private ArrayList<BannerService.Data> mData;
     private CollapsingToolbarLayoutState state;
@@ -53,7 +52,6 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
     private ImageWatcherHelper mIwHelper;
     private RoundImageView mUserAvatarRv;
     private int mUserAvatarH;
-    private GMPermissions mGmPermissions;
 
     @Override
     protected Integer layoutId() {
@@ -80,10 +78,6 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
         bindViewWithClick(R.id.addUserBtn, true);
         bindViewWithClick(R.id.sendMsgBtn, true);
         bindViewWithClick(R.id.dianZanIvBtn, true);
-
-        //申请权所需要的对象
-        mGmPermissions = GMPermissions.instance().setParameter(this, this, PermissionC.WR_FILE_CODE);
-        mGmPermissions.setPermissionCallBackExcute(this);
 
         //监听callapsingToolBarLayout的延展状态
         appBarLayoutSH();
@@ -129,17 +123,19 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
                 UserDetailActivity.this.finish();
                 break;
             case R.id.userAvatarIv:
-                 //读取SD卡的权限
-                //对应的是Build.Version_code  16
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    GMPermissions.skipPermissionActivity(this,
-                            PermissionC.WR_FILES_PERMISSION,PermissionC.PIC_IMG_VIDEO_CODE,
-                            getString(R.string.get_img_tip));
-                }else {
-                    //选择图片
-                    new GMSelectImg().picImgsOrVideo(this, MimeType.ofImage(),
-                            PermissionC.PIC_IMG_VIDEO_CODE,1);
-                }
+                //读取SD卡的权限
+                PermissionUtils.instance().requestPermission(this,
+                        getString(R.string.get_img_tip),PermissionC.WR_FILES_PERMISSION,
+                        new PermissionResultCallBack() {
+                            @Override
+                            public void permissionCallBack() {
+                                //选择图片
+                                new GMSelectImg().picImgsOrVideo(UserDetailActivity.this,
+                                        MimeType.ofImage(),
+                                        PermissionC.PIC_IMG_VIDEO_CODE,
+                                        1);
+                            }
+                        });
                 break;
             case R.id.addUserBtn:
                 Bundle bundle = new Bundle();
@@ -193,7 +189,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
 
     @Override
     public void showClickIv(Integer pos, ImageView imageView, List<Uri> dataList) {
-        ShowImgUtils.showImgs(pos,imageView, dataList);
+        ShowImgUtils.showImgs(pos, imageView, dataList);
     }
 
     //设置userAvatar是否可见
@@ -219,7 +215,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
         switch (requestCode) {
             case PermissionC.PIC_IMG_VIDEO_CODE:
                 //选择图片的结果
-                if (resultCode== Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     List<Uri> mSelected = Matisse.obtainResult(data);
                     //设置选择的图片
                     GlideUtil.loadCircleImage(UserDetailActivity.this,
@@ -233,33 +229,4 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv,GMPe
         }
     }
 
-//    //权限申请的回调
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case PermissionC.WR_FILE_CODE:
-//                for (int i = 0; i < grantResults.length; i++) {
-//                    //如果某一个权限用户没有同意--->申请权限
-//                    if (grantResults[i]!= PackageManager.PERMISSION_GRANTED){
-//                        //向用户展示该权限的dialog--->权限用途
-//                        mGmPermissions.showPermissionDialog(getString(R.string.get_img_tip));
-//                    }
-//                    if (i==grantResults.length-1&&grantResults[i]==PackageManager.PERMISSION_GRANTED){
-//                        //表示用户已经同意所有的权限--->执行需要权限后的操作
-//                        //选择图片
-//                        new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
-//                    }
-//                }
-//                break;
-//        }
-//    }
-
-    //执行权限通过后的代码
-    @Override
-    public void excutePermissionCodes() {
-        //选择图片
-        new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
-                PermissionC.PIC_IMG_VIDEO_CODE,1);
-    }
 }

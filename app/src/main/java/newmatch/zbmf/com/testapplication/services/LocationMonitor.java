@@ -1,5 +1,6 @@
 package newmatch.zbmf.com.testapplication.services;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -9,7 +10,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
+import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -21,6 +25,7 @@ import static android.content.Context.LOCATION_SERVICE;
 public class LocationMonitor {
 
     private static LocationMonitor instance = null;
+    private Activity activity;
     private Context mContext;
     private Location gpsLocation = null;
     private Location netLocation = null;
@@ -31,15 +36,16 @@ public class LocationMonitor {
         this.locationCallBack = locationCallBack;
     }
 
-    private LocationMonitor(Context context) {
+    private LocationMonitor(Context context, Activity activity) {
         this.mContext = context;
+        this.activity = activity;
     }
 
-    public static LocationMonitor getInstance(Context context) {
+    public static LocationMonitor getInstance(Context context, Activity activity) {
         if (instance == null) {
             synchronized (LocationMonitor.class) {
                 if (instance == null) {
-                    instance = new LocationMonitor(context);
+                    instance = new LocationMonitor(context, activity);
                 }
             }
         }
@@ -89,7 +95,18 @@ public class LocationMonitor {
                     != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(mContext
                     , PermissionC.LOCATION_PERMISSION[1]) != PackageManager.PERMISSION_GRANTED) {
                 //没有同意授予权限
-                // ActivityCompat.requestPermissions(mContext, PermissionC.LOCATION_PERMISSION, PermissionC.LOCATION_CODE);
+                PermissionUtils.instance().requestPermission(activity,
+                        mContext.getString(R.string.permission_name_location), PermissionC.LOCATION_PERMISSION,
+                        (PermissionResultCallBack) () -> {
+                            if (netWorkIsOpen()) {
+                                myLocationManager.requestLocationUpdates("network", 2000, 60, locationListener);
+                                netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            }
+                            if (gpsIsOpen()) {
+                                myLocationManager.requestLocationUpdates("gps", 2000, 60, locationListener);
+                                gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            }
+                        });
             } else {
                 //用户同意了定位的所有权限--->执行获取定位的操作
                 if (netWorkIsOpen()) {

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -31,7 +30,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
-import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserCenterActivity;
@@ -39,6 +37,7 @@ import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTab
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
@@ -48,6 +47,7 @@ import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
+import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
@@ -56,8 +56,7 @@ import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
  * A simple {@link Fragment} subclass.
  * 我的Fragment
  */
-public class MineFragment extends BaseFragment implements
-        GMPermissions.PermissionCallBackExcute {
+public class MineFragment extends BaseFragment {
 
     private RoundImageView mAvatarIv;
     private Toolbar mToolbar;
@@ -66,9 +65,8 @@ public class MineFragment extends BaseFragment implements
     private PersonalScrollView mPersonalSc;
 
 
-    public MineFragment() {}
-
-    private GMPermissions mGmPermissions;
+    public MineFragment() {
+    }
 
     public static MineFragment mineInstance() {
         MineFragment mineFragment = new MineFragment();
@@ -96,7 +94,7 @@ public class MineFragment extends BaseFragment implements
         TextView userSexAndAge = bindView(R.id.userSexAndAge);
         TextView userAccount = bindView(R.id.userAccount);
         mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
-        bindViewWithClick(R.id.goToSpace,true).setVisibility(View.VISIBLE);
+        bindViewWithClick(R.id.goToSpace, true).setVisibility(View.VISIBLE);
         RelativeLayout mine_user_view = bindViewWithClick(R.id.mine_user_view, true);
 //        ll = bindView(R.id.ll);
         /**************************************************/
@@ -109,14 +107,14 @@ public class MineFragment extends BaseFragment implements
 
         //准备数据--->tabLayout和viewPager
         addFG();
-        userCenterTab.setTabTextColors(R.color.black,R.color.colorPrimary);
+        userCenterTab.setTabTextColors(R.color.black, R.color.colorPrimary);
         userCenterTab.setupWithViewPager(userCenterViewPager);
         MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), mMsgTabTitles, fragmentList);
         userCenterViewPager.setAdapter(adapter);
         userCenterViewPager.setCurrentItem(0);
 
         EventBus.getDefault().register(this);//注册事件
-        mPersonalSc.setTabLayout(userCenterTab,mToolbar,mine_user_view,headRv);
+        mPersonalSc.setTabLayout(userCenterTab, mToolbar, mine_user_view, headRv);
         mPersonalSc.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
                 (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
 //                    PLog.LogD("==  scrollY : "+scrollY+"   ===  oldScrollY : "+oldScrollY);
@@ -131,11 +129,6 @@ public class MineFragment extends BaseFragment implements
         userSexAndAge.setText("女 23岁");
         userAccount.setText("wind_143u9145u91");
 
-        //申请权限
-        //申请权所需要的对象
-        mGmPermissions = GMPermissions.instance().setParameter(getActivity(), getActivity(), PermissionC.WR_FILE_CODE);
-        mGmPermissions.setPermissionCallBackExcute(this);
-
         //设置textView的复制操作
         GMCopy.instance().copyGetXY(userName, getActivity(), mPersonalSc);
         GMCopy.instance().copyGetXY(userAccount, getActivity(), mPersonalSc);
@@ -149,12 +142,12 @@ public class MineFragment extends BaseFragment implements
         mPersonalSc.setRVState(rvScrollEvent.getRVState());
     }
 
-    private void addFG(){
+    private void addFG() {
         String[] tabTitles = getActivity().getResources().getStringArray(R.array.mine_tab_titles);
         mMsgTabTitles = Arrays.asList(tabTitles);
-        if (fragmentList==null){
+        if (fragmentList == null) {
             fragmentList = new ArrayList<>();
-        }else if (fragmentList.size()>0){
+        } else if (fragmentList.size() > 0) {
             fragmentList.clear();
         }
         fragmentList.add(MyProductionFragment.instance());
@@ -178,16 +171,16 @@ public class MineFragment extends BaseFragment implements
     protected void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.avatarIv:
-                //对应的是Build.Version_code  16
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    GMPermissions.skipPermissionActivity(getActivity(),
-                            PermissionC.WR_FILES_PERMISSION, PermissionC.PIC_IMG_VIDEO_CODE,
-                            getString(R.string.get_img_tip));
-                } else {
-                    //选择图片
-                    new GMSelectImg().picImgsOrVideo(getActivity(),MimeType.ofImage(),
-                            PermissionC.PIC_IMG_VIDEO_CODE, 1);
-                }
+                PermissionUtils.instance().requestPermission(getActivity(),
+                        getString(R.string.get_img_tip),PermissionC.WR_FILES_PERMISSION,
+                        new PermissionResultCallBack() {
+                            @Override
+                            public void permissionCallBack() {
+                                //选择图片
+                                new GMSelectImg().picImgsOrVideo(getActivity(), MimeType.ofImage(),
+                                        PermissionC.PIC_IMG_VIDEO_CODE, 1);
+                            }
+                        });
                 break;
             case R.id.userName:
                 View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.update_et_view, null);
@@ -220,13 +213,6 @@ public class MineFragment extends BaseFragment implements
     @Override
     protected Boolean setViewEnterStatuBar() {
         return true;
-    }
-
-    @Override
-    public void excutePermissionCodes() {
-        //选择图片
-        new GMSelectImg().picImgsOrVideo(getActivity(),MimeType.ofImage(),
-                PermissionC.PIC_IMG_VIDEO_CODE, 1);
     }
 
     @Override

@@ -15,7 +15,10 @@ public final class PermissionC {
 
     public static final int init_permis_code=0x1;
 
-    public static final String init_permis="init_permission";
+    public static final String init_permis="Permissions";
+    public static final String PARCELABLE ="pars";
+    public static final String SERIALIZE ="serial";
+    public static final String TIP ="tip";
 
     //位置，读写文件权限,相机权限
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
 import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
+import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
@@ -71,8 +74,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     //fragment的集合数据
     private List<Fragment> fragments;
     private MZBannerView homeBanner;
-    //    private ViewPager homeBanner;
-
+    private AppBarLayout homeAppBar;
+    private Toolbar homeToolBar;
+    private CollapsingToolbarLayoutState state;
+    private TabLayout mainTab;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -108,10 +113,11 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
         TextView searchBtn = bindViewWithClick(R.id.searchBtn, true);
+        homeToolBar = bindView(R.id.homeToolBar);
         homeBanner = bindView(R.id.homeBanner);
-
+        homeAppBar = bindView(R.id.homeAppBar);
         //搜索图标  男性用户隐藏  女性用户显示
-        TabLayout mainTab = bindView(R.id.mainTab);
+        mainTab = bindView(R.id.mainTab);
         ViewPager viewPager = bindView(R.id.viewPager);
         mainTab.setupWithViewPager(viewPager, true);
         //准备fragment集合list的数据
@@ -131,7 +137,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
 
         //模拟轮播的数据
         initBannerView(homeBanner);
-
+        appBarLayoutSH();
 
     }
 
@@ -283,6 +289,29 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         fragments.add(new Home1Fragment());
         fragments.add(new Home2Fragment());
         return fragments;
+    }
+
+    private void appBarLayoutSH() {
+        homeAppBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
+                    homeToolBar.setVisibility(View.GONE);
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                    homeToolBar.setVisibility(View.VISIBLE);
+                    state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
+                }
+            } else {
+                if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                    if (state == CollapsingToolbarLayoutState.COLLAPSED) {
+                        homeToolBar.setVisibility(View.GONE);
+                    }
+                    state = CollapsingToolbarLayoutState.INTERNEDIATE;//修改状态标记为中间
+                }
+            }
+        });
     }
 
     @Override

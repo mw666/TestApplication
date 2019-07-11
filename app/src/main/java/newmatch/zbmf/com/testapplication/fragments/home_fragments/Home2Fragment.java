@@ -21,14 +21,13 @@ import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
-import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * Create By Administrator
  * on 2019/7/1
  */
 public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
-        DianZanClickListener, StaggerAdapter.ClickCardView {
+        DianZanClickListener{
 
 
     private RecyclerView homeRecyclerView;
@@ -67,7 +66,7 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
 //        mHomeGridAdapter.addImgList1(imgs);
         StaggerAdapter testAdapter = new StaggerAdapter(getActivity());
         homeRecyclerView.setAdapter(testAdapter);
-        testAdapter.setClickCardView(this);
+        testAdapter.setHomeRVIvClick(this);
 
         List<Integer> imgs = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
@@ -148,9 +147,4 @@ public class Home2Fragment extends BaseFragment implements HomeRVIvClick,
         SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
     }
 
-
-    @Override
-    public void clickCardView(int position) {
-        ToastUtils.showSquareTvToast(getActivity(), "  position:" + position);
-    }
 }

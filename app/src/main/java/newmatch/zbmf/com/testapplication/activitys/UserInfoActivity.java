@@ -3,7 +3,6 @@ package newmatch.zbmf.com.testapplication.activitys;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,34 +19,31 @@ import com.zhihu.matisse.MimeType;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCalendar;
-import newmatch.zbmf.com.testapplication.GMClass.GMPermissions;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
+import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * 圈友信息填写页面
  */
-public class UserInfoActivity extends BaseActivity implements GMPermissions.PermissionCallBackExcute {
+public class UserInfoActivity extends BaseActivity {
 
     private TextInputLayout mPhoneLayout;
-    //    private TextInputLayout mLocationLayout;
-//    private TextInputLayout mBirthdayLayout;
     //用户同意所需的全部权限的标志
-    private Boolean allGrantedPermission = false;
     private RoundImageView mAvatarIv;
     private TextView mLocationTv;
     private TextView mBirthdayTv;
-    private GMPermissions mGmPermissions;
 
     @Override
     protected Integer layoutId() {
@@ -75,17 +71,10 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
         submitUserInfoBtn.setText(getString(R.string.confirm));
 
         textChangeListener(mPhoneLayout, clearPhone);
-//        textChangeListener(mLocationLayout, clearLocation);
-//        textChangeListener(mBirthdayLayout, clearBirthday);
-        //权限
-//        wrFilesPermission();
-        //申请权所需要的对象
-        mGmPermissions = GMPermissions.instance().setParameter(this, this, PermissionC.WR_FILE_CODE);
-        mGmPermissions.setPermissionCallBackExcute(this);
 
         sexRG.setOnCheckedChangeListener((group, checkedId) -> {
             //获取用户的性别
-            RadioButton radioButton = (RadioButton) UserInfoActivity.this.findViewById(group.getCheckedRadioButtonId());
+            RadioButton radioButton = UserInfoActivity.this.findViewById(group.getCheckedRadioButtonId());
             CharSequence sex = radioButton.getText();
             PLog.LogD("--   选择的性别  :" + sex);
 
@@ -96,40 +85,6 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
     @Override
     protected void initData() {
 
-    }
-
-    /**
-     * 封装好动态权限
-     */
-    public void wrFilesPermission() {
-        //对应的是Build.Version_code  16
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            GMPermissions.skipPermissionActivity(this,
-                    PermissionC.WR_FILES_PERMISSION, PermissionC.PIC_IMG_VIDEO_CODE
-                    , getString(R.string.get_img_tip));
-        } else {
-            //选择图片
-            new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
-                    PermissionC.PIC_IMG_VIDEO_CODE, 1);
-        }
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //如果Android版本大于或等于6.0
-            boolean b = ActivityCompat.checkSelfPermission(this, PermissionC.WR_FILES_PERMISSION[0])
-                    != PackageManager.PERMISSION_GRANTED;
-            boolean b1 = ActivityCompat.checkSelfPermission(
-                    this, PermissionC.WR_FILES_PERMISSION[1])
-                    != PackageManager.PERMISSION_GRANTED;
-            if (b || b1) {
-                PLog.LogD("---    执行获取文件读写权限  ----");
-                //请求权限
-                ActivityCompat.requestPermissions(this, PermissionC.WR_FILES_PERMISSION
-                        , PermissionC.WR_FILE_CODE);
-            } else {
-                allGrantedPermission = true;
-            }
-        } else {
-            allGrantedPermission = true;
-        }*/
     }
 
     /**
@@ -190,14 +145,17 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
                 break;*/
             case R.id.avatarL:
             case R.id.avatarIv:
-                //                if (!allGrantedPermission) {
-                //检查权限
-                wrFilesPermission();
-//                } else {
-                //执行选择图片视频
-//                    picImgsOrVideo(1);
-//                    new GMSelectImg().picImgsOrVideo(this, PermissionC.PIC_IMG_VIDEO_CODE,1);
-//                }
+                PermissionUtils.instance().requestPermission(this,
+                        getString(R.string.get_img_tip),PermissionC.WR_FILES_PERMISSION,
+                        new PermissionResultCallBack() {
+                            @Override
+                            public void permissionCallBack() {
+                                //选择图片
+                                new GMSelectImg().picImgsOrVideo(UserInfoActivity.this
+                                        , MimeType.ofImage(),
+                                        PermissionC.PIC_IMG_VIDEO_CODE, 1);
+                            }
+                        });
                 break;
             case R.id.birthdayTv:
             case R.id.selectBirthdayIv:
@@ -220,44 +178,9 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case PermissionC.WR_FILE_CODE:
-//                for (int i = 0; i < grantResults.length; i++) {
-//                    //某一个权限没有同意--->dialog,向用户展示说明需要该权限的用途
-//                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-//                        MyDialogUtil.getInstance().setDialogCallBack(new DialogCallBack() {
-//                            @Override
-//                            public void positiveClick(DialogInterface dialog) {
-//                                //用户同意权限--->重新申请权限
-//                                ActivityCompat.requestPermissions(UserInfoActivity.this
-//                                        , permissions, PermissionC.WR_FILE_CODE);
-//                                dialog.dismiss();
-//                            }
-//
-//                            @Override
-//                            public void negativeClick(DialogInterface dialog) {
-//                                //用户不同意权限--->不做处理
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                                .showPermissionDialog(UserInfoActivity.this, getString(R.string.wr_permission_tip));
-//                    }
-//                    //用户同意了所有权限
-//                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED && i == grantResults.length - 1) {
-//                        allGrantedPermission = true;
-//                    }
-//                }
-//                break;
-//        }
-//    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        PLog.LogD("---  请求码  :"+requestCode+"--   结果码 ： "+resultCode);
         switch (requestCode) {
             case PermissionC.PIC_IMG_VIDEO_CODE:
                 if (resultCode == Activity.RESULT_OK) {
@@ -276,29 +199,4 @@ public class UserInfoActivity extends BaseActivity implements GMPermissions.Perm
         }
     }
 
-//    //系统的时间选择器
-//    public void showDataPicker() {
-//        final Calendar calendar = Calendar.getInstance();
-////        mTvDate.setText(DateUtils.date2String(calendar.getTime(), DateUtils.YMD_FORMAT));
-//        DatePickerDialog dialog = new DatePickerDialog(UserInfoActivity.this,
-//                (view, year, month, dayOfMonth) -> {
-//                    PLog.LogD("onDateSet: year: " + year + ", month: " + month + ", dayOfMonth: " + dayOfMonth);
-//                    calendar.set(Calendar.YEAR, year);
-//                    calendar.set(Calendar.MONTH, month);
-//                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                    mBirthdayTv.setText(TimeUtil.getYMD(calendar.getTime()/*, DateUtils.YMD_FORMAT*/));
-//                },
-//                calendar.get(Calendar.YEAR),
-//                calendar.get(Calendar.MONTH),
-//                calendar.get(Calendar.DAY_OF_MONTH));
-//        dialog.show();
-//    }
-
-
-    @Override
-    public void excutePermissionCodes() {
-        //选择图片
-        new GMSelectImg().picImgsOrVideo(this,MimeType.ofImage(),
-                PermissionC.PIC_IMG_VIDEO_CODE, 1);
-    }
 }

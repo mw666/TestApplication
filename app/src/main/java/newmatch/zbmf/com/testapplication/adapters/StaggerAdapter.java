@@ -14,6 +14,8 @@ import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 
 /**
@@ -24,12 +26,15 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
 
     private final int w;
     private Context context;
-    private ClickCardView clickCardView;
-
-    public void setClickCardView(ClickCardView clickCardView) {
-        this.clickCardView = clickCardView;
+    private HomeRVIvClick mHomeRVIvClick;
+    private DianZanClickListener mDianZanClickListener;
+    public void setDianZan(DianZanClickListener dianZan) {
+        this.mDianZanClickListener = dianZan;
     }
 
+    public void setHomeRVIvClick(HomeRVIvClick homeRVIvClick) {
+        this.mHomeRVIvClick = homeRVIvClick;
+    }
     private enum ITEM_TYPE {
         BIG_LEFT,
         BIG_RIGHT,
@@ -192,20 +197,11 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
         iv.setLayoutParams(lp);
         cardIv.setLayoutParams(layoutParams);
         GlideUtil.loadImage(context, R.drawable.place_holder_img, imgs.get(i), iv);
-        holder.iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (clickCardView != null)
-                    clickCardView.clickCardView(i);
-            }
+        holder.iv.setOnClickListener(v -> {
+            if (mHomeRVIvClick != null)
+                mHomeRVIvClick.rvIvCallBack(i);
         });
-        holder.cardIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (clickCardView != null)
-                    clickCardView.clickCardView(i);
-            }
-        });
+
     }
 
     @Override
@@ -228,7 +224,4 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
         }
     }
 
-    public interface ClickCardView {
-        void clickCardView(int position);
-    }
 }
