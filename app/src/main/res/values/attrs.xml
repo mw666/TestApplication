@@ -4,6 +4,12 @@
          used for button bars depending on the API level.
          ?android:attr/buttonBarStyle is new as of API 11 so this is
          necessary to support previous API levels. -->
+
+    <!--带圆角的ImageView-->
+    <declare-styleable name="ConnerImageView">
+
+    </declare-styleable>
+
     <declare-styleable name="ButtonBarContainerTheme">
         <attr name="metaButtonBarStyle" format="reference"/>
         <attr name="metaButtonBarButtonStyle" format="reference"/>

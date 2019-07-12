@@ -1,13 +1,10 @@
-package newmatch.zbmf.com.testapplication.custom_view;
+package newmatch.zbmf.com.testapplication.views.circleImageView;
 
 import android.content.Context;
-
 import android.graphics.Canvas;
-
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
@@ -26,7 +23,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
 
     public CustomImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //PS:一定不要再draw里面新建RectF，一定不要再draw里面新建RectF，一定不要再draw里面新建RectF，
+        //PS:一定不要再draw里面新建RectF
         // 重要的事情说三遍，会严重消耗内存
         mRectF = new RectF();
         mPath = new Path();

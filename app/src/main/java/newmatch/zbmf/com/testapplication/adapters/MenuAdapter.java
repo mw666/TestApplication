@@ -5,13 +5,12 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.custom_view.CustomImageView;
+import newmatch.zbmf.com.testapplication.views.circleImageView.CustomImageView;
+
 
 /**
  * Created By pq
