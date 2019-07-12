@@ -10,8 +10,8 @@ import android.widget.TextView;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.utils.TextContentUtil;
+import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
 
 public class AddFirendActivity extends BaseActivity {
 

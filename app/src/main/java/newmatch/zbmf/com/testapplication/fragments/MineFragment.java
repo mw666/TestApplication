@@ -38,7 +38,6 @@ import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
-import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
 import newmatch.zbmf.com.testapplication.fragments.mine_under_fragment.MyProductionFragment;
@@ -51,6 +50,7 @@ import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.views.PersonalScrollView;
+import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
 
 /**
  * A simple {@link Fragment} subclass.

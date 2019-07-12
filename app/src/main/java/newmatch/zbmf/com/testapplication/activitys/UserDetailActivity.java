@@ -31,7 +31,6 @@ import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
-import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.interfaces.ShowClickIv;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
@@ -39,6 +38,7 @@ import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.UnitUtils;
+import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
 
 public class UserDetailActivity extends BaseActivity implements ShowClickIv {
 

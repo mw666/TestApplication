@@ -12,6 +12,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
 import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.circleImageView.ConnerImageView;
 
 public class TestActivity extends AppCompatActivity implements HomeRVIvClick {
 
@@ -20,7 +21,10 @@ public class TestActivity extends AppCompatActivity implements HomeRVIvClick {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test2);
 
+        ConnerImageView connerIv = findViewById(R.id.connerIv);
         RecyclerView rv = findViewById(R.id.rv);
+
+        connerIv.setBackgroundResource(R.drawable.mn4);
 
         rv.setHasFixedSize(true);
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2,

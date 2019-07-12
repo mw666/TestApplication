@@ -27,12 +27,12 @@ import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.component.PLog;
-import newmatch.zbmf.com.testapplication.custom_view.RoundImageView;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
 
 /**
  * 圈友信息填写页面

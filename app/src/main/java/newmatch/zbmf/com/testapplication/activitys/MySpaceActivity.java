@@ -45,6 +45,7 @@ import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
+import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
 import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
@@ -52,6 +53,7 @@ import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.AnimatSpecialEffectUtil;
+import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 public class MySpaceActivity extends BaseActivity implements DynamicAdapter.CommentDynamic
@@ -427,14 +429,22 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         myCircleAdapter = new MyCircleAdapter(MySpaceActivity.this);
         recyclerView.setAdapter(myCircleAdapter);
         videoDynamicBtn.setOnClickListener(btnView -> {
-            //检查权限
-
-            new GMSelectImg().picImgsOrVideo(this, MimeType.ofVideo(),
-                    PermissionC.PIC_IMG_VIDEO_CODE, 15);
+            //选择视频
+            PermissionUtils.instance().requestPermission(this,
+                    getString(R.string.get_img_tip), PermissionC.WR_FILES_PERMISSION,
+                    (PermissionResultCallBack) () -> new GMSelectImg().
+                            picImgsOrVideo(MySpaceActivity.this,
+                                    MimeType.ofVideo(),
+                                    PermissionC.PIC_IMG_VIDEO_CODE,
+                                    9));
         });
         photoDynamicBtn.setOnClickListener(btnView -> {
-            new GMSelectImg().picImgsOrVideo(this, MimeType.ofImage(),
-                    PermissionC.PIC_IMG_VIDEO_CODE, 9);
+            //选择照片
+            PermissionUtils.instance().requestPermission(this,
+                    getString(R.string.get_img_tip), PermissionC.WR_FILES_PERMISSION,
+                    (PermissionResultCallBack) () ->
+                            new GMSelectImg().picImgsOrVideo(this, MimeType.ofImage(),
+                                    PermissionC.PIC_IMG_VIDEO_CODE, 9));
         });
         dynamicSendBtn.setOnClickListener(btnView -> {
             //发布的文字
