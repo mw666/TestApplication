@@ -7,10 +7,14 @@
 
     <!--带圆角的ImageView-->
     <declare-styleable name="ConnerImageView">
-        <attr name="lt_conner" format="dimension" />
-        <attr name="rt_conner" format="dimension" />
-        <attr name="lb_conner" format="dimension" />
-        <attr name="rb_conner" format="dimension" />
+        <attr name="lt_conner1" format="dimension" />
+        <attr name="lt_conner2" format="dimension" />
+        <attr name="rt_conner1" format="dimension" />
+        <attr name="rt_conner2" format="dimension" />
+        <attr name="lb_conner1" format="dimension" />
+        <attr name="lb_conner2" format="dimension" />
+        <attr name="rb_conner1" format="dimension" />
+        <attr name="rb_conner2" format="dimension" />
         <attr name="board" format="dimension" />
         <attr name="board_color" format="color" />
     </declare-styleable>

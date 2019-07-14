@@ -77,7 +77,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
     private AppBarLayout homeAppBar;
     private Toolbar homeToolBar;
     private CollapsingToolbarLayoutState state;
-    private TabLayout mainTab;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -117,9 +116,21 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         homeBanner = bindView(R.id.homeBanner);
         homeAppBar = bindView(R.id.homeAppBar);
         //搜索图标  男性用户隐藏  女性用户显示
-        mainTab = bindView(R.id.mainTab);
+        TabLayout mainTab = bindView(R.id.mainTab);
         ViewPager viewPager = bindView(R.id.viewPager);
         mainTab.setupWithViewPager(viewPager, true);
+
+
+        //模拟设置tab的数据
+        setTabContent(mainTab,viewPager);
+        //模拟轮播的数据
+        initBannerView(homeBanner);
+        appBarLayoutSH();
+
+    }
+
+    //模拟准备设置tab的内容
+    private void setTabContent(TabLayout mainTab,ViewPager viewPager){
         //准备fragment集合list的数据
         List<Fragment> fragmentList = initFragments();
         String[] titles = new String[]{"精华", "新人"};
@@ -134,14 +145,9 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         viewPager.setAdapter(mainFragMentAdapter);
         mainTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);
-
-        //模拟轮播的数据
-        initBannerView(homeBanner);
-        appBarLayoutSH();
-
     }
 
-
+    //模拟准备banner的数据
     private void initBannerView(MZBannerView homeBanner) {
         int[] imgs = {R.drawable.mn14, R.drawable.mn16, R.drawable.mn31, R.drawable.mn25};
 
@@ -291,6 +297,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         return fragments;
     }
 
+    //设置appBar关合的效果
     private void appBarLayoutSH() {
         homeAppBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0) {

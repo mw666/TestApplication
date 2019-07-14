@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 
@@ -59,25 +57,10 @@ public class MyCircleAdapter extends RecyclerView.Adapter<MyCircleAdapter.Circle
     public void onBindViewHolder(@NonNull CircleHolder circleHolder, int i) {
         int windowW = GetUIDimens.getWindowW(mContext);
         ViewGroup.LayoutParams lp = circleHolder.iv.getLayoutParams();
-        lp.width = (windowW - 120) / 3;
-        lp.height = (windowW - 120) / 3;
+        lp.width = (windowW - 180) / 3;
+        lp.height = (windowW - 180) / 3;
         circleHolder.iv.setLayoutParams(lp);
-        int type = i % 3;
-        if (type == 1) {
-            GlideUtil.loadCornerdImg(mContext, imgUriList.get(i), R.drawable.loading1,
-                    circleHolder.iv, false, false,
-                    false, false);
-        } else if (type == 2) {
-            GlideUtil.loadCornerdImg(mContext, imgUriList.get(i), R.drawable.loading1,
-                    circleHolder.iv, false, false,
-                    true, true);
-        } else {
-            GlideUtil.loadCornerdImg(mContext, imgUriList.get(i), R.drawable.loading1,
-                    circleHolder.iv, true, true,
-                    false, false);
-        }
-
-//        circleHolder.iv.setOnTouchListener();
+        GlideUtil.loadImage(mContext,R.drawable.loading1,imgUriList.get(i),circleHolder.iv);
 
     }
 

@@ -1,12 +1,37 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="newmatch.zbmf.com.testapplication.fragments.dynamic_fragments.UserDynamicFragment">
+<com.scwang.smartrefresh.layout.SmartRefreshLayout android:id="@+id/dynamicRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:srlAccentColor="@color/white"
+    app:srlEnableLoadMore="true"
+    app:srlEnablePreviewInEditMode="true"
+    app:srlEnableRefresh="true"
+    app:srlFooterHeight="@dimen/dp_40"
+    app:srlHeaderHeight="@dimen/dp_40"
+    app:srlPrimaryColor="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlAccentColor="@color/toast_bg_color"
+        app:srlPrimaryColor="@color/white"
+        app:srlTextSizeTitle="@dimen/sp_12" />
+
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/dynamicRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:focusable="false" />
 
-</FrameLayout>
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlAccentColor="@color/toast_bg_color"
+        app:srlFooterHeight="@dimen/dp_40"
+        app:srlPrimaryColor="@color/white"
+        app:srlTextSizeTitle="@dimen/sp_12" />
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

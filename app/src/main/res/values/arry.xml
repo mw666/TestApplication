@@ -6,4 +6,18 @@
         <item>@string/like</item>
         <item>@string/setting</item>
     </array>
+    <!--动态广场的数据-->
+    <array name="dynamic_tab_titles">
+        <item>@string/nvshen</item>
+        <item>@string/yujie</item>
+        <item>@string/luoli</item>
+        <item>@string/heisikong</item>
+        <item>@string/tianniu</item>
+        <item>@string/zhifukong</item>
+        <item>@string/gaogenkong</item>
+        <item>@string/nuannan</item>
+        <item>@string/nanshen</item>
+        <item>@string/zhainan</item>
+    </array>
+
 </resources>

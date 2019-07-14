@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,7 +194,8 @@ public class StatusBarUtil {
      * @param activity       需要设置的activity
      * @param statusBarAlpha 状态栏透明度
      */
-    public static void setTranslucentForCoordinatorLayout(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+    public static void setTranslucentForCoordinatorLayout(Activity activity,
+                                                          @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return;
         }
@@ -339,6 +341,20 @@ public class StatusBarUtil {
             // 设置属性
             setDrawerLayoutProperty(drawerLayout, contentLayout);
         }
+    }
+    //给状态栏设置一个View
+    public void setStatusView(Activity activity, int viewRes){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            View statusBarView = new View(activity);
+            LinearLayout.LayoutParams params =
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
+            statusBarView.setLayoutParams(params);
+//            statusBarView.setBackgroundColor(calculateStatusColor(color, alpha));
+            statusBarView.setId(FAKE_STATUS_BAR_VIEW_ID);
+            statusBarView.setBackground(ActivityCompat.getDrawable(activity,viewRes));
+        }
+
     }
 
     /**

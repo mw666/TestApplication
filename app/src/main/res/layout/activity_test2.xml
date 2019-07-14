@@ -8,17 +8,21 @@
     android:orientation="vertical"
     tools:context=".activitys.TestActivity">
 
-    <newmatch.zbmf.com.testapplication.views.circleImageView.ConnerImageView
-        android:id="@+id/connerIv"
-        android:layout_width="@dimen/dp_180"
-        android:layout_height="@dimen/dp_180"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        app:lt_conner="@dimen/dp_12" />
+    <ImageView
+        android:id="@+id/testIv"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
+        android:visibility="gone" />
+
+    <newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView
+        android:id="@+id/testIv2"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_200"
+        android:src="@drawable/mn3"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </LinearLayout>

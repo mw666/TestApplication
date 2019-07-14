@@ -97,9 +97,11 @@ public class MsgFragment extends BaseFragment {
         }
         msgTabTitles.add(getString(R.string.msg));//消息
         msgTabTitles.add( getString(R.string.good_friends));//好友
+        msgTabTitles.add( getString(R.string.my_like));//我的关注
         //msgTabTitles.add(0,getString(R.string.group));//群组
         fragmentList.add(ChatListFragment.instance());
-        fragmentList.add( GoodFriendsOrGroupFragment.instance());
+        fragmentList.add(GoodFriendsOrGroupFragment.instance());
+        fragmentList.add(MyLikeFragment.instance());
     }
 
     @Override

@@ -37,7 +37,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/bg_img"/>
 
-                <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
+                <newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView
                     android:id="@+id/userAvatarIv"
                     android:layout_width="@dimen/dp_85"
                     android:layout_height="@dimen/dp_85"
@@ -182,7 +182,7 @@
                     android:layout_marginRight="@dimen/dp_8"/>
 
 
-                <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
+                <newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView
                     android:id="@+id/userAvatarRv"
                     android:layout_width="@dimen/dp_42"
                     android:layout_height="@dimen/dp_42"

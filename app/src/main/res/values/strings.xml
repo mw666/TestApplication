@@ -45,6 +45,16 @@
     <string name="wr_permission_tip">app运行需要获取文件权限,请同意</string>
     <string name="select_city">选择城市</string>
     <string name="currentAddress">您正在看：</string>
+    <string name="nvshen">女神</string>
+    <string name="yujie">御姐</string>
+    <string name="luoli">萝莉</string>
+    <string name="heisikong">黑丝控</string>
+    <string name="tianniu">甜妞</string>
+    <string name="zhifukong">制服控</string>
+    <string name="gaogenkong">高跟控</string>
+    <string name="nuannan">暖男</string>
+    <string name="nanshen">男神</string>
+    <string name="zhainan">宅男</string>
     <string name="home">首页</string>
     <string name="dynamic">动态</string>
     <string name="msg">消息</string>
@@ -122,5 +132,6 @@
     <string name="content">这是邀请说明的内容，嗲年发哦佛法建瓯帕金斯发哦分哦泼妇麻烦皮肤敏感苹果
         .......................</string>
     <string name="invite_method">邀请新用户打开浏览器扫描下载二位码或搜索下载链接，下载App，注册时填写您的邀请码！</string>
+    <string name="my_like">我的关注</string>
 
 </resources>
