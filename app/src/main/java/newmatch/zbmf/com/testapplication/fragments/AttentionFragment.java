@@ -38,8 +38,8 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
     BannerService mResult;
     private int measuredHeight;
 
-    private int[] banner={R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,
-            R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9,R.drawable.mn9};
+    private int[] banner={R.drawable.j1,R.drawable.j2,R.drawable.j3,R.drawable.j4,
+            R.drawable.j5};
 
     public AttentionFragment() {}
 

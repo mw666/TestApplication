@@ -3,27 +3,19 @@ package newmatch.zbmf.com.testapplication.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
 import newmatch.zbmf.com.testapplication.activitys.RegisterActivity;
@@ -333,7 +325,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
                     ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.login_success));
 
-                    SkipActivityUtil.skipActivity(registerActivity, MainActivity.class);
+//                    SkipActivityUtil.skipActivity(registerActivity, MainActivity.class);
+
+                    SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
                     registerActivity.finish();
                 }
                 break;

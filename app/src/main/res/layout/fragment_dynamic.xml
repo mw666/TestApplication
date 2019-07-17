@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/dynamicAppbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_120"
+        android:layout_height="@dimen/dp_150"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
+            android:background="#f7f7f7"
+            app:contentScrim="@color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
@@ -28,7 +29,7 @@
             <newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView
                 android:id="@+id/dynamicBanner"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="150dp"
                 android:background="@drawable/vp_bg"
                 app:canLoop="true"
                 app:indicatorAlign="center"
@@ -42,22 +43,24 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/dynamicToolBar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_28"
+                android:layout_height="@dimen/dp_35"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_23"
                 android:background="@drawable/no_corner_white_bg"
                 android:fitsSystemWindows="true"
                 android:gravity="center"
+                android:visibility="visible"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/dynamicTab"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dp_14"
                     android:fitsSystemWindows="true"
                     app:background="@drawable/no_corner_white_bg"
+                    app:layout_collapseMode="pin"
                     app:tabGravity="center"
                     app:tabIndicatorColor="#111111"
                     app:tabIndicatorHeight="@dimen/dp_2"
@@ -68,13 +71,15 @@
                     app:tabTextColor="@color/common_bg_press" />
 
                 <ImageView
-                    android:layout_width="@dimen/dp_28"
-                    android:layout_height="@dimen/dp_28"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_gravity="end"
                     android:background="@color/white"
                     android:padding="@dimen/dp_2"
                     android:src="@drawable/arrow_right_gray" />
+
             </android.support.v7.widget.Toolbar>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -105,6 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_28"
         android:background="@drawable/gradient_view"
-        android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -54,7 +54,7 @@ public class MyLikeFragment extends BaseFragment {
 
     @Override
     protected Boolean setViewEnterStatuBar() {
-        return null;
+        return true;
     }
 
 

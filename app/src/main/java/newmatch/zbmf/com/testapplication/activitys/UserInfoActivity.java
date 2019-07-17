@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -52,9 +55,20 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        //设置内容顶进状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         MyActivityManager.getMyActivityManager().pushAct(UserInfoActivity.this);
         bindViewWithClick(R.id.avatarL, true);
         mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
+        Toolbar toolbar = bindView(R.id.toolbar);
+        TextView toolbar_title = bindView(R.id.toolbar_title);
+        toolbar_title.setText("个人资料");
+
+        setSupportActionBar(toolbar);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayShowTitleEnabled(false);
+        supportActionBar.setDisplayHomeAsUpEnabled(false);
+
         RadioGroup sexRG = bindView(R.id.sexRG);
         mPhoneLayout = bindView(R.id.phoneLayout);
         ImageView clearPhone = bindViewWithClick(R.id.clearPhone, true);
@@ -146,15 +160,12 @@ public class UserInfoActivity extends BaseActivity {
             case R.id.avatarL:
             case R.id.avatarIv:
                 PermissionUtils.instance().requestPermission(this,
-                        getString(R.string.get_img_tip),PermissionC.WR_FILES_PERMISSION,
-                        new PermissionResultCallBack() {
-                            @Override
-                            public void permissionCallBack() {
-                                //选择图片
-                                new GMSelectImg().picImgsOrVideo(UserInfoActivity.this
-                                        , MimeType.ofImage(),
-                                        PermissionC.PIC_IMG_VIDEO_CODE, 1);
-                            }
+                        getString(R.string.get_img_tip), PermissionC.WR_FILES_PERMISSION,
+                        (PermissionResultCallBack) () -> {
+                            //选择图片
+                            new GMSelectImg().picImgsOrVideo(UserInfoActivity.this
+                                    , MimeType.ofImage(),
+                                    PermissionC.PIC_IMG_VIDEO_CODE, 1);
                         });
                 break;
             case R.id.birthdayTv:
@@ -174,6 +185,7 @@ public class UserInfoActivity extends BaseActivity {
                 //提交用户资料
                 ToastUtils.showSingleToast(MyApplication.getInstance(), "提交用户资料");
                 SkipActivityUtil.skipActivity(UserInfoActivity.this, MainActivity.class);
+                finish();
                 break;
         }
     }

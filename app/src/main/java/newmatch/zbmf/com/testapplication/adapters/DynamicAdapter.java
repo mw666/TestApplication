@@ -60,7 +60,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
     public void onBindViewHolder(@NonNull DyViewHolder holder, int position) {
         //设置动态的用户的图片
         //模拟-----先加载本地
-        GlideUtil.loadCircleImage(mContext, R.drawable.touxiang_icon, R.drawable.mn9, holder.mDyUserAvatar);
+        GlideUtil.loadCircleImage(mContext, R.drawable.touxiang_icon, R.drawable.j1, holder.mDyUserAvatar);
         //设置发布动态用户的性别
         //模拟设置为女
         GlideUtil.loadImageWithLocation(mContext, R.drawable.woman_sex_icon, holder.mDySexIv);

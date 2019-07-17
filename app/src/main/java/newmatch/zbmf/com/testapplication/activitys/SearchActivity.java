@@ -1,5 +1,6 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +13,7 @@ import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.utils.TextContentUtil;
 
-public class SearchActivity extends BaseActivity{
+public class SearchActivity extends BaseActivity {
 
     @Override
     protected Integer layoutId() {
@@ -27,7 +28,10 @@ public class SearchActivity extends BaseActivity{
         //设置返回箭头的隐藏
         Toolbar toolBar = bindView(R.id.toolbar);
         setSupportActionBar(toolBar);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayShowTitleEnabled(false);
+        supportActionBar.setDisplayHomeAsUpEnabled(false);
 
 //        bindView(R.id.toolbar_title).setVisibility(View.INVISIBLE);//隐藏顶部标题
         EditText searchUserEt = bindView(R.id.searchUserEt);
@@ -35,7 +39,7 @@ public class SearchActivity extends BaseActivity{
         RecyclerView searchRecommendRv = bindView(R.id.searchRecommendRv);
         ImageView clearSearchEt = bindView(R.id.clearSearchEt);
 
-        TextContentUtil.showOrHideClearIv(searchUserEt,searchResultIv);
+        TextContentUtil.showOrHideClearIv(searchUserEt, searchResultIv);
 
     }
 
@@ -63,8 +67,6 @@ public class SearchActivity extends BaseActivity{
     protected void onViewClick(View view) {
 
     }
-
-
 
 
 }

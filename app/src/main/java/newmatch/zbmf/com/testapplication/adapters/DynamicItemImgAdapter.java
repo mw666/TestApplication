@@ -47,7 +47,7 @@ public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAd
     @Override
     public void onBindViewHolder(@NonNull DynamicItemImgHolder holder, int position) {
         //加载本地美女图片
-        GlideUtil.loadImageWithLocation(mContext,R.drawable.mn9,holder.mRvIv);
+        GlideUtil.loadImageWithLocation(mContext,R.drawable.j1,holder.mRvIv);
         if (imgCount<2){
            GMSetViewLayoutParams.instance().gainScreenW(mContext)
                    .setImageviewLp(mContext,holder.mRvIv,1);

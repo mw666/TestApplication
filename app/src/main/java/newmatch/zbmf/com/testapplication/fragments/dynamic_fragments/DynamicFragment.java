@@ -4,7 +4,6 @@ package newmatch.zbmf.com.testapplication.fragments.dynamic_fragments;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +46,7 @@ public class DynamicFragment extends BaseFragment  {
     private AppBarLayout dynamicAppbar;
     private CollapsingToolbarLayoutState state;
     private View statusView;
+    private MZBannerView dynamicBanner;
 
     public DynamicFragment() {
 
@@ -77,7 +77,7 @@ public class DynamicFragment extends BaseFragment  {
 
         dynamicToolBar = bindView(R.id.dynamicToolBar);
         statusView = bindView(R.id.statusView);
-        MZBannerView dynamicBanner = bindView(R.id.dynamicBanner);
+        dynamicBanner = bindView(R.id.dynamicBanner);
         dynamicAppbar = bindView(R.id.dynamicAppbar);
         TabLayout dynamicTab = bindView(R.id.dynamicTab);
         ViewPager dynamicViewPager = bindView(R.id.dynamicViewPager);
@@ -170,7 +170,7 @@ public class DynamicFragment extends BaseFragment  {
 
     //模拟设置轮播广告
     private void initBannerView(MZBannerView homeBanner) {
-        int[] imgs = {R.drawable.mn14, R.drawable.mn16, R.drawable.mn31, R.drawable.mn25};
+        int[] imgs = {R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4};
 
         List<Integer> imgList;
         imgList = new ArrayList<>();
@@ -216,14 +216,14 @@ public class DynamicFragment extends BaseFragment  {
                     state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
                     dynamicToolBar.setVisibility(View.GONE);
                 }
-                statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view));
+               // statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view));
             } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                 Log.i("===KKK","   222");
                 if (state != CollapsingToolbarLayoutState.COLLAPSED) {
                     dynamicToolBar.setVisibility(View.VISIBLE);
                     state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
                 }
-                statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view1));
+                //statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view1));
                 StatusBarUtil.setTranslucentForCoordinatorLayout(activity,39);
             } else {
                 Log.i("===KKK","   333");
@@ -231,13 +231,24 @@ public class DynamicFragment extends BaseFragment  {
                     if (state == CollapsingToolbarLayoutState.COLLAPSED) {
                         dynamicToolBar.setVisibility(View.GONE);
                     }
-                    statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view2));
+                  //  statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view2));
                     state = CollapsingToolbarLayoutState.INTERNEDIATE;//修改状态标记为中间
                 }
             }
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        dynamicBanner.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dynamicBanner.pause();
+    }
 
 }
 

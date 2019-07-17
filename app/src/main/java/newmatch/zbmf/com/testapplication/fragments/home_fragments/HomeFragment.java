@@ -149,7 +149,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
 
     //模拟准备banner的数据
     private void initBannerView(MZBannerView homeBanner) {
-        int[] imgs = {R.drawable.mn14, R.drawable.mn16, R.drawable.mn31, R.drawable.mn25};
+        int[] imgs = {R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4};
 
         List<Integer> imgList;
         imgList = new ArrayList<>();

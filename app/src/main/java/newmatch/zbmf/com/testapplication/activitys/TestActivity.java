@@ -40,9 +40,8 @@ public class TestActivity extends AppCompatActivity implements HomeRVIvClick {
         RoundImageView testIv2 = findViewById(R.id.testIv2);
         RecyclerView rv = findViewById(R.id.rv);
 
-        testIv2.setBackgroundResource(R.drawable.mn5);
+        testIv2.setBackgroundResource(R.drawable.j4);
 
-        //
         //        connerIv.setBackgroundResource(R.drawable.mn4);
         //
         //        rv.setHasFixedSize(true);

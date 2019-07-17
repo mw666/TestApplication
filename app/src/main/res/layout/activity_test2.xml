@@ -18,7 +18,7 @@
         android:id="@+id/testIv2"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_200"
-        android:src="@drawable/mn3"/>
+        android:src="@drawable/j1"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"

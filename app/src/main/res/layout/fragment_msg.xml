@@ -14,16 +14,17 @@
         android:id="@+id/msgFGTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_28"
-        android:background="@drawable/topbar_bg"
+        android:layout_marginTop="@dimen/dp_21"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/lavender"
         app:tabIndicatorHeight="@dimen/dp_3"
-        app:tabMinWidth="@dimen/dp_80"
+        app:tabMinWidth="@dimen/dp_65"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
         app:tabTextColor="@color/grey" />
+
+    <!--android:background="@drawable/topbar_bg"-->
 
     <!--<include layout="@layout/tab_layout_with_viewpager"/>-->
 

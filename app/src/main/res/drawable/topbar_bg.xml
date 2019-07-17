@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
-    <!--<gradient-->
-        <!--android:centerColor="@color/middlePurple"-->
-        <!--android:endColor="@color/colorPrimaryDark"-->
-        <!--android:startColor="@color/mPurple_1"/>-->
     <gradient
-        android:centerColor="@color/black_12"
-        android:endColor="@color/black_11"
-        android:startColor="@color/black_3"/>
+        android:centerColor="@color/deepPurple"
+        android:endColor="@color/colorPrimaryDark_1"
+        android:startColor="@color/pink_8"/>
+    <!--<gradient-->
+        <!--android:centerColor="@color/black_12"-->
+        <!--android:endColor="@color/black_11"-->
+        <!--android:startColor="@color/black_3"/>-->
 </shape>

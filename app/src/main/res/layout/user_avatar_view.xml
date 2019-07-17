@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_below="@+id/topToolBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -13,7 +14,7 @@
         android:background="@color/white"
         android:orientation="horizontal">
 
-        <newmatch.zbmf.com.testapplication.custom_view.RoundImageView
+        <newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView
             android:id="@+id/avatarIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -42,7 +42,7 @@ public class ChatRecommendAdapter extends RecyclerView.Adapter<ChatRecommendAdap
     public void onBindViewHolder(@NonNull ChatRecommendHolder holder, int position) {
         //模拟展示
         GlideUtil.loadCircleImage(mContext, R.drawable.place_holder_img, mContext.getResources().
-                getDrawable(R.drawable.mn9), holder.mChatRecommendItemIv);
+                getDrawable(R.drawable.j1), holder.mChatRecommendItemIv);
 
         clickIv(holder.mChatRecommendItemIv,holder.getAdapterPosition());
     }

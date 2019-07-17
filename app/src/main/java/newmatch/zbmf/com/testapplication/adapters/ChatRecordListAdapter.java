@@ -45,7 +45,7 @@ public class ChatRecordListAdapter extends RecyclerView.Adapter<ChatRecordListAd
     public void onBindViewHolder(@NonNull ChatRecordListHolder holder, int position) {
         holder.mChatItemNick.setText("二狗子");
         GlideUtil.loadCircleImage(mContext, R.drawable.place_holder_img, mContext.getResources().
-                getDrawable(R.drawable.mn9), holder.mChatItemUserIv);
+                getDrawable(R.drawable.j3), holder.mChatItemUserIv);
         holder.mChatLastTime.setText("上午  8:23");
         holder.mChatLastChatMsg.setText("你个坏东西，快还我的辣条");
         holder.mChatItemRL.setOnClickListener(new OnceClickListener() {
