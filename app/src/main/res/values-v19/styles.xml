@@ -14,5 +14,13 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-
+    <!--activity公用的style-->
+    <style name="activityPublicStyle" parent="@style/BaseTheme">
+        <!--默认隐藏软件盘-->
+        <item name="android:windowSoftInputMode">stateHidden</item>
+        <!--屏幕的方向设置为竖屏-->
+        <item name="android:screenOrientation">portrait</item>
+        <!--设置configChanges-->
+        <item name="android:configChanges">orientation|keyboardHidden|screenSize</item>
+    </style>
 </resources>

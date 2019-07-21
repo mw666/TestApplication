@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
+        android:elevation="@dimen/dp_5"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8"
+        tools:ignore="RtlSymmetry">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/comment_list_location_icon"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            app:srcCompat="@drawable/location_icon" />
+
+        <TextView
+            android:id="@+id/comment_list_location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/comment_list_location_icon"
+            android:padding="@dimen/dp_3"
+            android:text="武威市"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/dismissDialogBtn"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:background="@drawable/wave_border_less_ripple"
+            app:srcCompat="@drawable/ic_delete_gray" />
+
+        <TextView
+            android:id="@+id/commentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="253条评论"
+            android:textColor="@color/black_13"
+            android:textSize="@dimen/sp_13"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_3"
+        android:background="@color/common_line" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_55"
+        android:paddingBottom="@dimen/dp_50">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_10"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_empty_data"
+            android:drawablePadding="@dimen/dp_5"
+            android:visibility="gone"
+            android:padding="@dimen/dp_12"
+            android:text="亲，留点评论，再走哦！"
+            android:textColor="@color/blue_11"
+            android:textSize="@dimen/sp_13" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_3"
+            android:background="@color/common_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:orientation="horizontal">
+
+            <newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText
+                android:id="@+id/commentEt"
+                android:layout_width="@dimen/dp_285"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="@dimen/dp_5"
+                android:background="@drawable/comment_et_view_bg"
+                android:gravity="center_vertical|left"
+                android:hint="@string/comment_hint"
+                android:inputType="textMultiLine"
+                android:minHeight="30dp"
+                android:minLines="4"
+                android:paddingStart="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_cd"
+                android:textCursorDrawable="@drawable/et_cursor_color"
+                android:textSize="15sp"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/sendComment"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_25"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:background="@drawable/comment_send_bg"
+                android:paddingEnd="@dimen/dp_4"
+                app:srcCompat="@drawable/ic_send_gray"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

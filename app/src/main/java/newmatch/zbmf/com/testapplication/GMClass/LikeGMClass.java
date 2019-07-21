@@ -2,6 +2,7 @@ package newmatch.zbmf.com.testapplication.GMClass;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import newmatch.zbmf.com.testapplication.utils.AnimatSpecialEffectUtil;
  * 这里放置的是点赞的通用方法
  */
 
-public class LikeGMClass {
+public class LikeGMClass <T extends View> {
 
     /**
      * 有接口时将点赞的判断换回来
@@ -23,6 +24,7 @@ public class LikeGMClass {
 
     //当前没有调接口，使用isLike标记
     private static Boolean isLike = false;
+
     public static void clickLike(Activity activity, ImageView view) {
         if (!isLike) {//点赞
             //这里处理点赞和取消点赞
@@ -46,14 +48,17 @@ public class LikeGMClass {
     }
 
     //当前没有调接口，使用isDianLike标记
-    private static Boolean isDianLike=false;
-    public static void clickTvLike(Activity activity, Context context,TextView view) {
+    private static Boolean isDianLike = false;
+
+    public static void clickTvLike(Activity activity, Context context, boolean isAnim, int drawableRes1,
+                                   int drawableRes2, int drawablePadding, TextView view) {
         if (!isDianLike) {//点赞
             //这里处理点赞和取消点赞
-            AnimatSpecialEffectUtil.releaseTwoStars(activity, view);
+            if (isAnim)
+                AnimatSpecialEffectUtil.releaseTwoStars(activity, view);
             isDianLike = true;
             //更换点赞成点亮的图标
-            GMTextSetIcon.setTvLeftIcon(context,R.drawable.dian_zan_grey_icon,view);
+            GMTextSetIcon.setTvLeftIcon(context, drawableRes1, drawablePadding, view);
             //设置动画
             AnimatSpecialEffectUtil.setNodAnim(activity, view);
 
@@ -63,7 +68,7 @@ public class LikeGMClass {
         } else {//取消点赞
             isDianLike = false;
             //更换点赞成点亮的图标
-            GMTextSetIcon.setTvLeftIcon(context,R.drawable.dian_zan_purple_icon,view);
+            GMTextSetIcon.setTvLeftIcon(context, drawableRes2, drawablePadding, view);
             //设置动画
             AnimatSpecialEffectUtil.setNodAnim(activity, view);
         }

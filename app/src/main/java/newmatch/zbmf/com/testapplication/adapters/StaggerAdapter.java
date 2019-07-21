@@ -14,8 +14,8 @@ import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
-import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 
 /**

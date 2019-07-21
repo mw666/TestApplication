@@ -58,35 +58,6 @@ public class Main2Fragment extends BaseFragment {
         //获取宿主Activity对象
         mainActivity = (MainActivity) getActivity();
         ViewPager menuViewPager = bindView(R.id.menuViewPager);
-        imgList = new ArrayList<>();
-        for (int i = 0; i < imgs.length; i++) {
-            imgList.add(imgs[i]);
-        }
-        MenuAdapter menuAdapter = new MenuAdapter(imgList, null, R.layout.menu_view);
-        menuViewPager.setAdapter(menuAdapter);
-        menuViewPager.setOffscreenPageLimit(imgList.size());//设置预加载的数量
-        menuViewPager.setPageMargin(5);
-        //ViewPager默认选择中间的那个
-        if (imgList.size() > 2)
-            menuViewPager.setCurrentItem(1);
-        //添加3D画廊效果
-        menuViewPager.setPageTransformer(true, new RotationPageTransformer());
-        menuViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
         //获取控件
         RelativeLayout rL = bindView(R.id.rL);
         menuHeadIv = bindViewWithClick(R.id.menuHeadIv, true);
@@ -107,7 +78,8 @@ public class Main2Fragment extends BaseFragment {
         TextView accountTv = bindViewWithClick(R.id.accountTv, true);
         TextView loginOutTv = bindViewWithClick(R.id.loginOutTv, true);
 
-
+        //设置画廊效果的ViewPager
+        gallerlyPager(menuViewPager);
         //设置textView的复制操作
         GMCopy.instance().copyGetXY(userNick, getActivity(), rL);
         GMCopy.instance().copyGetXY(userAccount, getActivity(), rL);
@@ -203,6 +175,39 @@ public class Main2Fragment extends BaseFragment {
         if (headUri != null)
             GlideUtil.loadCircleImage(getActivity(), R.drawable.ic_head_portrait_icon,
                     headUri, menuHeadIv);
+    }
+
+    //ViewPager的3D画廊效果
+    private void gallerlyPager(ViewPager menuViewPager) {
+        imgList = new ArrayList<>();
+        for (int i = 0; i < imgs.length; i++) {
+            imgList.add(imgs[i]);
+        }
+        MenuAdapter menuAdapter = new MenuAdapter(imgList, null, R.layout.menu_view);
+        menuViewPager.setAdapter(menuAdapter);
+        menuViewPager.setOffscreenPageLimit(imgList.size());//设置预加载的数量
+        menuViewPager.setPageMargin(5);
+        //ViewPager默认选择中间的那个
+        if (imgList.size() > 2)
+            menuViewPager.setCurrentItem(1);
+        //添加3D画廊效果
+        menuViewPager.setPageTransformer(true, new RotationPageTransformer());
+        menuViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
 

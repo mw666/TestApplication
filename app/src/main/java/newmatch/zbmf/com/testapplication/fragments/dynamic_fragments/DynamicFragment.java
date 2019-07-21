@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.facebook.stetho.common.LogUtil;
@@ -211,27 +210,21 @@ public class DynamicFragment extends BaseFragment  {
     private void appBarLayoutSH() {
         dynamicAppbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0) {
-                Log.i("===KKK","   111");
                 if (state != CollapsingToolbarLayoutState.EXPANDED) {
                     state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
                     dynamicToolBar.setVisibility(View.GONE);
                 }
-               // statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view));
             } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                Log.i("===KKK","   222");
                 if (state != CollapsingToolbarLayoutState.COLLAPSED) {
                     dynamicToolBar.setVisibility(View.VISIBLE);
                     state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
                 }
-                //statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view1));
-                StatusBarUtil.setTranslucentForCoordinatorLayout(activity,39);
+                StatusBarUtil.setStatusBarUpperAPI21(activity);
             } else {
-                Log.i("===KKK","   333");
                 if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
                     if (state == CollapsingToolbarLayoutState.COLLAPSED) {
                         dynamicToolBar.setVisibility(View.GONE);
                     }
-                  //  statusView.setBackground(ActivityCompat.getDrawable(activity,R.drawable.gradient_view2));
                     state = CollapsingToolbarLayoutState.INTERNEDIATE;//修改状态标记为中间
                 }
             }

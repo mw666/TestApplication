@@ -72,9 +72,10 @@
     </style>
 
     <style name="alertDialogStyle02" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowSoftInputMode">adjustPan|stateVisible</item>
+        <item name="android:windowSoftInputMode">adjustPan|stateHidden</item>
         <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
+        <item name="android:maxHeight">@dimen/dp_500</item>
     </style>
 
     <style name="MyAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">   
@@ -100,6 +101,17 @@
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <!--activity公用的style-->
+    <style name="activityPublicStyle" parent="@style/BaseTheme">
+        <!--默认隐藏软件盘-->
+        <item name="android:windowSoftInputMode">stateHidden</item>
+        <!--屏幕的方向设置为竖屏-->
+        <item name="android:screenOrientation">portrait</item>
+        <!--设置configChanges-->
+        <item name="android:configChanges">orientation|keyboardHidden|screenSize</item>
+    </style>
+
     <!--专门申请权限的activity-->
     <style name="activityApplyPermissionsTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--<item name="android:windowIsFloating">true</item>-->

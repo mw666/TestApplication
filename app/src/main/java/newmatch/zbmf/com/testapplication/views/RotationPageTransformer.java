@@ -9,7 +9,7 @@ import android.view.View;
  */
 public class RotationPageTransformer implements ViewPager.PageTransformer {
 
-    private float MIN_SCALE = 0.85f;
+    private float MIN_SCALE = 0.9f;
 
     public RotationPageTransformer() {
 

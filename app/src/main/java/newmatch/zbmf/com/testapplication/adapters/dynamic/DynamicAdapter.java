@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.dynamic;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,12 +10,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import newmatch.zbmf.com.testapplication.GMClass.GMRvSetLayoutManager;
 import newmatch.zbmf.com.testapplication.GMClass.GMTextSetIcon;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
-import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
-import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
+import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
+import newmatch.zbmf.com.testapplication.callback.CommentListCallBack;
+import newmatch.zbmf.com.testapplication.callback.LikeCallBack;
+import newmatch.zbmf.com.testapplication.callback.SkipUserDetailCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 
@@ -30,19 +36,43 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
     private CommentDynamic mCommentDynamic;
     private LikeCallBack mLikeCallBack;
     private CommentArrowCallBack mCommentArrowCallBack;
+    private CommentListCallBack commentListCallBack;
+    private SkipUserDetailCallBack skipUserDetailCallBack;
 
-    private Integer spanCount = 1;//模拟标记动态的网格数量---默认值为1
+
+    /*模拟图片数据*/
+    private List<Integer> img1 = Arrays.asList(new Integer[]{R.drawable.j5});
+    private List<Integer> img2 = Arrays.asList(new Integer[]{R.drawable.j3, R.drawable.j2});
+    private List<Integer> img3 = Arrays.asList(new Integer[]{R.drawable.j5, R.drawable.j2, R.drawable.j4});
+    private List<Integer> img4 = Arrays.asList(new Integer[]{R.drawable.j5, R.drawable.j2, R.drawable.j4, R.drawable.j1
+            , R.drawable.j2, R.drawable.j3, R.drawable.j4, R.drawable.j5});
+    private List<Integer> img;
 
     public void setCommentDynamic(CommentDynamic commentDynamic) {
         mCommentDynamic = commentDynamic;
+        /*模拟图片数据*/
+        img = new ArrayList<>();
+        img.add(img1.size());
+        img.add(img2.size());
+        img.add(img3.size());
+        img.add(img4.size());
+
     }
 
     public void setLikeCallBack(LikeCallBack likeCallBack) {
         mLikeCallBack = likeCallBack;
     }
 
-    public void setCommentArrowCallBack(CommentArrowCallBack commentArrowCallBack){
-        mCommentArrowCallBack=commentArrowCallBack;
+    public void setCommentArrowCallBack(CommentArrowCallBack commentArrowCallBack) {
+        mCommentArrowCallBack = commentArrowCallBack;
+    }
+
+    public void setCommentListCallBack(CommentListCallBack commentListCallBack) {
+        this.commentListCallBack = commentListCallBack;
+    }
+
+    public void setSkipUserDetailCallBack(SkipUserDetailCallBack skipUserDetailCallBack) {
+        this.skipUserDetailCallBack = skipUserDetailCallBack;
     }
 
     public DynamicAdapter(Context context) {
@@ -65,13 +95,14 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
         //模拟设置为女
         GlideUtil.loadImageWithLocation(mContext, R.drawable.woman_sex_icon, holder.mDySexIv);
         //设置发布动态用户的昵称
-        holder.mDyUserName.setText("仙女儿");
+        holder.mDyUserName.setText("维纳斯的忧伤");
         //设置用户的动态文字内容
-        holder.mDyUserContentTv.setText("我是最美的小仙女儿。。。");
+        holder.mDyUserContentTv.setText("当魁拔之歌再次响起的时候，战神必将再次归来，我们的魁拔！");
         //设置定位的tx
-        holder.mDyUserLocationTv.setText("浙江省杭州市小和山水沟沟螃蟹扎");
+        holder.mDyUserLocationTv.setText("浙江省台州市温岭");
         //设置定位图标
-        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.location_icon, holder.mDyUserLocationTv);
+        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.location_icon,
+                2, holder.mDyUserLocationTv);
         //设置该条动态发布距离当前的时间
         holder.mDyContentTime.setText("3小时前");
         //设置动态发布者距离当前用户的位置距离
@@ -79,23 +110,44 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
         //设置评论的数量
         holder.mCommentCountIcon.setText("5");
         //设置评论的Icon
-        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.comment_icon, holder.mCommentCountIcon);
+        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.comment_icon,
+                3, holder.mCommentCountIcon);
         //设置浏览的数量
         holder.mSeeCountTfv.setText("234");
         //设置浏览的Icon
-        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.see_icon, holder.mSeeCountTfv);
+        GMTextSetIcon.setTvLeftIcon(mContext, R.drawable.see_icon,
+                3, holder.mSeeCountTfv);
         //设置点赞的数量
-        holder.mDyLikeContentTv.setText("234");
+        holder.mDyLikeContentTv.setText("2264");
+
+        /*设置动态图片的recyclerView的数据*/
         //发布的动态的图片列表
         holder.mDyUserRV.setNestedScrollingEnabled(false);
-        GMRvSetLayoutManager.setGridLayoutManager(mContext, holder.mDyUserRV, 3/*spanCount*/);
-        //给动态图片列表设置Adapter
-        DynamicItemImgAdapter imgAdapter = new DynamicItemImgAdapter(mContext/*,图片数据*/);
-        imgAdapter.setShowClickIv((pos, imageView, dataList) -> {
-            //展示图片
-            ShowImgUtils.showImgs(pos,imageView, dataList);
-        });
+        int type = 0;
+        DynamicItemImgAdapter imgAdapter;
+
+        if (img.get(position) <= 1) {
+            type = 1;
+            GMRvSetLayoutManager.setGridLayoutManager(mContext, holder.mDyUserRV, type);
+            //给动态图片列表设置Adapter
+            imgAdapter = new DynamicItemImgAdapter(mContext, type, img1);
+        } else if (img.get(position) <= 4) {
+            type = 2;
+            GMRvSetLayoutManager.setGridLayoutManager(mContext, holder.mDyUserRV, type);
+            imgAdapter = new DynamicItemImgAdapter(mContext, type, img2);
+        } else {
+            type = 3;
+            GMRvSetLayoutManager.setGridLayoutManager(mContext, holder.mDyUserRV, type);
+            if (position == 2) {
+                imgAdapter = new DynamicItemImgAdapter(mContext, type, img3);
+            } else {
+                imgAdapter = new DynamicItemImgAdapter(mContext, type, img4);
+            }
+        }
         holder.mDyUserRV.setAdapter(imgAdapter);
+        //展示图片
+        imgAdapter.setShowClickIv(ShowImgUtils::showImgs);
+
         //设置评论
         GMRvSetLayoutManager.setLinearLayoutManager(mContext, holder.mCommentRV);
         holder.mCommentRV.setNestedScrollingEnabled(false);
@@ -109,6 +161,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
                 }
             }
         });
+        //点击弹出评论输入框
         holder.mCommentBtnRL.setOnClickListener(new OnceClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
@@ -121,9 +174,25 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
         holder.mDyDropTopArrow.setOnClickListener(new OnceClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
-                if (mCommentArrowCallBack!=null){
+                if (mCommentArrowCallBack != null) {
                     mCommentArrowCallBack.arrowClickCallBack(holder.getAdapterPosition());
                 }
+            }
+        });
+        //点击展示评论列表-->由下方弹出评论的对话框
+        holder.mCommentCountIcon.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                if (commentListCallBack != null)
+                    commentListCallBack.commentListCallback();
+            }
+        });
+        //点击该用户头像跳转该用户个人中心页面
+        holder.mDyUserAvatar.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                if (skipUserDetailCallBack != null)
+                    skipUserDetailCallBack.skipUserDetailCallBack(0);
             }
         });
 
@@ -131,7 +200,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
 
     @Override
     public int getItemCount() {
-        return 2;
+        return img.size();
     }
 
     static class DyViewHolder extends RecyclerView.ViewHolder {
@@ -142,7 +211,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
                 mDyDistanceTv, mCommentCountIcon, mSeeCountTfv, mDyLikeContentTv;
         private final RecyclerView mDyUserRV, mCommentRV;
 
-        public DyViewHolder(View itemView) {
+        DyViewHolder(View itemView) {
             super(itemView);
             mCommentBtnRL = itemView.findViewById(R.id.commentBtnRL);
             //用户的动态头像

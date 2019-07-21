@@ -6,9 +6,8 @@
     <newmatch.zbmf.com.testapplication.views.customViewPager.CustomViewPager
         android:id="@+id/mzbanner_vp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-    </newmatch.zbmf.com.testapplication.views.customViewPager.CustomViewPager>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

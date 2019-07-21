@@ -46,14 +46,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     // 在MobSDK的扩展中注册SMSSDK的相关信息
-    // MobSDK {
-    //   appKey "28b730acbedd5"
-    // appSecret "09aac733d3fdaf7d50e33e91a7ad796c"
-
+//     MobSDK {
+//       appKey "28b730acbedd5"
+//     appSecret "09aac733d3fdaf7d50e33e91a7ad796c"
+//
 //        SMSSDK {
 //            gui true //关闭mob的开源UI界面
 //        }
-    // }
+//     }
     productFlavors {
     }
 }
@@ -104,7 +104,7 @@ dependencies {
     //gif框架
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     //图片缩放
-    implementation 'com.github.iielse:ImageWatcher:1.1.3'
+    implementation 'com.github.iielse:ImageWatcher:1.1.5'
     //动态权限
     //    compile 'com.yanzhenjie.alertdialog:alertdialog:1.0.1'
     //    implementation 'com.yanzhenjie:permission:2.0.0-rc12'

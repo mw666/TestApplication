@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.interfaces;
+package newmatch.zbmf.com.testapplication.callback;
 
 import android.net.Uri;
 import android.widget.ImageView;
@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface ShowClickIv {
 
-    void showClickIv(Integer pos, ImageView imageView,List<Uri> dataList);
+    void showClickIv(Integer pos, ImageView imageView, List<Uri> dataList);
 
 }

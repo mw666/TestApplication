@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -86,7 +87,7 @@ public class MyDialogUtil {
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+                window.getDecorView().setBackground(ActivityCompat.getDrawable(context,res));
             }
             WindowManager manager = activity.getWindowManager();
             Display display = manager.getDefaultDisplay();
@@ -129,7 +130,7 @@ public class MyDialogUtil {
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+                window.getDecorView().setBackground(ActivityCompat.getDrawable(context,res));
             }
             WindowManager manager = activity.getWindowManager();
             Display display = manager.getDefaultDisplay();
@@ -184,7 +185,7 @@ public class MyDialogUtil {
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+                window.getDecorView().setBackground(ActivityCompat.getDrawable(context,res));
             }
             WindowManager manager = activity.getWindowManager();
             Display display = manager.getDefaultDisplay();
@@ -250,7 +251,7 @@ public class MyDialogUtil {
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+                window.getDecorView().setBackground(ActivityCompat.getDrawable(context,res));
             }
             WindowManager manager = activity.getWindowManager();
             Display display = manager.getDefaultDisplay();
@@ -283,16 +284,16 @@ public class MyDialogUtil {
 
     @SuppressLint("ObsoleteSdkInt")
     public static void showBottomDynamicDialog(Activity activity, Context context, View view,
-                                               boolean touchCancel, int res, String title,
-                                               DialogActCallBack actionCallBac) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.dialogTheme1);
+                                               boolean touchCancel, int res, int dialogStyle,
+                                               DialogActCallBack actCallBack) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, dialogStyle);
         AlertDialog alertDialog = builder.create();
         alertDialog.setView(view);
         Window window = alertDialog.getWindow();
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                window.getDecorView().setBackground(context.getResources().getDrawable(res));
+                window.getDecorView().setBackground(ActivityCompat.getDrawable(context,res));
             }
             WindowManager manager = activity.getWindowManager();
             Display display = manager.getDefaultDisplay();
@@ -305,6 +306,8 @@ public class MyDialogUtil {
             alertDialog.setCancelable(touchCancel);
             alertDialog.setCanceledOnTouchOutside(touchCancel);
             window.setWindowAnimations(R.style.alertDialogStyle01);
+            if (actCallBack != null)
+                actCallBack.cancelActCallBack(alertDialog);
         }
         alertDialog.show();
     }

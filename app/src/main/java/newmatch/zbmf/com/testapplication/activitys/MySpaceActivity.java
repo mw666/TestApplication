@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
@@ -38,18 +37,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
+import newmatch.zbmf.com.testapplication.GMClass.GMTextSetIcon;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.DynamicAdapter;
 import newmatch.zbmf.com.testapplication.adapters.MyCircleAdapter;
+import newmatch.zbmf.com.testapplication.adapters.dynamic.DynamicAdapter;
 import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
+import newmatch.zbmf.com.testapplication.callback.LikeCallBack;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
-import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
-import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.AnimatSpecialEffectUtil;
@@ -57,7 +57,7 @@ import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 public class MySpaceActivity extends BaseActivity implements DynamicAdapter.CommentDynamic
-        , MyDiaog.PositiveBtnClick, LikeCallBack, CommentArrowCallBack, DialogActCallBack {
+        , MyDiaog.PositiveBtnClick, LikeCallBack, CommentArrowCallBack/*, DialogActCallBack*/ {
 
     private SmartRefreshLayout mySpaceRefreshLayout;
     private RecyclerView mySpaceRV;
@@ -66,7 +66,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
     private Toolbar mToolbar;
     private ImageView mBackBtn;
     private AppCompatImageView mySpaceFloatBtn, addDynationBtn;
-    private LinearLayout dynamicSpaceBtn, photoSpaceBtn;
+    private TextView dynamicSpaceBtn, photoSpaceBtn;
     //子按钮列表
 
     private List<AppCompatImageView> buttonItems = new ArrayList<AppCompatImageView>();
@@ -109,7 +109,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         dynamicAdapter.setCommentArrowCallBack(this);
         mySpaceRV.setAdapter(dynamicAdapter);
 
-//        showExplodBtns();
+        //        showExplodBtns();
         //刷新
         mySpaceRefreshLayout.setOnRefreshListener(refreshLayout -> {
             isRefresh = true;
@@ -128,13 +128,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
     }
 
     //爆炸式按钮效果
-//    private void showExplodBtns() {
-//        AppCompatImageView mySpacePhotoBtn = bindView(R.id.mySpacePhotoBtn);
-//        AppCompatImageView mySpaceVideoBtn = bindView(R.id.mySpaceVideoBtn);
-//        buttonItems.add(mySpacePhotoBtn);
-//        buttonItems.add(mySpaceVideoBtn);
-//
-//    }
+    //    private void showExplodBtns() {
+    //        AppCompatImageView mySpacePhotoBtn = bindView(R.id.mySpacePhotoBtn);
+    //        AppCompatImageView mySpaceVideoBtn = bindView(R.id.mySpaceVideoBtn);
+    //        buttonItems.add(mySpacePhotoBtn);
+    //        buttonItems.add(mySpaceVideoBtn);
+    //
+    //    }
 
     /**
      * 按钮移动动画
@@ -173,11 +173,11 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
             objAnimatorY.setStartDelay(100);
             objAnimatorRotate.start();
             Log.d("===TTT", "   ==  flag:" + flag);
-//            if (flag == -1) {
-//                showOrHideBtn(objAnimatorX, View.VISIBLE);
-//            } else if (flag == 1) {
+            //            if (flag == -1) {
+            //                showOrHideBtn(objAnimatorX, View.VISIBLE);
+            //            } else if (flag == 1) {
             showOrHideBtn(objAnimatorX, View.VISIBLE);
-//            }
+            //            }
         }
     }
 
@@ -186,17 +186,14 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         objAnimatorX.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // TODO Auto-generated method stub
                 // 将按钮设为可见
                 for (int i = 0; i < buttonItems.size(); i++) {
                     buttonItems.get(i).setVisibility(vG);
@@ -275,13 +272,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
             case R.id.mySpaceFloatBtn:
             case R.id.mySpaceAdd:
                 //弹出发表视频或图文的动态对话框
-//                if (flag == 1) {
-//                    flag = -1;
-//                    buttonAnimation(buttonItems, -300);
-//                } else if (flag == -1) {
-//                    flag = 1;
-//                    buttonAnimation(buttonItems, 300);
-//                }
+                //                if (flag == 1) {
+                //                    flag = -1;
+                //                    buttonAnimation(buttonItems, -300);
+                //                } else if (flag == -1) {
+                //                    flag = 1;
+                //                    buttonAnimation(buttonItems, 300);
+                //                }
                 setSendDynamicView();
                 break;
             case R.id.backBtn:
@@ -398,26 +395,23 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         });
     }
 
-    @Override
-    public void cancelActCallBack(AlertDialog alertDialog) {
-        //弹出发表图文动态的对话框
-        alertDialog.dismiss();
-
-    }
-
-    @Override
-    public void positionActCallBack(AlertDialog alertDialog) {
-        //弹出发表视频动态的对话框
-        alertDialog.dismiss();
-
-    }
-
     private MyCircleAdapter myCircleAdapter;
 
     private void setSendDynamicView() {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.push_dynamic_view, null);
+        final AlertDialog[] mAlertDialog = new AlertDialog[1];
         MyDialogUtil.showBottomDynamicDialog(this, this, dialogView
-                , true, R.drawable.dialog_bg, "", this);
+                , true, R.drawable.dialog_bg, R.style.dialogTheme1, new DialogActCallBack() {
+                    @Override
+                    public void cancelActCallBack(AlertDialog alertDialog) {
+                        mAlertDialog[0] = alertDialog;
+                    }
+
+                    @Override
+                    public void positionActCallBack(AlertDialog alertDialog) {
+
+                    }
+                });
         EditText dynamicContentEt = dialogView.findViewById(R.id.dynamicContentEt);
         TextView sendTv = dialogView.findViewById(R.id.sendTv);
         RecyclerView recyclerView = dialogView.findViewById(R.id.recyclerView);
@@ -451,6 +445,10 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
             String contentCharacter = dynamicContentEt.getText().toString().trim();
             ToastUtils.showSingleToast(MySpaceActivity.this, contentCharacter);
 
+            //销毁alertDialog
+            AlertDialog alertDialog = mAlertDialog[0];
+            if (alertDialog != null && alertDialog.isShowing())
+                alertDialog.dismiss();
         });
         dynamicContentEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -465,19 +463,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String trim = dynamicContentEt.getText().toString().trim();
+                String trim = editable.toString().trim();
                 if (trim.length() > 0) {
-                    sendTv.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(
-                            MySpaceActivity.this, R.drawable.ic_send_pulle)
-                            , null, null, null);
-                    sendTv.setTextColor(ContextCompat.getColor(
-                            MySpaceActivity.this, R.color.plum_3));
+                    GMTextSetIcon.setTvLeftIconColor(MySpaceActivity.this, sendTv,
+                            R.drawable.ic_send_pulle, R.color.plum_3);
                 } else {
-                    sendTv.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(
-                            MySpaceActivity.this, R.drawable.ic_send_gray)
-                            , null, null, null);
-                    sendTv.setTextColor(ContextCompat.getColor(
-                            MySpaceActivity.this, R.color.black));
+                    GMTextSetIcon.setTvLeftIconColor(MySpaceActivity.this, sendTv,
+                            R.drawable.ic_send_gray, R.color.black_4);
                 }
             }
         });
@@ -492,9 +484,9 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
                     List<Uri> mSelected = Matisse.obtainResult(data);
                     Log.d("===TAG", "   size:" + mSelected.size());
 
-//                    GlideUtil.loadCornerdImg(MySpaceActivity.this, mSelected.get(0),
-//                            R.drawable.loading1,
-//                            iv, true, true, false, false);
+                    //                    GlideUtil.loadCornerdImg(MySpaceActivity.this, mSelected.get(0),
+                    //                            R.drawable.loading1,
+                    //                            iv, true, true, false, false);
                     myCircleAdapter.addData(mSelected);
 
                 }

@@ -23,7 +23,7 @@ import newmatch.zbmf.com.testapplication.adapters.MineViewAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
-import newmatch.zbmf.com.testapplication.interfaces.MineViewClick;
+import newmatch.zbmf.com.testapplication.callback.MineViewClick;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;

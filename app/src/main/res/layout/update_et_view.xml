@@ -40,7 +40,7 @@
         android:background="@drawable/comment_send_bg"
         android:paddingEnd="@dimen/dp_4"
         android:paddingRight="@dimen/dp_4"
-        android:src="@drawable/send_icon"
+        android:src="@drawable/ic_send_pulle"
         tools:ignore="RtlSymmetry"/>
 
 </LinearLayout>

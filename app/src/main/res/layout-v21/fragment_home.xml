@@ -147,11 +147,11 @@
                         android:layout_marginEnd="@dimen/dp_12"
                         app:background="@drawable/no_corner_white_bg"
                         app:tabGravity="fill"
-                        app:tabIndicatorColor="#111111"
-                        app:tabIndicatorHeight="@dimen/dp_1"
+                        app:tabIndicatorColor="@color/deepPurple"
+                        app:tabIndicatorHeight="@dimen/dp_2"
                         app:tabMode="fixed"
                         app:tabRippleColor="@color/white_50"
-                        app:tabSelectedTextColor="#111111"
+                        app:tabSelectedTextColor="@color/deepPurple"
                         app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:tabTextColor="@color/common_bg_press" />
                 </android.support.v7.widget.Toolbar>

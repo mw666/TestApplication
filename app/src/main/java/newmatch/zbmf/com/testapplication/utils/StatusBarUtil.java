@@ -10,6 +10,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,41 @@ public class StatusBarUtil {
     private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
     private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
+
+    // 5.0版本以上
+    public static void setStatusBarUpperAPI21(Activity activity) {
+        Window window = activity.getWindow();
+        //设置透明状态栏,这样才能让 ContentView 向上
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        View mChildView = mContentView.getChildAt(0);
+        if (mChildView != null) {
+            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
+            ViewCompat.setFitsSystemWindows(mChildView, false);
+        }
+    }
+
+    // 4.4 - 5.0版本
+    public static void setStatusBarUpperAPI19(Activity activity) {
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        View statusBarView = mContentView.getChildAt(0);
+        //移除假的 View
+        if (statusBarView != null && statusBarView.getLayoutParams() != null &&
+                statusBarView.getLayoutParams().height == getStatusBarHeight(activity)) {
+            mContentView.removeView(statusBarView);
+        }
+        //不预留空间
+        if (mContentView.getChildAt(0) != null) {
+            ViewCompat.setFitsSystemWindows(mContentView.getChildAt(0), false);
+        }
+    }
 
     /**
      * 设置状态栏颜色

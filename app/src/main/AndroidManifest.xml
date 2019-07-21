@@ -35,17 +35,16 @@
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/activityPublicStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
-
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -66,12 +65,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.SelectCityActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle"/>
         <activity
             android:name=".activitys.UserDetailActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -85,8 +82,7 @@
 
         <activity
             android:name=".activitys.AddFirendActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle"/>
         <activity
             android:name=".activitys.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -94,13 +90,13 @@
         <!-- 专门用来申请权限的activity -->
         <activity
             android:name=".activitys.SettledActivity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.VIPActivity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle"/>
         <activity
             android:name=".activitys.UserCenterActivity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle"/>
         <activity
             android:name=".activitys.PermissionsActivity"
             android:screenOrientation="portrait"
@@ -116,11 +112,16 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activitys.WalletActivity" />
-        <activity android:name=".activitys.OptionsActivity" />
-        <activity android:name=".activitys.MySpaceActivity" />
-        <activity android:name=".activitys.InvateActivity" />
-        <activity android:name=".activitys.TestActivity">
+        <activity android:name=".activitys.WalletActivity"
+            android:theme="@style/activityPublicStyle"/>
+        <activity android:name=".activitys.OptionsActivity"
+            android:theme="@style/activityPublicStyle"/>
+        <activity android:name=".activitys.MySpaceActivity"
+            android:theme="@style/activityPublicStyle"/>
+        <activity android:name=".activitys.InvateActivity"
+            android:theme="@style/activityPublicStyle"/>
+        <activity android:name=".activitys.TestActivity"
+            android:theme="@style/activityPublicStyle">
 
         </activity>
     </application>

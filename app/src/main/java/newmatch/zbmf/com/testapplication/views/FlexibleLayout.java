@@ -15,9 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.interfaces.OnPullListener;
-import newmatch.zbmf.com.testapplication.interfaces.OnReadyPullListener;
-import newmatch.zbmf.com.testapplication.interfaces.OnRefreshListener;
+import newmatch.zbmf.com.testapplication.callback.OnPullListener;
+import newmatch.zbmf.com.testapplication.callback.OnReadyPullListener;
+import newmatch.zbmf.com.testapplication.callback.OnRefreshListener;
 import newmatch.zbmf.com.testapplication.utils.PullAnimatorUtil;
 
 /**

@@ -21,8 +21,8 @@ import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 

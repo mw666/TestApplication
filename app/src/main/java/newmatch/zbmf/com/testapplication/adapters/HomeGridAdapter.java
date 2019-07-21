@@ -20,8 +20,8 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseViewHolder;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
-import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**

@@ -43,7 +43,7 @@
             android:paddingRight="@dimen/dp_4"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_5"
-            android:src="@drawable/send_icon"
+            android:src="@drawable/ic_send_pulle"
             tools:ignore="RtlSymmetry"
             android:layout_marginEnd="@dimen/dp_7"/>
 </LinearLayout>

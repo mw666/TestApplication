@@ -134,6 +134,7 @@
     <color name="light_blue">#B2DFEE</color>
     <color name="blue_11">#ADD8E6</color>
     <color name="blue_12">#AFEEEE</color>
+    <color name="blue_13">#F0FFFF</color>
 
     <color name="green">#40c60a</color>
     <color name="light_green">#90EE90</color>
@@ -168,7 +169,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="black_overlay1">#99000000</color>
     <color name="black_overlay2">#44000000</color>
-    <color name="black">#9F000000</color>
+    <color name="black">#96000000</color>
     <color name="black_0">#AA000000</color>
     <color name="black_13">#0D0000</color>
     <color name="black_1">#1C1C1C</color>

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
-import newmatch.zbmf.com.testapplication.interfaces.MsgChatItemClick;
+import newmatch.zbmf.com.testapplication.callback.MsgChatItemClick;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**

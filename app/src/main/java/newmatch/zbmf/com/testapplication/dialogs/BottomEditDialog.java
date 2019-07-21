@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.interfaces.CommentCallBack;
+import newmatch.zbmf.com.testapplication.callback.CommentCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**

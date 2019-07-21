@@ -15,8 +15,8 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             android:background="#f7f7f7"
+            android:fitsSystemWindows="true"
             app:contentScrim="@color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
@@ -43,12 +43,10 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/dynamicToolBar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_23"
                 android:background="@drawable/no_corner_white_bg"
                 android:fitsSystemWindows="true"
-                android:gravity="center"
                 android:visibility="visible"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -57,26 +55,27 @@
                     android:id="@+id/dynamicTab"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_35"
+                    android:layout_marginTop="@dimen/dp_24"
                     android:layout_marginEnd="@dimen/dp_14"
                     android:fitsSystemWindows="true"
                     app:background="@drawable/no_corner_white_bg"
                     app:layout_collapseMode="pin"
                     app:tabGravity="center"
-                    app:tabIndicatorColor="#111111"
+                    app:tabIndicatorColor="@color/deepPurple"
                     app:tabIndicatorHeight="@dimen/dp_2"
                     app:tabMode="scrollable"
-                    app:tabRippleColor="@color/white_50"
-                    app:tabSelectedTextColor="#111111"
+                    app:tabSelectedTextColor="@color/deepPurple"
                     app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     app:tabTextColor="@color/common_bg_press" />
 
-                <ImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
                     android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/dp_31"
                     android:background="@color/white"
                     android:padding="@dimen/dp_2"
-                    android:src="@drawable/arrow_right_gray" />
+                    app:srcCompat="@drawable/ic_arrow_right_deep_purple" />
 
             </android.support.v7.widget.Toolbar>
 

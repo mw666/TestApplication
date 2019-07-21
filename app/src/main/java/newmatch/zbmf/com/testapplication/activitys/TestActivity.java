@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
 

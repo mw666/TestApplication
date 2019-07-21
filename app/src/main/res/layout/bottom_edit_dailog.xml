@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <!--<View
         android:layout_width="match_parent"
@@ -17,14 +17,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
 
         <newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText
             android:id="@+id/input_remark"
             android:layout_width="@dimen/dp_285"
             android:layout_height="@dimen/dp_30"
             android:layout_gravity="center"
-            android:textCursorDrawable="@drawable/et_cursor_color"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="@dimen/dp_5"
             android:background="@drawable/comment_et_view_bg"
@@ -33,27 +33,26 @@
             android:inputType="textMultiLine"
             android:minHeight="30dp"
             android:minLines="4"
-            android:paddingLeft="5dp"
             android:paddingStart="5dp"
+            android:paddingLeft="5dp"
             android:paddingTop="3dp"
             android:singleLine="false"
             android:textColor="@color/black"
             android:textColorHint="@color/black_cd"
+            android:textCursorDrawable="@drawable/et_cursor_color"
             android:textSize="15sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry"/>
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/sendComment"
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_25"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/dp_7"
             android:background="@drawable/comment_send_bg"
             android:paddingEnd="@dimen/dp_4"
-            android:paddingRight="@dimen/dp_4"
-            android:layout_marginRight="@dimen/dp_7"
-            android:src="@drawable/send_icon"
-            tools:ignore="RtlSymmetry"
-            android:layout_marginEnd="@dimen/dp_7"/>
+            app:srcCompat="@drawable/ic_send_gray"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
     <!--<LinearLayout
         android:layout_width="wrap_content"

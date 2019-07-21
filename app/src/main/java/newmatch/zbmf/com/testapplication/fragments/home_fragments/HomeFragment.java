@@ -18,8 +18,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.stetho.common.LogUtil;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,8 +36,8 @@ import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
-import newmatch.zbmf.com.testapplication.interfaces.DianZanClickListener;
-import newmatch.zbmf.com.testapplication.interfaces.HomeRVIvClick;
+import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
@@ -159,15 +157,11 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         homeBanner.addPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                LogUtil.e("----->addPageChangeLisnter:" + position +
-                        "positionOffset:" + positionOffset + "positionOffsetPixels:"
-                        + positionOffsetPixels);
+
             }
 
             @Override
-            public void onPageSelected(int position) {
-                LogUtil.e("addPageChangeLisnter:" + position);
-            }
+            public void onPageSelected(int position) { }
 
             @Override
             public void onPageScrollStateChanged(int state) {

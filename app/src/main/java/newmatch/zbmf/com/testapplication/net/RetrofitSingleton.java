@@ -15,7 +15,7 @@ import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.component.OrmLite;
 import newmatch.zbmf.com.testapplication.component.PLog;
-import newmatch.zbmf.com.testapplication.interfaces.UpLoadFileApi;
+import newmatch.zbmf.com.testapplication.callback.UpLoadFileApi;
 import newmatch.zbmf.com.testapplication.net.beans.CityORM;
 import newmatch.zbmf.com.testapplication.net.loader.FileUploadObserver;
 import newmatch.zbmf.com.testapplication.net.loader.MultipartBuilder;

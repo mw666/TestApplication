@@ -124,7 +124,7 @@
                 android:visibility="invisible"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-                <!--     android:background="@drawable/topbar_bg"-->
+
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
@@ -144,7 +144,6 @@
                     android:layout_gravity="end|top"
                     android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dp_15"
-                    android:layout_marginRight="@dimen/dp_15"
                     android:background="@drawable/wave_border_less_ripple"
                     android:padding="@dimen/dp_3"
                     app:srcCompat="@drawable/ic_add_dynation" />
@@ -156,10 +155,8 @@
                 android:layout_width="29dp"
                 android:layout_height="29dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="@dimen/dp_8"
-                android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_32"
                 android:background="@drawable/wave_border_less_ripple"
                 android:padding="@dimen/dp_4"
@@ -173,7 +170,6 @@
                 android:layout_gravity="end|top"
                 android:layout_marginTop="@dimen/dp_35"
                 android:layout_marginEnd="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
                 android:background="@drawable/wave_border_less_ripple"
                 android:padding="@dimen/dp_3"
                 android:visibility="visible"
@@ -189,6 +185,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!--将改成TabLayout-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -196,48 +193,61 @@
             <LinearLayout
                 android:id="@+id/topTab"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_38"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
                     android:id="@+id/photoSpaceBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_38"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_btn_bg"
-                    android:gravity="center">
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_photo_album"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_5"
+                    android:text="图片相册"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableStart="@drawable/ic_photo_album"
-                        android:drawableLeft="@drawable/ic_photo_album"
-                        android:drawablePadding="@dimen/dp_3"
-                        android:text="图片相册"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_15" />
-                </LinearLayout>
 
-                <LinearLayout
+                <TextView
                     android:id="@+id/dynamicSpaceBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_38"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_btn_bg"
-                    android:gravity="center">
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_dynamic_space"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_5"
+                    android:text="动态广场"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableStart="@drawable/ic_dynamic_space"
-                        android:drawableLeft="@drawable/ic_dynamic_space"
-                        android:drawablePadding="@dimen/dp_3"
-                        android:text="动态广场"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_15" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/myLike"
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_dynamic_space"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_5"
+                    android:text="我的关注"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
+                <TextView
+                    android:id="@+id/myFans"
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_dynamic_space"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_5"
+                    android:text="我的粉丝"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15" />
 
             </LinearLayout>
 

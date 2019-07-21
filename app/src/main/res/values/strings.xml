@@ -92,7 +92,7 @@
     <string name="version_update">版本更新</string>
     <string name="login_out">退出登录</string>
     <string name="qy_dynamic">圈友动态</string>
-    <string name="comment_tip">评论...</string>
+    <string name="comment_tip">留点评论吧...</string>
     <string name="tian_msg_tip">说点蜜语哟...</string>
     <string name="moodsValue">人气值</string>
     <string name="get_img_tip">app获取图片需要该权限，请同意！</string>

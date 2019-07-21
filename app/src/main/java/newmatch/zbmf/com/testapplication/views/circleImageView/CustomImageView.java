@@ -38,13 +38,13 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
         //将mRectF设置为imageview本身的宽高
         mRectF.set(0, 0, getWidth(), getHeight());
         //将path设置rect值
-        mPath.addRoundRect(mRectF, 30, 30, Path.Direction.CW);
+        mPath.addRoundRect(mRectF, 25, 25, Path.Direction.CW);
         //切割画布，只留下自己需要的部分
         canvas.clipPath(mPath);
         //保留imageview本身的绘制图片
         super.draw(canvas);
         //画出描边
-        canvas.drawRoundRect(mRectF, 30, 30, mPaint);
+        canvas.drawRoundRect(mRectF, 25, 25, mPaint);
     }
 
 

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
-import newmatch.zbmf.com.testapplication.interfaces.RecommendUser;
+import newmatch.zbmf.com.testapplication.callback.RecommendUser;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**

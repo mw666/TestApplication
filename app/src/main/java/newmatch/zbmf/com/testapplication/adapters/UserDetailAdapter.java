@@ -15,7 +15,7 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
-import newmatch.zbmf.com.testapplication.interfaces.ShowClickIv;
+import newmatch.zbmf.com.testapplication.callback.ShowClickIv;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**

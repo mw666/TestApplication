@@ -193,8 +193,8 @@
                 <TextView
                     android:id="@+id/userSendTv"
                     style="@style/userNoTvStyle"
-                    android:drawableLeft="@drawable/send_icon"
-                    android:drawableStart="@drawable/send_icon"
+                    android:drawableLeft="@drawable/ic_send_pulle"
+                    android:drawableStart="@drawable/ic_send_pulle"
                     android:text="@string/send_user"/>
 
                 <Space

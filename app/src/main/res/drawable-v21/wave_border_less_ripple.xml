@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="@color/lavender">
+        android:color="@color/light_blue">
+    <!--blue_13-->
 <!--   无边界的水波纹  -->
 </ripple>

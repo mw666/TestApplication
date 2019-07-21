@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.interfaces;
+package newmatch.zbmf.com.testapplication.callback;
 
 /**
  * Created by gavin

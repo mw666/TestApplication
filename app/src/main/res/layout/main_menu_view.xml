@@ -119,7 +119,7 @@
                     android:layout_marginTop="@dimen/dp_45"
                     android:layout_marginEnd="@dimen/dp_13"
                     android:layout_marginRight="@dimen/dp_13"
-                    android:drawableTop="@drawable/ic_like"
+                    android:drawableTop="@drawable/ic_like_heart_pink"
                     android:gravity="center"
                     android:lines="1"
                     android:maxLength="10"

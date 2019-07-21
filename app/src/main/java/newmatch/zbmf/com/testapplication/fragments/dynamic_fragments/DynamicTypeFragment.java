@@ -2,9 +2,13 @@ package newmatch.zbmf.com.testapplication.fragments.dynamic_fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +17,28 @@ import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.Objects;
+
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.DynamicAdapter;
+import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
+import newmatch.zbmf.com.testapplication.adapters.comment.CommenListAdapter;
+import newmatch.zbmf.com.testapplication.adapters.dynamic.DynamicAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
+import newmatch.zbmf.com.testapplication.callback.CommentListCallBack;
+import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
+import newmatch.zbmf.com.testapplication.callback.LikeCallBack;
+import newmatch.zbmf.com.testapplication.callback.SkipUserDetailCallBack;
 import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
+import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
-import newmatch.zbmf.com.testapplication.interfaces.CommentArrowCallBack;
-import newmatch.zbmf.com.testapplication.interfaces.LikeCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
+import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
@@ -34,7 +47,8 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * 动态类型的fragment
  */
 public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.CommentDynamic
-        , MyDiaog.PositiveBtnClick, LikeCallBack, CommentArrowCallBack {
+        , MyDiaog.PositiveBtnClick, LikeCallBack, CommentArrowCallBack, CommentListCallBack,
+        SkipUserDetailCallBack {
 
     private MainActivity activity;
     private Handler mHandler = new Handler();
@@ -108,6 +122,8 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
         dynamicAdapter.setCommentDynamic(this);
         dynamicAdapter.setLikeCallBack(this);
         dynamicAdapter.setCommentArrowCallBack(this);
+        dynamicAdapter.setCommentListCallBack(this);
+        dynamicAdapter.setSkipUserDetailCallBack(this);
         dynamicRV.setAdapter(dynamicAdapter);
 
         //刷新
@@ -154,7 +170,8 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
     @Override
     public void likeCallBack(int position, TextView likeTv) {
         //点赞的设置
-        LikeGMClass.clickTvLike(getActivity(), getActivity(), likeTv);
+        LikeGMClass.clickTvLike(getActivity(), getActivity(),true, R.drawable.dian_zan_grey_icon,
+                R.drawable.dian_zan_purple_icon,3, likeTv);
     }
 
     @Override
@@ -225,6 +242,28 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
 
             }
         });
+
+        inputRemark.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String content = s.toString().trim();
+                if (content.length()>0){
+                    sendComment.setImageResource(R.drawable.ic_send_pulle);
+                }else {
+                    sendComment.setImageResource(R.drawable.ic_send_gray);
+                }
+            }
+        });
     }
 
     //监听RecyclerView的滑动
@@ -275,4 +314,78 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
     }
 
 
+    @Override
+    public void commentListCallback() {
+        //展示评论列表dialog
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.comment_list_dialog_view, null);
+        TextView comment_list_location_name = view.findViewById(R.id.comment_list_location_name);
+        TextView commentCount = view.findViewById(R.id.commentCount);
+        AppCompatImageView dismissDialogBtn = view.findViewById(R.id.dismissDialogBtn);
+        RecyclerView comment_list_rv = view.findViewById(R.id.comment_list_rv);
+        ContainsEmojiEditText commentEt = view.findViewById(R.id.commentEt);
+        AppCompatImageView sendComment = view.findViewById(R.id.sendComment);
+
+        final AlertDialog[] mAlertDialog = new AlertDialog[1];
+        MyDialogUtil.showBottomDynamicDialog(getActivity(), getActivity(), view
+                , false, R.drawable.comment_list_dialog_bg, R.style.alertDialogStyle02,
+                new DialogActCallBack() {
+                    @Override
+                    public void cancelActCallBack(AlertDialog alertDialog) {
+                        mAlertDialog[0] = alertDialog;
+                    }
+
+                    @Override
+                    public void positionActCallBack(AlertDialog alertDialog) {
+
+                    }
+                });
+        dismissDialogBtn.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                AlertDialog alertDialog = mAlertDialog[0];
+                if (alertDialog != null && alertDialog.isShowing())
+                    alertDialog.dismiss();
+            }
+        });
+
+        commentEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String content = s.toString().trim();
+                if (content.length()>0){
+                    sendComment.setImageResource(R.drawable.ic_send_pulle);
+                }else {
+                    sendComment.setImageResource(R.drawable.ic_send_gray);
+                }
+            }
+        });
+
+        ToastUtils.showSquareTvToast(getActivity(), "此处可发表带Emoji表情评论");
+
+        /*此处模拟评论的列表*/
+        comment_list_rv.setLayoutManager(new LinearLayoutManager(getActivity()
+                , OrientationHelper.VERTICAL, false));
+        CommenListAdapter commenListAdapter = new CommenListAdapter(getActivity());
+        comment_list_rv.setAdapter(commenListAdapter);
+
+
+
+
+    }
+
+    @Override
+    public void skipUserDetailCallBack(int userId) {
+        //点击用户头像跳转该用户的详情页面
+        SkipActivityUtil.skipActivity(Objects.requireNonNull(getActivity()), UserDetailActivity.class);
+    }
 }

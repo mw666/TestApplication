@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.dynamic;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,7 +15,7 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.GMClass.GMSetViewLayoutParams;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
-import newmatch.zbmf.com.testapplication.interfaces.ShowClickIv;
+import newmatch.zbmf.com.testapplication.callback.ShowClickIv;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 
 /**
@@ -24,13 +24,20 @@ import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
  * 动态Item图片网格列表的adapter
  */
 
-public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAdapter.DynamicItemImgHolder>{
+public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAdapter.DynamicItemImgHolder> {
 
     private Context mContext;
-    private int imgCount=5;//模拟图片的数量
-    public DynamicItemImgAdapter(Context context){
-        mContext=context;
+    private int type;//标记RV的类型
+    /*模拟的图片数据*/
+    private List<Integer> imgs;
+
+    public DynamicItemImgAdapter(Context context, int type, List<Integer> myImgs) {
+        this.mContext = context;
+        this.type = type;
+        this.imgs = myImgs;
     }
+
+    /*设置点击RV的图片的点击事件*/
     private ShowClickIv mShowClickIv;
 
     public void setShowClickIv(ShowClickIv showClickIv) {
@@ -41,23 +48,21 @@ public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAd
     @Override
     public DynamicItemImgHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new DynamicItemImgHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.dynamic_item_img_view,parent,false));
+                .inflate(R.layout.dynamic_item_img_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull DynamicItemImgHolder holder, int position) {
-        //加载本地美女图片
-        GlideUtil.loadImageWithLocation(mContext,R.drawable.j1,holder.mRvIv);
-        if (imgCount<2){
-           GMSetViewLayoutParams.instance().gainScreenW(mContext)
-                   .setImageviewLp(mContext,holder.mRvIv,1);
-        }else if (imgCount<3){
-            GMSetViewLayoutParams.instance().gainScreenW(mContext)
-                    .setImageviewLp(mContext,holder.mRvIv,2);
-        }else {
-            GMSetViewLayoutParams.instance().gainScreenW(mContext)
-                    .setImageviewLp(mContext,holder.mRvIv,3);
+        if (type == 1) {
+            GMSetViewLayoutParams.instance().setImageviewLp(mContext, holder.mRvIv, 1);
+        } else if (type == 2) {
+            GMSetViewLayoutParams.instance().setImageviewLp(mContext, holder.mRvIv, 2);
+        } else if (type == 3) {
+            GMSetViewLayoutParams.instance().setImageviewLp(mContext, holder.mRvIv, 3);
         }
+        //加载本地美女图片
+        GlideUtil.loadImageWithLocation(mContext, imgs.get(position), holder.mRvIv);
+
         //设置点击查看图片
         holder.mRvIv.setOnClickListener(new OnceClickListener() {
             @Override
@@ -68,7 +73,7 @@ public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAd
                    /* for (int i = 0; i < mData.size(); i++) {
                         uris.add(Uri.parse(mData.get(i).getImagePath()));
                     }*/
-                    mShowClickIv.showClickIv(holder.getAdapterPosition(),holder.mRvIv,uris);
+                    mShowClickIv.showClickIv(holder.getAdapterPosition(), holder.mRvIv, uris);
                 }
             }
         });
@@ -76,14 +81,14 @@ public class DynamicItemImgAdapter extends RecyclerView.Adapter<DynamicItemImgAd
 
     @Override
     public int getItemCount() {
-        return imgCount;
+        return imgs == null ? 0 : imgs.size();
     }
 
-    static class DynamicItemImgHolder extends RecyclerView.ViewHolder{
+    static class DynamicItemImgHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mRvIv;
 
-         DynamicItemImgHolder(View itemView) {
+        DynamicItemImgHolder(View itemView) {
             super(itemView);
             mRvIv = itemView.findViewById(R.id.rvIv);
         }

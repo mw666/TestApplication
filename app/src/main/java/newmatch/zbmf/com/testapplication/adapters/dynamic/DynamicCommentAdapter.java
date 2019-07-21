@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.dynamic;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
