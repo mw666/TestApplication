@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.adapters;
+package newmatch.zbmf.com.testapplication.adapters.myPagerAdapters;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;

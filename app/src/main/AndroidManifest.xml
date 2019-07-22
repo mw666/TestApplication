@@ -81,9 +81,6 @@
         </provider>
 
         <activity
-            android:name=".activitys.AddFirendActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity
             android:name=".activitys.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />

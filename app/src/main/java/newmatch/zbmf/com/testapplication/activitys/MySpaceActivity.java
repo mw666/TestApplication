@@ -66,7 +66,6 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
     private Toolbar mToolbar;
     private ImageView mBackBtn;
     private AppCompatImageView mySpaceFloatBtn, addDynationBtn;
-    private TextView dynamicSpaceBtn, photoSpaceBtn;
     //子按钮列表
 
     private List<AppCompatImageView> buttonItems = new ArrayList<AppCompatImageView>();
@@ -88,10 +87,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         mBackBtn = bindViewWithClick(R.id.backBtn, true);
         addDynationBtn = bindViewWithClick(R.id.addDynationBtn, true);
         bindViewWithClick(R.id.mySpaceAdd, true);
+        bindViewWithClick(R.id.tabItemPhoto, true);
+        bindViewWithClick(R.id.tabItemDynamic, true);
+        bindViewWithClick(R.id.tabItemMyLike, true);
+        bindViewWithClick(R.id.tabItemMyFans, true);
         mySpaceFloatBtn = bindViewWithClick(R.id.mySpaceFloatBtn, true);
-        photoSpaceBtn = bindViewWithClick(R.id.photoSpaceBtn, true);
-        dynamicSpaceBtn = bindViewWithClick(R.id.dynamicSpaceBtn, true);
         mySpaceRefreshLayout = bindView(R.id.mySpaceRefreshLayout);
+
         //支持嵌套滑动
         mySpaceRefreshLayout.setEnableNestedScroll(true);
         ClassicsHeader mySpaceHeader = bindView(R.id.mySpaceHeader);
@@ -99,7 +101,7 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         statusView = bindView(R.id.statusView);
         mySpaceRV = bindView(R.id.mySpaceRV);
 
-
+        //设置我的主场的recyclerView
         mySpaceRV.setLayoutManager(new LinearLayoutManager(this,
                 OrientationHelper.VERTICAL, false));
 
@@ -284,17 +286,30 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
             case R.id.backBtn:
                 ActivityAnimUtils.instance().activityOut(MySpaceActivity.this);
                 break;
-            case R.id.dynamicSpaceBtn:
-                //跳转动态广场
+            case R.id.tabItemPhoto:
+                //跳转我的图片页面
+                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的相册");
 
                 break;
-            case R.id.photoSpaceBtn:
-                //跳转照片短视频空间
+            case R.id.tabItemDynamic:
+                //跳转动态广场页面
+                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转动态广场");
+
+                break;
+            case R.id.tabItemMyLike:
+                //跳转我的关注页面
+                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的关注");
+
+                break;
+            case R.id.tabItemMyFans:
+                //跳转我的粉丝页面
+                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的粉丝");
 
                 break;
         }
     }
 
+    //监听RecyclerView的滑动
     private void moniteRvScroll(RecyclerView rv) {
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int rvState = -1;

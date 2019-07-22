@@ -133,5 +133,7 @@
         .......................</string>
     <string name="invite_method">邀请新用户打开浏览器扫描下载二位码或搜索下载链接，下载App，注册时填写您的邀请码！</string>
     <string name="my_like">我的关注</string>
+    <string name="photo_alubm">图片相册</string>
+    <string name="dynamic_space">动态广场</string>
 
 </resources>

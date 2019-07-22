@@ -180,6 +180,7 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
         showPopupDialog();
     }
 
+    //弹出对话框
     private void showPopupDialog() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_dynamic_arrow_down_view, null);
         TextView reprint = view.findViewById(R.id.reprint);

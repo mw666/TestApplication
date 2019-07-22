@@ -35,7 +35,7 @@ public class StatusBarUtil {
     private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
 
-    // 5.0版本以上
+    // 5.0版本以上,设置状态栏为全透明
     public static void setStatusBarUpperAPI21(Activity activity) {
         Window window = activity.getWindow();
         //设置透明状态栏,这样才能让 ContentView 向上
@@ -52,7 +52,7 @@ public class StatusBarUtil {
         }
     }
 
-    // 4.4 - 5.0版本
+    // 4.4 - 5.0版本,设置状态栏为全透明
     public static void setStatusBarUpperAPI19(Activity activity) {
         Window window = activity.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

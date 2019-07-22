@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
+import newmatch.zbmf.com.testapplication.adapters.myPagerAdapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;

@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/no_corner_white_bg"
+                android:background="@drawable/topbar_bg"
                 android:fitsSystemWindows="true"
                 android:visibility="visible"
                 app:layout_collapseMode="pin"
@@ -61,21 +61,21 @@
                     app:background="@drawable/no_corner_white_bg"
                     app:layout_collapseMode="pin"
                     app:tabGravity="center"
-                    app:tabIndicatorColor="@color/deepPurple"
+                    app:tabIndicatorColor="@color/gold_15"
                     app:tabIndicatorHeight="@dimen/dp_2"
                     app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/deepPurple"
+                    app:tabSelectedTextColor="@color/gold_15"
                     app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    app:tabTextColor="@color/common_bg_press" />
+                    app:tabTextColor="@color/gray" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:layout_width="@dimen/dp_22"
                     android:layout_height="@dimen/dp_22"
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/dp_31"
-                    android:background="@color/white"
+                    android:background="@color/colorPrimaryDark_1"
                     android:padding="@dimen/dp_2"
-                    app:srcCompat="@drawable/ic_arrow_right_deep_purple" />
+                    app:srcCompat="@drawable/ic_arrow_right_white" />
 
             </android.support.v7.widget.Toolbar>
 

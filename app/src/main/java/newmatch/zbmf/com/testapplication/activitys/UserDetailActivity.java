@@ -12,12 +12,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.ielse.imagewatcher.ImageWatcherHelper;
@@ -27,23 +33,26 @@ import com.zhihu.matisse.MimeType;
 import java.util.ArrayList;
 import java.util.List;
 
+import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
+import newmatch.zbmf.com.testapplication.adapters.myPagerAdapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.adapters.dynamic.DynamicAdapter;
 import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
+import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.callback.LikeCallBack;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.callback.ShowClickIv;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
+import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
+import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
-import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.views.RotationPageTransformer;
 import newmatch.zbmf.com.testapplication.views.customViewPager.BannerViewHolder;
@@ -62,6 +71,8 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
     private AppCompatImageView userAvatarIv;
     private ImageWatcherHelper mIwHelper;
     private int mUserAvatarH;
+    private AppCompatImageView addUserBtn;
+    private AppCompatImageView sendMsgBtn;
 
     @Override
     protected Integer layoutId() {
@@ -89,7 +100,10 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
         //关注按钮
         bindViewWithClick(R.id.guanZhuBtn1, true);
         bindViewWithClick(R.id.guanZhuBtn, true);
+        bindViewWithClick(R.id.goToUserPhotoSpace, true);
+        bindViewWithClick(R.id.goToUserPhotoSpaceParent, true);
         //昵称
+        RelativeLayout appBarRL = bindView(R.id.appBarRL);
         TextView userNick = bindView(R.id.userNick);
         //用户账号
         TextView userAccount = bindView(R.id.userAccount);
@@ -104,6 +118,9 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
         //该用户相册的展示图片
         LinearLayout userVpOuter = bindView(R.id.userVpOuter);
         ViewPager userViewBanner = bindView(R.id.userViewPager);
+        //浮动的按钮，添加好友，先好友发送消息
+        addUserBtn = bindViewWithClick(R.id.addUserBtn, true);
+        sendMsgBtn = bindViewWithClick(R.id.sendMsgBtn, true);
         //童虎动态列表
         RecyclerView userSpaceRV = bindView(R.id.userSpaceRV);
         userSpaceRV.setLayoutManager(new LinearLayoutManager(this,
@@ -115,13 +132,14 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
         dynamicAdapter.setCommentArrowCallBack(this);
         userSpaceRV.setAdapter(dynamicAdapter);
 
-
+        //监听recyclerView的滚动
+        moniteRvScroll(userSpaceRV);
         //设置画廊效果的ViewPager
         galleryPager(userViewBanner);
         //监听callapsingToolBarLayout的延展状态
         appBarLayoutSH();
-        //测量userAvatarIv的高度
-        //userAvatarExChangeShow(userAppBar);
+        //设置要复制的数据
+        copyContent(userNick, userAccount, appBarRL);
 
     }
 
@@ -166,14 +184,16 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
                 break;
             case R.id.addUserBtn:
                 //添加好友
-                Bundle bundle = new Bundle();
-
-                SkipActivityUtil.skipDataActivity(UserDetailActivity.this,
-                        AddFirendActivity.class, bundle);
+                showPopupDialog();
                 break;
             case R.id.sendMsgBtn:
                 //发送好友消息
 
+                break;
+            case R.id.goToUserPhotoSpaceParent:
+            case R.id.goToUserPhotoSpace:
+                //前往用户相册，需要开通会员方能查看用户私密相册-->弹出dialog
+                showVipDialogEntrance();
                 break;
         }
     }
@@ -264,7 +284,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
     @Override
     public void arrowClickCallBack(int position) {
         //点击弹出对话框的按钮
-        ToastUtils.showSquareTvToast(UserDetailActivity.this, "弹出对话框");
+        showTypeDialog();
     }
 
     @Override
@@ -275,7 +295,61 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
         //        LikeGMClass.clickLike(this, likeTv);
     }
 
-    private int[] imgs = {R.drawable.j5, R.drawable.j4, R.drawable.j1,R.drawable.j3};
+    //监听RecyclerView的滑动
+    private void moniteRvScroll(RecyclerView rv) {
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int rvState = -1;
+            int correctYCount = 0;
+            int bearYCount = 0;
+            float alpha;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                //状态有三种：0：停止  1：拖动  2：滑翔
+                rvState = newState;
+                if (newState == 1 || newState == 2) {
+                    addUserBtn.setVisibility(View.GONE);
+                    sendMsgBtn.setVisibility(View.GONE);
+                } else if (newState == 0) {
+                    addUserBtn.setVisibility(View.VISIBLE);
+                    sendMsgBtn.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy < 0) {
+                    //向下滑动
+                    correctYCount += dy;
+                    //------>不透明
+                    float hh = (80 + correctYCount);
+                    if (hh <= 1f) {
+                        alpha = 1;
+                    } else {
+                        alpha = (Math.abs(hh)) / 100;
+                    }
+                }
+                if (dy > 0) {
+                    //向上滑动
+                    bearYCount += dy;
+                    if ((Math.abs(bearYCount)) >= 80) {
+                        alpha = 1 - (float) 80 / 100;
+                    } else {
+                        alpha = (1 - Math.abs((float) bearYCount) / 100);
+                    }
+                }
+                if (rvState == 0) {
+                    //静止  ---》correctYCount=0;
+                    correctYCount = 0;
+                    bearYCount = 0;
+                }
+            }
+        });
+    }
+
+    private int[] imgs = {R.drawable.j5, R.drawable.j4, R.drawable.j1, R.drawable.j3};
 
     //ViewPager的3D画廊效果
     private void galleryPager(ViewPager menuViewPager) {
@@ -347,5 +421,130 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
 
     }
 
+    //复制
+    private void copyContent(TextView userNick, TextView userAccount, View parent) {
+        //复制,昵称
+        GMCopy.instance().copyGetXY(userNick, this, parent);
+        //复制,用户账号
+        GMCopy.instance().copyGetXY(userAccount, this, parent);
+    }
+
+    //弹出添加好友对话框
+    private void showPopupDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.add_user_dialog_view, null);
+        AppCompatImageView newUserAvatar = view.findViewById(R.id.newUserAvatar);
+        TextView userNick = view.findViewById(R.id.userNick);
+        TextView userSex = view.findViewById(R.id.userSex);
+        TextView userAge = view.findViewById(R.id.userAge);
+        EditText verifyMsg = view.findViewById(R.id.verifyMsg);
+        EditText remark = view.findViewById(R.id.remark);
+        LinearLayout groupParent = view.findViewById(R.id.groupParent);
+        Switch seeMyDynamicSwitch = view.findViewById(R.id.seeMyDynamicSwitch);
+        Button sendAddUserBtn = view.findViewById(R.id.sendAddUserBtn);
+        DialogUtils.instance().setView(view)
+                .setIsCancel(true)
+                .setHasMargin(true)
+                .setDialogStyle(R.style.dialog)
+                .setGravity(Gravity.CENTER)
+                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
+                .gMDialog(this, this);
+        //设置要添加的好友的头像
+        GlideUtil.loadCircleImage(this, R.drawable.place_holder_img, R.drawable.j4, newUserAvatar);
+        //设置要添加的用户的昵称
+        userNick.setText("铁蛋儿");
+        //设置性别
+        userSex.setText("男");
+        //设置年龄
+        userAge.setText("24岁");
+        //获取添加好友的验证信息
+        String addUserVerifyMsg = verifyMsg.getText().toString().trim();
+        //获取备注
+        String addUserRemark = remark.getText().toString().trim();
+        //设置分组
+        groupParent.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                //spanner弹出选择分组
+                ToastUtils.showSingleToast(UserDetailActivity.this, "设置分组");
+            }
+        });
+        //设置不让他看我的动态
+        seeMyDynamicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                ToastUtils.showSingleToast(UserDetailActivity.this, "不让他查看我的动态");
+            }
+        });
+        //发送添加好友的请求
+        sendAddUserBtn.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                ToastUtils.showSingleToast(UserDetailActivity.this, "发送添加好友的请求");
+            }
+        });
+    }
+
+    //弹出开通会员的dialog
+    private void showVipDialogEntrance(){
+        View view = LayoutInflater.from(this).inflate(R.layout.open_vip_dialog, null);
+        AppCompatImageView vipIcon = view.findViewById(R.id.vipIcon);
+        TextView vipTitle = view.findViewById(R.id.vipTitle);
+        TextView vipTipContent = view.findViewById(R.id.vipTipContent);
+        AppCompatImageView rmbIcon = view.findViewById(R.id.rmbIcon);
+        TextView rmbValue = view.findViewById(R.id.rmbValue);
+        Button openVipBtn = view.findViewById(R.id.openVipBtn);
+        DialogUtils.instance().setView(view)
+                .setIsCancel(true)
+                .setHasMargin(true)
+                .setDialogStyle(R.style.dialog)
+                .setGravity(Gravity.CENTER)
+                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
+                .gMDialog(this, this);
+        //确认开通VIP
+        openVipBtn.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                ToastUtils.showSingleToast(UserDetailActivity.this,"确认开通VIP");
+            }
+        });
+    }
+
+    //弹出对话框
+    private void showTypeDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_dynamic_arrow_down_view, null);
+        TextView reprint = view.findViewById(R.id.reprint);
+        TextView collect = view.findViewById(R.id.collect);
+        TextView report = view.findViewById(R.id.report);
+        DialogUtils.instance().setView(view)
+                .setIsCancel(true)
+                .setHasMargin(true)
+                .setDialogStyle(R.style.dialog)
+                .setGravity(Gravity.CENTER)
+                .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
+                //                .setDialogAnimStyle(R.style.dialogAnimator01)
+                .gMDialog(this, this);
+        reprint.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                //转载
+                ToastUtils.showSingleToast(MyApplication.getInstance(), "转载");
+            }
+        });
+        collect.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                //收藏
+                ToastUtils.showSingleToast(MyApplication.getInstance(), "收藏");
+            }
+        });
+        report.setOnClickListener(new OnceClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                //举报
+                ToastUtils.showSingleToast(MyApplication.getInstance(), "举报");
+            }
+        });
+    }
 
 }

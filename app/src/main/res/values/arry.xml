@@ -19,5 +19,15 @@
         <item>@string/nanshen</item>
         <item>@string/zhainan</item>
     </array>
+    <!--我的主场tab title-->
+    <array name="my_space_tab_titles">
+        <item>@string/photo_space</item>
+        <item>@string/dynamic_piazza</item>
+        <item>@string/my_like</item>
+        <item>@string/my_fans</item>
+    </array>
 
+    <string name="photo_space">图片相册</string>
+    <string name="dynamic_piazza">动态广场</string>
+    <string name="my_fans">我的粉丝</string>
 </resources>

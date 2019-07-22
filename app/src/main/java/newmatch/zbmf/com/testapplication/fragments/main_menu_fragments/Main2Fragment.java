@@ -21,7 +21,7 @@ import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
 import newmatch.zbmf.com.testapplication.activitys.OptionsActivity;
 import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.activitys.WalletActivity;
-import newmatch.zbmf.com.testapplication.adapters.MenuAdapter;
+import newmatch.zbmf.com.testapplication.adapters.myPagerAdapters.MenuAdapter;
 import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
