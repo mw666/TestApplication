@@ -64,6 +64,7 @@
                     app:tabIndicatorColor="@color/gold_15"
                     app:tabIndicatorHeight="@dimen/dp_2"
                     app:tabMode="scrollable"
+                    app:tabRippleColor="@color/light_blue"
                     app:tabSelectedTextColor="@color/gold_15"
                     app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     app:tabTextColor="@color/gray" />
@@ -98,8 +99,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/dynamicViewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

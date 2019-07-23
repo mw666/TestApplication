@@ -8,6 +8,7 @@
     </array>
     <!--动态广场的数据-->
     <array name="dynamic_tab_titles">
+        <item>@string/all</item>
         <item>@string/nvshen</item>
         <item>@string/yujie</item>
         <item>@string/luoli</item>
@@ -26,8 +27,11 @@
         <item>@string/my_like</item>
         <item>@string/my_fans</item>
     </array>
+    <!--图片和短视频的tab标题-->
+    <array name="photo_video_titles">
+        <item>@string/photo</item>
+        <item>@string/video</item>
+    </array>
 
-    <string name="photo_space">图片相册</string>
-    <string name="dynamic_piazza">动态广场</string>
-    <string name="my_fans">我的粉丝</string>
+
 </resources>

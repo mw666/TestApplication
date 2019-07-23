@@ -34,9 +34,7 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
-
-        </activity>
+            android:theme="@style/FullscreenTheme"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/activityPublicStyle">
@@ -65,10 +63,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.SelectCityActivity"
-            android:theme="@style/activityPublicStyle"/>
+            android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.UserDetailActivity"
-            android:theme="@style/activityPublicStyle"/>
+            android:theme="@style/activityPublicStyle" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -90,16 +88,17 @@
             android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.VIPActivity"
-            android:theme="@style/activityPublicStyle"/>
+            android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.UserCenterActivity"
-            android:theme="@style/activityPublicStyle"/>
+            android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.PermissionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EmptyTheme">
             <intent-filter>
                 <action android:name="android.testApplication.permissions.permissionActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -109,18 +108,22 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activitys.WalletActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity android:name=".activitys.OptionsActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity android:name=".activitys.MySpaceActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity android:name=".activitys.InvateActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity android:name=".activitys.TestActivity"
-            android:theme="@style/activityPublicStyle">
-
-        </activity>
+        <activity
+            android:name=".activitys.WalletActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.OptionsActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.MySpaceActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.InvateActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.TestActivity"
+            android:theme="@style/activityPublicStyle"></activity>
+        <activity android:name=".activitys.PhotoVideoActivity"></activity>
     </application>
 
 </manifest>

@@ -257,16 +257,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <!--<android.support.v4.widget.NestedScrollView-->
-    <!--android:id="@+id/nestedSc"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:fillViewport="true"-->
-    <!--android:minHeight="@dimen/dp_100"-->
-    <!--android:scrollbars="none"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/mySpaceRefreshLayout"
         android:layout_width="match_parent"
@@ -289,7 +279,7 @@
             app:srlTextSizeTitle="@dimen/sp_12" />
 
         <!--横向recyclerView的图像-->
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/userVpOuter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -297,14 +287,6 @@
             android:clipChildren="false"
             android:orientation="vertical">
 
-            <!--<newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView-->
-            <!--android:id="@+id/userViewPager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dp_90"-->
-            <!--app:canLoop="false"-->
-            <!--app:gallery="true"-->
-            <!--app:indicatorAlign="center"-->
-            <!--app:open_mz_mode="false" />-->
             <android.support.v4.view.ViewPager
                 android:id="@+id/userViewPager"
                 android:layout_width="@dimen/dp_200"
@@ -316,7 +298,7 @@
                 android:id="@+id/goToUserPhotoSpaceParent"
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_100"
-                android:layout_gravity="end"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/go_to_user_photo_space_view"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
@@ -336,15 +318,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/userSpaceRV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_100"
+                android:layout_below="@+id/userViewPager"
                 android:focusable="false" />
 
-        </FrameLayout>
+        </RelativeLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:id="@+id/mySpaceFooter"
@@ -358,8 +339,6 @@
         </com.scwang.smartrefresh.layout.footer.ClassicsFooter>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    <!--</android.support.v4.widget.NestedScrollView>-->
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/addUserBtn"

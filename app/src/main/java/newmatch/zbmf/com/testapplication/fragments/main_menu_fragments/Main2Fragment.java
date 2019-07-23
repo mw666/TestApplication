@@ -2,6 +2,7 @@ package newmatch.zbmf.com.testapplication.fragments.main_menu_fragments;
 
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
@@ -46,6 +47,12 @@ public class Main2Fragment extends BaseFragment {
 
     }
 
+    public static Main2Fragment instance(){
+        Main2Fragment main2Fragment = new Main2Fragment();
+        Bundle bundle = new Bundle();
+        main2Fragment.setArguments(bundle);
+        return main2Fragment;
+    }
 
     @Override
     protected Integer layoutId() {
@@ -77,6 +84,7 @@ public class Main2Fragment extends BaseFragment {
         TextView versionUpdateTv = bindViewWithClick(R.id.versionUpdateTv, true);
         TextView accountTv = bindViewWithClick(R.id.accountTv, true);
         TextView loginOutTv = bindViewWithClick(R.id.loginOutTv, true);
+
 
         //设置画廊效果的ViewPager
         gallerlyPager(menuViewPager);

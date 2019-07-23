@@ -21,8 +21,6 @@ import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFrag
 import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
-import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
-import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.StatusBarUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -116,11 +114,6 @@ public class DynamicFragment extends BaseFragment  {
         MyFragmentStatePagerAdapter mainFragMentAdapter =
                 new MyFragmentStatePagerAdapter(getChildFragmentManager(),
                         fragmentList, Arrays.asList(dynamicTabTitles));
-        List<Fragment> mFragment = new ArrayList<>();
-        if (mFragment.size() == 0) {
-            mFragment.add(new Main2Fragment());
-            mFragment.add(new Main1Fragment());
-        }
         viewPager.setAdapter(mainFragMentAdapter);
         dynamicTab.setupWithViewPager(viewPager, true);
         viewPager.setCurrentItem(0);

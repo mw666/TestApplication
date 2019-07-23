@@ -13,7 +13,8 @@ public class SkipActivityUtil {
 
     //跳转activity
     public static void skipActivity(Activity activity,Class clazz){
-        activity.startActivity(new Intent(activity,clazz));
+        ActivityAnimUtils.instance().activityIn(activity,clazz);
+//        activity.startActivity(new Intent(activity,clazz));
     }
     //跳转并返回结果
     public static void skipActivityForResult(Activity activity,Class clazz,Integer requestCode){
@@ -23,6 +24,11 @@ public class SkipActivityUtil {
     public static void skipDataActivity(Activity activity, Class clazz, Bundle bundle){
         Intent intent = new Intent(activity,clazz);
         intent.putExtras(bundle);
+        activity.startActivity(intent);
+    }
+
+    //携带数据跳转
+    public static void skipIntentDataActivity(Activity activity,Intent intent){
         activity.startActivity(intent);
     }
 

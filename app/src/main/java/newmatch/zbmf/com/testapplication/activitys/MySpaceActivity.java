@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -36,8 +37,10 @@ import com.zhihu.matisse.MimeType;
 import java.util.ArrayList;
 import java.util.List;
 
+import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.GMClass.GMTextSetIcon;
+import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.MyCircleAdapter;
 import newmatch.zbmf.com.testapplication.adapters.dynamic.DynamicAdapter;
@@ -48,12 +51,14 @@ import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
 import newmatch.zbmf.com.testapplication.callback.LikeCallBack;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
+import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.AnimatSpecialEffectUtil;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
+import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 public class MySpaceActivity extends BaseActivity implements DynamicAdapter.CommentDynamic
@@ -100,6 +105,13 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         ClassicsHeader mySpaceFooter = bindView(R.id.mySpaceFooter);
         statusView = bindView(R.id.statusView);
         mySpaceRV = bindView(R.id.mySpaceRV);
+        RelativeLayout appBarRL = bindView(R.id.appBarRL);
+        TextView userNick = bindView(R.id.userNick);
+        TextView userSexTv = bindView(R.id.userSexTv);
+        TextView userAddressTv = bindView(R.id.userAddressTv);
+        TextView careTv = bindView(R.id.careTv);
+        TextView fansTv = bindView(R.id.fansTv);
+        TextView userAccount = bindView(R.id.userAccount);
 
         //设置我的主场的recyclerView
         mySpaceRV.setLayoutManager(new LinearLayoutManager(this,
@@ -126,7 +138,17 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
         moniteRvScroll(mySpaceRV);
         appBarLayoutSH();
         setPlrTouchLisenler();
+        //设置要复制的数据
+        copyContent(userNick, userAccount, appBarRL);
 
+    }
+
+    //复制
+    private void copyContent(TextView userNick, TextView userAccount, View parent) {
+        //复制,昵称
+        GMCopy.instance().copyGetXY(userNick, this, parent);
+        //复制,用户账号
+        GMCopy.instance().copyGetXY(userAccount, this, parent);
     }
 
     //爆炸式按钮效果
@@ -288,13 +310,15 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
                 break;
             case R.id.tabItemPhoto:
                 //跳转我的图片页面
-                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的相册");
-
+                SkipActivityUtil.skipActivity(MySpaceActivity.this, PhotoVideoActivity.class);
+                finish();
                 break;
             case R.id.tabItemDynamic:
                 //跳转动态广场页面
-                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转动态广场");
-
+                Intent intent = new Intent(MySpaceActivity.this, MainActivity.class);
+                intent.putExtra(C.CURRENT,1);
+                SkipActivityUtil.skipIntentDataActivity(MySpaceActivity.this, intent);
+                finish();
                 break;
             case R.id.tabItemMyLike:
                 //跳转我的关注页面

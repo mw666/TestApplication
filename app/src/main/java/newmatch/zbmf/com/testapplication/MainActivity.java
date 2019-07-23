@@ -27,6 +27,7 @@ import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.ViewPagerAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.callback.DialogActCallBack;
+import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
@@ -64,12 +65,16 @@ public class MainActivity extends BaseActivity {
         //全屏，内容顶入状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         viewPager = bindView(R.id.mainViewPager);
+
+        //获取传递过来的值
+        int current = getIntent().getIntExtra(C.CURRENT, 0);
+
         if (mFragment == null) {
             mFragment = new ArrayList<>();
         }
         if (mFragment.size() == 0) {
-            main2Fragment = new Main2Fragment();
-            main1Fragment = new Main1Fragment();
+            main2Fragment = Main2Fragment.instance();
+            main1Fragment = Main1Fragment.instance(current);
             mFragment.add(main2Fragment);
             mFragment.add(main1Fragment);
         }
@@ -194,10 +199,9 @@ public class MainActivity extends BaseActivity {
     }
 
     //切换ViewPager的选择项
-    public void selectViewPager(int pos){
+    public void selectViewPager(int pos) {
         viewPager.setCurrentItem(pos);
     }
-
 
 
 }

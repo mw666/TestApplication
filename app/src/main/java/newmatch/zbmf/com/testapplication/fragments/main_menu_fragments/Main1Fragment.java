@@ -4,6 +4,7 @@ package newmatch.zbmf.com.testapplication.fragments.main_menu_fragments;
 import android.annotation.TargetApi;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -21,6 +22,7 @@ import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MainFragMentAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
+import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.fragments.dynamic_fragments.DynamicFragment;
 import newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment;
 import newmatch.zbmf.com.testapplication.fragments.msg_fragments.MsgFragment;
@@ -48,6 +50,13 @@ public class Main1Fragment extends BaseFragment implements
         // Required empty public constructor
     }
 
+    public static Main1Fragment instance(int current){
+        Main1Fragment main1Fragment = new Main1Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(C.CURRENT,current);
+        main1Fragment.setArguments(bundle);
+        return main1Fragment;
+    }
 
     @Override
     protected Integer layoutId() {
@@ -64,6 +73,8 @@ public class Main1Fragment extends BaseFragment implements
         bottomNavigationView = bindView(R.id.bottomNavigationView);
         mViewPager = bindView(R.id.viewPager);
 
+        //获取传递过来的值
+        int current = getArguments().getInt(C.CURRENT);
 
         List<Fragment> fragmentList = new ArrayList<>();
         homeFragment = HomeFragment.homgInstance(TianShareUtil.getCity());
@@ -74,9 +85,14 @@ public class Main1Fragment extends BaseFragment implements
                 .getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(mainFragMentAdapter);
         addListener();
-        //初始ViewPager和bottomNavigationView的位置
-        mViewPager.setCurrentItem(0);
-        bottomNavigationView.setSelectedItemId(0);
+        if (current>=0){
+            mViewPager.setCurrentItem(current);
+            bottomNavigationView.setSelectedItemId(current);
+        }else {
+            //初始ViewPager和bottomNavigationView的位置
+            mViewPager.setCurrentItem(0);
+            bottomNavigationView.setSelectedItemId(0);
+        }
         // 如果不是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
         mIwHelper.setTranslucentStatus(!isTranslucentStatus ?
                 GetUIDimens.calcStatusBarHeight(getActivity()) : 0);

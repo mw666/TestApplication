@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,12 +46,13 @@ public class MsgFragment extends BaseFragment {
     protected void initView() {
 //        TextView toolbar_title = bindView(R.id.toolbar_title);
 //        toolbar_title.setText(getString(R.string.linkmans));
+        bindViewWithClick(R.id.goToMySpace, true);
         TabLayout msgFGTabLayout = bindView(R.id.msgFGTabLayout);
         ViewPager msgViewPager = bindView(R.id.msgViewPager);
 
         MsgTabAdapter adapter = new MsgTabAdapter(getChildFragmentManager(), msgTabTitles, fragmentList);
         msgViewPager.setAdapter(adapter);
-        msgFGTabLayout.setupWithViewPager(msgViewPager,true);
+        msgFGTabLayout.setupWithViewPager(msgViewPager, true);
         msgFGTabLayout.setTabsFromPagerAdapter(adapter);
         msgViewPager.setCurrentItem(0);
 
@@ -69,6 +72,12 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     protected void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.goToMySpace:
+                //跳转我的主场页面
+                SkipActivityUtil.skipActivity(getActivity(), MySpaceActivity.class);
+                break;
+        }
 
     }
 
@@ -83,24 +92,24 @@ public class MsgFragment extends BaseFragment {
         addFG();
     }
 
-    private void addFG(){
-        if (fragmentList==null){
+    private void addFG() {
+        if (fragmentList == null) {
             fragmentList = new ArrayList<>();
-        }else if (fragmentList.size()>0){
+        } else if (fragmentList.size() > 0) {
             fragmentList.clear();
         }
-        if (msgTabTitles==null){
+        if (msgTabTitles == null) {
             msgTabTitles = new ArrayList<>();
-        }else if (msgTabTitles.size()>0){
+        } else if (msgTabTitles.size() > 0) {
             msgTabTitles.clear();
         }
         msgTabTitles.add(getString(R.string.msg));//消息
-        msgTabTitles.add( getString(R.string.good_friends));//好友
-        msgTabTitles.add( getString(R.string.my_like));//我的关注
+        msgTabTitles.add(getString(R.string.good_friends));//好友
+        //msgTabTitles.add(getString(R.string.my_like));//我的关注
         //msgTabTitles.add(0,getString(R.string.group));//群组
         fragmentList.add(ChatListFragment.instance());
         fragmentList.add(GoodFriendsOrGroupFragment.instance());
-        fragmentList.add(MyLikeFragment.instance());
+        //fragmentList.add(MyLikeFragment.instance());
     }
 
     @Override

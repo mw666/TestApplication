@@ -81,7 +81,9 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
     protected void initView() {
         //获取宿主activity的对象
         activity = (MainActivity) getActivity();
+        TextView emptyView = bindView(R.id.emptyView);
         mDynamicRefreshLayout = bindView(R.id.dynamicRefreshLayout);
+        //如果没有数据，则展示emptyView
 
         RecyclerView dynamicRV = bindView(R.id.dynamicRV);
 

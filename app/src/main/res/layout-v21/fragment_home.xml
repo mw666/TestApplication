@@ -150,10 +150,10 @@
                         app:tabIndicatorColor="@color/deepPurple"
                         app:tabIndicatorHeight="@dimen/dp_2"
                         app:tabMode="fixed"
-                        app:tabRippleColor="@color/white_50"
+                        app:tabRippleColor="@color/light_blue"
                         app:tabSelectedTextColor="@color/deepPurple"
                         app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        app:tabTextColor="@color/common_bg_press" />
+                        app:tabTextColor="@color/gray" />
                 </android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.CollapsingToolbarLayout>

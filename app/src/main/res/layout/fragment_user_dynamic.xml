@@ -19,13 +19,30 @@
         app:srlPrimaryColor="@color/white_grey_1"
         app:srlTextSizeTitle="@dimen/sp_12" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/dynamicRV"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_grey_1"
-        android:focusable="false" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dynamicRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_grey_1"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_empty_data"
+            android:drawablePadding="@dimen/dp_5"
+            android:padding="@dimen/dp_12"
+            android:text="暂无相册哟！"
+            android:textColor="@color/blue_11"
+            android:textSize="@dimen/sp_13"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <com.scwang.smartrefresh.layout.footer.ClassicsFooter
         android:layout_width="match_parent"

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?android:attr/selectableItemBackground"
-              android:orientation="horizontal"
-              android:paddingBottom="@dimen/dp_10"
-              android:paddingTop="@dimen/dp_10">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/fdArrow"
@@ -16,16 +15,14 @@
         android:src="@drawable/arrow_right_gray"/>
 
     <TextView
-        android:id="@+id/fenZuName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dp_12"
         android:layout_marginStart="@dimen/dp_12"
         android:text="@string/fen_zu_name"
+        android:id="@+id/fenZuName"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_15"
-        tools:ignore="RtlHardcoded"/>
+        android:textSize="@dimen/sp_15"/>
 
     <Space
         android:layout_width="0dp"
@@ -39,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
+        android:layout_marginEnd="@dimen/dp_12"
         android:text="@string/member_count"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_15"/>

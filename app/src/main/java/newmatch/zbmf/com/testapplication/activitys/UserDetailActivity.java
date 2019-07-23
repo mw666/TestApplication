@@ -51,6 +51,7 @@ import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -168,6 +169,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
     protected void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.backBtn:
+                ActivityAnimUtils.instance().activityOut(this);
                 UserDetailActivity.this.finish();
                 break;
             case R.id.userAvatarIv:
@@ -188,7 +190,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
                 break;
             case R.id.sendMsgBtn:
                 //发送好友消息
-
+                ToastUtils.showSingleToast(this,"跳转聊天页面");
                 break;
             case R.id.goToUserPhotoSpaceParent:
             case R.id.goToUserPhotoSpace:

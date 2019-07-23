@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -120,7 +120,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         TextView toolBarTitle = bindView(R.id.toolbar_title);
         if (toolBar != null) {
             toolBar.setTitle("");
-            toolBarTitle.setText(title);
+            if (!TextUtils.isEmpty(title))
+                toolBarTitle.setText(title);
             setSupportActionBar(toolBar);
             if (homeAsUpEnabled) {
                 ImageView back = bindView(R.id.backBtn);
