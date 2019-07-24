@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.MyLikeFansActivity">
+
+    <include
+        android:id="@+id/fansToolBar"
+        layout="@layout/normal_activity_toolbar" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/fansRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_68"
+        app:srlAccentColor="@color/white_grey_1"
+        app:srlEnableLoadMore="true"
+        app:srlEnablePreviewInEditMode="true"
+        app:srlEnableRefresh="true"
+        app:srlFooterHeight="@dimen/dp_40"
+        app:srlHeaderHeight="@dimen/dp_40"
+        app:srlPrimaryColor="@color/white">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/toast_bg_color"
+            app:srlPrimaryColor="@color/white_grey_1"
+            app:srlTextSizeTitle="@dimen/sp_12" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fansRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white_grey_1"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/emptyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/ic_empty_data"
+                android:drawablePadding="@dimen/dp_5"
+                android:padding="@dimen/dp_12"
+                android:text="暂无数据..."
+                android:textColor="@color/blue_14"
+                android:textSize="@dimen/sp_13"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/toast_bg_color"
+            app:srlFooterHeight="@dimen/dp_40"
+            app:srlPrimaryColor="@color/white_grey_1"
+            app:srlTextSizeTitle="@dimen/sp_12" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</RelativeLayout>

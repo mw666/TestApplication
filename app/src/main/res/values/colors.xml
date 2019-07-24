@@ -91,6 +91,7 @@
     <color name="user_add_bg_color">#FF69B6</color>
     <!--少女粉-->
     <color name="pinkColor">#FA7199</color>
+    <color name="pinkColor_90">#90FA7199</color>
     <color name="pink_6">#FF82AB</color>
     <color name="pink_7">#CD8C95</color>
     <color name="pink_8">#EEA2AD</color>
@@ -119,6 +120,8 @@
     <color name="plum_21">#CD96CD</color>
     <color name="plum_22">#EEAEEE</color>
     <color name="plum_23">#FFBBFF</color>
+    <color name="plum_23_6A">#6AFFBBFF</color>
+    <color name="plum_24">#fbcbfa</color>
 
     <color name="blue_1">#000080</color>
     <color name="blue_2">#0000CD</color>
@@ -137,6 +140,7 @@
     <color name="blue_11">#ADD8E6</color>
     <color name="blue_12">#AFEEEE</color>
     <color name="blue_13">#F0FFFF</color>
+    <color name="blue_14">#6EAAFF</color>
 
     <color name="green">#40c60a</color>
     <color name="light_green">#90EE90</color>

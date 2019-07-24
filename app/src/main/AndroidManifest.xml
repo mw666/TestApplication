@@ -34,7 +34,7 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/activityPublicStyle">
@@ -80,8 +80,7 @@
 
         <activity
             android:name=".activitys.SearchActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:theme="@style/activityPublicStyle" />
         <!-- 专门用来申请权限的activity -->
         <activity
             android:name=".activitys.SettledActivity"
@@ -122,8 +121,13 @@
             android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.TestActivity"
-            android:theme="@style/activityPublicStyle"></activity>
-        <activity android:name=".activitys.PhotoVideoActivity"></activity>
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.PhotoVideoActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.MyLikeFansActivity"
+            android:theme="@style/activityPublicStyle" />
     </application>
 
 </manifest>

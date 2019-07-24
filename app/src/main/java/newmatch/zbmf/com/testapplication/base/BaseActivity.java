@@ -78,7 +78,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         initToolBar(title, showBackBtn);
         initView();
 //        statusBar();
-
         initData();
     }
 
@@ -119,10 +118,11 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         Toolbar toolBar = bindView(R.id.toolbar);
         TextView toolBarTitle = bindView(R.id.toolbar_title);
         if (toolBar != null) {
-            toolBar.setTitle("");
-            if (!TextUtils.isEmpty(title))
-                toolBarTitle.setText(title);
             setSupportActionBar(toolBar);
+            toolBar.setTitle("");
+            if (!TextUtils.isEmpty(title)) {
+                toolBarTitle.setText(title);
+            }
             if (homeAsUpEnabled) {
                 ImageView back = bindView(R.id.backBtn);
                 if (back != null) {

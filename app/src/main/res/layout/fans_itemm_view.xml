@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dp_1"
+    android:padding="@dimen/dp_10">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/fansAvatar"
+        android:layout_width="@dimen/dp_36"
+        android:layout_height="@dimen/dp_36"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_head_portrait_icon" />
+
+    <TextView
+        android:id="@+id/fansName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_toEndOf="@+id/fansAvatar"
+        android:padding="1dp"
+        android:text="秦始皇的雄兵"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_13"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/fansLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fansName"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_toEndOf="@+id/fansAvatar"
+        android:background="@drawable/label_bg_pink"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="@string/nanshen"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:id="@+id/fansLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fansName"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_toEndOf="@+id/fansLabel1"
+        android:background="@drawable/label_bg_pink"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="@string/zhifukong"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+    <Button
+        android:id="@+id/likeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_38"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right"
+        android:layout_marginStart="@dimen/dp_28"
+        android:backgroundTint="@color/zhihu_selector_imgs_bottom_textcolor"
+        android:drawableRight="@drawable/ic_like_add_heart_white"
+        android:drawablePadding="@dimen/dp_2"
+        android:text="@string/guan_zhu"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13"
+        tools:ignore="RtlHardcoded" />
+</RelativeLayout>

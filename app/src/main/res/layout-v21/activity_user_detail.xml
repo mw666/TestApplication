@@ -116,13 +116,28 @@
                     android:textSize="@dimen/sp_11" />
 
                 <TextView
-                    android:id="@+id/userAccount"
+                    android:id="@+id/userAccountTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/careTv"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_1"
                     android:layout_toEndOf="@+id/userAvatarIv"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/ye_hi_number"
+                    android:textColor="@color/white_gray"
+                    android:textSize="@dimen/sp_12" />
+
+                <TextView
+                    android:id="@+id/userAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/careTv"
+                    android:layout_marginStart="@dimen/dp_3"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_toEndOf="@+id/userAccountTitle"
                     android:lines="1"
                     android:maxLength="10"
                     android:padding="@dimen/dp_2"

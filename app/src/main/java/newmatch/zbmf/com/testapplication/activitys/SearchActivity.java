@@ -24,14 +24,9 @@ public class SearchActivity extends BaseActivity {
     protected void initView() {
         //全屏，内容延伸至状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        //隐藏toolBar的返回icon
+        setGoneToolBar();
 
-        //设置返回箭头的隐藏
-        Toolbar toolBar = bindView(R.id.toolbar);
-        setSupportActionBar(toolBar);
-//        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setDisplayShowTitleEnabled(false);
-        supportActionBar.setDisplayHomeAsUpEnabled(false);
 
 //        bindView(R.id.toolbar_title).setVisibility(View.INVISIBLE);//隐藏顶部标题
         EditText searchUserEt = bindView(R.id.searchUserEt);
@@ -39,8 +34,19 @@ public class SearchActivity extends BaseActivity {
         RecyclerView searchRecommendRv = bindView(R.id.searchRecommendRv);
         ImageView clearSearchEt = bindView(R.id.clearSearchEt);
 
+        //隐藏或显示清空EditText的icon
         TextContentUtil.showOrHideClearIv(searchUserEt, searchResultIv);
 
+    }
+
+    //设置toolBar
+    private void setGoneToolBar() {
+        //设置返回箭头的隐藏
+        Toolbar toolBar = bindView(R.id.toolbar);
+        setSupportActionBar(toolBar);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayShowTitleEnabled(false);
+        supportActionBar.setDisplayHomeAsUpEnabled(false);
     }
 
     @Override

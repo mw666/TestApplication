@@ -311,7 +311,6 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
             case R.id.tabItemPhoto:
                 //跳转我的图片页面
                 SkipActivityUtil.skipActivity(MySpaceActivity.this, PhotoVideoActivity.class);
-                finish();
                 break;
             case R.id.tabItemDynamic:
                 //跳转动态广场页面
@@ -322,13 +321,15 @@ public class MySpaceActivity extends BaseActivity implements DynamicAdapter.Comm
                 break;
             case R.id.tabItemMyLike:
                 //跳转我的关注页面
-                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的关注");
-
+                Intent likeIntent = new Intent(MySpaceActivity.this, MyLikeFansActivity.class);
+                likeIntent.putExtra(C.TYPE,2);
+                SkipActivityUtil.skipIntentDataActivity(MySpaceActivity.this, likeIntent);
                 break;
             case R.id.tabItemMyFans:
                 //跳转我的粉丝页面
-                ToastUtils.showSingleToast(MySpaceActivity.this, "跳转我的粉丝");
-
+                Intent fansIntent = new Intent(MySpaceActivity.this, MyLikeFansActivity.class);
+                fansIntent.putExtra(C.TYPE,1);
+                SkipActivityUtil.skipIntentDataActivity(MySpaceActivity.this, fansIntent);
                 break;
         }
     }

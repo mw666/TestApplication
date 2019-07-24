@@ -3,6 +3,7 @@ package newmatch.zbmf.com.testapplication.activitys;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -117,4 +118,24 @@ public class PhotoVideoActivity extends BaseActivity {
         return fragments;
     }
 
+
+    private int x = 0;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x = (int) event.getX();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int nowX = (int) event.getX();
+                int i = nowX - x;
+                if (i > 120) {
+                    x = 0;
+                    ActivityAnimUtils.instance().activityOut(PhotoVideoActivity.this);
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
 }

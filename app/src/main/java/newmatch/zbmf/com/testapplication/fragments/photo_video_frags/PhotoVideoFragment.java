@@ -1,7 +1,7 @@
 package newmatch.zbmf.com.testapplication.fragments.photo_video_frags;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,12 +13,14 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.PvAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
  * Created By pq
  * on 2019/7/23
  */
-public class PhotoVideoFragment extends BaseFragment {
+public class PhotoVideoFragment extends BaseFragment implements PvAdapter.CreateAlbumCallBack,
+        PvAdapter.SkipAlbumCallBack {
 
 
     public static PhotoVideoFragment instance() {
@@ -66,10 +68,25 @@ public class PhotoVideoFragment extends BaseFragment {
 
     //设置RecyclerView的数据
     private void setRvContent(RecyclerView rv) {
-        rv.setLayoutManager(new LinearLayoutManager(getContext(),
-                OrientationHelper.VERTICAL, false));
-        PvAdapter pvAdapter = new PvAdapter();
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2,
+                OrientationHelper.VERTICAL, false);
+        rv.setLayoutManager(manager);
+        PvAdapter pvAdapter = new PvAdapter(getActivity(),2);
+        pvAdapter.setCreateAlbumCallBack(this);
+        pvAdapter.setSkipAlbumCallBack(this);
         rv.setAdapter(pvAdapter);
     }
 
+    @Override
+    public void createAlbumCallBack() {
+        //创建新的相册
+        ToastUtils.showSingleToast(getActivity(),"新建相册");
+    }
+
+    @Override
+    public void skipAlbumCallBack() {
+        //跳转相册
+        ToastUtils.showSingleToast(getActivity(),"跳转相册");
+
+    }
 }

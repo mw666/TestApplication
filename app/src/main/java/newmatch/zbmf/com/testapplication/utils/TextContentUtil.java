@@ -9,11 +9,12 @@ import android.widget.ImageView;
 /**
  * Created by **
  * on 2018/9/21.
+ * 隐藏EditText的清除图标
  */
 
 public class TextContentUtil {
 
-    public static void showOrHideClearIv(EditText et, ImageView clearIv){
+    public static void showOrHideClearIv(EditText et, ImageView clearIv) {
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -22,9 +23,9 @@ public class TextContentUtil {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0){
+                if (s.length() > 0) {
                     clearIv.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     clearIv.setVisibility(View.GONE);
                 }
             }

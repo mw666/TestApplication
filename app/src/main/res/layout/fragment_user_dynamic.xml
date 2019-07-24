@@ -27,6 +27,7 @@
             android:id="@+id/dynamicRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
             android:background="@color/white_grey_1"
             android:focusable="false" />
 

@@ -23,4 +23,6 @@ public class C {
     public static final String NET_CACHE = MyApplication.getAppCacheDir() + File.separator + "NetCache";
 
     public static final String CURRENT = "current";
+
+    public static final String TYPE = "type";
 }

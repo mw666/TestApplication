@@ -124,15 +124,28 @@
                     android:text="粉丝:237"
                     android:textColor="@color/white_gray"
                     android:textSize="@dimen/sp_11" />
-
                 <TextView
-                    android:id="@+id/userAccount"
+                    android:id="@+id/userAccountTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/careTv"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_1"
                     android:layout_toEndOf="@+id/mySpaceHeadIv"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/ye_hi_number"
+                    android:textColor="@color/white_gray"
+                    android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/userAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/careTv"
+                    android:layout_marginStart="@dimen/dp_3"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_toEndOf="@+id/userAccountTitle"
                     android:lines="1"
                     android:maxLength="10"
                     android:padding="@dimen/dp_2"
@@ -282,7 +295,7 @@
                 android:padding="@dimen/dp_3"
                 android:text="@string/photo_alubm"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tabItemDynamic"
@@ -296,7 +309,7 @@
                 android:padding="@dimen/dp_3"
                 android:text="@string/dynamic_space"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tabItemMyLike"
@@ -310,7 +323,7 @@
                 android:padding="@dimen/dp_3"
                 android:text="@string/my_like"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tabItemMyFans"
@@ -324,7 +337,7 @@
                 android:padding="@dimen/dp_3"
                 android:text="@string/my_fans"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_11" />
         </LinearLayout>
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
