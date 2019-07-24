@@ -22,5 +22,9 @@
         <item name="android:screenOrientation">portrait</item>
         <!--设置configChanges-->
         <item name="android:configChanges">orientation|keyboardHidden|screenSize</item>
+        <!--设置toolBar左边无标题-->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 </resources>

@@ -129,7 +129,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                     back.setVisibility(View.VISIBLE);
                     back.setOnClickListener(view -> onBackPressed());
                 }
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 toolBar.setNavigationIcon(R.drawable.back_icon);
                 toolBar.setNavigationOnClickListener(v -> onBackPressed());
             }

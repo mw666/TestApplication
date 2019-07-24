@@ -122,12 +122,10 @@
         <activity
             android:name=".activitys.TestActivity"
             android:theme="@style/activityPublicStyle" />
-        <activity
-            android:name=".activitys.PhotoVideoActivity"
-            android:theme="@style/activityPublicStyle" />
-        <activity
-            android:name=".activitys.MyLikeFansActivity"
-            android:theme="@style/activityPublicStyle" />
+        <activity android:name=".activitys.PhotoVideoActivity"
+            android:theme="@style/activityPublicStyle"/>
+        <activity android:name=".activitys.MyLikeFansActivity"
+            android:theme="@style/activityPublicStyle"/>
     </application>
 
 </manifest>

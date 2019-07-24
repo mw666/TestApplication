@@ -210,7 +210,7 @@
                 android:fitsSystemWindows="true"
                 android:minHeight="?attr/actionBarSize"
                 android:paddingTop="@dimen/dp_20"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
