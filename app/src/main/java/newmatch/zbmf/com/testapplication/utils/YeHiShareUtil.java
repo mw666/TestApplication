@@ -1,6 +1,7 @@
 package newmatch.zbmf.com.testapplication.utils;
 
 import android.location.Address;
+import android.text.TextUtils;
 
 import java.util.Locale;
 
@@ -21,16 +22,22 @@ public class YeHiShareUtil {
 
     public static void saveAddress(Address address) {
         LogUtils.D("----  存储地址---- " + "省："
-                + address.getAdminArea() + " 市：" + address.getSubAdminArea() + " 区：" + address.getLocality());
+                + address.getAdminArea() + " 市：" + address.getLocality() + " 区：" + address.getSubLocality());
         Locale locale = address.getLocale();
         putCountry(address.getCountryName());//存储国家名称
         putCountryCode(address.getCountryCode());//存储国家代码
-        putProvince(address.getAdminArea());//存储省
-        putCity(address.getSubAdminArea());//存储市
-        putLocality(address.getLocality());//存储区/县级市
+        putProvince(address.getLocality());//存储省
+        String subAdminArea = address.getSubAdminArea();
+        putCity(address.getLocality());//存储市
+        String locality = address.getSubLocality();
+        if (TextUtils.isEmpty(locality)) {
+            locality = address.getLocality();
+        }
+        putLocality(locality);//存储区/县级市
         putAreaPhone(address.getPhone());//存储所在位置的电话区号
         putPostalCode(address.getPostalCode());//存储所在位置的邮政编码
-        putSubLocality(address.getSubLocality());
+        String subLocality = address.getSubLocality();
+        putSubLocality(subLocality);
         putThoroughfare(address.getThoroughfare());//存储所在主道路
         putSubThoroughfare(address.getSubThoroughfare());//存储所在副道路
         putFeatureName(address.getFeatureName());//存储街道详细地址

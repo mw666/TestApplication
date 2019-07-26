@@ -120,6 +120,8 @@ dependencies {
     //图片裁剪库
     implementation 'com.github.yalantis:ucrop:2.2.3'
     implementation 'com.github.yalantis:ucrop:2.2.3-native'
+    //时间，地区，条件选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
 
 
 }
