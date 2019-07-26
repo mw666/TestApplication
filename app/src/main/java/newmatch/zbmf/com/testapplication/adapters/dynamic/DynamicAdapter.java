@@ -17,7 +17,7 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.GMClass.GMRvSetLayoutManager;
 import newmatch.zbmf.com.testapplication.GMClass.GMTextSetIcon;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;
 import newmatch.zbmf.com.testapplication.callback.CommentListCallBack;
 import newmatch.zbmf.com.testapplication.callback.LikeCallBack;

@@ -19,7 +19,7 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.citys.entity.City;
 import newmatch.zbmf.com.testapplication.citys.listener.CityClickCallBack;
 import newmatch.zbmf.com.testapplication.citys.listener.CurrentCityListener;
-import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
+import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
 
 /**
  * Created by next
@@ -102,23 +102,23 @@ public class CityListAdapter extends BaseAdapter implements CurrentCityListener 
         if (viewType == 0) {//正在查看
             convertView = inflater.inflate(R.layout.current_see_location_item, null);
             mCurrentSelectLocationV = convertView.findViewById(R.id.currentSelectLocationV);
-            if (TextUtils.isEmpty(TianShareUtil.getSeeCity())) {
-                currentSeeCity = TianShareUtil.getCity();
+            if (TextUtils.isEmpty(YeHiShareUtil.getCity())) {
+                currentSeeCity = YeHiShareUtil.getCity();
             } else {
-                currentSeeCity = TianShareUtil.getSeeCity();
+                currentSeeCity = YeHiShareUtil.getCity();
             }
             mCurrentSelectLocationV.setText(currentSeeCity);
             if (mCityClickCallBack != null)
-                mCityClickCallBack.setCurrentSeeLocation(TianShareUtil.getCity(), mCurrentSelectLocationV);
+                mCityClickCallBack.setCurrentSeeLocation(YeHiShareUtil.getCity(), mCurrentSelectLocationV);
         } else if (viewType == 1) {//定位
             convertView = inflater.inflate(R.layout.item_city_location, null);
             Button tv_location = (Button) convertView.findViewById(R.id.tv_location);
             //传入当前定位的城市
-            currentSeeCity = TianShareUtil.getCity();
+            currentSeeCity = YeHiShareUtil.getCity();
             tv_location.setText(currentSeeCity);
             tv_location.setOnClickListener(v -> {
                 if (mCityClickCallBack != null) {
-                    TianShareUtil.setSeeCity(currentSeeCity);
+                    YeHiShareUtil.putCity(currentSeeCity);
                     mCityClickCallBack.locationCity(currentSeeCity);
                     mCurrentSelectLocationV.setText(currentSeeCity);
                 }
@@ -166,7 +166,7 @@ public class CityListAdapter extends BaseAdapter implements CurrentCityListener 
                 holder.name.setOnClickListener(v -> {
                     if (mCityClickCallBack != null) {
                         isSeeOther = true;
-                        TianShareUtil.setSeeCity(allCities.get(position).getName());
+                        YeHiShareUtil.putCity(allCities.get(position).getName());
                         currentSeeCity = allCities.get(position).getName();
                         mCityClickCallBack.selectAllCity(allCities.get(position).getName());
                         mCurrentSelectLocationV.setText(allCities.get(position).getName());
@@ -186,7 +186,7 @@ public class CityListAdapter extends BaseAdapter implements CurrentCityListener 
     @Override
     public void currentCityCallBack(String currentSeeCity) {
         isSeeOther = true;
-        TianShareUtil.setSeeCity(currentSeeCity);
+        YeHiShareUtil.putCity(currentSeeCity);
         this.currentSeeCity = currentSeeCity;
     }
 

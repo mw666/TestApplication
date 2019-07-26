@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 
 /**
  * Created By pq

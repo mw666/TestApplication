@@ -18,7 +18,7 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
-import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;

@@ -2,11 +2,11 @@
 <resources>
 
     <style name="textInputTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorAccent">@color/colorPrimary</item>
-        <item name="android:textColorHint">@color/white_grey</item>
+        <item name="android:colorAccent">@color/deepPurple</item>
+        <item name="android:textColorHint">@color/pink_6</item>
         <item name="colorControlNormal">@color/white_grey</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/deepPurple</item>
+        <item name="colorControlHighlight">@color/deepPurple</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
@@ -72,6 +72,14 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <!--输入editText属性-->
+        <item name="android:colorAccent">@color/deepPurple</item>
+        <item name="android:textColorHint">@color/pink_6</item>
+        <item name="colorControlNormal">@color/white_grey</item>
+        <item name="colorControlActivated">@color/deepPurple</item>
+        <item name="colorControlHighlight">@color/deepPurple</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
     </style>
 
 </resources>

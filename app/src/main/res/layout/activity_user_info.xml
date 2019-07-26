@@ -7,19 +7,51 @@
     android:orientation="vertical"
     tools:context="newmatch.zbmf.com.testapplication.activitys.UserInfoActivity">
 
-    <!--<include layout="@layout/my_toolbar"/>-->
     <include
         android:id="@+id/topToolBar"
         layout="@layout/normal_activity_toolbar" />
 
-    <include
-        android:id="@+id/userAvatar"
-        layout="@layout/user_avatar_view" />
+    <!--<include-->
+    <!--android:id="@+id/userAvatar"-->
+    <!--layout="@layout/user_avatar_view" />-->
+    <RelativeLayout
+        android:id="@+id/topAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_68"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_15">
+
+        <TextView
+            android:id="@+id/avatarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawableBottom="@drawable/add_user_head_bottom_line"
+            android:drawablePadding="@dimen/dp_3"
+            android:padding="@dimen/dp_10"
+            android:text="选取用户图像"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/userAvatar"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_below="@+id/avatarTitle"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_head_portrait_icon" />
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/userAvatar"
+        android:layout_below="@+id/topAvatar"
+        android:layout_marginTop="@dimen/dp_13"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <RadioGroup
@@ -28,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_1"
             android:background="@color/white"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingTop="@dimen/dp_3"
             android:paddingBottom="@dimen/dp_5"
@@ -36,8 +69,8 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_25"
-                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_20"
                 android:gravity="center"
                 android:padding="@dimen/dp_3"
                 android:shadowColor="@color/colorPrimary"
@@ -48,8 +81,8 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_55"
-                android:layout_marginLeft="@dimen/dp_55"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_25"
                 android:gravity="center"
                 android:padding="@dimen/dp_3"
                 android:shadowColor="@color/colorPrimary"
@@ -59,10 +92,56 @@
         </RadioGroup>
 
         <RelativeLayout
+            android:id="@+id/addCropImg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_1"
-            android:background="@color/white">
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/addUserShowImgTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/dp_21"
+                android:drawableBottom="@drawable/add_show_img_tv_bottom_line"
+                android:drawablePadding="@dimen/dp_3"
+                android:padding="@dimen/dp_3"
+                android:text="请上传展示的照片"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/userShowImg"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="@dimen/dp_120"
+                android:layout_below="@+id/addUserShowImgTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/selectUserShowImg"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="120dp"
+                android:layout_below="@+id/addUserShowImgTitle"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/add_user_img_shape_view"
+                android:drawableTop="@drawable/ic_add_group_purple"
+                android:gravity="center"
+                android:padding="@dimen/dp_30"
+                android:text="点击选取展示照片"
+                android:textColor="@color/deepPurple"
+                android:textSize="@dimen/sp_10" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:visibility="gone">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/phoneLayout"
@@ -90,7 +169,11 @@
                 android:visibility="invisible" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/userInfoRLStyle">
+        <RelativeLayout
+            style="@style/userInfoRLStyle"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_50">
 
             <TextView
                 android:id="@+id/locationTv"
@@ -109,7 +192,9 @@
 
         <RelativeLayout
             style="@style/userInfoRLStyle"
-            android:paddingTop="@dimen/dp_16">
+            android:paddingTop="@dimen/dp_15"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_50">
 
             <TextView
                 android:id="@+id/birthdayTv"
@@ -119,6 +204,8 @@
             <ImageView
                 android:id="@+id/selectBirthdayIv"
                 style="@style/userInfoLocationIvStyle"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerVertical="true"
                 android:src="@drawable/right_arrow_purple_icon" />
 
             <View
@@ -135,7 +222,14 @@
 
             <Button
                 android:id="@+id/submitUserInfoBtn"
-                style="@style/btnStyle" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginStart="@dimen/dp_50"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:background="@drawable/login_btn0_bg"
+                android:text="@string/positive"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -44,7 +44,7 @@ import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.MyCircleAdapter;
 import newmatch.zbmf.com.testapplication.adapters.dynamic.DynamicAdapter;
-import newmatch.zbmf.com.testapplication.assist.CollapsingToolbarLayoutState;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.CommentArrowCallBack;

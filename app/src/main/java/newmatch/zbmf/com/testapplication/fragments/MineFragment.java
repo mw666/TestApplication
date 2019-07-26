@@ -34,7 +34,7 @@ import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserCenterActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;

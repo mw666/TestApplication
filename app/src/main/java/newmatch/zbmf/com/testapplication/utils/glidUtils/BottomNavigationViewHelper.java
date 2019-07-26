@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.assist;
+package newmatch.zbmf.com.testapplication.utils.glidUtils;
 
 import android.annotation.SuppressLint;
 import android.support.design.internal.BottomNavigationItemView;

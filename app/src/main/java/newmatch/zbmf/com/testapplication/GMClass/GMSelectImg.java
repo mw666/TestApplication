@@ -12,9 +12,8 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import java.util.Set;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GifSizeFilter;
-import newmatch.zbmf.com.testapplication.assist.Glide4Engine;
-import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GifSizeFilter;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.Glide4Engine;
 
 /**
  * Created by **

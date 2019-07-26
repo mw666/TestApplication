@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.callback.MineViewClick;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
 

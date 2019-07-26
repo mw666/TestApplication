@@ -64,7 +64,7 @@
                 <Button
                     android:id="@+id/zc_verifyCodeBtn"
                     android:layout_width="@dimen/dp_58"
-                    android:layout_height="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_25"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:layout_marginRight="@dimen/dp_35"

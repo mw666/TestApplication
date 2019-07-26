@@ -29,7 +29,7 @@ import newmatch.zbmf.com.testapplication.fragments.msg_fragments.MsgFragment;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
-import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
+import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
 import newmatch.zbmf.com.testapplication.views.NoScrollViewPager;
 
 /**
@@ -77,7 +77,7 @@ public class Main1Fragment extends BaseFragment implements
         int current = getArguments().getInt(C.CURRENT);
 
         List<Fragment> fragmentList = new ArrayList<>();
-        homeFragment = HomeFragment.homgInstance(TianShareUtil.getCity());
+        homeFragment = HomeFragment.homgInstance(YeHiShareUtil.getCity());
         fragmentList.add(homeFragment);
         fragmentList.add(DynamicFragment.dynamicInstance());
         fragmentList.add(MsgFragment.msgInstance());

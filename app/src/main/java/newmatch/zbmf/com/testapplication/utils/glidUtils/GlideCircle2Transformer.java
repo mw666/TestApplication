@@ -1,4 +1,4 @@
-package newmatch.zbmf.com.testapplication.assist;
+package newmatch.zbmf.com.testapplication.utils.glidUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

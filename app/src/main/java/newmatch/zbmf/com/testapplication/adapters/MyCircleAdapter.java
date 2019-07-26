@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 
 /**

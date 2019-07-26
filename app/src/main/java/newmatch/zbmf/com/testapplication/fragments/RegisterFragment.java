@@ -37,7 +37,8 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * A simple {@link Fragment} subclass.
  * 注册或登录
  */
-public class RegisterFragment extends BaseFragment implements View.OnClickListener, TestView<RegisterBean, RegisterOrLoginPresenter> {
+public class RegisterFragment extends BaseFragment implements
+        View.OnClickListener, TestView<RegisterBean, RegisterOrLoginPresenter> {
 
     private TextInputLayout mAccountTextLayout;
     private TextInputLayout mPasswordTextLayout;
@@ -109,29 +110,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             clearListener(mAccountTextLayout, mClearAccount);
             clearListener(mPasswordTextLayout, mClearPassword);
             setLoginViewClick();
-
-            passwordInputEt.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    if (!TextUtils.isEmpty(accountInputEt.getText().toString().trim())) {
-                        if (passwordInputEt.getText().toString().trim().length() > 6) {
-                            mLoginBtn.setBackground(ContextCompat.getDrawable(getActivity(),
-                                    R.drawable.login_btn1_bg_pressed));
-                        }
-                    }
-                }
-            });
+            //改变按钮的颜色
+            btnChangeColor(passwordInputEt,mLoginBtn);
         } else if (mTabPosition == 1) {
             mZc_accountTextLayout = bindView(mView, R.id.zc_accountTextLayout);
             TextInputEditText zc_accountInputEt = bindView(mView, R.id.zc_accountInputEt);
@@ -150,29 +130,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             clearListener(mZc_accountTextLayout, mZc_clearAccount);
             clearListener(mZc_passwordTextLayout, mZc_clearPassword);
             setRegisterViewClick();
-
-            zc_passwordInputEt.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    if (!TextUtils.isEmpty(zc_passwordInputEt.getText().toString().trim())) {
-                        if (zc_passwordInputEt.getText().toString().trim().length() > 6) {
-                            mZc_btn.setBackground(ContextCompat.getDrawable(getActivity(),
-                                    R.drawable.login_btn1_bg_pressed));
-                        }
-                    }
-                }
-            });
+            //改变按钮的颜色
+            btnChangeColor(zc_passwordInputEt,mZc_btn);
         }
     }
 
@@ -454,5 +413,34 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public void resultCallBack(RegisterBean result) {
         //跳转圈友信息填写页面
         SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
+    }
+
+    //设置EditText监听长度的变化，按钮的变色
+    private void btnChangeColor(TextInputEditText tiEditText,Button btn){
+        tiEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!TextUtils.isEmpty(tiEditText.getText().toString().trim())) {
+                    if (tiEditText.getText().toString().trim().length() > 6) {
+                        btn.setBackground(ContextCompat.getDrawable(getActivity(),
+                                R.drawable.login_btn1_bg_pressed));
+                    } else {
+                        btn.setBackground(ContextCompat.getDrawable(getActivity(),
+                                R.drawable.login_btn0_bg));
+                    }
+                }
+            }
+        });
     }
 }

@@ -101,10 +101,12 @@ public class LocationMonitor {
                             if (netWorkIsOpen()) {
                                 myLocationManager.requestLocationUpdates("network", 2000, 60, locationListener);
                                 netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                                locationListener.onLocationChanged(netLocation);
                             }
                             if (gpsIsOpen()) {
                                 myLocationManager.requestLocationUpdates("gps", 2000, 60, locationListener);
                                 gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                locationListener.onLocationChanged(gpsLocation);
                             }
                         });
             } else {
@@ -112,10 +114,12 @@ public class LocationMonitor {
                 if (netWorkIsOpen()) {
                     myLocationManager.requestLocationUpdates("network", 2000, 60, locationListener);
                     netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    locationListener.onLocationChanged(netLocation);
                 }
                 if (gpsIsOpen()) {
                     myLocationManager.requestLocationUpdates("gps", 2000, 60, locationListener);
                     gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    locationListener.onLocationChanged(gpsLocation);
                 }
             }
         } else {
@@ -123,10 +127,12 @@ public class LocationMonitor {
             if (netWorkIsOpen()) {
                 myLocationManager.requestLocationUpdates("network", 2000, 60, locationListener);
                 netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                locationListener.onLocationChanged(netLocation);
             }
             if (gpsIsOpen()) {
                 myLocationManager.requestLocationUpdates("gps", 2000, 60, locationListener);
                 gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                locationListener.onLocationChanged(gpsLocation);
             }
         }
     }

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 
 

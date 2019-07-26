@@ -140,5 +140,7 @@
     <string name="my_fans">我的粉丝</string>
     <string name="all">全部</string>
     <string name="ye_hi_number">夜嗨号:</string>
+    <string name="positive">确定</string>
+    <string name="crop_img">裁剪图片</string>
 
 </resources>

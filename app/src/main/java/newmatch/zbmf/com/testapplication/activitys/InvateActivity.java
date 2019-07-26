@@ -1,6 +1,5 @@
 package newmatch.zbmf.com.testapplication.activitys;
 
-import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,12 +9,11 @@ import android.widget.TextView;
 
 import java.io.File;
 
-import it.sephiroth.android.library.easing.Linear;
 import newmatch.zbmf.com.testapplication.GMClass.GMCopy;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.utils.DrawableByteBitmapExUtils;
-import newmatch.zbmf.com.testapplication.utils.FileUtils;
+import newmatch.zbmf.com.testapplication.utils.fileUtils.FileUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
@@ -70,8 +68,7 @@ public class InvateActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.downLoadCode:
                 //点击保存下载码
-                String savePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                        + File.separator + "aYeHai" + File.separator + "img";
+                String savePath = FileUtils.getYehiImgAssistPath();
                 String fileName = savePath + File.separator + "code.jpeg";
                 byte[] bytes = DrawableByteBitmapExUtils.drawable2Byte(ContextCompat.getDrawable(this,
                         R.drawable.ic_2_code));

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +23,7 @@ import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.services.LocationMonitor;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.StatusBarUtil;
-import newmatch.zbmf.com.testapplication.utils.TianShareUtil;
+import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
 
 /**
  * 欢迎页
@@ -38,29 +39,16 @@ public class SplashActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         //是否全屏
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        //设置状态栏半透明
-//        StatusBarUtil.setTranslucent(SplashActivity.this,
-//                ContextCompat.getColor(SplashActivity.this,R.color.plum_2));
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         StatusBarUtil.setStatuBar(SplashActivity.this, Color.TRANSPARENT);
-//        if (Build.VERSION.SDK_INT>21){
-//            View decorView = getWindow().getDecorView();
-//            int options=View.SYSTEM_UI_FLAG_FULLSCREEN
-//                    |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                    |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                    |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//            decorView.setSystemUiVisibility(options);
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
-//        }
 
         PermissionUtils.instance().requestPermission(this,
                 getString(R.string.permission_name_location), PermissionC.LOCATION_PERMISSION,
                 (PermissionResultCallBack) () -> {
-                    skipNextAct();
-                    LocationMonitor.getInstance(SplashActivity.this,
+                    Location location = LocationMonitor.getInstance(SplashActivity.this,
                             SplashActivity.this).getLocation();
+                    getCity(location);
+                    skipNextAct();
                 });
 
 
@@ -84,7 +72,7 @@ public class SplashActivity extends AppCompatActivity implements
 //            }
 //            if (!hasNeedPermissi) {
 //
-
+//
 //            }
 //        } else {
 //            //直接执行
@@ -117,7 +105,7 @@ public class SplashActivity extends AppCompatActivity implements
                     location.getLongitude(), 1);
             if (addresses != null && addresses.size() > 0) {
                 Address address = addresses.get(0);
-                TianShareUtil.saveAddress(address);
+                YeHiShareUtil.saveAddress(address);
                 return address;
             }
             return null;

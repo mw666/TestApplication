@@ -40,7 +40,6 @@ public class PermissionUtils {
         intent.addCategory("android.intent.category.DEFAULT");
         bundle.putString(PermissionC.TIP, tip);
         bundle.putStringArray(PermissionC.init_permis, permissions);
-//        bundle.putSerializable(PermissionC.SERIALIZE, permissionResultCallBack);
         intent.putExtras(bundle);
         activity.startActivity(intent);
     }

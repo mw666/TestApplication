@@ -1,5 +1,7 @@
 package newmatch.zbmf.com.testapplication.presenter;
 
+import android.annotation.SuppressLint;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -40,6 +42,7 @@ public class TestWanAndroidPresenter implements TestPresenter {
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void doLoadData(String... params) {
         WanAndroidBanner wanAndroidBanner = RetrofitSingleton.getInstance().create(WanAndroidBanner.class);

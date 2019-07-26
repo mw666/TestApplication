@@ -2,11 +2,15 @@ package newmatch.zbmf.com.testapplication.activitys;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,37 +20,44 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.model.AspectRatio;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 
+import java.io.File;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.GMClass.GMCalendar;
 import newmatch.zbmf.com.testapplication.GMClass.GMSelectImg;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.PermissionResultCallBack;
 import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
+import newmatch.zbmf.com.testapplication.utils.LogUtils;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.PermissionUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
-import newmatch.zbmf.com.testapplication.views.circleImageView.RoundImageView;
+import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
+import newmatch.zbmf.com.testapplication.utils.fileUtils.FileUtils;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 
 /**
- * 圈友信息填写页面
+ * 嗨友信息填写页面
  */
 public class UserInfoActivity extends BaseActivity {
 
     private TextInputLayout mPhoneLayout;
-    //用户同意所需的全部权限的标志
-    private RoundImageView mAvatarIv;
     private TextView mLocationTv;
     private TextView mBirthdayTv;
+    private AppCompatImageView userAvatar;
+    private AppCompatImageView userShowImg;
+    private TextView selectUserShowImg;
+    private Button submitUserInfoBtn;
 
     @Override
     protected Integer layoutId() {
@@ -58,31 +69,27 @@ public class UserInfoActivity extends BaseActivity {
         //设置内容顶进状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         MyActivityManager.getMyActivityManager().pushAct(UserInfoActivity.this);
-        bindViewWithClick(R.id.avatarL, true);
-        mAvatarIv = bindViewWithClick(R.id.avatarIv, true);
-        Toolbar toolbar = bindView(R.id.toolbar);
-        TextView toolbar_title = bindView(R.id.toolbar_title);
-        toolbar_title.setText("个人资料");
 
-        setSupportActionBar(toolbar);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setDisplayShowTitleEnabled(false);
-        supportActionBar.setDisplayHomeAsUpEnabled(false);
+        //初始化设置ToolBar
+        initGoneToolBar();
 
         RadioGroup sexRG = bindView(R.id.sexRG);
         mPhoneLayout = bindView(R.id.phoneLayout);
         ImageView clearPhone = bindViewWithClick(R.id.clearPhone, true);
-//        mLocationLayout = bindView(R.id.locationLayout);
-//        ImageView clearLocation = bindViewWithClick(R.id.clearLocation, true);
-//        mBirthdayLayout = bindView(R.id.birthdayLayout);
-//        ImageView clearBirthday = bindViewWithClick(R.id.clearBirthday, true);
-        Button submitUserInfoBtn = bindViewWithClick(R.id.submitUserInfoBtn, true);
+        submitUserInfoBtn = bindViewWithClick(R.id.submitUserInfoBtn, true);
         mLocationTv = bindViewWithClick(R.id.locationTv, true);
         bindViewWithClick(R.id.selectLocationIv, true);
         mBirthdayTv = bindViewWithClick(R.id.birthdayTv, true);
         bindViewWithClick(R.id.selectBirthdayIv, true);
+        //用户头像
+        userAvatar = bindViewWithClick(R.id.userAvatar, true);
+        selectUserShowImg = bindViewWithClick(R.id.selectUserShowImg, true);
+        userShowImg = bindViewWithClick(R.id.userShowImg, true);
 
-        submitUserInfoBtn.setText(getString(R.string.confirm));
+        String province = YeHiShareUtil.getProvince();
+        String city = YeHiShareUtil.getCity();
+        String seeCity = YeHiShareUtil.getLocality();
+        mLocationTv.setText(String.format("%s-%s-%s", province, city, seeCity));
 
         textChangeListener(mPhoneLayout, clearPhone);
 
@@ -90,10 +97,20 @@ public class UserInfoActivity extends BaseActivity {
             //获取用户的性别
             RadioButton radioButton = UserInfoActivity.this.findViewById(group.getCheckedRadioButtonId());
             CharSequence sex = radioButton.getText();
-            PLog.LogD("--   选择的性别  :" + sex);
-
+            if (!TextUtils.isEmpty(sex)) {
+                rgSelected = true;
+                setSubmitBtnColor();
+            }
         });
+    }
 
+    //初始化隐藏ToolBar
+    private void initGoneToolBar() {
+        Toolbar toolbar = bindView(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayShowTitleEnabled(false);
+        supportActionBar.setDisplayHomeAsUpEnabled(false);
     }
 
     @Override
@@ -132,7 +149,7 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected String initTitle() {
-        return getString(R.string.user_info);
+        return "个人资料";
     }
 
     @Override
@@ -148,17 +165,22 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.selectUserShowImg:
+            case R.id.userShowImg:
+                //选取用户展示的照片
+                PermissionUtils.instance().requestPermission(this,
+                        getString(R.string.get_img_tip), PermissionC.WR_FILES_PERMISSION,
+                        (PermissionResultCallBack) () -> {
+                            //选择图片
+                            new GMSelectImg().picImgsOrVideo(UserInfoActivity.this
+                                    , MimeType.ofImage(),
+                                    PermissionC.SHWO_USER_IMG, 1);
+                        });
+                break;
             case R.id.clearPhone:
                 mPhoneLayout.getEditText().getText().clear();
                 break;
-            /*case R.id.clearLocation:
-                mLocationLayout.getEditText().getText().clear();
-                break;
-            case R.id.clearBirthday:
-                mBirthdayLayout.getEditText().getText().clear();
-                break;*/
-            case R.id.avatarL:
-            case R.id.avatarIv:
+            case R.id.userAvatar:
                 PermissionUtils.instance().requestPermission(this,
                         getString(R.string.get_img_tip), PermissionC.WR_FILES_PERMISSION,
                         (PermissionResultCallBack) () -> {
@@ -171,9 +193,11 @@ public class UserInfoActivity extends BaseActivity {
             case R.id.birthdayTv:
             case R.id.selectBirthdayIv:
                 //选择生日
-                String calendar = new GMCalendar().showCalemdar(UserInfoActivity.this).getCalendar();
-                mBirthdayTv.setText(calendar);
-//                showDataPicker();
+                new GMCalendar().showCalemdar(UserInfoActivity.this,
+                        date -> {
+                            mBirthdayTv.setText(date);
+                            setSubmitBtnColor();
+                        });
                 break;
             case R.id.locationTv:
             case R.id.selectLocationIv:
@@ -183,12 +207,14 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.submitUserInfoBtn:
                 //提交用户资料
-                ToastUtils.showSingleToast(MyApplication.getInstance(), "提交用户资料");
-                SkipActivityUtil.skipActivity(UserInfoActivity.this, MainActivity.class);
-                finish();
+                submitUserInfo();
                 break;
         }
     }
+
+    private boolean hasHead = false;
+    private boolean hasShowCover = false;
+    private boolean rgSelected = false;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -197,8 +223,12 @@ public class UserInfoActivity extends BaseActivity {
             case PermissionC.PIC_IMG_VIDEO_CODE:
                 if (resultCode == Activity.RESULT_OK) {
                     List<Uri> mSelected = Matisse.obtainResult(data);
-                    GlideUtil.loadCircleImage(UserInfoActivity.this,
-                            R.drawable.touxiang_icon, mSelected.get(0), mAvatarIv);
+                    if (mSelected.get(0) != null) {
+                        GlideUtil.loadCircleImage(UserInfoActivity.this,
+                                R.drawable.ic_head_portrait_icon, mSelected.get(0), userAvatar);
+                        hasHead = true;
+                        setSubmitBtnColor();
+                    }
                 }
                 break;
             case PermissionC.USER_INFO_CITY_CODE:
@@ -206,9 +236,116 @@ public class UserInfoActivity extends BaseActivity {
                     String seeCity = data.getStringExtra(PermissionC.USER_CITY);
                     //选择到的城市
                     mLocationTv.setText(seeCity);
+                    setSubmitBtnColor();
+                }
+                break;
+            case PermissionC.SHWO_USER_IMG:
+                if (resultCode == Activity.RESULT_OK) {
+                    List<Uri> mSelected = Matisse.obtainResult(data);
+                    selectImgCrop(mSelected.get(0));
+                }
+                break;
+            case UCrop.REQUEST_CROP:
+                //返回裁剪的图片
+                if (resultCode == RESULT_OK) {
+                    Uri resultUri = UCrop.getOutput(data);
+                    if (resultUri != null) {
+                        GlideUtil.loadImage(UserInfoActivity.this,
+                                R.drawable.place_holder_img, resultUri, userShowImg);
+                        selectUserShowImg.setVisibility(View.GONE);
+                        hasShowCover = true;
+                        setSubmitBtnColor();
+                    }
+                } else {
+                    Throwable cropError = UCrop.getError(data);
+                    String errorMessage = cropError.getMessage();
+                    LogUtils.E(errorMessage);
                 }
                 break;
         }
+    }
+
+    //判断 用户生日定位都不为空
+    private boolean birthDayLocationEmpty() {
+        String location = mLocationTv.getText().toString().trim();
+        String birthDay = mBirthdayTv.getText().toString().trim();
+        if (!TextUtils.isEmpty(location) && !TextUtils.isEmpty(birthDay)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //设置按钮的颜色
+    private void setSubmitBtnColor() {
+        if (hasShowCover && hasHead && rgSelected && birthDayLocationEmpty()) {
+            submitUserInfoBtn.setBackgroundResource(R.drawable.login_btn1_bg_pressed);
+        } else {
+            submitUserInfoBtn.setBackgroundResource(R.drawable.login_btn0_bg);
+        }
+    }
+
+    //提交用户资料
+    private void submitUserInfo() {
+        String location = mLocationTv.getText().toString().trim();
+        String birthDay = mBirthdayTv.getText().toString().trim();
+        if (!hasHead) {
+            ToastUtils.showSingleToast(this, "请选择用户头像");
+            return;
+        }
+        if (!hasShowCover) {
+            ToastUtils.showSingleToast(this, "请选择本人展示照片");
+            return;
+        }
+        if (!rgSelected) {
+            ToastUtils.showSingleToast(this, "请选择您的性别");
+            return;
+        }
+        if (TextUtils.isEmpty(location)) {
+            ToastUtils.showSingleToast(this, "请选择您的所在城市地区");
+            return;
+        }
+        if (TextUtils.isEmpty(birthDay)) {
+            ToastUtils.showSingleToast(this, "请选择您的生日");
+            return;
+        }
+        SkipActivityUtil.skipActivity(UserInfoActivity.this, MainActivity.class);
+        finish();
+    }
+
+    //选择图片并裁剪
+    public void selectImgCrop(Uri sourceUri) {
+        String yeHiImgPath = FileUtils.getYeHiImgUserPath();
+        FileUtils.checkDir(yeHiImgPath);
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        File file = new File(FileUtils.getUserShowCover(timeStamp));
+        Uri destinationUri = Uri.fromFile(file);
+        advancedConfig(sourceUri, destinationUri);
+    }
+
+    private void advancedConfig(Uri sourceUri, Uri destinationUri) {
+        //裁剪图片
+        UCrop uCrop = UCrop.of(sourceUri, destinationUri);
+        UCrop.Options options = new UCrop.Options();
+        options.setToolbarColor(ActivityCompat.getColor(this, R.color.deepPurple));
+        options.setStatusBarColor(ActivityCompat.getColor(this, R.color.deepPurple));
+        options.setToolbarTitle(getString(R.string.crop_img));
+        options.setFreeStyleCropEnabled(true);
+        options.setCompressionFormat(Bitmap.CompressFormat.PNG);
+        options.setShowCropFrame(true);
+        options.setMaxBitmapSize(480);
+        options.setAspectRatioOptions(1,
+//                new AspectRatio("WOW", 1, 2),
+                new AspectRatio("MUCH", 3, 4),
+//                new AspectRatio("RATIO", CropImageView.DEFAULT_ASPECT_RATIO,
+//                        CropImageView.DEFAULT_ASPECT_RATIO),
+                new AspectRatio("ASPECT", 1, 1),
+                new AspectRatio("SO", 16, 9));
+        uCrop.withAspectRatio(1, 1)
+                .withMaxResultSize(640, 640)
+                .withOptions(options)
+                .useSourceImageAspectRatio()
+                .start(UserInfoActivity.this);
     }
 
 }

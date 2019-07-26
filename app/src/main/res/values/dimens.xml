@@ -102,6 +102,7 @@
     <dimen name="dp_103">103dp</dimen>
     <dimen name="dp_1_5">1.5dp</dimen>
     <dimen name="dp_125">125dp</dimen>
+    <dimen name="dp_115">115dp</dimen>
     <dimen name="dp_135">135dp</dimen>
     <dimen name="dp_145">145dp</dimen>
     <dimen name="dp_195">195dp</dimen>

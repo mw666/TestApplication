@@ -34,15 +34,17 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/activityPublicStyle">
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/activityPublicStyle">
+
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -58,9 +60,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activitys.UserInfoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/textInputTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.SelectCityActivity"
             android:theme="@style/activityPublicStyle" />
@@ -122,10 +122,18 @@
         <activity
             android:name=".activitys.TestActivity"
             android:theme="@style/activityPublicStyle" />
-        <activity android:name=".activitys.PhotoVideoActivity"
-            android:theme="@style/activityPublicStyle"/>
-        <activity android:name=".activitys.MyLikeFansActivity"
-            android:theme="@style/activityPublicStyle"/>
+        <activity
+            android:name=".activitys.PhotoVideoActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
+            android:name=".activitys.MyLikeFansActivity"
+            android:theme="@style/activityPublicStyle" />
+        <!--图片裁剪所需-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

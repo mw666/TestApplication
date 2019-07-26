@@ -12,7 +12,7 @@ import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.assist.SimpleLoader;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.SimpleLoader;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.PLog;
 import newmatch.zbmf.com.testapplication.dialogs.SheetDialog;

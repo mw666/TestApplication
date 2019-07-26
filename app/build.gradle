@@ -117,5 +117,9 @@ dependencies {
     implementation 'com.ruffian.library:RTextView:1.0.11'
     //Android 时间总线
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //图片裁剪库
+    implementation 'com.github.yalantis:ucrop:2.2.3'
+    implementation 'com.github.yalantis:ucrop:2.2.3-native'
+
 
 }

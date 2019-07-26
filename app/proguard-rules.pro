@@ -24,3 +24,7 @@
 -keep class com.mob.**{*;}
 -keep class cn.smssdk.**{*;}
 -dontwarn com.mob.**
+#配置图片裁剪的混淆过滤
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
