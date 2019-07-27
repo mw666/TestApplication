@@ -21,17 +21,18 @@ public class YeHiShareUtil {
     }
 
     public static void saveAddress(Address address) {
-        LogUtils.D("----  存储地址---- " + "省："
-                + address.getAdminArea() + " 市：" + address.getLocality() + " 区：" + address.getSubLocality());
         Locale locale = address.getLocale();
         putCountry(address.getCountryName());//存储国家名称
         putCountryCode(address.getCountryCode());//存储国家代码
-        putProvince(address.getLocality());//存储省
+        putProvince(address.getAdminArea());//存储省
         String subAdminArea = address.getSubAdminArea();
-        putCity(address.getLocality());//存储市
-        String locality = address.getSubLocality();
+        if (TextUtils.isEmpty(subAdminArea)) {
+            subAdminArea = address.getLocality();
+        }
+        putCity(subAdminArea);//存储市
+        String locality = address.getLocality();
         if (TextUtils.isEmpty(locality)) {
-            locality = address.getLocality();
+            locality = address.getSubLocality();
         }
         putLocality(locality);//存储区/县级市
         putAreaPhone(address.getPhone());//存储所在位置的电话区号

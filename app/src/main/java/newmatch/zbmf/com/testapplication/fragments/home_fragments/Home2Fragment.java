@@ -15,7 +15,7 @@ import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
-import newmatch.zbmf.com.testapplication.adapters.StaggerAdapter;
+import newmatch.zbmf.com.testapplication.adapters.staggerAdapters.StaggerAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;

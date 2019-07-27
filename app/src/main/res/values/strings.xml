@@ -142,5 +142,7 @@
     <string name="ye_hi_number">夜嗨号:</string>
     <string name="positive">确定</string>
     <string name="crop_img">裁剪图片</string>
+    <string name="update_recommend_users">换一批</string>
+    <string name="yehi_red_search">夜嗨热搜</string>
 
 </resources>

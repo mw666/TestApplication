@@ -215,6 +215,7 @@ public class UserInfoActivity extends BaseActivity {
     private boolean hasHead = false;
     private boolean hasShowCover = false;
     private boolean rgSelected = false;
+    private int type = 0;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -224,10 +225,8 @@ public class UserInfoActivity extends BaseActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     List<Uri> mSelected = Matisse.obtainResult(data);
                     if (mSelected.get(0) != null) {
-                        GlideUtil.loadCircleImage(UserInfoActivity.this,
-                                R.drawable.ic_head_portrait_icon, mSelected.get(0), userAvatar);
-                        hasHead = true;
-                        setSubmitBtnColor();
+                        this.type = 1;
+                        selectImgCrop(mSelected.get(0), type);
                     }
                 }
                 break;
@@ -242,7 +241,8 @@ public class UserInfoActivity extends BaseActivity {
             case PermissionC.SHWO_USER_IMG:
                 if (resultCode == Activity.RESULT_OK) {
                     List<Uri> mSelected = Matisse.obtainResult(data);
-                    selectImgCrop(mSelected.get(0));
+                    this.type = 2;
+                    selectImgCrop(mSelected.get(0), type);
                 }
                 break;
             case UCrop.REQUEST_CROP:
@@ -250,16 +250,26 @@ public class UserInfoActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     Uri resultUri = UCrop.getOutput(data);
                     if (resultUri != null) {
-                        GlideUtil.loadImage(UserInfoActivity.this,
-                                R.drawable.place_holder_img, resultUri, userShowImg);
-                        selectUserShowImg.setVisibility(View.GONE);
-                        hasShowCover = true;
+                        if (this.type == 1) {
+                            //用户头像
+                            GlideUtil.loadCircleImage(UserInfoActivity.this,
+                                    R.drawable.ic_head_portrait_icon, resultUri, userAvatar);
+                            hasHead = true;
+                        } else if (this.type == 2) {
+                            //用户展示封面
+                            GlideUtil.loadImage(UserInfoActivity.this,
+                                    R.drawable.place_holder_img, resultUri, userShowImg);
+                            selectUserShowImg.setVisibility(View.GONE);
+                            hasShowCover = true;
+                        }
                         setSubmitBtnColor();
                     }
                 } else {
-                    Throwable cropError = UCrop.getError(data);
-                    String errorMessage = cropError.getMessage();
-                    LogUtils.E(errorMessage);
+                    if (data != null) {
+                        Throwable cropError = UCrop.getError(data);
+                        String errorMessage = cropError.getMessage();
+                        LogUtils.E(errorMessage);
+                    }
                 }
                 break;
         }
@@ -314,16 +324,16 @@ public class UserInfoActivity extends BaseActivity {
     }
 
     //选择图片并裁剪
-    public void selectImgCrop(Uri sourceUri) {
+    public void selectImgCrop(Uri sourceUri, int type) {
         String yeHiImgPath = FileUtils.getYeHiImgUserPath();
         FileUtils.checkDir(yeHiImgPath);
         String timeStamp = String.valueOf(System.currentTimeMillis());
         File file = new File(FileUtils.getUserShowCover(timeStamp));
         Uri destinationUri = Uri.fromFile(file);
-        advancedConfig(sourceUri, destinationUri);
+        advancedConfig(sourceUri, destinationUri, type);
     }
 
-    private void advancedConfig(Uri sourceUri, Uri destinationUri) {
+    private void advancedConfig(Uri sourceUri, Uri destinationUri, int type) {
         //裁剪图片
         UCrop uCrop = UCrop.of(sourceUri, destinationUri);
         UCrop.Options options = new UCrop.Options();

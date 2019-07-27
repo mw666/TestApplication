@@ -21,58 +21,145 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/searchResultTitle"
-                style="@style/searchTvTitleStyle"
-                android:layout_marginTop="@dimen/dp_5"
-                android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
-                android:text="@string/search_result_title" />
+            <FrameLayout
+                android:id="@+id/searchResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/searchResultIvCard"
-                android:layout_width="@dimen/dp_100"
-                android:layout_height="@dimen/dp_100"
-                android:layout_below="@+id/searchResultTitle"
-                android:layout_marginStart="@dimen/dp_15"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_7"
-                android:gravity="center"
+                <TextView
+                    android:id="@+id/searchResultTitle"
+                    style="@style/searchTvTitleStyle"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
+                    android:text="@string/search_result_title"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/searchResultIvCard"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_150"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_35"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="#c4c6c8"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="6dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/searchResultIv"
+                        android:layout_width="@dimen/dp_150"
+                        android:layout_height="@dimen/dp_150"
+                        android:layout_below="@+id/searchResultTitle"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/emptyView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:drawableTop="@drawable/ic_empty_data"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:padding="@dimen/dp_12"
+                    android:text="暂无搜索结果..."
+                    android:textColor="@color/blue_14"
+                    android:textSize="@dimen/sp_13"
+                    android:visibility="visible" />
+
+                <!--搜索记录-->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/searchRecordRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/yeHiRedSearchResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchResult"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
                 android:orientation="vertical"
-                app:cardBackgroundColor="#c4c6c8"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="6dp"
-                app:cardPreventCornerOverlap="true"
-                app:layout_constraintTop_toTopOf="parent">
+                android:paddingBottom="@dimen/dp_10">
 
-                <ImageView
-                    android:id="@+id/searchResultIv"
+                <TextView
+                    android:id="@+id/yeHiRedSearch"
+                    style="@style/searchTvTitleStyle"
+                    android:background="@drawable/wave_border_less_ripple"
+                    android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
+                    android:text="@string/yehi_red_search" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/yeHiRedSearchRv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/searchResultTitle"
-                    android:background="@color/white"
-                    android:scaleType="centerCrop" />
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_15" />
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/searchRecommendTitle"
-                style="@style/searchTvTitleStyle"
-                android:layout_below="@+id/searchResultIvCard"
-                android:layout_marginTop="@dimen/dp_13"
-                android:background="@drawable/wave_border_less_ripple"
-                android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
-                android:text="@string/search_recommend_title" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/yeHiRedSearchResult"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_10">
 
+                <TextView
+                    android:id="@+id/searchRecommendTitle"
+                    style="@style/searchTvTitleStyle"
+                    android:background="@drawable/wave_border_less_ripple"
+                    android:drawableBottom="@drawable/search_tv_bottom_view_purple_62"
+                    android:text="@string/search_recommend_title" />
+
+                <TextView
+                    android:id="@+id/updateRecommendUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:background="@drawable/wave_border_less_ripple"
+                    android:drawableStart="@drawable/ic_update_data"
+                    android:drawablePadding="@dimen/dp_3"
+                    android:padding="@dimen/dp_3"
+                    android:text="@string/update_recommend_users"
+                    android:textColor="@color/deepPurple"
+                    android:textSize="@dimen/sp_12" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/searchRecommendRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/searchRecommendTitle"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginRight="@dimen/dp_15" />
+            </RelativeLayout>
+
+            <!--关键字检索列表-->
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/searchRecommendRv"
+                android:id="@+id/searchListRv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/searchRecommendTitle"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_7"
-                android:layout_marginRight="@dimen/dp_15" />
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
