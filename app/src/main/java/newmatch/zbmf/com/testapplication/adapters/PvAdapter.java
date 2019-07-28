@@ -104,7 +104,7 @@ public class PvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             albumCoverViewLp.width = (windowW - 100) / 2;
             albumCoverViewLp.height = (windowW - 100) / 2;
             ((PvHolder2) viewHolder).album_cover.setLayoutParams(albumCoverViewLp);
-            ((PvHolder2) viewHolder).album_cover.setBackgroundResource(R.drawable.j5);
+            ((PvHolder2) viewHolder).album_cover.setBackgroundResource(R.drawable.m5);
             ((PvHolder2) viewHolder).albumName.setText("丘比特的眼泪");
             ((PvHolder2) viewHolder).albumNumber.setText("[234张]");
         }

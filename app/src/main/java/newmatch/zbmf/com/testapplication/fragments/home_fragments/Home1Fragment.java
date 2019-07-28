@@ -63,11 +63,11 @@ public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
 
         List<Integer> imgs = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            imgs.add(R.drawable.j1);
-            imgs.add(R.drawable.j2);
-            imgs.add(R.drawable.j3);
-            imgs.add(R.drawable.j4);
-            imgs.add(R.drawable.j5);
+            imgs.add(R.drawable.m1);
+            imgs.add(R.drawable.m4);
+            imgs.add(R.drawable.m7);
+            imgs.add(R.drawable.m2);
+            imgs.add(R.drawable.m5);
         }
         testAdapter.addData(imgs);
     }

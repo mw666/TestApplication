@@ -19,7 +19,7 @@
         android:layout_height="@dimen/dp_160"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/j1" />
+       />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -41,11 +41,11 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
 
 
     /*模拟图片数据*/
-    private List<Integer> img1 = Arrays.asList(new Integer[]{R.drawable.j5});
-    private List<Integer> img2 = Arrays.asList(new Integer[]{R.drawable.j3, R.drawable.j2});
-    private List<Integer> img3 = Arrays.asList(new Integer[]{R.drawable.j5, R.drawable.j2, R.drawable.j4});
-    private List<Integer> img4 = Arrays.asList(new Integer[]{R.drawable.j5, R.drawable.j2, R.drawable.j4, R.drawable.j1
-            , R.drawable.j2, R.drawable.j3, R.drawable.j4, R.drawable.j5});
+    private List<Integer> img1 = Arrays.asList(new Integer[]{R.drawable.m1});
+    private List<Integer> img2 = Arrays.asList(new Integer[]{R.drawable.m2, R.drawable.m4});
+    private List<Integer> img3 = Arrays.asList(new Integer[]{R.drawable.m4, R.drawable.m3, R.drawable.m5});
+    private List<Integer> img4 = Arrays.asList(new Integer[]{R.drawable.m7, R.drawable.m1,
+            R.drawable.m6, R.drawable.m7, R.drawable.m3, R.drawable.m1, R.drawable.m3, R.drawable.m2});
     private List<Integer> img;
 
     public void setCommentDynamic(CommentDynamic commentDynamic) {
@@ -90,7 +90,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DyViewHo
     public void onBindViewHolder(@NonNull DyViewHolder holder, int position) {
         //设置动态的用户的图片
         //模拟-----先加载本地
-        GlideUtil.loadCircleImage(mContext, R.drawable.touxiang_icon, R.drawable.j1, holder.mDyUserAvatar);
+        GlideUtil.loadCircleImage(mContext, R.drawable.touxiang_icon, R.drawable.m1, holder.mDyUserAvatar);
         //设置发布动态用户的性别
         //模拟设置为女
         GlideUtil.loadImageWithLocation(mContext, R.drawable.woman_sex_icon, holder.mDySexIv);

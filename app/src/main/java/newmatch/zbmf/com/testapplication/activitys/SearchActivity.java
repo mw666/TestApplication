@@ -131,9 +131,9 @@ public class SearchActivity extends BaseActivity implements HomeRVIvClick {
 
         List<Integer> imgs = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            imgs.add(R.drawable.j1);
-            imgs.add(R.drawable.j4);
-            imgs.add(R.drawable.j5);
+            imgs.add(R.drawable.m2);
+            imgs.add(R.drawable.m1);
+            imgs.add(R.drawable.m3);
         }
         testAdapter.addData(imgs);
     }

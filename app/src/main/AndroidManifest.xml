@@ -35,16 +35,16 @@
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/activityPublicStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/activityPublicStyle">
-
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -87,9 +87,6 @@
             android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.VIPActivity"
-            android:theme="@style/activityPublicStyle" />
-        <activity
-            android:name=".activitys.UserCenterActivity"
             android:theme="@style/activityPublicStyle" />
         <activity
             android:name=".activitys.PermissionsActivity"

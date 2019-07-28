@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.views.circleImageView.CustomImageView;
 
 
@@ -50,7 +51,8 @@ public class MenuAdapter extends PagerAdapter {
         //        TextView sumDeclare = view.findViewById(R.id.sumDeclare);
 
 
-        menuIv.setBackgroundResource(mList.get(position));
+        GlideUtil.loadImage(container.getContext(), R.drawable.place_holder_img
+                , mList.get(position), menuIv);
         if (payImgs != null && payImgs.size() > 0) {
             pay_type.setBackgroundResource(payImgs.get(position));
         }

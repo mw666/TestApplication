@@ -351,7 +351,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
         });
     }
 
-    private int[] imgs = {R.drawable.j5, R.drawable.j4, R.drawable.j1, R.drawable.j3};
+    private int[] imgs = {R.drawable.m3, R.drawable.m6, R.drawable.m7, R.drawable.m2};
 
     //ViewPager的3D画廊效果
     private void galleryPager(ViewPager menuViewPager) {
@@ -388,7 +388,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
 
     //模拟准备banner的数据
     private void initBannerView(MZBannerView homeBanner) {
-        int[] imgs = {R.drawable.card5, R.drawable.card3, R.drawable.card4, R.drawable.j4};
+        int[] imgs = {R.drawable.card5, R.drawable.card3, R.drawable.card4, R.drawable.m1};
 
         List<Integer> imgList;
         imgList = new ArrayList<>();
@@ -451,7 +451,7 @@ public class UserDetailActivity extends BaseActivity implements ShowClickIv
                 .setDialogDecoeViewBg(R.drawable.add_friend_et_bg)
                 .gMDialog(this, this);
         //设置要添加的好友的头像
-        GlideUtil.loadCircleImage(this, R.drawable.place_holder_img, R.drawable.j4, newUserAvatar);
+        GlideUtil.loadCircleImage(this, R.drawable.place_holder_img, R.drawable.m1, newUserAvatar);
         //设置要添加的用户的昵称
         userNick.setText("铁蛋儿");
         //设置性别

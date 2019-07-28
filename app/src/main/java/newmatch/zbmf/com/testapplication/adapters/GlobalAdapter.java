@@ -29,7 +29,7 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.GlobalHold
     public void onBindViewHolder(@NonNull GlobalHolder globalHolder, int i) {
 
         GlideUtil.loadCircleImage(globalHolder.itemView.getContext(), R.drawable.place_holder_img,
-                R.drawable.j2, globalHolder.fansAvatar);
+                R.drawable.m4, globalHolder.fansAvatar);
         globalHolder.fansName.setText("秦始皇的马甲   ");
     }
 

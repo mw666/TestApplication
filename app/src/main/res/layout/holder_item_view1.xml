@@ -23,4 +23,16 @@
         android:scaleType="center"
         />
 
+    <TextView
+        android:id="@+id/lable"
+        android:padding="@dimen/dp_3"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        android:text="#这是动态标签"
+        android:gravity="start|bottom"
+        android:background="@drawable/show_iv_lable_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
+
 </android.support.design.card.MaterialCardView>

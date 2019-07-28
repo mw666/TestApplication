@@ -8,15 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import newmatch.zbmf.com.testapplication.R;
-import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 
 /**
  * Create By Administrator
@@ -68,10 +69,10 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
 
     @Override
     public int getItemViewType(int position) {
-//        int ad = position % 15;
-//        if (position != 0 && ad == 0) {
-//            return ITEM_TYPE.ALONE_BIG.ordinal();
-//        } else {
+        //        int ad = position % 15;
+        //        if (position != 0 && ad == 0) {
+        //            return ITEM_TYPE.ALONE_BIG.ordinal();
+        //        } else {
         int res = position % 3;
         int n = position & 1;
         if ((res == 0 && n == 0)) {
@@ -85,7 +86,7 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
         } else {
             return ITEM_TYPE.ALONE_BIG.ordinal();
         }
-//        }
+        //        }
     }
 
     @NonNull
@@ -160,17 +161,17 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
     @Override
     public void onBindViewHolder(@NonNull StaggerAdapter.Holder holder, int i) {
         //这里计算好，理论上是可以显示一个横向的item，暂时注销
-//        int ad = i % 15;
+        //        int ad = i % 15;
         ImageView iv = holder.iv;
         CardView cardIv = holder.cardIv;
         ViewGroup.LayoutParams layoutParams = cardIv.getLayoutParams();
         ViewGroup.LayoutParams lp = iv.getLayoutParams();
-//        if (i != 0 && ad == 0) {
-//            lp.width = w;
-//            lp.height = w;
-//            layoutParams.width = w;
-//            layoutParams.height = w/3;
-//        } else {
+        //        if (i != 0 && ad == 0) {
+        //            lp.width = w;
+        //            lp.height = w;
+        //            layoutParams.width = w;
+        //            layoutParams.height = w/3;
+        //        } else {
         int res = i % 3;
         int n = i & 1;
 
@@ -195,10 +196,12 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
             layoutParams.width = w / 3;
             layoutParams.height = w / 3;
         }
-//        }
+        //        }
         iv.setLayoutParams(lp);
         cardIv.setLayoutParams(layoutParams);
         GlideUtil.loadImage(context, R.drawable.place_holder_img, imgs.get(i), iv);
+        /*设置标签*/
+        holder.lable.setText("#这是标签");
         holder.iv.setOnClickListener(v -> {
             if (mHomeRVIvClick != null)
                 mHomeRVIvClick.rvIvCallBack(i);
@@ -215,12 +218,14 @@ public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.Holder> 
 
         private final ImageView iv;
         private final CardView cardIv;
+        private final TextView lable;
         //        private final LinearLayout ll;
 
         Holder(@NonNull View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             cardIv = itemView.findViewById(R.id.cardIv);
+            lable = itemView.findViewById(R.id.lable);
             //            ll = itemView.findViewById(R.id.ll);
 
         }

@@ -37,7 +37,7 @@ public class ChatListFragment extends BaseFragment implements RecommendUser, Msg
 
 
     private MZBannerView mMZBanner;
-    private int[] banner = {R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4, R.drawable.j5};
+    private int[] banner = {R.drawable.m1, R.drawable.m6, R.drawable.m3, R.drawable.m8, R.drawable.m2};
     private MZBannerView recommendBanner;
 
     public ChatListFragment() {
@@ -138,7 +138,7 @@ public class ChatListFragment extends BaseFragment implements RecommendUser, Msg
 
     //模拟设置轮播广告
     private void initBannerView(MZBannerView homeBanner) {
-        int[] imgs = {R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4};
+        int[] imgs = {R.drawable.m4, R.drawable.m5, R.drawable.m2, R.drawable.m7};
 
         List<Integer> imgList;
         imgList = new ArrayList<>();
