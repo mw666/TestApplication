@@ -34,17 +34,11 @@
         <activity
             android:name=".activitys.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
-
-        </activity>
+            android:theme="@style/FullscreenTheme"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/activityPublicStyle">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activitys.RegisterActivity"
@@ -89,6 +83,9 @@
             android:name=".activitys.VIPActivity"
             android:theme="@style/activityPublicStyle" />
         <activity
+            android:name=".activitys.UserCenterActivity"
+            android:theme="@style/activityPublicStyle" />
+        <activity
             android:name=".activitys.PermissionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EmptyTheme">
@@ -125,12 +122,18 @@
         <activity
             android:name=".activitys.MyLikeFansActivity"
             android:theme="@style/activityPublicStyle" />
-        <!--图片裁剪所需-->
+        <!-- 图片裁剪所需 -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Test.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

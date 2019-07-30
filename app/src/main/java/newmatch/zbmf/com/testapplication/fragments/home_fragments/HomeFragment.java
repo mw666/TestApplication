@@ -22,28 +22,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import newmatch.zbmf.com.testapplication.GMClass.GMSelector;
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
-import newmatch.zbmf.com.testapplication.activitys.SelectCityActivity;
 import newmatch.zbmf.com.testapplication.activitys.UserDetailActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
-import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
-import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
+import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
+import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
-import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
-import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
 import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
 import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.views.customViewPager.BannerViewHolder;
 import newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView;
 import newmatch.zbmf.com.testapplication.views.customViewPager.MZHolderCreator;
@@ -200,8 +200,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         switch (view.getId()) {
             case R.id.locationIcon:
                 //跳转选择地址页面  区域定位
-                startActivityForResult(new Intent(getActivity(), SelectCityActivity.class),
-                        PermissionC.CURRENT_CITY_CODE);
+                GMSelector.initOptionPicker(getActivity());
+
+//                startActivityForResult(new Intent(getActivity(), SelectCityActivity.class),
+//                        PermissionC.CURRENT_CITY_CODE);
                 break;
             case R.id.searchBtn:
                 //男性用户点击跳转搜索页面，女性用户点击跳转入驻页面

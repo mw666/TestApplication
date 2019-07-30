@@ -4,6 +4,9 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.litesuits.orm.db.assit.WhereBuilder;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -11,20 +14,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
+import newmatch.zbmf.com.testapplication.callback.UpLoadFileApi;
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.component.OrmLite;
 import newmatch.zbmf.com.testapplication.component.PLog;
-import newmatch.zbmf.com.testapplication.callback.UpLoadFileApi;
 import newmatch.zbmf.com.testapplication.net.beans.CityORM;
 import newmatch.zbmf.com.testapplication.net.loader.FileUploadObserver;
 import newmatch.zbmf.com.testapplication.net.loader.MultipartBuilder;
 import newmatch.zbmf.com.testapplication.net.loader.UploadFileRequestBody;
+import newmatch.zbmf.com.testapplication.utils.LogUtils;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.utils.Util;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -45,9 +52,8 @@ public class RetrofitSingleton {
     private static OkHttpClient sOkHttpClient = null;
 
     private void init() {
-        initOkHttp();
+//        initOkHttp();
         initRetrofit();
-//        sApiService = sRetrofit.create(ApiInterface.class);
     }
 
     private RetrofitSingleton() {
@@ -63,7 +69,7 @@ public class RetrofitSingleton {
     }
 
     private static void initOkHttp() {
-
+        /*再次封装  https://www.jianshu.com/p/2e8b400909b7*/
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         // 缓存 http://www.jianshu.com/p/93153b34310e
         File cacheFile = new File(C.NET_CACHE);
@@ -120,7 +126,27 @@ public class RetrofitSingleton {
         sOkHttpClient = builder.build();
     }
 
+    /**
+     * 初始化Retrofit
+     */
     private static void initRetrofit() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        //设置缓存
+        setOkHttpCache(builder);
+        //添加公共参数
+        addPubLicParameter(builder);
+        //设置头
+        setRequestHeader(builder);
+        //设置日志信息拦截器
+        setLogInterceptor(builder);
+        //设置Cookie
+        setCookie(builder);
+        //设置超时和重连
+        setRetryTimeOut(builder);
+
+        sOkHttpClient = builder.build();
+
         sRetrofit = new Retrofit.Builder()
                 .baseUrl(NetConfigApi.BASE_URL)
                 .client(sOkHttpClient)
@@ -145,15 +171,150 @@ public class RetrofitSingleton {
         return throwable -> {
             if (t.toString().contains("GaiException") || t.toString().contains("SocketTimeoutException") ||
                     t.toString().contains("UnknownHostException")) {
-                ToastUtils.showSingleToast(MyApplication.getInstance(),"网络问题");
+                ToastUtils.showSingleToast(MyApplication.getInstance(), "网络问题");
             } else if (t.toString().contains("API没有")) {
                 OrmLite.getInstance()
                         .delete(new WhereBuilder(CityORM.class).where("name=?", Util.replaceInfo(t.getMessage())));
-                ToastUtils.showSingleToast(MyApplication.getInstance(),"错误: " + t.getMessage());
+                ToastUtils.showSingleToast(MyApplication.getInstance(), "错误: " + t.getMessage());
             }
             PLog.w(t.getMessage());
         };
     }
+
+    /**
+     * 设置OkHttp的缓存
+     *
+     * @param builder
+     */
+    private static void setOkHttpCache(OkHttpClient.Builder builder) {
+        File cacheFile = new File(C.NET_CACHE);
+        Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
+        Interceptor cacheInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                if (!Util.isNetworkConnected(MyApplication.getInstance())) {
+                    request = request.newBuilder()
+                            .cacheControl(CacheControl.FORCE_CACHE)
+                            .build();
+                }
+                Response response = chain.proceed(request);
+                if (Util.isNetworkConnected(MyApplication.getInstance())) {
+                    int maxAge = 0;
+                    // 有网络时 设置缓存超时时间0个小时
+                    response.newBuilder()
+                            .header("Cache-Control", "public, max-age=" + maxAge)
+                            // 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                            .removeHeader("YeHi")
+                            .build();
+                } else {
+                    // 无网络时，设置超时为4周
+                    int maxStale = 60 * 60 * 24 * 28;
+                    response.newBuilder()
+                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                            .removeHeader("nyn")
+                            .build();
+                }
+                return response;
+            }
+        };
+        builder.cache(cache).addInterceptor(cacheInterceptor);
+    }
+
+    /**
+     * 给网络框架添加公共参数
+     *
+     * @param builder
+     */
+    private static void addPubLicParameter(OkHttpClient.Builder builder) {
+        //公共参数
+        Interceptor addQueryParameterInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                Request request;
+                //源请求的方法
+                String method = originalRequest.method();
+                LogUtils.D("请求的方法：" + method);
+                //源请求的头
+                Headers headers = originalRequest.headers();
+                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
+                        //在这里提供你的自定义参数(Provide your custom parameter here)
+                        .addQueryParameter("platform", "android")
+                        .addQueryParameter("version", "1.0.0")
+                        .build();
+                request = originalRequest.newBuilder().url(modifiedUrl).build();
+                return chain.proceed(request);
+            }
+        };
+        //公共参数
+        builder.addInterceptor(addQueryParameterInterceptor);
+    }
+
+    /**
+     * 设置请求头
+     *
+     * @param builder
+     */
+    private static void setRequestHeader(OkHttpClient.Builder builder) {
+        Interceptor headerInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                Request.Builder requestBuilder = originalRequest.newBuilder()
+                        .header("AppType", "POST")//请求类型:POST
+                        .header("Content-Type", "application/json")//数据格式
+                        .header("Accept", "application/json")//接收的数据格式
+                        .method(originalRequest.method(), originalRequest.body());
+                Request request = requestBuilder.build();
+                return chain.proceed(request);
+            }
+        };
+        //设置头
+        builder.addInterceptor(headerInterceptor);
+    }
+
+    /**
+     * 设置日志信息拦截器
+     *
+     * @param builder
+     */
+    private static void setLogInterceptor(OkHttpClient.Builder builder) {
+        if (BuildConfig.DEBUG) {
+            // Log信息拦截器
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            //设置 Debug Log 模式
+            builder.addInterceptor(loggingInterceptor);
+        }
+    }
+
+    /**
+     * 设置Cookie
+     *
+     * @param builder
+     */
+    private static void setCookie(OkHttpClient.Builder builder) {
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        builder.cookieJar(new JavaNetCookieJar(cookieManager));
+    }
+
+    /**
+     * 设置请求超时和重连
+     *
+     * @param builder
+     */
+    private static void setRetryTimeOut(OkHttpClient.Builder builder) {
+        //设置超时
+        builder.connectTimeout(15, TimeUnit.SECONDS);//请求连接15S超时
+        builder.readTimeout(20, TimeUnit.SECONDS);//取读20S超时
+        builder.writeTimeout(20, TimeUnit.SECONDS);//写入20S超时
+        //错误重连
+        builder.retryOnConnectionFailure(true);
+    }
+
+
 
    /* public Observable<Version> fetchVersion() {
         return sApiService.mVersionAPI(C.API_TOKEN)
@@ -164,8 +325,8 @@ public class RetrofitSingleton {
     /**
      * 单上传文件的封装.
      *
-     * @param url 完整的接口地址
-     * @param file 需要上传的文件
+     * @param url                完整的接口地址
+     * @param file               需要上传的文件
      * @param fileUploadObserver 上传回调
      */
     public void upLoadFile(String url, File file, FileUploadObserver<ResponseBody> fileUploadObserver) {
@@ -182,8 +343,8 @@ public class RetrofitSingleton {
     /**
      * 多文件上传.
      *
-     * @param url 上传接口地址
-     * @param files 文件列表
+     * @param url                上传接口地址
+     * @param files              文件列表
      * @param fileUploadObserver 文件上传回调
      */
     public void upLoadFiles(String url, List<File> files, FileUploadObserver<ResponseBody> fileUploadObserver) {

@@ -3,6 +3,8 @@ package newmatch.zbmf.com.testapplication.net;
 /**
  * Created by **
  * on 2018/8/23.
+ * <p>
+ * API地址配置
  */
 
 public class NetConfigApi {
