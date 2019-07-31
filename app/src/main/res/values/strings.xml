@@ -145,4 +145,10 @@
     <string name="update_recommend_users">换一批</string>
     <string name="yehi_red_search">夜嗨热搜</string>
 
+    <string name="str_none" />
+    <string name="loading">加载中…</string>
+    <string name="load_failed">加载失败. 点击重试!</string>
+    <string name="load_failed_no_network">网络环境差!点击重试</string>
+    <string name="empty">暂无数据!</string>
+
 </resources>

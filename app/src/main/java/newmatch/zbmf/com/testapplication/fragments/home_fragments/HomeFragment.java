@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import newmatch.zbmf.com.testapplication.GMClass.GMSelector;
 import newmatch.zbmf.com.testapplication.GMClass.LikeGMClass;
+import newmatch.zbmf.com.testapplication.GMClass.selector.GMSelector;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.SearchActivity;
@@ -105,7 +105,7 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
             mCurrentLocationTv.setText(currentCity);
         }
         mCurrentLocationTv.setVisibility(View.VISIBLE);
-        mCurrentLocationTv.setText("位置");
+
         //头像
         headIv = bindViewWithClick(R.id.headIv, true);
         AppCompatImageView searchIv = bindViewWithClick(R.id.searchIv, true);
@@ -200,8 +200,10 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         switch (view.getId()) {
             case R.id.locationIcon:
                 //跳转选择地址页面  区域定位
-                GMSelector.initOptionPicker(getActivity());
-
+                GMSelector.instance(getActivity()).showPickerView((province, city, area) -> {
+                    //返回的依次是省市区
+                    mCurrentLocationTv.setText(area);
+                });
 //                startActivityForResult(new Intent(getActivity(), SelectCityActivity.class),
 //                        PermissionC.CURRENT_CITY_CODE);
                 break;

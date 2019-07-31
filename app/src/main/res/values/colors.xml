@@ -191,4 +191,7 @@
     <color name="black_11">#000000</color>
     <color name="black_12">#090909</color>
 
+    <color name="color_loading_status">#FFCCCCCC</color>
+
+
 </resources>

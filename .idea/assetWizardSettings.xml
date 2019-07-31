@@ -19,12 +19,10 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="12" />
                             <entry key="opacityPercent" value="95" />
-                            <entry key="outputName" value="ic_update_data" />
+                            <entry key="outputName" value="icon_loading" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\iMac\Downloads\换一批.svg" />
-                            <entry key="width" value="12" />
+                            <entry key="sourceFile" value="C:\Users\iMac\Downloads\加载.svg" />
                           </map>
                         </option>
                       </PersistentState>

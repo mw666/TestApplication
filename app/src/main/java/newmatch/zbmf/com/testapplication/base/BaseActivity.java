@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.billy.android.loading.Gloading;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import newmatch.zbmf.com.testapplication.R;
@@ -221,5 +222,49 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         }
     };
 
+    //绑定加载数据状态的View
+    protected Gloading.Holder mHolder;
+
+    /**
+     * make a Gloading.Holder wrap with current activity by default
+     * override this method in subclass to do special initialization
+     *
+     * @see
+     */
+    protected void initLoadingStatusViewIfNeed() {
+        if (mHolder == null) {
+            //bind status view to activity root view by default
+            mHolder = Gloading.getDefault().wrap(this).withRetry(() -> onLoadRetry());
+        }
+    }
+
+    //在子类中重写这个方法执行重复的任务
+    protected void onLoadRetry() {
+        // override this method in subclass to do retry task
+    }
+
+    //展示加载
+    public void showLoading() {
+        initLoadingStatusViewIfNeed();
+        mHolder.showLoading();
+    }
+
+    //加载成功
+    public void showLoadSuccess() {
+        initLoadingStatusViewIfNeed();
+        mHolder.showLoadSuccess();
+    }
+
+    //加载失败
+    public void showLoadFailed() {
+        initLoadingStatusViewIfNeed();
+        mHolder.showLoadFailed();
+    }
+
+    //加载的数据为空
+    public void showEmpty() {
+        initLoadingStatusViewIfNeed();
+        mHolder.showEmpty();
+    }
 
 }

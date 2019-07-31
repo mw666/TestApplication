@@ -5,8 +5,10 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.billy.android.loading.BuildConfig;
+import com.billy.android.loading.Gloading;
 
-
+import newmatch.zbmf.com.testapplication.GMClass.loading.adapter.GlobalAdapter;
 import newmatch.zbmf.com.testapplication.utils.MyActivityManager;
 import newmatch.zbmf.com.testapplication.utils.SharedpreferencesUtil;
 
@@ -27,6 +29,8 @@ public class MyApplication extends Application {
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
         instance = this;
         SharedpreferencesUtil.getInstance().initSharedUtil(this);
+        Gloading.debug(BuildConfig.DEBUG);
+        Gloading.initDefault(new GlobalAdapter());
         //初始化Mob短信的配置
         //MobSDK.init(this);
 

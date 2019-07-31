@@ -25,4 +25,6 @@ public class C {
     public static final String CURRENT = "current";
 
     public static final String TYPE = "type";
+
+    public static final String HIDE_LOADING_STATUS_MSG = "hide_loading_status_msg";
 }
