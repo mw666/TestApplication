@@ -12,14 +12,12 @@ public class NetConfigApi {
     //玩Android接口
     public static final String BASE_URL =
 //            "http://106.12.103.105:8081/web/";//测试地址
-            "https://www.wanandroid.com";
+            "http://192.168.1.115:9101/";
 
     //注册接口
     public static final String REGISTER = "register/check";
     //登录接口
-    public static final String Login_in = "user/login";
-
-
+    public static final String LOGIN = "user/login";
 
 
 }

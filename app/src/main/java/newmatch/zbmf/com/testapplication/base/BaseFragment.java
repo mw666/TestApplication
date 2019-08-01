@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment{
         Boolean isEnter = setViewEnterStatuBar();
         //设置状态栏的通用特性
         initAppBar(isEnter);
-        initPresenter();//该处返回BasePresenter
+        BasePresenter basePresenter = initPresenter();//该处返回BasePresenter
         initData();
         initView();
         return mView;

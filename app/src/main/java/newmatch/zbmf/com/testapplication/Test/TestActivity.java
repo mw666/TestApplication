@@ -19,14 +19,17 @@ import newmatch.zbmf.com.testapplication.GMClass.loading.adapter.GlobalAdapter;
 import newmatch.zbmf.com.testapplication.GMClass.selector.GMSelector;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
+import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
+import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 
 /**
  * 用于测试的Activity
  */
-public class TestActivity extends BaseActivity {
+public class TestActivity extends BaseActivity implements TestView<BaseResponse<TestBean>, TestCaiPresenter> {
 
     private Button locationBtn, loadingBtn1, loadingBtn2;
     private ImageView imageView;
+    private TestCaiPresenter testCaiPresenter;
 
     //获取随机的图片资源
     public static String getRandomImage() {
@@ -54,6 +57,9 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        if (testCaiPresenter == null)
+            testCaiPresenter = new TestCaiPresenter(this);
+        testCaiPresenter.doLoadData();
 
     }
 
@@ -130,17 +136,30 @@ public class TestActivity extends BaseActivity {
                 .load(picUrl)
                 .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                Target<Drawable> target, boolean isFirstResource) {
                         showLoadFailed();
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model,
+                                                   Target<Drawable> target, DataSource dataSource,
+                                                   boolean isFirstResource) {
                         showLoadSuccess();
                         return false;
                     }
                 })
                 .into(imageView);
+    }
+
+    @Override
+    public void resultCallBack(BaseResponse<TestBean> result) {
+
+    }
+
+    @Override
+    public void setPresenter(TestCaiPresenter presenter) {
+
     }
 }

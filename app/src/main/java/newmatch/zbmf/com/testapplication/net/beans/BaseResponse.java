@@ -14,31 +14,31 @@ public class BaseResponse<T> {
             "errorMsg": ""
     }*/
 
-    private int errorCode; // 返回的code
-    private T data; // 具体的数据结果
-    private String errorMsg; // message 可用来返回接口的说明
+    private int status_code; // 返回的code
+    private T result_data; // 具体的数据结果
+    private String msg; // message 可用来返回接口的说明
 
     public int getCode() {
-        return errorCode;
+        return status_code;
     }
 
     public void setCode(int code) {
-        this.errorCode = code;
+        this.status_code = code;
     }
 
     public T getData() {
-        return data;
+        return result_data;
     }
 
     public void setData(T data) {
-        this.data = data;
+        this.result_data = data;
     }
 
     public String getMsg() {
-        return errorMsg;
+        return msg;
     }
 
     public void setMsg(String msg) {
-        this.errorMsg = msg;
+        this.msg = msg;
     }
 }

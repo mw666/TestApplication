@@ -2,7 +2,9 @@ package newmatch.zbmf.com.testapplication.services;
 
 
 import io.reactivex.Observable;
+import newmatch.zbmf.com.testapplication.Test.TestBean;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
+import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -20,6 +22,9 @@ public interface WanAndroidBanner {
     //加入RxJava配合使用，返回的将是一个Observable对象
     @GET("banner/json")
     Observable<BannerService> getBannerRx();
+
+    @GET("ad/getGuideContent")
+    Observable<BaseResponse<TestBean>> getLottery();
 
 //    /**
 //     * 玩Android注册的数据：
