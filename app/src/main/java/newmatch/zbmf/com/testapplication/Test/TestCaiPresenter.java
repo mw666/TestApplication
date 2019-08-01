@@ -1,5 +1,7 @@
 package newmatch.zbmf.com.testapplication.Test;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -50,9 +52,12 @@ public class TestCaiPresenter implements TestPresenter {
                 .doOnError(RetrofitSingleton::disposeFailureInfo)//错误处理
                 .compose(RxUtil.io())//重用代码--->管理生命周期
                 .subscribe(testBeanBaseResponse -> {
-                    int code = testBeanBaseResponse.getCode();
+                    List<TestBean.ResultDataBean> result_data = testBeanBaseResponse.getResult_data();
                     String msg = testBeanBaseResponse.getMsg();
-                    TestBean data = testBeanBaseResponse.getData();
+                    int status_code = testBeanBaseResponse.getStatus_code();
+                    //                    int code = testBeanBaseResponse.getCode();
+//                    String msg = testBeanBaseResponse.getMsg();
+//                    TestBean data = testBeanBaseResponse.getData();
 
                 }, throwable -> {
                     String message = throwable.getMessage();

@@ -4,7 +4,6 @@ package newmatch.zbmf.com.testapplication.services;
 import io.reactivex.Observable;
 import newmatch.zbmf.com.testapplication.Test.TestBean;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
-import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -24,7 +23,7 @@ public interface WanAndroidBanner {
     Observable<BannerService> getBannerRx();
 
     @GET("ad/getGuideContent")
-    Observable<BaseResponse<TestBean>> getLottery();
+    Observable<TestBean> getLottery();
 
 //    /**
 //     * 玩Android注册的数据：

@@ -5,8 +5,6 @@ import com.litesuits.orm.db.assit.WhereBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +29,6 @@ import okhttp3.CacheControl;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
-import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -295,9 +292,9 @@ public class RetrofitSingleton {
      * @param builder
      */
     private static void setCookie(OkHttpClient.Builder builder) {
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        builder.cookieJar(new JavaNetCookieJar(cookieManager));
+//        CookieManager cookieManager = new CookieManager();
+//        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+//        builder.cookieJar(new JavaNetCookieJar(cookieManager));
     }
 
     /**

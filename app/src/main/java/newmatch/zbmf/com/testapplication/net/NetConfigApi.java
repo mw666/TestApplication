@@ -12,7 +12,7 @@ public class NetConfigApi {
     //玩Android接口
     public static final String BASE_URL =
 //            "http://106.12.103.105:8081/web/";//测试地址
-            "http://192.168.1.115:9101/";
+            "http://106.12.103.105:9101/yehai-web/";
 
     //注册接口
     public static final String REGISTER = "register/check";
