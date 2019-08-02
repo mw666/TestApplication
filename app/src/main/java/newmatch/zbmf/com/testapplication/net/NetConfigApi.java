@@ -18,6 +18,11 @@ public class NetConfigApi {
     public static final String REGISTER = "register/check";
     //登录接口
     public static final String LOGIN = "user/login";
+    /***********新的接口*********/
+    //引导图接口
+    public static final String GUIDE_BANNER = "ad/getGuideContent";
+    //启动页接口
+    public static final String LAUNCH_INFO = "ad/getLaunchContent";
 
 
 }

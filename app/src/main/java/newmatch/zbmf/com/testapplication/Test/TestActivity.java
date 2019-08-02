@@ -19,17 +19,15 @@ import newmatch.zbmf.com.testapplication.GMClass.loading.adapter.GlobalAdapter;
 import newmatch.zbmf.com.testapplication.GMClass.selector.GMSelector;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
-import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
-import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 
 /**
  * 用于测试的Activity
  */
-public class TestActivity extends BaseActivity implements TestView<BaseResponse<TestBean>, TestCaiPresenter> {
+public class TestActivity extends BaseActivity  {
 
     private Button locationBtn, loadingBtn1, loadingBtn2;
     private ImageView imageView;
-    private TestCaiPresenter testCaiPresenter;
+
 
     //获取随机的图片资源
     public static String getRandomImage() {
@@ -57,9 +55,6 @@ public class TestActivity extends BaseActivity implements TestView<BaseResponse<
 
     @Override
     protected void initData() {
-        if (testCaiPresenter == null)
-            testCaiPresenter = new TestCaiPresenter(this);
-        testCaiPresenter.doLoadData();
 
     }
 
@@ -153,13 +148,4 @@ public class TestActivity extends BaseActivity implements TestView<BaseResponse<
                 .into(imageView);
     }
 
-    @Override
-    public void resultCallBack(BaseResponse<TestBean> result) {
-
-    }
-
-    @Override
-    public void setPresenter(TestCaiPresenter presenter) {
-
-    }
 }

@@ -1,10 +1,16 @@
 package newmatch.zbmf.com.testapplication.presenter.requests;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import newmatch.zbmf.com.testapplication.entity.RegisterBean;
 import newmatch.zbmf.com.testapplication.net.NetConfigApi;
+import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
+import newmatch.zbmf.com.testapplication.presenter.YeHiBean.GuideBanner;
+import newmatch.zbmf.com.testapplication.presenter.YeHiBean.YeHiLaunch;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -14,7 +20,7 @@ import retrofit2.http.POST;
  *
  */
 
-public interface SweetRequests {
+public interface YeHiRequests {
 
     /*
      * 示例   GET
@@ -49,6 +55,16 @@ public interface SweetRequests {
                                       @Field("phone")String phone,
                                       @Field("zone")String zone,
                                       @Field("code")String code);
+
+    //引导图接口
+    @GET(NetConfigApi.GUIDE_BANNER)
+    Observable<BaseResponse<List<GuideBanner>>> guidePic();
+
+    //启动页接口
+    @GET(NetConfigApi.LAUNCH_INFO)
+    Observable<BaseResponse<List<YeHiLaunch>>> lunchInfo();
+
+
 
 
 }

@@ -37,8 +37,6 @@ import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
-import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
-import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -55,15 +53,11 @@ import newmatch.zbmf.com.testapplication.views.customViewPager.MZHolderCreator;
  * <p>
  * 测试网络结构
  */
-public class HomeFragment extends BaseFragment implements HomeRVIvClick,
-        TestView<BannerService, TestWanAndroidPresenter>, DianZanClickListener {
+public class HomeFragment extends BaseFragment implements HomeRVIvClick, DianZanClickListener {
 
     private TextView mCurrentLocationTv;
-
-    private TestWanAndroidPresenter mPresenter;
     //    private HomeGridAdapter mHomeGridAdapter;
     private int mToolTarH;
-
     //数据
     BannerService mResult;
     private RecyclerView mHomeRV;
@@ -184,14 +178,12 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
 
     @Override
     protected void initData() {
-        mPresenter.doLoadData();
+
     }
 
     @Override
     protected BasePresenter initPresenter() {
-        //初始化presenter
-        mPresenter = new TestWanAndroidPresenter(this);
-        return mPresenter;
+        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -254,19 +246,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick,
         ArrayList<BannerService.Data> data = mResult.getData();
         bundle.putParcelableArrayList(PermissionC.USER_PIC, data);
         SkipActivityUtil.skipDataActivity(getActivity(), UserDetailActivity.class, bundle);
-    }
-
-    @Override
-    public void setPresenter(TestWanAndroidPresenter presenter) {
-        //设置presenter
-        this.mPresenter = presenter;
-    }
-
-    @Override
-    public void resultCallBack(BannerService result) {
-        this.mResult = result;
-        //返回结果
-        //        mHomeGridAdapter.addImgList(result.getData());
     }
 
     @Override

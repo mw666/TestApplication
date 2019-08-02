@@ -132,13 +132,13 @@ public class RetrofitSingleton {
         //设置缓存
         setOkHttpCache(builder);
         //添加公共参数
-        //addPubLicParameter(builder);
+        addPubLicParameter(builder);
         //设置头
-        //setRequestHeader(builder);
+        setRequestHeader(builder);
         //设置日志信息拦截器
         setLogInterceptor(builder);
         //设置Cookie
-        //setCookie(builder);
+        setCookie(builder);
         //设置超时和重连
         setRetryTimeOut(builder);
 

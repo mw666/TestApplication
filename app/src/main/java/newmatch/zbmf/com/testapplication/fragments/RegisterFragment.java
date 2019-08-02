@@ -24,9 +24,6 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.PLog;
-import newmatch.zbmf.com.testapplication.entity.RegisterBean;
-import newmatch.zbmf.com.testapplication.presenter.RegisterOrLoginPresenter;
-import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
@@ -38,7 +35,7 @@ import newmatch.zbmf.com.testapplication.utils.ToastUtils;
  * 注册或登录
  */
 public class RegisterFragment extends BaseFragment implements
-        View.OnClickListener, TestView<RegisterBean, RegisterOrLoginPresenter> {
+        View.OnClickListener {
 
     private TextInputLayout mAccountTextLayout;
     private TextInputLayout mPasswordTextLayout;
@@ -60,7 +57,6 @@ public class RegisterFragment extends BaseFragment implements
     private TextInputEditText mZc_verifyCodeInputEt;
     private int mTabPosition;
     private View mView;//布局的View
-    private RegisterOrLoginPresenter mPresenter;
     private RegisterActivity registerActivity;
 
     public RegisterFragment() {
@@ -142,10 +138,7 @@ public class RegisterFragment extends BaseFragment implements
 
     @Override
     protected BasePresenter initPresenter() {
-        if (mPresenter == null) {
-            mPresenter = new RegisterOrLoginPresenter(this);
-        }
-        return mPresenter;
+       return null;
     }
 
     @Override
@@ -336,7 +329,7 @@ public class RegisterFragment extends BaseFragment implements
                         mZc_passwordTextLayout)) {
                     if (!TextUtils.isEmpty(code)) {
                         //提交到开发者服务器--->mob的服务器,进行短信验证
-                        mPresenter.register(BuildConfig.MOB_APPKEY, zcAccount, "86", code);
+//                        mPresenter.register(BuildConfig.MOB_APPKEY, zcAccount, "86", code);
 //                        SMSSDK.submitVerificationCode("86", mPhone, code);//这个是直接发送到mob服务器进行的验证
                     }
                 }
@@ -401,18 +394,6 @@ public class RegisterFragment extends BaseFragment implements
     public void onDestroy() {
         super.onDestroy();
 //        SMSSDK.unregisterEventHandler(eventHandler);
-    }
-
-    @Override
-    public void setPresenter(RegisterOrLoginPresenter presenter) {
-        //设置presenter
-        this.mPresenter = presenter;
-    }
-
-    @Override
-    public void resultCallBack(RegisterBean result) {
-        //跳转圈友信息填写页面
-        SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
     }
 
     //设置EditText监听长度的变化，按钮的变色

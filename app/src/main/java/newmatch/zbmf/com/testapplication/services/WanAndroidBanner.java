@@ -1,9 +1,12 @@
 package newmatch.zbmf.com.testapplication.services;
 
 
+import java.util.List;
+
 import io.reactivex.Observable;
-import newmatch.zbmf.com.testapplication.Test.TestBean;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
+import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
+import newmatch.zbmf.com.testapplication.presenter.YeHiBean.GuideBanner;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -23,7 +26,7 @@ public interface WanAndroidBanner {
     Observable<BannerService> getBannerRx();
 
     @GET("ad/getGuideContent")
-    Observable<TestBean> getLottery();
+    Observable<BaseResponse<List<GuideBanner>>> getLottery();
 
 //    /**
 //     * 玩Android注册的数据：
@@ -52,8 +55,6 @@ public interface WanAndroidBanner {
 //    Observable<IWanLogin> login(@Field("username") String username, @Field("password") String password);
 
     //文件的上传与下载
-
-
 
 
 }

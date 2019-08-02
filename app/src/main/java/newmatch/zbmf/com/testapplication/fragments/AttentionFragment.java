@@ -17,25 +17,19 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.callback.RecommendUser;
-import newmatch.zbmf.com.testapplication.views.customViewPager.BannerPageClickListener;
-import newmatch.zbmf.com.testapplication.presenter.TestWanAndroidPresenter;
-import newmatch.zbmf.com.testapplication.presenter.backview.TestView;
 import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.views.customViewPager.BannerPageClickListener;
 
 /**
  * A simple {@link Fragment} subclass.
  * 关注Fragment
  */
 public class AttentionFragment extends BaseFragment implements RecommendUser, HomeRVIvClick,
-        TestView<BannerService, TestWanAndroidPresenter> ,BannerPageClickListener {
+        BannerPageClickListener {
 
-    private TestWanAndroidPresenter mPresenter;
     private HomeGridAdapter mHomeGridAdapter;
-    //数据
-    BannerService mResult;
     private int measuredHeight;
 
     private int[] banner={R.drawable.m2,R.drawable.m4,R.drawable.m5,R.drawable.m7,
@@ -102,14 +96,12 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
 
     @Override
     protected void initData() {
-        mPresenter.doLoadData();
+
     }
 
     @Override
     protected BasePresenter initPresenter() {
-        //初始化presenter
-        mPresenter = new TestWanAndroidPresenter(this);
-        return mPresenter;
+        return null;
     }
 
     @Override
@@ -132,19 +124,6 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
     public void rvIvCallBack(int position) {
         //跳转用户首资料页面
 
-    }
-
-    @Override
-    public void setPresenter(TestWanAndroidPresenter presenter) {
-        //设置presenter
-        this.mPresenter = presenter;
-    }
-
-    @Override
-    public void resultCallBack(BannerService result) {
-        this.mResult = result;
-        //返回结果
-        mHomeGridAdapter.addImgList(result.getData());
     }
 
     @Override
