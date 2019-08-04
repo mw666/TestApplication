@@ -1,11 +1,11 @@
-package newmatch.zbmf.com.testapplication.presenter.YeHiBean;
+package newmatch.zbmf.com.testapplication.mvp.YeHiBean;
 
 /**
  * Created By pq
  * on 2019/8/2
+ * 启动页数据
  */
-public class GuideBanner {
-
+public class YeHiLaunch {
     /**
      * adfunction : 1
      * adsource : 0
@@ -103,4 +103,5 @@ public class GuideBanner {
                 ", userid=" + userid +
                 '}';
     }
+
 }

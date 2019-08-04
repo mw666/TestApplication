@@ -23,11 +23,10 @@ import newmatch.zbmf.com.testapplication.activitys.OptionsActivity;
 import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.activitys.WalletActivity;
 import newmatch.zbmf.com.testapplication.adapters.myPagerAdapters.MenuAdapter;
-import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ActivityAnimUtils;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.GlideUtil;
 import newmatch.zbmf.com.testapplication.views.RotationPageTransformer;
 
 /**
@@ -97,11 +96,6 @@ public class Main2Fragment extends BaseFragment {
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @Override

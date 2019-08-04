@@ -23,7 +23,6 @@ import newmatch.zbmf.com.testapplication.adapters.staggerAdapters.StaggerAdapter
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.callback.DianZanClickListener;
 import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 
 /**
@@ -75,11 +74,6 @@ public class Home1Fragment extends BaseFragment implements HomeRVIvClick,
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @Override

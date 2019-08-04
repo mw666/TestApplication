@@ -6,7 +6,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
-import newmatch.zbmf.com.testapplication.presenter.YeHiBean.GuideBanner;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.GuideBanner;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

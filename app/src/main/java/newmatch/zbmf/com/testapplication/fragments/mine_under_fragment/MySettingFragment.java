@@ -22,11 +22,10 @@ import newmatch.zbmf.com.testapplication.activitys.VIPActivity;
 import newmatch.zbmf.com.testapplication.adapters.MineViewAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
-import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.callback.MineViewClick;
+import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.listeners.DialogCallBack;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
@@ -76,10 +75,6 @@ public class MySettingFragment extends BaseFragment implements MineViewClick {
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
 
     @Override
     protected void onViewClick(View view) {

@@ -18,12 +18,11 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MyFragmentStatePagerAdapter;
-import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.StatusBarUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
 import newmatch.zbmf.com.testapplication.views.customViewPager.BannerViewHolder;
 import newmatch.zbmf.com.testapplication.views.customViewPager.MZBannerView;
 import newmatch.zbmf.com.testapplication.views.customViewPager.MZHolderCreator;
@@ -141,11 +140,6 @@ public class DynamicFragment extends BaseFragment  {
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @Override

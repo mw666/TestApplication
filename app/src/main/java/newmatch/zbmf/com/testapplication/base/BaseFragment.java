@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * Created by **
@@ -25,7 +24,6 @@ public abstract class BaseFragment extends Fragment{
     protected abstract Integer layoutId();
     protected abstract void initView();
     protected abstract void initData();
-    protected abstract BasePresenter initPresenter();
     //点击事件
     protected abstract void onViewClick(View view);
     //是否全屏，让视图内容浸入状态栏
@@ -41,7 +39,6 @@ public abstract class BaseFragment extends Fragment{
         Boolean isEnter = setViewEnterStatuBar();
         //设置状态栏的通用特性
         initAppBar(isEnter);
-        BasePresenter basePresenter = initPresenter();//该处返回BasePresenter
         initData();
         initView();
         return mView;

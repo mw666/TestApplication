@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.UserInfo;
 
 /**
  * Created by **
@@ -20,6 +21,7 @@ public class YeHiShareUtil {
         return SharedpreferencesUtil.getInstance();
     }
 
+    //存储位置地理信息
     public static void saveAddress(Address address) {
         Locale locale = address.getLocale();
         putCountry(address.getCountryName());//存储国家名称
@@ -44,6 +46,12 @@ public class YeHiShareUtil {
         putFeatureName(address.getFeatureName());//存储街道详细地址
         putLongitude((float) address.getLongitude());//存储所在位置经度
         putLatitude((float) address.getLatitude());//存储所在位置纬度
+    }
+
+    //存储用户信息
+    public static void saveUserInfo(UserInfo userInfo){
+//a
+
     }
 
     //获取国家

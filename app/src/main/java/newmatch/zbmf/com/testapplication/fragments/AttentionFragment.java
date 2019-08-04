@@ -19,7 +19,6 @@ import newmatch.zbmf.com.testapplication.adapters.HomeGridAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.callback.HomeRVIvClick;
 import newmatch.zbmf.com.testapplication.callback.RecommendUser;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.views.customViewPager.BannerPageClickListener;
 
 /**
@@ -97,11 +96,6 @@ public class AttentionFragment extends BaseFragment implements RecommendUser, Ho
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @Override

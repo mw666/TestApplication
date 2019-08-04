@@ -10,7 +10,6 @@ import newmatch.zbmf.com.testapplication.GMClass.GMRvSetLayoutManager;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.FriendsListAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +54,7 @@ public class FriendsListFragment extends BaseFragment implements
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
+
 
     @Override
     protected void onViewClick(View view) {

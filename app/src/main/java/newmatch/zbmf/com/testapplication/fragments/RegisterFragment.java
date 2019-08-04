@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import newmatch.zbmf.com.testapplication.MainActivity;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.ForgetPassWordActivity;
 import newmatch.zbmf.com.testapplication.activitys.RegisterActivity;
@@ -24,18 +25,21 @@ import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.component.BuildConfig;
 import newmatch.zbmf.com.testapplication.component.PLog;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.UserInfo;
+import newmatch.zbmf.com.testapplication.mvp.contract.LoginContract;
+import newmatch.zbmf.com.testapplication.mvp.presenter.LoginPresenter;
 import newmatch.zbmf.com.testapplication.utils.PhoneFormatCheckUtils;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.TimeCount;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
+import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
 
 /**
  * A simple {@link Fragment} subclass.
  * 注册或登录
  */
 public class RegisterFragment extends BaseFragment implements
-        View.OnClickListener {
+        View.OnClickListener, LoginContract.LoginView<UserInfo> {
 
     private TextInputLayout mAccountTextLayout;
     private TextInputLayout mPasswordTextLayout;
@@ -58,6 +62,7 @@ public class RegisterFragment extends BaseFragment implements
     private int mTabPosition;
     private View mView;//布局的View
     private RegisterActivity registerActivity;
+    private LoginPresenter loginPresenter;
 
     public RegisterFragment() {
         PLog.LogD("RegisterFragment 的构造方法");
@@ -86,7 +91,7 @@ public class RegisterFragment extends BaseFragment implements
     @Override
     protected void initView() {
         // 注册一个事件回调，用于处理SMSSDK接口请求的结果
-//        SMSSDK.registerEventHandler(eventHandler);
+        //        SMSSDK.registerEventHandler(eventHandler);
         registerActivity = (RegisterActivity) getActivity();
         mView = getView();
         if (mTabPosition == 0) {
@@ -101,13 +106,13 @@ public class RegisterFragment extends BaseFragment implements
             mLoginProtocolContent = mView.findViewById(R.id.loginProtocolContent);
 
             mLoginBtn.setText(getString(R.string.login));
-//            initNoFocus(mAccountTextLayout);
-//            initNoFocus(mPasswordTextLayout);
+            //            initNoFocus(mAccountTextLayout);
+            //            initNoFocus(mPasswordTextLayout);
             clearListener(mAccountTextLayout, mClearAccount);
             clearListener(mPasswordTextLayout, mClearPassword);
             setLoginViewClick();
             //改变按钮的颜色
-            btnChangeColor(passwordInputEt,mLoginBtn);
+            btnChangeColor(passwordInputEt, mLoginBtn);
         } else if (mTabPosition == 1) {
             mZc_accountTextLayout = bindView(mView, R.id.zc_accountTextLayout);
             TextInputEditText zc_accountInputEt = bindView(mView, R.id.zc_accountInputEt);
@@ -127,19 +132,20 @@ public class RegisterFragment extends BaseFragment implements
             clearListener(mZc_passwordTextLayout, mZc_clearPassword);
             setRegisterViewClick();
             //改变按钮的颜色
-            btnChangeColor(zc_passwordInputEt,mZc_btn);
+            btnChangeColor(zc_passwordInputEt, mZc_btn);
         }
     }
 
     @Override
     protected void initData() {
+        if (mTabPosition == 0) {
+            if (loginPresenter == null)
+                loginPresenter = LoginPresenter.DEFAULT(this);
+        } else if (mTabPosition == 1) {
 
+        }
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-       return null;
-    }
 
     @Override
     protected void onViewClick(View view) {
@@ -270,18 +276,9 @@ public class RegisterFragment extends BaseFragment implements
 
                 mAccountTextLayout.setErrorEnabled(false);
                 mPasswordTextLayout.setErrorEnabled(false);
+                //登录
+                login(account, password);
 
-                //验证用户名和密码
-                if (validateAccount(account, mAccountTextLayout) && validatePassword(password, mPasswordTextLayout)) {
-                    // TODO: 2018/9/10 调用登录接口
-
-                    ToastUtils.showSingleToast(MyApplication.getInstance(), getString(R.string.login_success));
-
-//                    SkipActivityUtil.skipActivity(registerActivity, MainActivity.class);
-
-                    SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
-                    registerActivity.finish();
-                }
                 break;
             case R.id.clearAccount:
                 if (!TextUtils.isEmpty(mAccountTextLayout.getEditText().getText().toString()))
@@ -314,7 +311,7 @@ public class RegisterFragment extends BaseFragment implements
                     return;
                 }
                 //请求获取验证码
-//                SMSSDK.getVerificationCode("86", mPhone);
+                //                SMSSDK.getVerificationCode("86", mPhone);
                 break;
             case R.id.zc_btn:
                 String zcAccount = mZc_accountTextLayout.getEditText().getText().toString();
@@ -329,8 +326,8 @@ public class RegisterFragment extends BaseFragment implements
                         mZc_passwordTextLayout)) {
                     if (!TextUtils.isEmpty(code)) {
                         //提交到开发者服务器--->mob的服务器,进行短信验证
-//                        mPresenter.register(BuildConfig.MOB_APPKEY, zcAccount, "86", code);
-//                        SMSSDK.submitVerificationCode("86", mPhone, code);//这个是直接发送到mob服务器进行的验证
+                        //                        mPresenter.register(BuildConfig.MOB_APPKEY, zcAccount, "86", code);
+                        //                        SMSSDK.submitVerificationCode("86", mPhone, code);//这个是直接发送到mob服务器进行的验证
                     }
                 }
                 break;
@@ -348,38 +345,38 @@ public class RegisterFragment extends BaseFragment implements
         }
     }
 
-//    private EventHandler eventHandler = new EventHandler() {
-//        public void afterEvent(int event, int result, Object data) {
-//            // afterEvent会在子线程被调用，因此如果后续有UI相关操作，需要将数据发送到UI线程
-//            Message msg = new Message();
-//            msg.arg1 = event;
-//            msg.arg2 = result;
-//            msg.obj = data;
-//            new Handler(Looper.getMainLooper(), msg1 -> {
-//                int event1 = msg1.arg1;
-//                int result1 = msg1.arg2;
-//                Object data1 = msg1.obj;
-//                if (event1 == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-//                    if (result1 == SMSSDK.RESULT_COMPLETE) {
-//                        //发送验证码的请求完成--->发送验证码的按钮开始计时，变灰，不可点击
-//                        setCodeBtn();
-//                    } else {
-//                        //处理错误的结果
-//                        ((Throwable) data1).printStackTrace();
-//                    }
-//                } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-//                    if (result1 == SMSSDK.RESULT_COMPLETE) {
-//                        //处理验证码验证通过的结果
-//                    } else {
-//                        //处理错误的结果
-//                        ((Throwable) data1).printStackTrace();
-//                    }
-//                }
-//                //其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
-//                return false;
-//            }).sendMessage(msg);
-//        }
-//    };
+    //    private EventHandler eventHandler = new EventHandler() {
+    //        public void afterEvent(int event, int result, Object data) {
+    //            // afterEvent会在子线程被调用，因此如果后续有UI相关操作，需要将数据发送到UI线程
+    //            Message msg = new Message();
+    //            msg.arg1 = event;
+    //            msg.arg2 = result;
+    //            msg.obj = data;
+    //            new Handler(Looper.getMainLooper(), msg1 -> {
+    //                int event1 = msg1.arg1;
+    //                int result1 = msg1.arg2;
+    //                Object data1 = msg1.obj;
+    //                if (event1 == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+    //                    if (result1 == SMSSDK.RESULT_COMPLETE) {
+    //                        //发送验证码的请求完成--->发送验证码的按钮开始计时，变灰，不可点击
+    //                        setCodeBtn();
+    //                    } else {
+    //                        //处理错误的结果
+    //                        ((Throwable) data1).printStackTrace();
+    //                    }
+    //                } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+    //                    if (result1 == SMSSDK.RESULT_COMPLETE) {
+    //                        //处理验证码验证通过的结果
+    //                    } else {
+    //                        //处理错误的结果
+    //                        ((Throwable) data1).printStackTrace();
+    //                    }
+    //                }
+    //                //其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
+    //                return false;
+    //            }).sendMessage(msg);
+    //        }
+    //    };
 
     //改变发送验证码按钮的状态
     private void setCodeBtn() {
@@ -393,11 +390,11 @@ public class RegisterFragment extends BaseFragment implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        SMSSDK.unregisterEventHandler(eventHandler);
+        //        SMSSDK.unregisterEventHandler(eventHandler);
     }
 
     //设置EditText监听长度的变化，按钮的变色
-    private void btnChangeColor(TextInputEditText tiEditText,Button btn){
+    private void btnChangeColor(TextInputEditText tiEditText, Button btn) {
         tiEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -423,5 +420,41 @@ public class RegisterFragment extends BaseFragment implements
                 }
             }
         });
+    }
+
+    //调用登录
+    private void login(String account, String password) {
+        //验证用户名和密码
+        if (validateAccount(account, mAccountTextLayout) &&
+                validatePassword(password, mPasswordTextLayout)) {
+            //调用登录接口
+            /*模拟用户账号登录  phone=21474836474&&password=yh123456*/
+            loginPresenter.login("21474836474", "yh123456");
+            ToastUtils.showSingleToast(MyApplication.getInstance(),
+                    getString(R.string.login_success));
+        }
+    }
+
+
+    //登陆成功
+    @Override
+    public void loginSuccess(UserInfo result) {
+        if (result != null) {
+            int sex = result.getSex();
+            //sex 0:男  1：女  3：未设置用户个人信息
+            if (sex == 3) {
+                SkipActivityUtil.skipActivity(registerActivity, UserInfoActivity.class);
+            } else {
+                //存储用户信息，跳转到首页
+                YeHiShareUtil.saveUserInfo(result);
+                SkipActivityUtil.skipActivity(registerActivity, MainActivity.class);
+            }
+        }
+        registerActivity.finish();
+    }
+
+    @Override
+    public void showFail(int Code, String failMsg) {
+
     }
 }

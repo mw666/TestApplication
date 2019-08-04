@@ -15,7 +15,6 @@ import newmatch.zbmf.com.testapplication.adapters.ProductionAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
 import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.events.RVScrollEvent;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 
 /**
@@ -110,10 +109,6 @@ public class MyProductionFragment extends BaseFragment implements ProductionAdap
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
 
     @Override
     protected void onViewClick(View view) {

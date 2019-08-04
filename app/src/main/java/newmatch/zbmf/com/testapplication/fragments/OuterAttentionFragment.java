@@ -15,7 +15,6 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,10 +65,7 @@ public class OuterAttentionFragment extends BaseFragment {
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
+
 
     @Override
     protected void onViewClick(View view) {

@@ -26,7 +26,6 @@ import newmatch.zbmf.com.testapplication.component.C;
 import newmatch.zbmf.com.testapplication.fragments.dynamic_fragments.DynamicFragment;
 import newmatch.zbmf.com.testapplication.fragments.home_fragments.HomeFragment;
 import newmatch.zbmf.com.testapplication.fragments.msg_fragments.MsgFragment;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 import newmatch.zbmf.com.testapplication.utils.ShowImgUtils;
 import newmatch.zbmf.com.testapplication.utils.YeHiShareUtil;
@@ -101,11 +100,6 @@ public class Main1Fragment extends BaseFragment implements
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @Override

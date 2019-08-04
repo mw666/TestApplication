@@ -37,7 +37,6 @@ import newmatch.zbmf.com.testapplication.entity.BannerService;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main1Fragment;
 import newmatch.zbmf.com.testapplication.fragments.main_menu_fragments.Main2Fragment;
 import newmatch.zbmf.com.testapplication.permissions.PermissionC;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.utils.glidUtils.CollapsingToolbarLayoutState;
@@ -179,11 +178,6 @@ public class HomeFragment extends BaseFragment implements HomeRVIvClick, DianZan
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

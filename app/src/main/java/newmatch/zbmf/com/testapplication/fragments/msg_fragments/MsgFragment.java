@@ -15,7 +15,6 @@ import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.activitys.MySpaceActivity;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 
 /**
@@ -65,10 +64,7 @@ public class MsgFragment extends BaseFragment {
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
+
 
     @Override
     protected void onViewClick(View view) {

@@ -15,7 +15,6 @@ import java.util.List;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.adapters.pager_fragment_adapters.MsgTabAdapter;
 import newmatch.zbmf.com.testapplication.base.BaseFragment;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.GetUIDimens;
 
 /**
@@ -74,10 +73,7 @@ public class GoodFriendsOrGroupFragment extends BaseFragment {
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
+
 
     @Override
     protected void onViewClick(View view) {

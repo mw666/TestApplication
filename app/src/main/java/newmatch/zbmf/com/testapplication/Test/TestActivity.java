@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.billy.android.loading.Gloading;
 import com.bumptech.glide.Glide;
@@ -12,21 +13,34 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.stetho.common.LogUtil;
 
+import java.util.List;
 import java.util.Locale;
 
 import newmatch.zbmf.com.testapplication.GMClass.loading.adapter.GlobalAdapter;
 import newmatch.zbmf.com.testapplication.GMClass.selector.GMSelector;
 import newmatch.zbmf.com.testapplication.R;
 import newmatch.zbmf.com.testapplication.base.BaseActivity;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.GuideBanner;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.OfficialHomeBanner;
+import newmatch.zbmf.com.testapplication.mvp.YeHiBean.YeHiLaunch;
+import newmatch.zbmf.com.testapplication.mvp.contract.GuideContract;
+import newmatch.zbmf.com.testapplication.mvp.contract.LaunchContract;
+import newmatch.zbmf.com.testapplication.mvp.contract.OfficialContract;
+import newmatch.zbmf.com.testapplication.mvp.presenter.GuidePresenter;
+import newmatch.zbmf.com.testapplication.mvp.presenter.OfficialBannerPresenter;
+import newmatch.zbmf.com.testapplication.utils.LogUtils;
 
 /**
  * 用于测试的Activity
  */
-public class TestActivity extends BaseActivity  {
+public class TestActivity extends BaseActivity implements GuideContract.GuideView<List<GuideBanner>>,
+        LaunchContract.LaunchView<YeHiLaunch>, OfficialContract.OfficialView<List<OfficialHomeBanner>> {
 
     private Button locationBtn, loadingBtn1, loadingBtn2;
     private ImageView imageView;
+    private TextView testTv;
 
 
     //获取随机的图片资源
@@ -46,6 +60,8 @@ public class TestActivity extends BaseActivity  {
         locationBtn = findViewById(R.id.locationBtn);
         loadingBtn1 = findViewById(R.id.loadingBtn1);
         loadingBtn2 = findViewById(R.id.loadingBtn2);
+        testTv = findViewById(R.id.testTv);
+
 
         imageView = bindView(R.id.iv);
 
@@ -55,7 +71,9 @@ public class TestActivity extends BaseActivity  {
 
     @Override
     protected void initData() {
-
+        //                GuidePresenter.DEFAULT(this).guideData(true,this);
+        //        LaunchPresenter.DEFAULT(this).getLaunchData();
+        OfficialBannerPresenter.DEFAULT(this).getOfficialHomeData();
     }
 
     @Override
@@ -78,6 +96,11 @@ public class TestActivity extends BaseActivity  {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        GuidePresenter.DEFAULT(this).destroy();
+    }
 
     public void showTime(View view) {
         GMSelector.instance(this).showPickerView((province, city, area) ->
@@ -86,17 +109,17 @@ public class TestActivity extends BaseActivity  {
 
     public void showLoad1(View view) {
         loadData();
-//        //在Activity中显示, 父容器为: android.R.id.content
-//        Gloading.Holder holder = Gloading.getDefault().wrap(this);
-//        //显示加载中的状态，通常是显示一个加载动画
-//        holder.showLoading();
-//
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        holder.showLoadingStatus(Gloading.STATUS_LOAD_FAILED);
+        //        //在Activity中显示, 父容器为: android.R.id.content
+        //        Gloading.Holder holder = Gloading.getDefault().wrap(this);
+        //        //显示加载中的状态，通常是显示一个加载动画
+        //        holder.showLoading();
+        //
+        //        try {
+        //            Thread.sleep(3000);
+        //        } catch (InterruptedException e) {
+        //            e.printStackTrace();
+        //        }
+        //        holder.showLoadingStatus(Gloading.STATUS_LOAD_FAILED);
     }
 
     public void showLoad2(View view) {
@@ -148,4 +171,40 @@ public class TestActivity extends BaseActivity  {
                 .into(imageView);
     }
 
+    /*接收请求接口后的结果*/
+    @Override
+    public void showSuccess(List<GuideBanner> result) {
+        if (result != null && result.size() > 0) {
+            GuideBanner guideBanner = result.get(0);
+
+            testTv.setText(guideBanner.toString());
+
+            LogUtil.d("结果：" + guideBanner.toString());
+        }
+    }
+
+    @Override
+    public void launchSuccess(YeHiLaunch result) {
+        if (result != null) {
+
+            testTv.setText(result.toString());
+
+            LogUtil.d("结果：" + result.toString());
+        }
+    }
+
+    @Override
+    public void showFail(int code, String failMsg) {
+        LogUtils.D("结果错误：" + code + " == " + failMsg);
+    }
+
+    @Override
+    public void officialSuccess(List<OfficialHomeBanner> result) {
+        if (result != null && result.size() > 0) {
+
+            testTv.setText(result.get(0).toString());
+
+            LogUtil.d("结果：" + result.get(0).toString());
+        }
+    }
 }

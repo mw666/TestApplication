@@ -1,11 +1,10 @@
-package newmatch.zbmf.com.testapplication.presenter.YeHiBean;
+package newmatch.zbmf.com.testapplication.mvp.YeHiBean;
 
 /**
  * Created By pq
  * on 2019/8/2
- * 启动页数据
  */
-public class YeHiLaunch {
+public class GuideBanner {
 
     /**
      * adfunction : 1
@@ -93,7 +92,7 @@ public class YeHiLaunch {
 
     @Override
     public String toString() {
-        return "YeHiLaunch{" +
+        return "GuideBanner{" +
                 "adfunction=" + adfunction +
                 ", adsource=" + adsource +
                 ", adstyle=" + adstyle +

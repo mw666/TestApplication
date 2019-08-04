@@ -36,7 +36,6 @@ import newmatch.zbmf.com.testapplication.dialogs.DialogUtils;
 import newmatch.zbmf.com.testapplication.dialogs.MyDialogUtil;
 import newmatch.zbmf.com.testapplication.dialogs.MyDiaog;
 import newmatch.zbmf.com.testapplication.listeners.OnceClickListener;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.ContainsEmojiEditText;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
@@ -98,10 +97,6 @@ public class DynamicTypeFragment extends BaseFragment implements DynamicAdapter.
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
 
     @Override
     protected void onViewClick(View view) {

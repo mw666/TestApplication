@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Function;
+import newmatch.zbmf.com.testapplication.mvp.requests.ErrorCallBack;
 import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
 
 /**
@@ -12,7 +13,11 @@ import newmatch.zbmf.com.testapplication.net.beans.BaseResponse;
  */
 public class ResponseTransformer {
 
-    public static <T> ObservableTransformer<BaseResponse<T>, T> handleResult() {
+    private static ErrorCallBack ErrorCallBack;
+
+    public static <T> ObservableTransformer<BaseResponse<T>, T>
+    handleResult(ErrorCallBack errorCallBack) {
+        ErrorCallBack = errorCallBack;
         return upstream -> upstream
                 .onErrorResumeNext(new ErrorResumeFunction<>())
                 .flatMap(new ResponseFunction<>());
@@ -25,7 +30,7 @@ public class ResponseTransformer {
      * @param <T>
      */
     private static class ErrorResumeFunction<T> implements Function<Throwable,
-                ObservableSource<? extends BaseResponse<T>>> {
+            ObservableSource<? extends BaseResponse<T>>> {
 
         @Override
         public ObservableSource<? extends BaseResponse<T>> apply(Throwable throwable) throws Exception {
@@ -49,6 +54,7 @@ public class ResponseTransformer {
             if (code == 200) {
                 return Observable.just(tResponse.getData());
             } else {
+                ErrorCallBack.errorCallBack(code, message);
                 return Observable.error(new ApiException(code, message));
             }
         }

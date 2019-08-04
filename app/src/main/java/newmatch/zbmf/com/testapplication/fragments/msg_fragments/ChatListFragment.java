@@ -22,7 +22,6 @@ import newmatch.zbmf.com.testapplication.base.MyApplication;
 import newmatch.zbmf.com.testapplication.callback.MsgChatItemClick;
 import newmatch.zbmf.com.testapplication.callback.RecommendUser;
 import newmatch.zbmf.com.testapplication.component.BannerViewHolderType;
-import newmatch.zbmf.com.testapplication.presenter.presenterIml.BasePresenter;
 import newmatch.zbmf.com.testapplication.utils.SkipActivityUtil;
 import newmatch.zbmf.com.testapplication.utils.ToastUtils;
 import newmatch.zbmf.com.testapplication.views.customViewPager.BannerViewHolder;
@@ -81,10 +80,7 @@ public class ChatListFragment extends BaseFragment implements RecommendUser, Msg
 
     }
 
-    @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
+
 
     @Override
     protected void onViewClick(View view) {
